@@ -334,7 +334,7 @@ No custom tables are created.
 
 For issues, feature requests, or questions:
 - **Internal:** Contact IIUM Holdings Web Development Team
-- **GitHub Issues:** [github.com/yourorg/haraka/issues](https://github.com/yourorg/haraka/issues)
+- **GitHub Issues:** [github.com/ismetdev/haraka/issues](https://github.com/ismetdev/haraka/issues)
 
 ## License
 
