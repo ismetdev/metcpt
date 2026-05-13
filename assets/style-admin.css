@@ -1,0 +1,183 @@
+/* ===================================
+   Haraka — Admin Meta Box Styles
+   =================================== */
+
+.hrk-meta-wrap {
+    padding: 4px 0;
+}
+
+.hrk-meta-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #646970;
+    border-bottom: 1px solid #dcdcde;
+    padding-bottom: 8px;
+    margin: 24px 0 16px;
+}
+
+.hrk-meta-section-title:first-child {
+    margin-top: 4px;
+}
+
+.hrk-meta-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: start;
+    margin-bottom: 14px;
+    gap: 12px;
+}
+
+.hrk-meta-row label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1d2327;
+    padding-top: 6px;
+    line-height: 1.4;
+}
+
+.hrk-hint {
+    font-size: 11px;
+    font-weight: 400;
+    color: #646970;
+    display: block;
+    margin-top: 2px;
+}
+
+.hrk-required {
+    color: #d63638;
+    margin-left: 2px;
+}
+
+.hrk-meta-row input[type="text"],
+.hrk-meta-row input[type="date"],
+.hrk-meta-row input[type="url"],
+.hrk-meta-row textarea {
+    width: 100%;
+    max-width: 520px;
+    font-size: 13px;
+    padding: 6px 10px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    color: #1d2327;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.hrk-meta-row input:focus,
+.hrk-meta-row textarea:focus {
+    border-color: #2271b1;
+    outline: 2px solid #2271b1;
+    outline-offset: 0;
+}
+
+.hrk-meta-row textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+/* Repeatable rows */
+.hrk-repeatable-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 12px;
+    background: #f8fafc;
+    border: 1px solid #dcdcde;
+    border-radius: 6px;
+}
+
+.hrk-repeatable-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.hrk-repeatable-fields input[type="text"],
+.hrk-repeatable-fields input[type="url"],
+.hrk-repeatable-fields select,
+.hrk-repeatable-fields textarea {
+    width: 100%;
+    font-size: 13px;
+    padding: 6px 10px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    color: #1d2327;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.hrk-repeatable-fields select {
+    height: 34px;
+}
+
+.hrk-repeatable-fields textarea {
+    height: 60px;
+    resize: vertical;
+}
+
+/* Itinerary specific — 3 columns side by side */
+.hrk-itinerary-header {
+    display: grid;
+    grid-template-columns: 120px 1fr 160px 80px;
+    gap: 8px;
+    padding: 0 12px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #646970;
+}
+
+.hrk-itinerary-row .hrk-itinerary-fields {
+    display: grid;
+    grid-template-columns: 120px 1fr 160px;
+    gap: 8px;
+    flex-direction: unset;
+}
+
+/* FAQ specific */
+.hrk-faq-row .hrk-faq-fields {
+    flex-direction: column;
+}
+
+/* Add row button */
+.hrk-add-row {
+    margin-top: 6px;
+    margin-bottom: 4px;
+    font-size: 12px !important;
+}
+
+/* Remove row button */
+.hrk-remove-row {
+    flex-shrink: 0;
+    font-size: 12px !important;
+    color: #d63638 !important;
+    border-color: #d63638 !important;
+    margin-top: 2px;
+}
+
+.hrk-remove-row:hover {
+    background: #d63638 !important;
+    color: #fff !important;
+}
+
+/* Status badges */
+.hrk-admin-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    vertical-align: middle;
+}
+
+.hrk-badge-upcoming { background: #dcfce7; color: #166534; }
+.hrk-badge-today    { background: #dbeafe; color: #1d4ed8; }
+.hrk-badge-past     { background: #f1f5f9; color: #475569; }

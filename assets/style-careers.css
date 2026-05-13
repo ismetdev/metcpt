@@ -1,0 +1,941 @@
+/* ===================================
+   Haraka — Careers Full Table
+   [careers_list]
+   =================================== */
+
+.crl-wrap {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    width: 100%;
+}
+
+.crl-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.crl-search {
+    flex: 1;
+    min-width: 200px;
+    height: 38px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0 14px;
+    font-size: 13px;
+    color: #1a1a1a;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.crl-search:focus {
+    border-color: #0056b3;
+}
+
+.crl-tabs {
+    display: flex;
+    gap: 4px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+.crl-tab {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: #64748b;
+    transition: all 0.15s;
+}
+
+.crl-tab.active {
+    background: #ffffff;
+    color: #1a1a1a;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.crl-count {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.crl-table-wrap {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.crl-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+}
+
+.crl-table th {
+    background: #f8fafc;
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    padding: 11px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.crl-table th.col-title   { width: 30%; }
+.crl-table th.col-company { width: 20%; }
+.crl-table th.col-dept    { width: 17%; }
+.crl-table th.col-loc     { width: 14%; }
+.crl-table th.col-type    { width: 10%; }
+.crl-table th.col-date    { width: 9%;  }
+
+.crl-table td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+    color: #1a1a1a;
+    overflow: hidden;
+}
+
+.crl-table tbody tr:last-child td { border-bottom: none; }
+.crl-table tbody tr:hover td      { background: #f8fafc; }
+
+.crl-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+    line-height: 1.35;
+}
+
+.crl-title a {
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+.crl-title a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.crl-badge-wrap { margin-top: 3px; }
+
+.crl-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.crl-badge-open   { background: #dcfce7; color: #166534; }
+.crl-badge-soon   { background: #fef9c3; color: #854d0e; }
+.crl-badge-closed { background: #fee2e2; color: #991b1b; }
+
+.crl-company  { font-size: 12px; color: #334155; }
+.crl-dept     { font-size: 12px; color: #64748b; }
+.crl-location { font-size: 12px; color: #64748b; }
+.crl-type     { font-size: 12px; color: #334155; white-space: nowrap; }
+.crl-date     { font-size: 12px; color: #334155; white-space: nowrap; }
+
+.crl-empty {
+    text-align: center;
+    padding: 40px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.crl-footer {
+    padding: 12px 16px;
+    text-align: right;
+    border-top: 1px solid #f1f5f9;
+}
+
+.crl-result-count {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+@media ( max-width: 768px ) {
+    .crl-table-wrap { overflow-x: auto; }
+    .crl-table      { min-width: 640px; }
+    .crl-toolbar    { flex-direction: column; align-items: stretch; }
+    .crl-count      { margin-left: 0; }
+}
+
+/* ===================================
+   Haraka — Careers Preview Strip
+   [careers_preview]
+   =================================== */
+
+.crp-wrap {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.crp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.crp-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.crp-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+}
+
+.crp-header-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.crp-header-count {
+    font-size: 12px;
+    color: #94a3b8;
+    background: #f1f5f9;
+    border-radius: 20px;
+    padding: 2px 8px;
+}
+
+.crp-header-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.crp-header-link:hover { text-decoration: underline; }
+
+.crp-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    text-decoration: none !important;
+    color: inherit !important;
+    transition: background 0.15s;
+}
+
+.crp-row:last-of-type { border-bottom: none; }
+.crp-row:hover        { background: #f8fafc; }
+
+.crp-row *,
+.crp-row *:hover {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+.crp-row-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.crp-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #0f172a;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.crp-meta {
+    font-size: 12px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.crp-sep {
+    color: #cbd5e1;
+}
+
+.crp-row-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.crp-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.crp-badge-open { background: #dcfce7; color: #15803d; }
+.crp-badge-soon { background: #fef9c3; color: #a16207; }
+
+.crp-date {
+    font-size: 12px;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+.crp-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.crp-footer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    text-decoration: none !important;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 20px;
+    transition: all 0.15s;
+}
+
+.crp-footer-btn:hover {
+    background: #0056b3;
+    color: #ffffff !important;
+    border-color: #0056b3;
+}
+
+.crp-empty {
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+@media ( max-width: 640px ) {
+    .crp-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .crp-row-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .crp-title {
+        white-space: normal;
+    }
+}
+
+/* ===================================
+   Haraka — Career Single Page
+   =================================== */
+
+.hrk-career-page {
+    font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
+    max-width: 860px;
+    margin: 40px auto;
+    padding: 0 24px 80px;
+    color: #0f172a;
+}
+
+.hrk-c-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #64748b;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.hrk-c-back:hover { color: #0f172a; }
+
+.hrk-c-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.hrk-c-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.hrk-c-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.hrk-c-status-open   { background: #dcfce7; color: #166534; }
+.hrk-c-status-open .hrk-c-dot   { background: #16a34a; }
+.hrk-c-status-soon   { background: #fef9c3; color: #a16207; }
+.hrk-c-status-soon .hrk-c-dot   { background: #ca8a04; }
+.hrk-c-status-closed { background: #f1f5f9; color: #475569; }
+.hrk-c-status-closed .hrk-c-dot { background: #94a3b8; }
+
+.hrk-c-type-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.hrk-c-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+    margin: 0 0 12px;
+}
+
+.hrk-c-excerpt {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.7;
+    margin: 0 0 24px;
+}
+
+.hrk-c-info-grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax( 160px, 1fr ) );
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.hrk-c-info-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+}
+
+.hrk-c-info-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    margin-bottom: 5px;
+}
+
+.hrk-c-info-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.4;
+}
+
+.hrk-c-company-logo {
+    max-height: 36px;
+    max-width: 120px;
+    object-fit: contain;
+    display: block;
+}
+
+.hrk-c-section { margin-bottom: 32px; }
+
+.hrk-c-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+}
+
+.hrk-c-content {
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.75;
+}
+
+.hrk-c-content p   { margin: 0 0 14px; }
+.hrk-c-content ul,
+.hrk-c-content ol  { padding-left: 20px; margin: 0 0 14px; }
+.hrk-c-content li  { margin-bottom: 6px; }
+.hrk-c-content h2,
+.hrk-c-content h3  { color: #0f172a; margin: 20px 0 8px; }
+
+.hrk-c-apply-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px 24px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.hrk-c-apply-deadline {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hrk-c-apply-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
+}
+
+.hrk-c-apply-date {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.hrk-c-date-urgent { color: #dc2626; }
+
+.hrk-c-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 24px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    transition: all 0.15s;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.hrk-c-btn-primary {
+    background: #0f172a;
+    color: #ffffff !important;
+}
+
+.hrk-c-btn-primary:hover { background: #1e293b; }
+
+.hrk-c-btn-disabled {
+    background: #f1f5f9;
+    color: #94a3b8 !important;
+    cursor: not-allowed;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 24px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.hrk-c-company-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px 24px;
+}
+
+.hrk-c-company-logo-lg {
+    max-height: 50px;
+    max-width: 140px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.hrk-c-company-info { flex: 1; }
+
+.hrk-c-company-desc {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.65;
+    margin: 0 0 10px;
+}
+
+.hrk-c-company-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.hrk-c-company-link:hover { text-decoration: underline; }
+
+.hrk-c-contact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 20px;
+}
+
+.hrk-c-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #dbeafe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1d4ed8;
+    flex-shrink: 0;
+}
+
+.hrk-c-contact-name  { font-size: 14px; font-weight: 600; color: #0f172a; }
+.hrk-c-contact-dept  { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+.hrk-c-contact-link  { font-size: 12px; color: #0056b3; text-decoration: none; }
+.hrk-c-contact-link:hover { text-decoration: underline; }
+
+@media ( max-width: 640px ) {
+    .hrk-c-title        { font-size: 24px; }
+    .hrk-c-apply-box    { flex-direction: column; align-items: flex-start; }
+    .hrk-c-company-box  { flex-direction: column; }
+    .hrk-c-btn          { width: 100%; justify-content: center; }
+    .hrk-c-btn-disabled { width: 100%; text-align: center; }
+}
+
+/* ===================================
+   Haraka — Career Single Page
+   template-single.php styles
+   =================================== */
+
+.hrk-career-page {
+    font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
+    max-width: 860px;
+    margin: 40px auto;
+    padding: 0 24px 80px;
+    color: #0f172a;
+}
+
+.hrk-c-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #64748b;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.hrk-c-back:hover { color: #0f172a; }
+
+.hrk-c-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.hrk-c-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.hrk-c-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.hrk-c-status-open   { background: #dcfce7; color: #166534; }
+.hrk-c-status-open .hrk-c-dot   { background: #16a34a; }
+.hrk-c-status-soon   { background: #fef9c3; color: #a16207; }
+.hrk-c-status-soon .hrk-c-dot   { background: #ca8a04; }
+.hrk-c-status-closed { background: #f1f5f9; color: #475569; }
+.hrk-c-status-closed .hrk-c-dot { background: #94a3b8; }
+
+.hrk-c-type-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.hrk-c-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+    margin: 0 0 12px;
+}
+
+.hrk-c-excerpt {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.7;
+    margin: 0 0 24px;
+}
+
+.hrk-c-info-grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax( 160px, 1fr ) );
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.hrk-c-info-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+}
+
+.hrk-c-info-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    margin-bottom: 5px;
+}
+
+.hrk-c-info-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.4;
+}
+
+.hrk-c-company-logo {
+    max-height: 36px;
+    max-width: 120px;
+    object-fit: contain;
+    display: block;
+}
+
+.hrk-c-section { margin-bottom: 32px; }
+
+.hrk-c-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+}
+
+.hrk-c-content {
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.75;
+}
+
+.hrk-c-content p   { margin: 0 0 14px; }
+.hrk-c-content ul,
+.hrk-c-content ol  { padding-left: 20px; margin: 0 0 14px; }
+.hrk-c-content li  { margin-bottom: 6px; }
+.hrk-c-content h2,
+.hrk-c-content h3  { color: #0f172a; margin: 20px 0 8px; }
+
+.hrk-c-apply-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px 24px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.hrk-c-apply-deadline {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hrk-c-apply-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
+}
+
+.hrk-c-apply-date {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.hrk-c-date-urgent { color: #dc2626; }
+
+.hrk-c-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 24px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    transition: all 0.15s;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.hrk-c-btn-primary {
+    background: #0f172a;
+    color: #ffffff !important;
+}
+
+.hrk-c-btn-primary:hover { background: #1e293b; }
+
+.hrk-c-btn-disabled {
+    background: #f1f5f9;
+    color: #94a3b8 !important;
+    cursor: not-allowed;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 24px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.hrk-c-company-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px 24px;
+}
+
+.hrk-c-company-logo-lg {
+    max-height: 50px;
+    max-width: 140px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.hrk-c-company-info { flex: 1; }
+
+.hrk-c-company-desc {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.65;
+    margin: 0 0 10px;
+}
+
+.hrk-c-company-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.hrk-c-company-link:hover { text-decoration: underline; }
+
+.hrk-c-contact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 20px;
+}
+
+.hrk-c-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #dbeafe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1d4ed8;
+    flex-shrink: 0;
+}
+
+.hrk-c-contact-name  { font-size: 14px; font-weight: 600; color: #0f172a; }
+.hrk-c-contact-dept  { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+.hrk-c-contact-link  { font-size: 12px; color: #0056b3; text-decoration: none; }
+.hrk-c-contact-link:hover { text-decoration: underline; }
+
+@media ( max-width: 640px ) {
+    .hrk-c-title        { font-size: 24px; }
+    .hrk-c-apply-box    { flex-direction: column; align-items: flex-start; }
+    .hrk-c-company-box  { flex-direction: column; }
+    .hrk-c-btn          { width: 100%; justify-content: center; }
+    .hrk-c-btn-disabled { width: 100%; text-align: center; }
+}

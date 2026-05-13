@@ -1,0 +1,1185 @@
+/* ===================================
+   Haraka — Tenders Full Table
+   =================================== */
+
+.tdl-wrap {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    width: 100%;
+}
+
+.tdl-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.tdl-search {
+    flex: 1;
+    min-width: 200px;
+    height: 38px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0 14px;
+    font-size: 13px;
+    color: #1a1a1a;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.tdl-search:focus { border-color: #0056b3; }
+
+.tdl-tabs {
+    display: flex;
+    gap: 4px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+.tdl-tab {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: #64748b;
+    transition: all 0.15s;
+}
+
+.tdl-tab.active {
+    background: #ffffff;
+    color: #1a1a1a;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+
+.tdl-count {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.tdl-table-wrap {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.tdl-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+}
+
+.tdl-table th {
+    background: #f8fafc;
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    padding: 11px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.tdl-table th.col-ref    { width: 17%; }
+.tdl-table th.col-title  { width: 33%; }
+.tdl-table th.col-issuer { width: 17%; }
+.tdl-table th.col-loc    { width: 13%; }
+.tdl-table th.col-date   { width: 11%; }
+.tdl-table th.col-doc    { width: 9%; text-align: center; }
+
+.tdl-table td {
+    padding: 14px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+    color: #1a1a1a;
+    overflow: hidden;
+}
+
+.tdl-table tbody tr:last-child td { border-bottom: none; }
+.tdl-table tbody tr:hover td { background: #f8fafc; }
+
+.tdl-ref {
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    color: #475569;
+    margin-bottom: 5px;
+}
+
+.tdl-badge-wrap { margin-top: 2px; }
+
+.tdl-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.tdl-badge-open   { background: #dcfce7; color: #166534; }
+.tdl-badge-soon   { background: #fef9c3; color: #854d0e; }
+.tdl-badge-closed { background: #fee2e2; color: #991b1b; }
+
+.tdl-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+    line-height: 1.35;
+}
+
+.tdl-title a {
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+.tdl-title a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.tdl-desc     { font-size: 11px; color: #64748b; line-height: 1.45; }
+.tdl-issuer   { font-size: 12px; color: #334155; }
+.tdl-location { font-size: 12px; color: #64748b; }
+.tdl-date     { font-size: 12px; color: #334155; white-space: nowrap; }
+.tdl-doc-cell { text-align: center; }
+
+.tdl-btn {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: #1a1a2e;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transition: background 0.15s;
+    white-space: nowrap;
+}
+
+.tdl-btn:hover { background: #0056b3; }
+.tdl-btn-closed { background: #94a3b8; }
+.tdl-btn-closed:hover { background: #64748b; }
+
+.tdl-no-doc { font-size: 13px; color: #cbd5e1; }
+.tdl-empty  { text-align: center; padding: 40px; color: #94a3b8; font-size: 13px; }
+
+.tdl-footer {
+    padding: 12px 16px;
+    text-align: right;
+    border-top: 1px solid #f1f5f9;
+}
+
+.tdl-result-count { font-size: 12px; color: #94a3b8; }
+
+@media ( max-width: 768px ) {
+    .tdl-table-wrap { overflow-x: auto; }
+    .tdl-table { min-width: 640px; }
+    .tdl-toolbar { flex-direction: column; align-items: stretch; }
+    .tdl-count { margin-left: 0; }
+}
+
+/* ===================================
+   Haraka — Tenders Preview Strip
+   =================================== */
+
+.tdp-wrap {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.tdp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.tdp-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tdp-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+}
+
+.tdp-header-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.tdp-header-count {
+    font-size: 12px;
+    color: #94a3b8;
+    background: #f1f5f9;
+    border-radius: 20px;
+    padding: 2px 8px;
+}
+
+.tdp-header-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.tdp-header-link:hover { text-decoration: underline; }
+
+.tdp-row {
+    display: grid;
+    grid-template-columns: 150px 1fr auto auto;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    text-decoration: none !important;
+    color: inherit !important;
+    transition: background 0.15s;
+}
+
+.tdp-row:last-of-type { border-bottom: none; }
+.tdp-row:hover { background: #f8fafc; }
+
+.tdp-row *,
+.tdp-row *:hover { text-decoration: none !important; color: inherit; }
+
+.tdp-ref {
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    color: #64748b;
+}
+
+.tdp-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #0f172a;
+    line-height: 1.4;
+}
+
+.tdp-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.tdp-badge-open { background: #dcfce7; color: #15803d; }
+.tdp-badge-soon { background: #fef9c3; color: #a16207; }
+
+.tdp-date {
+    font-size: 12px;
+    color: #64748b;
+    white-space: nowrap;
+    text-align: right;
+    min-width: 130px;
+}
+
+.tdp-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.tdp-footer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    text-decoration: none !important;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 20px;
+    transition: all 0.15s;
+}
+
+.tdp-footer-btn:hover {
+    background: #0056b3;
+    color: #ffffff !important;
+    border-color: #0056b3;
+}
+
+.tdp-empty {
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+@media ( max-width: 640px ) {
+    .tdp-row {
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        gap: 6px 12px;
+    }
+    .tdp-ref   { grid-column: 1; grid-row: 2; color: #94a3b8; }
+    .tdp-title { grid-column: 1; grid-row: 1; }
+    .tdp-badge { grid-column: 2; grid-row: 1; align-self: start; }
+    .tdp-date  { grid-column: 2; grid-row: 2; min-width: unset; font-size: 11px; }
+}
+
+/* ===================================
+   Haraka — Tender Single Page
+   =================================== */
+
+.hrk-tender-page {
+    font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
+    max-width: 860px;
+    margin: 40px auto;
+    padding: 0 24px 80px;
+    color: #0f172a;
+}
+
+.hrk-t-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #64748b;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.hrk-t-back:hover { color: #0f172a; }
+
+.hrk-t-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+}
+
+.hrk-t-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+.hrk-t-status-open   { background: #dcfce7; color: #166534; }
+.hrk-t-status-open .hrk-t-dot   { background: #16a34a; }
+.hrk-t-status-soon   { background: #fef9c3; color: #a16207; }
+.hrk-t-status-soon .hrk-t-dot   { background: #ca8a04; }
+.hrk-t-status-closed { background: #f1f5f9; color: #475569; }
+.hrk-t-status-closed .hrk-t-dot { background: #94a3b8; }
+
+.hrk-t-cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.hrk-t-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+    margin: 0 0 12px;
+}
+
+.hrk-t-desc {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.7;
+    margin: 0 0 24px;
+}
+
+.hrk-t-info-grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax( 180px, 1fr ) );
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.hrk-t-info-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+}
+
+.hrk-t-info-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    margin-bottom: 5px;
+}
+
+.hrk-t-info-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.4;
+}
+
+.hrk-t-section { margin-bottom: 32px; }
+
+.hrk-t-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+}
+
+.hrk-t-timeline-grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax( 160px, 1fr ) );
+    gap: 12px;
+}
+
+.hrk-t-timeline-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.hrk-t-deadline {
+    border-left: 3px solid #ef4444;
+}
+
+.hrk-t-timeline-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    margin-bottom: 6px;
+}
+
+.hrk-t-timeline-date {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.hrk-t-deadline .hrk-t-timeline-date { color: #dc2626; }
+
+.hrk-t-timeline-sub {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.hrk-t-doc-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 20px;
+    gap: 16px;
+}
+
+.hrk-t-doc-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.hrk-t-doc-fee {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 3px;
+}
+
+.hrk-t-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    transition: all 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.hrk-t-btn-primary {
+    background: #0f172a;
+    color: #ffffff !important;
+}
+
+.hrk-t-btn-primary:hover { background: #1e293b; }
+
+.hrk-t-submission-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 20px;
+}
+
+.hrk-t-submission-method {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #0056b3;
+    margin-bottom: 10px;
+}
+
+.hrk-t-submission-address {
+    font-size: 13px;
+    color: #334155;
+    line-height: 1.7;
+}
+
+.hrk-t-contact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 20px;
+}
+
+.hrk-t-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #dbeafe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1d4ed8;
+    flex-shrink: 0;
+}
+
+.hrk-t-contact-name { font-size: 14px; font-weight: 600; color: #0f172a; }
+.hrk-t-contact-dept { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+.hrk-t-contact-link { font-size: 12px; color: #0056b3; text-decoration: none; }
+.hrk-t-contact-link:hover { text-decoration: underline; }
+
+@media ( max-width: 640px ) {
+    .hrk-t-title { font-size: 22px; }
+    .hrk-t-doc-box { flex-direction: column; align-items: flex-start; }
+}
+
+/* ===================================
+   Haraka — Tenders Template B
+   Editorial Layout [tenders_list] + [tenders_preview]
+   =================================== */
+
+.hrk-tb-wrap {
+    font-family: 'Inter', 'DM Sans', -apple-system, sans-serif;
+    background: #f5f0e8;
+    padding: 48px 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ── Header ── */
+.hrk-tb-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.hrk-tb-header-left {
+    flex: 1;
+}
+
+.hrk-tb-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #7a6f60;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.hrk-tb-label-dash {
+    color: #a09680;
+}
+
+.hrk-tb-headline {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1410;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.hrk-tb-headline em {
+    font-style: italic;
+    font-weight: 400;
+}
+
+.hrk-tb-all-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #4a3f30;
+    text-decoration: none;
+    white-space: nowrap;
+    padding-top: 8px;
+    border-bottom: 1px solid #c8b89a;
+    padding-bottom: 2px;
+    flex-shrink: 0;
+    transition: color 0.15s ease;
+}
+
+.hrk-tb-all-link:hover {
+    color: #1a1410;
+}
+
+/* ── Panel ── */
+.hrk-tb-panel {
+    background: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* ── Tabs ── */
+.hrk-tb-tabs {
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    background: #faf8f4;
+    border-bottom: 1px solid #ede8e0;
+}
+
+.hrk-tb-tab {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 14px 0;
+    margin-right: 28px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #8a7d6a;
+    cursor: pointer;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.hrk-tb-tab.active {
+    color: #1a1410;
+    border-bottom-color: #1a1410;
+}
+
+.hrk-tb-tab:hover {
+    color: #4a3f30;
+}
+
+.hrk-tb-tab-static {
+    cursor: default;
+}
+
+.hrk-tb-tab-count {
+    font-size: 11px;
+    font-weight: 600;
+    background: #e8e0d4;
+    color: #4a3f30;
+    padding: 1px 7px;
+    border-radius: 20px;
+    margin-left: 2px;
+}
+
+.hrk-tb-tab-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.hrk-tb-dot-green { background: #16a34a; }
+.hrk-tb-dot-gray  { background: #94a3b8; }
+
+.hrk-tb-tab-viewall {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 500;
+    color: #4a3f30;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+}
+
+.hrk-tb-tab-viewall:hover {
+    color: #1a1410;
+}
+
+/* ── List ── */
+.hrk-tb-list {
+    padding: 0 24px;
+}
+
+/* ── Each row ── */
+.hrk-tb-row {
+    display: grid;
+    grid-template-columns: 150px 1fr auto auto;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0ebe2;
+}
+
+.hrk-tb-row:last-of-type {
+    border-bottom: none;
+}
+
+.hrk-tb-ref {
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    color: #8a7d6a;
+    line-height: 1.4;
+}
+
+.hrk-tb-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1410;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.hrk-tb-title:hover {
+    color: #4a3f30;
+    text-decoration: underline;
+}
+
+/* ── Badges ── */
+.hrk-tb-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.hrk-tb-badge-open   { background: #dcfce7; color: #15803d; }
+.hrk-tb-badge-soon   { background: #fef9c3; color: #a16207; }
+.hrk-tb-badge-closed { background: #f1f5f9; color: #475569; }
+
+.hrk-tb-date {
+    font-size: 12px;
+    color: #6b5f50;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ── Footer row (preview strip) ── */
+.hrk-tb-footer-row {
+    padding: 14px 0;
+    border-top: 1px solid #ede8e0;
+    text-align: center;
+}
+
+.hrk-tb-footer-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #4a3f30;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.hrk-tb-footer-link:hover {
+    color: #1a1410;
+}
+
+/* ── Empty state ── */
+.hrk-tb-empty {
+    padding: 32px 0;
+    text-align: center;
+    font-size: 13px;
+    color: #8a7d6a;
+}
+
+/* ── Responsive ── */
+@media ( max-width: 768px ) {
+    .hrk-tb-wrap {
+        padding: 36px 20px;
+    }
+
+    .hrk-tb-header {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .hrk-tb-headline {
+        font-size: 26px;
+    }
+
+    .hrk-tb-all-link {
+        padding-top: 0;
+        align-self: flex-start;
+    }
+
+    .hrk-tb-row {
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        gap: 6px 12px;
+    }
+
+    .hrk-tb-ref {
+        grid-column: 1;
+        grid-row: 2;
+        color: #a09680;
+        font-size: 10px;
+    }
+
+    .hrk-tb-title {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .hrk-tb-badge {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: start;
+    }
+
+    .hrk-tb-date {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 11px;
+    }
+
+    .hrk-tb-tabs {
+        padding: 0 16px;
+        overflow-x: auto;
+    }
+
+    .hrk-tb-list {
+        padding: 0 16px;
+    }
+}
+
+@media ( max-width: 480px ) {
+    .hrk-tb-wrap {
+        padding: 28px 14px;
+    }
+
+    .hrk-tb-headline {
+        font-size: 22px;
+    }
+}
+
+/* ===================================
+   Haraka — Tender Single Page
+   template-single.php styles
+   =================================== */
+
+.hrk-tender-page {
+    font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
+    max-width: 860px;
+    margin: 40px auto;
+    padding: 0 24px 80px;
+    color: #0f172a;
+}
+
+.hrk-t-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #64748b;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.hrk-t-back:hover { color: #0f172a; }
+
+.hrk-t-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+}
+
+.hrk-t-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.hrk-t-status-open   { background: #dcfce7; color: #166534; }
+.hrk-t-status-open .hrk-t-dot   { background: #16a34a; }
+.hrk-t-status-soon   { background: #fef9c3; color: #a16207; }
+.hrk-t-status-soon .hrk-t-dot   { background: #ca8a04; }
+.hrk-t-status-closed { background: #f1f5f9; color: #475569; }
+.hrk-t-status-closed .hrk-t-dot { background: #94a3b8; }
+
+.hrk-t-cat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.hrk-t-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+    margin: 0 0 12px;
+}
+
+.hrk-t-desc {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.7;
+    margin: 0 0 24px;
+}
+
+.hrk-t-info-grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax( 180px, 1fr ) );
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.hrk-t-info-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+}
+
+.hrk-t-info-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    margin-bottom: 5px;
+}
+
+.hrk-t-info-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.4;
+}
+
+.hrk-t-section { margin-bottom: 32px; }
+
+.hrk-t-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+}
+
+.hrk-t-timeline-grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax( 160px, 1fr ) );
+    gap: 12px;
+}
+
+.hrk-t-timeline-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.hrk-t-deadline {
+    border-left: 3px solid #ef4444;
+}
+
+.hrk-t-timeline-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    margin-bottom: 6px;
+}
+
+.hrk-t-timeline-date {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.hrk-t-deadline .hrk-t-timeline-date { color: #dc2626; }
+
+.hrk-t-timeline-sub {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.hrk-t-doc-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 20px;
+    gap: 16px;
+}
+
+.hrk-t-doc-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.hrk-t-doc-fee {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 3px;
+}
+
+.hrk-t-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    transition: all 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.hrk-t-btn-primary {
+    background: #0f172a;
+    color: #ffffff !important;
+}
+
+.hrk-t-btn-primary:hover { background: #1e293b; }
+
+.hrk-t-submission-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 20px;
+}
+
+.hrk-t-submission-method {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #0056b3;
+    margin-bottom: 10px;
+}
+
+.hrk-t-submission-address {
+    font-size: 13px;
+    color: #334155;
+    line-height: 1.7;
+}
+
+.hrk-t-contact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 20px;
+}
+
+.hrk-t-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #dbeafe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1d4ed8;
+    flex-shrink: 0;
+}
+
+.hrk-t-contact-name  { font-size: 14px; font-weight: 600; color: #0f172a; }
+.hrk-t-contact-dept  { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+.hrk-t-contact-link  { font-size: 12px; color: #0056b3; text-decoration: none; }
+.hrk-t-contact-link:hover { text-decoration: underline; }
+
+@media ( max-width: 640px ) {
+    .hrk-t-title     { font-size: 22px; }
+    .hrk-t-doc-box   { flex-direction: column; align-items: flex-start; }
+}

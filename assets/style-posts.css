@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+/* ===================================
+   Haraka — News Grid [news_grid]
+   =================================== */
+
+.hrk-ng-wrap {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #f5f0e8;
+    padding: 48px 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ── Section header ── */
+.hrk-ng-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.hrk-ng-header-left {
+    flex: 1;
+}
+
+.hrk-ng-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #7a6f60;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.hrk-ng-label-dash {
+    color: #a09680;
+}
+
+.hrk-ng-headline {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1410;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.hrk-ng-headline em {
+    font-style: italic;
+    font-weight: 400;
+}
+
+.hrk-ng-view-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #4a3f30;
+    text-decoration: none;
+    white-space: nowrap;
+    padding-top: 8px;
+    border-bottom: 1px solid #c8b89a;
+    padding-bottom: 2px;
+    flex-shrink: 0;
+    transition: color 0.15s ease;
+}
+
+.hrk-ng-view-link:hover {
+    color: #1a1410;
+}
+
+/* ── Main grid ── */
+.hrk-ng-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    align-items: start;
+}
+
+/* ── Featured post ── */
+.hrk-ng-featured {
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.hrk-ng-featured-img-link {
+    display: block;
+}
+
+.hrk-ng-featured-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+}
+
+.hrk-ng-featured-img-placeholder {
+    width: 100%;
+    height: 240px;
+    background: linear-gradient( 135deg, #1a2e2a 0%, #0d1f1b 100% );
+    display: block;
+}
+
+.hrk-ng-featured-body {
+    padding: 22px 22px 24px;
+}
+
+.hrk-ng-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.hrk-ng-cat {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #4a3f30;
+    background: #e8e0d4;
+    padding: 3px 8px;
+    border-radius: 2px;
+}
+
+.hrk-ng-date {
+    font-size: 11px;
+    color: #8a7d6a;
+    font-weight: 400;
+}
+
+.hrk-ng-featured-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: #1a1410;
+    line-height: 1.35;
+    margin: 0 0 12px;
+}
+
+.hrk-ng-featured-title a {
+    color: #1a1410;
+    text-decoration: none;
+}
+
+.hrk-ng-featured-title a:hover {
+    color: #4a3f30;
+}
+
+.hrk-ng-featured-excerpt {
+    font-size: 13px;
+    color: #6b5f50;
+    line-height: 1.7;
+    margin: 0 0 16px;
+}
+
+.hrk-ng-read-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2c1f0e;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-bottom: 1px solid #c8b89a;
+    padding-bottom: 1px;
+    transition: color 0.15s ease;
+}
+
+.hrk-ng-read-link:hover {
+    color: #1a1410;
+}
+
+/* ── Sidebar posts ── */
+.hrk-ng-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.hrk-ng-small-post {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: #ffffff;
+    padding: 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease;
+}
+
+.hrk-ng-small-post:hover {
+    background: #faf8f4;
+}
+
+.hrk-ng-small-thumb-link {
+    display: block;
+    flex-shrink: 0;
+}
+
+.hrk-ng-small-thumb {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
+}
+
+.hrk-ng-small-thumb-placeholder {
+    width: 80px;
+    height: 60px;
+    background: linear-gradient( 135deg, #1a2e2a 0%, #0d1f1b 100% );
+    display: block;
+    flex-shrink: 0;
+}
+
+.hrk-ng-small-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.hrk-ng-small-meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.hrk-ng-small-cat {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #4a3f30;
+}
+
+.hrk-ng-small-dot {
+    color: #c8b89a;
+    font-size: 9px;
+}
+
+.hrk-ng-small-date {
+    font-size: 10px;
+    color: #8a7d6a;
+    font-weight: 400;
+}
+
+.hrk-ng-small-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1410;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.hrk-ng-small-title a {
+    color: #1a1410;
+    text-decoration: none;
+}
+
+.hrk-ng-small-title a:hover {
+    color: #4a3f30;
+}
+
+/* ── Empty state ── */
+.hrk-ng-empty {
+    padding: 20px;
+    font-size: 13px;
+    color: #8a7d6a;
+    background: #f5f0e8;
+    border-radius: 4px;
+}
+
+/* ── Responsive ── */
+@media ( max-width: 768px ) {
+    .hrk-ng-wrap {
+        padding: 36px 20px;
+    }
+
+    .hrk-ng-header {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .hrk-ng-headline {
+        font-size: 22px;
+    }
+
+    .hrk-ng-view-link {
+        padding-top: 0;
+        align-self: flex-start;
+    }
+
+    .hrk-ng-grid {
+        grid-template-columns: 1fr;
+        gap: 3px;
+    }
+
+    .hrk-ng-featured-img,
+    .hrk-ng-featured-img-placeholder {
+        height: 200px;
+    }
+
+    .hrk-ng-featured-body {
+        padding: 18px;
+    }
+
+    .hrk-ng-featured-title {
+        font-size: 17px;
+    }
+}
+
+@media ( max-width: 480px ) {
+    .hrk-ng-wrap {
+        padding: 28px 16px;
+    }
+
+    .hrk-ng-small-post {
+        flex-direction: column;
+    }
+
+    .hrk-ng-small-thumb,
+    .hrk-ng-small-thumb-placeholder {
+        width: 100%;
+        height: 120px;
+    }
+
+    .hrk-ng-small-thumb-link {
+        width: 100%;
+    }
+}
