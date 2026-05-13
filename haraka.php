@@ -3,7 +3,7 @@
  * Plugin Name:       Haraka
  * Plugin URI:        https://v2.iiumholdings.com.my
  * Description:       Corporate Content Hub for WordPress. Manage Events, Tenders, and Careers with beautiful structured listings and full single-page templates. Built for IIUM Holdings.
- * Version:           2.3.0
+ * Version:           1.0.0
  * Author:            Ismet Fitri
  * Author URI:        https://v2.iiumholdings.com.my
  * License:           GPL2
