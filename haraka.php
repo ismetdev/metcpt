@@ -46,38 +46,62 @@ require_once HARAKA_PLUGIN_DIR . 'includes/careers/template-archive.php';
 
 // ── Enqueue frontend styles ───────────────────────────────────────────────────
 function haraka_enqueue_styles() {
+
+    // General styles always load
     wp_enqueue_style(
         'haraka-general',
         HARAKA_PLUGIN_URL . 'assets/style-general.css',
         array(),
         HARAKA_VERSION
     );
-    wp_enqueue_style(
-        'haraka-events',
-        HARAKA_PLUGIN_URL . 'assets/style-events.css',
-        array(),
-        HARAKA_VERSION
-    );
-    wp_enqueue_style(
-        'haraka-tenders',
-        HARAKA_PLUGIN_URL . 'assets/style-tenders.css',
-        array(),
-        HARAKA_VERSION
-    );
-    wp_enqueue_style(
-        'haraka-careers',
-        HARAKA_PLUGIN_URL . 'assets/style-careers.css',
-        array(),
-        HARAKA_VERSION
-    );
-    wp_enqueue_style(
-        'haraka-posts',
-        HARAKA_PLUGIN_URL . 'assets/style-posts.css',
-        array(),
-        HARAKA_VERSION
-    );
+
+    // Events — single page, archive, shortcode
+    if ( is_singular( 'hrk_event' ) || is_post_type_archive( 'hrk_event' ) || haraka_page_has_shortcode( 'events_list' ) ) {
+        wp_enqueue_style(
+            'haraka-events',
+            HARAKA_PLUGIN_URL . 'assets/style-events.css',
+            array(),
+            HARAKA_VERSION
+        );
+    }
+
+    // Tenders — single page, archive, shortcodes
+    if ( is_singular( 'hrk_tender' ) || is_post_type_archive( 'hrk_tender' ) || haraka_page_has_shortcode( 'tenders_list' ) || haraka_page_has_shortcode( 'tenders_preview' ) ) {
+        wp_enqueue_style(
+            'haraka-tenders',
+            HARAKA_PLUGIN_URL . 'assets/style-tenders.css',
+            array(),
+            HARAKA_VERSION
+        );
+    }
+
+    // Careers — single page, archive, shortcodes
+    if ( is_singular( 'hrk_career' ) || is_post_type_archive( 'hrk_career' ) || haraka_page_has_shortcode( 'careers_list' ) || haraka_page_has_shortcode( 'careers_preview' ) ) {
+        wp_enqueue_style(
+            'haraka-careers',
+            HARAKA_PLUGIN_URL . 'assets/style-careers.css',
+            array(),
+            HARAKA_VERSION
+        );
+    }
+
+    // Posts — news grid and category posts shortcodes
+    if ( haraka_page_has_shortcode( 'news_grid' ) || haraka_page_has_shortcode( 'category_posts' ) ) {
+        wp_enqueue_style(
+            'haraka-posts',
+            HARAKA_PLUGIN_URL . 'assets/style-posts.css',
+            array(),
+            HARAKA_VERSION
+        );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'haraka_enqueue_styles' );
+
+// ── Helper: check if current page contains a shortcode ────────────────────────
+function haraka_page_has_shortcode( $shortcode ) {
+    global $post;
+    return is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $shortcode );
+}
 
 // ── Enqueue admin styles ──────────────────────────────────────────────────────
 function haraka_enqueue_admin_styles( $hook ) {
