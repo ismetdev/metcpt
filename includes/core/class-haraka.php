@@ -154,10 +154,16 @@ class Haraka {
             'post-new.php',
             'index.php',
             'settings_page_haraka-settings',
+            'toplevel_page_haraka-settings',
         );
-        if ( ! in_array( $hook, $allowed_hooks ) ) {
+
+        // Also load on any Haraka settings page regardless of hook
+        $is_haraka_page = isset( $_GET['page'] ) && $_GET['page'] === 'haraka-settings';
+
+        if ( ! $is_haraka_page && ! in_array( $hook, $allowed_hooks ) ) {
             return;
         }
+
         wp_enqueue_style(
             'haraka-admin',
             HARAKA_PLUGIN_URL . 'assets/style-admin.css',

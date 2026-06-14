@@ -118,7 +118,7 @@ function haraka_settings_page_html() {
                 </a>
             </nav>
 
-            <div class="haraka-settings-content">
+            <div class="haraka-settings-content <?php echo $active_tab === 'error-log' ? 'haraka-settings-content-wide' : ''; ?>">
                 <form method="post" action="options.php">
                     <?php
                     if ( $active_tab === 'general' ) {
@@ -377,6 +377,13 @@ function haraka_settings_page_html() {
         }
         .updated.notice {
             border-left-color: #0056b3 !important;
+        }
+
+        .haraka-settings-content-wide {
+            padding: 20px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 0;
         }
     </style>
 

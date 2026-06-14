@@ -555,3 +555,55 @@ function haraka_ajax_clear_dummy_data() {
     ) );
 }
 add_action( 'wp_ajax_haraka_clear_dummy_data', 'haraka_ajax_clear_dummy_data' );
+
+// ── AJAX: seed dummy error log entries (dev only) ─────────────────────────────
+function haraka_ajax_seed_dummy_errors() {
+    check_ajax_referer( 'haraka_dummy_data', 'nonce' );
+
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_send_json_error( array( 'message' => 'Unauthorised.' ), 403 );
+    }
+
+    if ( ! haraka_dummy_data_enabled() ) {
+        wp_send_json_error( array( 'message' => 'Dummy data is not enabled.' ) );
+    }
+
+    global $wpdb;
+    $table = haraka_error_log_table();
+
+    $dummy_errors = array(
+        array( 'level' => 'fatal',     'message' => 'Maximum execution time of 30 seconds exceeded',              'source' => 'includes/tenders/shortcode-list.php',     'file' => HARAKA_PLUGIN_DIR . 'includes/tenders/shortcode-list.php',     'function' => 'haraka_tenders_list_shortcode()', 'line' => 45,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-6 days' ) ) ),
+        array( 'level' => 'error',     'message' => 'Call to undefined function haraka_get_tender_meta()',        'source' => 'includes/tenders/template-single.php',    'file' => HARAKA_PLUGIN_DIR . 'includes/tenders/template-single.php',    'function' => 'haraka_render_tender_single()',   'line' => 112, 'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-6 days' ) ) ),
+        array( 'level' => 'warning',   'message' => 'Undefined index: tender_close_time',                         'source' => 'includes/tenders/meta-boxes.php',         'file' => HARAKA_PLUGIN_DIR . 'includes/tenders/meta-boxes.php',         'function' => 'haraka_tender_meta_box_html()',   'line' => 78,  'resolved' => 1, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-5 days' ) ) ),
+        array( 'level' => 'notice',    'message' => 'Undefined variable: event_cal_url',                          'source' => 'includes/events/template-single.php',     'file' => HARAKA_PLUGIN_DIR . 'includes/events/template-single.php',     'function' => 'haraka_render_event_single()',    'line' => 203, 'resolved' => 1, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-5 days' ) ) ),
+        array( 'level' => 'exception', 'message' => 'InvalidArgumentException: Invalid date format provided',     'source' => 'includes/admin/cron.php',                 'file' => HARAKA_PLUGIN_DIR . 'includes/admin/cron.php',                 'function' => 'haraka_daily_tender_check()',     'line' => 34,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-4 days' ) ) ),
+        array( 'level' => 'error',     'message' => 'wpdb::prepare was called incorrectly — query does not contain placeholders', 'source' => 'includes/careers/shortcode-list.php', 'file' => HARAKA_PLUGIN_DIR . 'includes/careers/shortcode-list.php', 'function' => 'haraka_careers_list_shortcode()', 'line' => 67, 'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-3 days' ) ) ),
+        array( 'level' => 'warning',   'message' => 'array_map() expects parameter 2 to be array, null given',   'source' => 'includes/admin/settings-fields.php',      'file' => HARAKA_PLUGIN_DIR . 'includes/admin/settings-fields.php',      'function' => 'haraka_render_tenders_settings()','line' => 91,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-3 days' ) ) ),
+        array( 'level' => 'fatal',     'message' => 'Allowed memory size of 268435456 bytes exhausted',           'source' => 'includes/events/shortcode-list.php',      'file' => HARAKA_PLUGIN_DIR . 'includes/events/shortcode-list.php',      'function' => 'haraka_events_list_shortcode()', 'line' => 89,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-2 days' ) ) ),
+        array( 'level' => 'notice',    'message' => 'Trying to get property of non-object',                       'source' => 'includes/careers/template-single.php',    'file' => HARAKA_PLUGIN_DIR . 'includes/careers/template-single.php',    'function' => 'haraka_render_career_single()',   'line' => 145, 'resolved' => 1, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-1 day' ) ) ),
+        array( 'level' => 'error',     'message' => 'Cannot redeclare haraka_format_tender_date()',               'source' => 'includes/tenders/shortcode-preview.php',  'file' => HARAKA_PLUGIN_DIR . 'includes/tenders/shortcode-preview.php',  'function' => 'haraka_tenders_preview_shortcode()','line' => 22, 'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-1 day' ) ) ),
+        array( 'level' => 'warning',   'message' => 'Division by zero in dashboard widget count',                 'source' => 'includes/admin/dashboard-widget.php',     'file' => HARAKA_PLUGIN_DIR . 'includes/admin/dashboard-widget.php',     'function' => 'haraka_get_dashboard_counts()',   'line' => 56,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-4 hours' ) ) ),
+        array( 'level' => 'exception', 'message' => 'RuntimeException: Failed to write transient cache',          'source' => 'includes/admin/dashboard-widget.php',     'file' => HARAKA_PLUGIN_DIR . 'includes/admin/dashboard-widget.php',     'function' => 'haraka_get_dashboard_counts()',   'line' => 78,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-2 hours' ) ) ),
+    );
+
+    $context = wp_json_encode( array( 'url' => '/wp-admin/', 'method' => 'GET', 'user_id' => get_current_user_id(), 'wp_version' => get_bloginfo('version'), 'php_version' => PHP_VERSION ) );
+    $trace   = wp_json_encode( array() );
+
+    foreach ( $dummy_errors as $e ) {
+        $wpdb->insert( $table, array(
+            'created_at' => $e['created_at'],
+            'level'      => $e['level'],
+            'source'     => $e['source'],
+            'message'    => $e['message'],
+            'file'       => $e['file'],
+            'function'   => $e['function'],
+            'line'       => $e['line'],
+            'trace'      => $trace,
+            'context'    => $context,
+            'resolved'   => $e['resolved'],
+        ), array( '%s','%s','%s','%s','%s','%s','%d','%s','%s','%d' ) );
+    }
+
+    wp_send_json_success( array( 'message' => '12 dummy error log entries seeded across 7 days.' ) );
+}
+add_action( 'wp_ajax_haraka_seed_dummy_errors', 'haraka_ajax_seed_dummy_errors' );

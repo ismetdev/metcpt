@@ -89,6 +89,11 @@ function haraka_render_general_settings() {
                     data-nonce="<?php echo esc_attr( wp_create_nonce( 'haraka_dummy_data' ) ); ?>">
                 Clear Dummy Data
             </button>
+            <button type="button"
+                    class="button hrk-seed-errors-btn"
+                    data-nonce="<?php echo esc_attr( wp_create_nonce( 'haraka_dummy_data' ) ); ?>">
+                Seed Dummy Errors
+            </button>
             <span class="hrk-dummy-status" id="hrk-dummy-status"></span>
         </div>
     </div>
@@ -142,6 +147,14 @@ function haraka_render_general_settings() {
             clearBtn.addEventListener('click', function() {
                 if (!confirm('Clear all dummy data? This cannot be undone.')) return;
                 runAction('haraka_clear_dummy_data', clearBtn.getAttribute('data-nonce'), clearBtn, 'Clear Dummy Data');
+            });
+        }
+
+        var seedErrBtn = document.querySelector('.hrk-seed-errors-btn');
+        if (seedErrBtn) {
+            seedErrBtn.addEventListener('click', function() {
+                if (!confirm('Seed 12 dummy error log entries?')) return;
+                runAction('haraka_seed_dummy_errors', seedErrBtn.getAttribute('data-nonce'), seedErrBtn, 'Seed Dummy Errors');
             });
         }
     })();
