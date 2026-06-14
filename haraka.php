@@ -115,7 +115,13 @@ function haraka_page_has_shortcode( $shortcode ) {
 
 // ── Enqueue admin styles ──────────────────────────────────────────────────────
 function haraka_enqueue_admin_styles( $hook ) {
-    if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
+    $allowed_hooks = array(
+        'post.php',
+        'post-new.php',
+        'index.php',
+        'settings_page_haraka-settings',
+    );
+    if ( ! in_array( $hook, $allowed_hooks ) ) {
         return;
     }
 
