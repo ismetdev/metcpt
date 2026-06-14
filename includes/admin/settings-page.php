@@ -25,6 +25,7 @@ function haraka_register_settings() {
     register_setting( 'haraka_general', 'haraka_accent_colour',       array( 'sanitize_callback' => 'sanitize_hex_color',      'default' => '#0056b3' ) );
     register_setting( 'haraka_general', 'haraka_organisation_name',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'IIUM Holdings Sdn Bhd' ) );
     register_setting( 'haraka_general', 'haraka_enable_dummy_data',   array( 'sanitize_callback' => 'absint',                   'default' => 0 ) );
+
     // ── Events ────────────────────────────────────────────────────────────────
     register_setting( 'haraka_events', 'haraka_events_archive_url',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => '/events' ) );
     register_setting( 'haraka_events', 'haraka_events_default_order', array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'ASC' ) );
@@ -66,12 +67,15 @@ function haraka_settings_page_html() {
         return;
     }
 
-    // Which tab is active
-    $active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'general';
+    $active_tab   = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'general';
+    $is_full_page = in_array( $active_tab, array( 'error-log', 'how-to' ), true );
 
-    // Show success notice manually after save
     if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] === 'true' ) {
         echo '<div class="notice notice-success is-dismissible"><p><strong>Haraka Settings saved successfully.</strong></p></div>';
+    }
+
+    if ( $active_tab === 'how-to' ) {
+        echo '<link rel="stylesheet" href="' . esc_url( HARAKA_PLUGIN_URL . 'assets/style-docs.css?v=' . HARAKA_VERSION ) . '">';
     }
     ?>
 
@@ -89,40 +93,26 @@ function haraka_settings_page_html() {
             </div>
         </div>
 
-        <div class="haraka-settings-body">
+        <div class="haraka-settings-body <?php echo $is_full_page ? 'haraka-settings-body-full' : ''; ?>">
 
             <nav class="haraka-settings-nav">
                 <a href="?page=haraka-settings&tab=general"
-                   class="haraka-nav-item <?php echo $active_tab === 'general'  ? 'active' : ''; ?>">
-                    General
-                </a>
+                   class="haraka-nav-item <?php echo $active_tab === 'general'    ? 'active' : ''; ?>">General</a>
                 <a href="?page=haraka-settings&tab=events"
-                   class="haraka-nav-item <?php echo $active_tab === 'events'   ? 'active' : ''; ?>">
-                    Events
-                </a>
+                   class="haraka-nav-item <?php echo $active_tab === 'events'     ? 'active' : ''; ?>">Events</a>
                 <a href="?page=haraka-settings&tab=tenders"
-                   class="haraka-nav-item <?php echo $active_tab === 'tenders'  ? 'active' : ''; ?>">
-                    Tenders
-                </a>
+                   class="haraka-nav-item <?php echo $active_tab === 'tenders'    ? 'active' : ''; ?>">Tenders</a>
                 <a href="?page=haraka-settings&tab=careers"
-                   class="haraka-nav-item <?php echo $active_tab === 'careers'  ? 'active' : ''; ?>">
-                    Careers
-                </a>
+                   class="haraka-nav-item <?php echo $active_tab === 'careers'    ? 'active' : ''; ?>">Careers</a>
                 <a href="?page=haraka-settings&tab=posts"
-                   class="haraka-nav-item <?php echo $active_tab === 'posts'  ? 'active' : ''; ?>">
-                    Posts
-                </a>
+                   class="haraka-nav-item <?php echo $active_tab === 'posts'      ? 'active' : ''; ?>">Posts</a>
                 <a href="?page=haraka-settings&tab=error-log"
-                   class="haraka-nav-item hrk-nav-error-log <?php echo $active_tab === 'error-log' ? 'active' : ''; ?>">
-                    Error Log
-                </a>
+                   class="haraka-nav-item <?php echo $active_tab === 'error-log'  ? 'active' : ''; ?>">Error Log</a>
                 <a href="?page=haraka-settings&tab=how-to"
-                   class="haraka-nav-item <?php echo $active_tab === 'how-to' ? 'active' : ''; ?>">
-                    How To
-                </a>                
+                   class="haraka-nav-item <?php echo $active_tab === 'how-to'     ? 'active' : ''; ?>">How To</a>
             </nav>
 
-            <div class="haraka-settings-content <?php echo in_array( $active_tab, array( 'error-log', 'how-to' ) ) ? 'haraka-settings-content-wide' : ''; ?>">
+            <div class="haraka-settings-content <?php echo $is_full_page ? 'haraka-settings-content-wide' : ''; ?>">
                 <form method="post" action="options.php">
                     <?php
                     if ( $active_tab === 'general' ) {
@@ -142,11 +132,10 @@ function haraka_settings_page_html() {
                         haraka_render_posts_settings();
                     } elseif ( $active_tab === 'error-log' ) {
                         haraka_render_error_log_tab();
-                    }
-                    elseif ( $active_tab === 'how-to' ) {
+                    } elseif ( $active_tab === 'how-to' ) {
                         haraka_render_docs_tab();
-                    }                    
-                    if ( $active_tab !== 'error-log' && $active_tab !== 'how-to' ) {
+                    }
+                    if ( ! $is_full_page ) {
                         submit_button( 'Save Settings', 'primary', 'submit', true, array( 'class' => 'haraka-save-btn' ) );
                     }
                     ?>
@@ -203,19 +192,26 @@ function haraka_settings_page_html() {
             display: flex;
             gap: 0;
             max-width: 960px;
-            margin-top: 24px;
+            margin-top: 20px;
+        }
+        .haraka-settings-body-full {
+            max-width: 100%;
+            margin-top: 0;
         }
         .haraka-settings-nav {
             width: 180px;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
+            padding-top: 20px;
             gap: 2px;
-            padding-right: 20px;
+        }
+        .haraka-settings-body-full .haraka-settings-nav {
+            display: none;
         }
         .haraka-nav-item {
             display: block;
-            padding: 10px 14px;
+            padding: 8px 14px;
             font-size: 13px;
             font-weight: 500;
             color: #475569;
@@ -237,6 +233,15 @@ function haraka_settings_page_html() {
             border: 1px solid #e2e8f0;
             border-radius: 12px;
             padding: 28px 32px;
+            margin-top: 20px;
+        }
+        .haraka-settings-content-wide {
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            margin-top: 0;
+            width: 100%;
         }
         .haraka-section-title {
             font-size: 11px;
@@ -386,17 +391,6 @@ function haraka_settings_page_html() {
         .updated.notice {
             border-left-color: #0056b3 !important;
         }
-
-        .haraka-settings-content-wide {
-            padding: 20px;
-            background: #f1f5f9;
-            border: none;
-            border-radius: 0;
-        }
-
-        <?php if ( $active_tab === 'how-to' ) : ?>
-        <link rel="stylesheet" href="<?php echo esc_url( HARAKA_PLUGIN_URL . 'assets/style-docs.css?v=' . HARAKA_VERSION ); ?>">
-        <?php endif; ?>
     </style>
 
     <script>

@@ -926,6 +926,7 @@ function haraka_render_docs_tab() {
     </div>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
     (function() {
 
         // ── Copy buttons ──────────────────────────────────────────────────────
@@ -964,27 +965,24 @@ function haraka_render_docs_tab() {
         // ── Active sidebar link on scroll ─────────────────────────────────────
         var sections = document.querySelectorAll('.hrk-docs-section[id]');
         var navLinks = document.querySelectorAll('.hrk-docs-nav-link');
-        var content  = document.querySelector('.hrk-docs-content');
 
-        if (content) {
-            content.addEventListener('scroll', function() {
-                var scrollTop = content.scrollTop;
-                var active    = null;
+        window.addEventListener('scroll', function() {
+            var scrollTop = window.scrollY || document.documentElement.scrollTop;
+            var active    = null;
 
-                sections.forEach(function(section) {
-                    if (section.offsetTop - 60 <= scrollTop) {
-                        active = section.id;
-                    }
-                });
-
-                navLinks.forEach(function(link) {
-                    link.classList.remove('active');
-                    if (active && link.getAttribute('href') === '#' + active) {
-                        link.classList.add('active');
-                    }
-                });
+            sections.forEach(function(section) {
+                if (section.getBoundingClientRect().top <= 100) {
+                    active = section.id;
+                }
             });
-        }
+
+            navLinks.forEach(function(link) {
+                link.classList.remove('active');
+                if (active && link.getAttribute('href') === '#' + active) {
+                    link.classList.add('active');
+                }
+            });
+        });
 
         // ── Smooth scroll on sidebar click ────────────────────────────────────
         navLinks.forEach(function(link) {
@@ -993,16 +991,18 @@ function haraka_render_docs_tab() {
                 if (href && href.startsWith('#')) {
                     e.preventDefault();
                     var target = document.querySelector(href);
-                    if (target && content) {
-                        content.scrollTo({ top: target.offsetTop - 20, behavior: 'smooth' });
+                    if (target) {
+                        var top = target.getBoundingClientRect().top + window.scrollY - 80;
+                        window.scrollTo({ top: top, behavior: 'smooth' });
                     }
                     navLinks.forEach(function(l) { l.classList.remove('active'); });
                     link.classList.add('active');
                 }
             });
-        });
+        });        
 
     })();
+    }); // DOMContentLoaded
     </script>
 
     <?php

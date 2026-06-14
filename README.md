@@ -248,7 +248,9 @@ haraka/
 │   │   ├── cron.php                       # Email notifications
 │   │   ├── dashboard-widget.php           # Admin widget
 │   │   ├── error-log.php                  # Error capture, DB, AJAX, cron
-│   │   └── error-log-page.php             # Error Log tab UI
+│   │   ├── error-log-page.php             # Error Log tab UI
+│   │   ├── docs-page.php                  # How To tab UI
+│   │   └── dummy-data.php                 # Seed and clear dummy data
 │   ├── events/
 │   │   ├── meta-boxes.php                 # Event fields
 │   │   ├── shortcode-list.php             # [events_list]
@@ -277,7 +279,8 @@ haraka/
     ├── style-tenders.css                  # Tenders styles (both templates + archive)
     ├── style-careers.css                  # Careers styles + archive
     ├── style-posts.css                    # News grid styles
-    └── style-admin.css                    # Admin styles
+    ├── style-admin.css                    # Admin styles
+    └── style-docs.css                     # How To tab styles
 ```
 
 ## Custom Post Types
