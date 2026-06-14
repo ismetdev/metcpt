@@ -29,4 +29,8 @@ function haraka_page_has_shortcode( $shortcode ) {
 
 // ── Bootstrap ─────────────────────────────────────────────────────────────────
 require_once HARAKA_PLUGIN_DIR . 'includes/core/class-haraka.php';
+require_once HARAKA_PLUGIN_DIR . 'includes/admin/error-log.php';
 Haraka::instance();
+
+// ── Ensure error log table exists ────────────────────────────────────────────
+add_action( 'admin_init', 'haraka_error_log_create_table' );

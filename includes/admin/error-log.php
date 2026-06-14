@@ -33,7 +33,10 @@ function haraka_error_log_create_table() {
     $charset    = $wpdb->get_charset_collate();
     $db_version = get_option( 'haraka_error_log_db_version', '' );
 
-    if ( $db_version === HARAKA_ERROR_LOG_TABLE_VERSION ) {
+    // Check version AND confirm table actually exists
+    // Prevents stale version option blocking recreation after failed install
+    $table_exists = $wpdb->get_var( "SHOW TABLES LIKE '{$table}'" );
+    if ( $db_version === HARAKA_ERROR_LOG_TABLE_VERSION && $table_exists ) {
         return;
     }
 

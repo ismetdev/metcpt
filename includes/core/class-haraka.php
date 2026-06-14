@@ -54,7 +54,6 @@ class Haraka {
             require_once HARAKA_PLUGIN_DIR . 'includes/admin/settings-page.php';
             require_once HARAKA_PLUGIN_DIR . 'includes/admin/settings-fields.php';
             require_once HARAKA_PLUGIN_DIR . 'includes/admin/dashboard-widget.php';
-            require_once HARAKA_PLUGIN_DIR . 'includes/admin/error-log.php';
             require_once HARAKA_PLUGIN_DIR . 'includes/admin/error-log-page.php';
             require_once HARAKA_PLUGIN_DIR . 'includes/careers/meta-boxes-company.php';
             require_once HARAKA_PLUGIN_DIR . 'includes/careers/meta-boxes-career.php';
@@ -177,6 +176,7 @@ class Haraka {
      */
     public function activate() {
         haraka_register_post_types();
+        haraka_error_log_create_table();
         flush_rewrite_rules();
     }
 
