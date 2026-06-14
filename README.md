@@ -62,6 +62,16 @@ A comprehensive WordPress plugin built for IIUM Holdings Sdn Bhd to manage corpo
 - Deduplication prevents repeated notifications
 - Manual trigger available via Settings page
 
+**Error Log**
+- Captures PHP errors, uncaught exceptions, fatal errors, and WP_Error events
+- Scoped strictly to Haraka plugin files — other plugins ignored
+- Stores logs in dedicated `wp_haraka_error_log` database table
+- Filterable admin UI — filter by level (error, warning, notice, exception, fatal) and resolved status
+- View Details modal shows full stack trace and request context
+- Mark Resolved per entry via AJAX — no page reload
+- Copy for Claude button generates a pre-formatted diagnostic prompt
+- Auto-purges resolved logs older than 30 days via WP-Cron
+
 ## Installation
 
 ### Requirements
@@ -236,7 +246,9 @@ haraka/
 │   │   ├── settings-page.php              # Settings UI
 │   │   ├── settings-fields.php            # Field renderers
 │   │   ├── cron.php                       # Email notifications
-│   │   └── dashboard-widget.php           # Admin widget
+│   │   ├── dashboard-widget.php           # Admin widget
+│   │   ├── error-log.php                  # Error capture, DB, AJAX, cron
+│   │   └── error-log-page.php             # Error Log tab UI
 │   ├── events/
 │   │   ├── meta-boxes.php                 # Event fields
 │   │   ├── shortcode-list.php             # [events_list]
