@@ -116,9 +116,13 @@ function haraka_settings_page_html() {
                    class="haraka-nav-item hrk-nav-error-log <?php echo $active_tab === 'error-log' ? 'active' : ''; ?>">
                     Error Log
                 </a>
+                <a href="?page=haraka-settings&tab=how-to"
+                   class="haraka-nav-item <?php echo $active_tab === 'how-to' ? 'active' : ''; ?>">
+                    How To
+                </a>                
             </nav>
 
-            <div class="haraka-settings-content <?php echo $active_tab === 'error-log' ? 'haraka-settings-content-wide' : ''; ?>">
+            <div class="haraka-settings-content <?php echo in_array( $active_tab, array( 'error-log', 'how-to' ) ) ? 'haraka-settings-content-wide' : ''; ?>">
                 <form method="post" action="options.php">
                     <?php
                     if ( $active_tab === 'general' ) {
@@ -139,9 +143,13 @@ function haraka_settings_page_html() {
                     } elseif ( $active_tab === 'error-log' ) {
                         haraka_render_error_log_tab();
                     }
-                    if ( $active_tab !== 'error-log' ) {
+                    } elseif ( $active_tab === 'how-to' ) {
+                        haraka_render_docs_tab();
+                    }                    
+                    if ( $active_tab !== 'error-log' && $active_tab !== 'how-to' ) {
                         submit_button( 'Save Settings', 'primary', 'submit', true, array( 'class' => 'haraka-save-btn' ) );
-                    }                    ?>
+                    }
+                    ?>
                 </form>
             </div>
 
@@ -385,6 +393,10 @@ function haraka_settings_page_html() {
             border: none;
             border-radius: 0;
         }
+
+        <?php if ( $active_tab === 'how-to' ) : ?>
+        <link rel="stylesheet" href="<?php echo esc_url( HARAKA_PLUGIN_URL . 'assets/style-docs.css?v=' . HARAKA_VERSION ); ?>">
+        <?php endif; ?>
     </style>
 
     <script>

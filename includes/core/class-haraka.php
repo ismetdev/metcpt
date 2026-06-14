@@ -48,6 +48,7 @@ class Haraka {
         require_once HARAKA_PLUGIN_DIR . 'includes/admin/cron.php';
         require_once HARAKA_PLUGIN_DIR . 'includes/admin/error-log.php';
         require_once HARAKA_PLUGIN_DIR . 'includes/admin/dummy-data.php';
+        require_once HARAKA_PLUGIN_DIR . 'includes/admin/docs-page.php';        
 
         // Admin only
         if ( is_admin() ) {
