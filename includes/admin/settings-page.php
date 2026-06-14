@@ -24,7 +24,7 @@ function haraka_register_settings() {
     // ── General ───────────────────────────────────────────────────────────────
     register_setting( 'haraka_general', 'haraka_accent_colour',       array( 'sanitize_callback' => 'sanitize_hex_color',      'default' => '#0056b3' ) );
     register_setting( 'haraka_general', 'haraka_organisation_name',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'IIUM Holdings Sdn Bhd' ) );
-
+    register_setting( 'haraka_general', 'haraka_enable_dummy_data',   array( 'sanitize_callback' => 'absint',                   'default' => 0 ) );
     // ── Events ────────────────────────────────────────────────────────────────
     register_setting( 'haraka_events', 'haraka_events_archive_url',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => '/events' ) );
     register_setting( 'haraka_events', 'haraka_events_default_order', array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'ASC' ) );
