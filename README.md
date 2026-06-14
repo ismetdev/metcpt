@@ -238,6 +238,8 @@ php /path/to/your/wordpress/wp-cron.php
 haraka/
 ├── haraka.php                              # Plugin entry point
 ├── uninstall.php                           # Cleanup on deletion
+├── libs/
+│   └── plugin-update-checker/          # Auto-update library (YahnisElsts)
 ├── includes/
 │   ├── core/
 │   │   ├── class-haraka.php               # Main loader class
@@ -317,6 +319,7 @@ No custom tables are created.
 - CSS versioning for cache busting
 - Minimal queries in shortcodes
 - Optional category filtering reduces query load
+- Automatic update notifications via GitHub releases
 
 ## Browser Support
 
