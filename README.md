@@ -230,7 +230,6 @@ haraka/
 ├── uninstall.php                       # Cleanup on deletion
 ├── includes/
 │   ├── post-types.php                  # CPT registration
-│   ├── shortcode-general.php           # [category_posts]
 │   ├── admin/
 │   │   ├── settings-page.php           # Settings UI
 │   │   ├── settings-fields.php         # Field renderers
@@ -256,7 +255,8 @@ haraka/
 │   │   ├── template-single.php         # Single career page
 │   │   └── template-archive.php        # Career archive page
 │   └── posts/
-│       └── shortcode-news-grid.php     # [news_grid]
+│       └── shortcode-general.php       # [category_posts]
+│       ├── shortcode-news-grid.php     # [news_grid]
 └── assets/
     ├── style-general.css               # Base styles
     ├── style-events.css                # Events styles + archive

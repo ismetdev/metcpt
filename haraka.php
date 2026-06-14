@@ -21,7 +21,7 @@ define( 'HARAKA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 // ── Load all modules ──────────────────────────────────────────────────────────
 require_once HARAKA_PLUGIN_DIR . 'includes/post-types.php';
-require_once HARAKA_PLUGIN_DIR . 'includes/shortcode-general.php';
+require_once HARAKA_PLUGIN_DIR . 'includes/posts/shortcode-general.php';
 require_once HARAKA_PLUGIN_DIR . 'includes/admin/settings-page.php';
 require_once HARAKA_PLUGIN_DIR . 'includes/admin/settings-fields.php';
 require_once HARAKA_PLUGIN_DIR . 'includes/admin/cron.php';
