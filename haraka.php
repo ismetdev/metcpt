@@ -6,7 +6,8 @@
  * Version:           1.0.0
  * Author:            Ismet Fitri
  * Author URI:        https://v2.iiumholdings.com.my
- * License:           GPL2
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       haraka
  */
 
