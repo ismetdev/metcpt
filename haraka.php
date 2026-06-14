@@ -27,6 +27,16 @@ function haraka_page_has_shortcode( $shortcode ) {
     return is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $shortcode );
 }
 
+// ── Auto-updater — checks GitHub releases for updates ─────────────────────────
+require_once HARAKA_PLUGIN_DIR . 'libs/plugin-update-checker/plugin-update-checker.php';
+$haraka_update_checker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+    'https://github.com/ismetdev/haraka/',
+    HARAKA_PLUGIN_FILE,
+    'haraka'
+);
+$haraka_update_checker->setBranch( 'main' );
+$haraka_update_checker->getVcsApi()->enableReleaseAssets();
+
 // ── Bootstrap ─────────────────────────────────────────────────────────────────
 require_once HARAKA_PLUGIN_DIR . 'includes/core/class-haraka.php';
 require_once HARAKA_PLUGIN_DIR . 'includes/admin/error-log.php';
