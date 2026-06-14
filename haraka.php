@@ -40,6 +40,9 @@ require_once HARAKA_PLUGIN_DIR . 'includes/tenders/shortcode-preview.php';
 require_once HARAKA_PLUGIN_DIR . 'includes/tenders/template-single.php';
 require_once HARAKA_PLUGIN_DIR . 'includes/tenders/shortcode-template-b.php';
 require_once HARAKA_PLUGIN_DIR . 'includes/posts/shortcode-news-grid.php';
+require_once HARAKA_PLUGIN_DIR . 'includes/events/template-archive.php';
+require_once HARAKA_PLUGIN_DIR . 'includes/tenders/template-archive.php';
+require_once HARAKA_PLUGIN_DIR . 'includes/careers/template-archive.php';
 
 // ── Enqueue frontend styles ───────────────────────────────────────────────────
 function haraka_enqueue_styles() {
