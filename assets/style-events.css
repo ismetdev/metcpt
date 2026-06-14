@@ -514,3 +514,301 @@
     .hrk-btn { justify-content: center; }
     .hrk-vip-tag { display: none; }
 }
+
+/* ===================================
+   Haraka — Event Archive Page
+   template-archive.php styles
+   =================================== */
+
+.hrk-ev-archive-wrap {
+    font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+    color: #0f172a;
+}
+
+.hrk-ev-archive-header {
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.hrk-ev-archive-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
+.hrk-ev-archive-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+    margin: 0 0 16px;
+}
+
+.hrk-ev-archive-desc {
+    font-size: 16px;
+    color: #475569;
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.hrk-ev-archive-filters {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+}
+
+.hrk-ev-filter-btn {
+    padding: 10px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hrk-ev-filter-btn:hover {
+    color: #0f172a;
+    border-color: #cbd5e1;
+}
+
+.hrk-ev-filter-btn.active {
+    color: #ffffff;
+    background: #0f172a;
+    border-color: #0f172a;
+}
+
+.hrk-ev-archive-grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax( 340px, 1fr ) );
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.hrk-ev-archive-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.hrk-ev-archive-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba( 15, 23, 42, 0.08 );
+    transform: translateY( -2px );
+}
+
+.hrk-ev-card-thumb {
+    width: 100%;
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    background-color: #f1f5f9;
+    flex-shrink: 0;
+}
+
+.hrk-ev-card-thumb-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient( 135deg, #0f172a 0%, #1e293b 100% );
+}
+
+.hrk-ev-card-thumb-placeholder span {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba( 255, 255, 255, 0.4 );
+}
+
+.hrk-ev-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px;
+}
+
+.hrk-ev-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.hrk-ev-card-date-badge {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.hrk-ev-date-day {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.hrk-ev-date-month {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.hrk-ev-card-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.hrk-ev-status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.hrk-ev-status-upcoming {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.hrk-ev-status-upcoming .hrk-ev-status-dot { background: #16a34a; }
+
+.hrk-ev-status-today {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.hrk-ev-status-today .hrk-ev-status-dot { background: #2563eb; }
+
+.hrk-ev-status-past {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.hrk-ev-status-past .hrk-ev-status-dot { background: #94a3b8; }
+
+.hrk-ev-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.4;
+    margin: 0 0 14px;
+    flex: 1;
+}
+
+.hrk-ev-archive-card:hover .hrk-ev-card-title {
+    color: #0056b3;
+}
+
+.hrk-ev-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.hrk-ev-card-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.hrk-ev-card-meta-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
+}
+
+.hrk-ev-card-meta-value {
+    font-size: 13px;
+    color: #334155;
+    font-weight: 500;
+}
+
+.hrk-ev-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid #f1f5f9;
+    margin-top: auto;
+}
+
+.hrk-ev-card-time {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.hrk-ev-card-arrow {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    border-radius: 50%;
+    color: #64748b;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.hrk-ev-archive-card:hover .hrk-ev-card-arrow {
+    background: #0f172a;
+    color: #ffffff;
+}
+
+.hrk-ev-archive-empty {
+    text-align: center;
+    padding: 80px 24px;
+}
+
+.hrk-ev-empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.hrk-ev-empty-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #334155;
+    margin: 0 0 8px;
+}
+
+.hrk-ev-empty-text {
+    font-size: 14px;
+    color: #64748b;
+}
+
+@media ( max-width: 768px ) {
+    .hrk-ev-archive-wrap  { padding: 40px 16px 60px; }
+    .hrk-ev-archive-title { font-size: 32px; }
+    .hrk-ev-archive-grid  { grid-template-columns: 1fr; }
+}
