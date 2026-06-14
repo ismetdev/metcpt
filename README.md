@@ -226,44 +226,46 @@ php /path/to/your/wordpress/wp-cron.php
 
 ```
 haraka/
-├── haraka.php                          # Main plugin file
-├── uninstall.php                       # Cleanup on deletion
+├── haraka.php                              # Plugin entry point
+├── uninstall.php                           # Cleanup on deletion
 ├── includes/
-│   ├── post-types.php                  # CPT registration
+│   ├── core/
+│   │   ├── class-haraka.php               # Main loader class
+│   │   └── post-types.php                 # CPT registration
 │   ├── admin/
-│   │   ├── settings-page.php           # Settings UI
-│   │   ├── settings-fields.php         # Field renderers
-│   │   ├── cron.php                    # Email notifications
-│   │   └── dashboard-widget.php        # Admin widget
+│   │   ├── settings-page.php              # Settings UI
+│   │   ├── settings-fields.php            # Field renderers
+│   │   ├── cron.php                       # Email notifications
+│   │   └── dashboard-widget.php           # Admin widget
 │   ├── events/
-│   │   ├── meta-boxes.php              # Event fields
-│   │   ├── shortcode-list.php          # [events_list]
-│   │   ├── template-single.php         # Single event page
-│   │   └── template-archive.php        # Event archive page
+│   │   ├── meta-boxes.php                 # Event fields
+│   │   ├── shortcode-list.php             # [events_list]
+│   │   ├── template-single.php            # Single event page
+│   │   └── template-archive.php           # Event archive page
 │   ├── tenders/
-│   │   ├── meta-boxes.php              # Tender fields
-│   │   ├── shortcode-list.php          # [tenders_list]
-│   │   ├── shortcode-preview.php       # [tenders_preview]
-│   │   ├── shortcode-template-b.php    # Template B renderer
-│   │   ├── template-single.php         # Single tender page
-│   │   └── template-archive.php        # Tender archive page
+│   │   ├── meta-boxes.php                 # Tender fields
+│   │   ├── shortcode-list.php             # [tenders_list]
+│   │   ├── shortcode-preview.php          # [tenders_preview]
+│   │   ├── shortcode-template-b.php       # Template B renderer
+│   │   ├── template-single.php            # Single tender page
+│   │   └── template-archive.php           # Tender archive page
 │   ├── careers/
-│   │   ├── meta-boxes-company.php      # Company fields
-│   │   ├── meta-boxes-career.php       # Career fields
-│   │   ├── shortcode-list.php          # [careers_list]
-│   │   ├── shortcode-preview.php       # [careers_preview]
-│   │   ├── template-single.php         # Single career page
-│   │   └── template-archive.php        # Career archive page
+│   │   ├── meta-boxes-company.php         # Company fields
+│   │   ├── meta-boxes-career.php          # Career fields
+│   │   ├── shortcode-list.php             # [careers_list]
+│   │   ├── shortcode-preview.php          # [careers_preview]
+│   │   ├── template-single.php            # Single career page
+│   │   └── template-archive.php           # Career archive page
 │   └── posts/
-│       ├── shortcode-general.php       # [category_posts]
-│       └── shortcode-news-grid.php     # [news_grid]
+│       ├── shortcode-general.php          # [category_posts]
+│       └── shortcode-news-grid.php        # [news_grid]
 └── assets/
-    ├── style-general.css               # Base styles
-    ├── style-events.css                # Events styles + archive
-    ├── style-tenders.css               # Tenders styles (both templates + archive)
-    ├── style-careers.css               # Careers styles + archive
-    ├── style-posts.css                 # News grid styles
-    └── style-admin.css                 # Admin styles
+    ├── style-general.css                  # Base styles
+    ├── style-events.css                   # Events styles + archive
+    ├── style-tenders.css                  # Tenders styles (both templates + archive)
+    ├── style-careers.css                  # Careers styles + archive
+    ├── style-posts.css                    # News grid styles
+    └── style-admin.css                    # Admin styles
 ```
 
 ## Custom Post Types
