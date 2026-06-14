@@ -42,6 +42,113 @@ function haraka_render_general_settings() {
     </div>
 
     <?php
+
+    // ── Developer Tools ───────────────────────────────────────────────────────
+    ?>
+    <div class="haraka-section-title">Developer Tools</div>
+
+    <div class="haraka-field-row">
+        <div class="haraka-field-label">
+            Enable Dummy Data Button
+            <span class="haraka-field-hint">
+                Shows seed and clear buttons for local testing only.
+                Never enable on a live production site.
+            </span>
+        </div>
+        <div class="haraka-toggle-wrap">
+            <label class="haraka-toggle">
+                <input type="checkbox"
+                       name="haraka_enable_dummy_data"
+                       value="1"
+                       <?php checked( 1, get_option( 'haraka_enable_dummy_data', 0 ) ); ?> />
+                <span class="haraka-toggle-slider"></span>
+            </label>
+            <span class="haraka-toggle-label">
+                <?php echo get_option( 'haraka_enable_dummy_data', 0 ) ? 'Enabled' : 'Disabled'; ?>
+            </span>
+        </div>
+    </div>
+
+    <?php if ( get_option( 'haraka_enable_dummy_data', 0 ) ) : ?>
+    <div class="haraka-field-row">
+        <div class="haraka-field-label">
+            Dummy Data Actions
+            <span class="haraka-field-hint">
+                Seeds 10 events, 10 tenders, and 10 careers.<br>
+                Clear removes only dummy posts — real content is never affected.
+            </span>
+        </div>
+        <div class="hrk-dummy-actions">
+            <button type="button"
+                    class="button button-primary hrk-seed-btn"
+                    data-nonce="<?php echo esc_attr( wp_create_nonce( 'haraka_dummy_data' ) ); ?>">
+                Seed Dummy Data
+            </button>
+            <button type="button"
+                    class="button hrk-clear-btn"
+                    data-nonce="<?php echo esc_attr( wp_create_nonce( 'haraka_dummy_data' ) ); ?>">
+                Clear Dummy Data
+            </button>
+            <span class="hrk-dummy-status" id="hrk-dummy-status"></span>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var ajaxUrl = '<?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>';
+        var status  = document.getElementById('hrk-dummy-status');
+
+        function runAction(action, nonce, btn, msg) {
+            btn.disabled    = true;
+            btn.textContent = 'Please wait…';
+            status.textContent = '';
+            status.className   = 'hrk-dummy-status';
+
+            var body = new FormData();
+            body.append('action', action);
+            body.append('nonce',  nonce);
+
+            fetch(ajaxUrl, { method: 'POST', body: body })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    btn.disabled    = false;
+                    btn.textContent = msg;
+                    if (data.success) {
+                        status.textContent = '✓ ' + data.data.message;
+                        status.className   = 'hrk-dummy-status hrk-dummy-ok';
+                    } else {
+                        status.textContent = '✗ ' + (data.data ? data.data.message : 'Error.');
+                        status.className   = 'hrk-dummy-status hrk-dummy-err';
+                    }
+                })
+                .catch(function() {
+                    btn.disabled    = false;
+                    btn.textContent = msg;
+                    status.textContent = '✗ Network error.';
+                    status.className   = 'hrk-dummy-status hrk-dummy-err';
+                });
+        }
+
+        var seedBtn = document.querySelector('.hrk-seed-btn');
+        if (seedBtn) {
+            seedBtn.addEventListener('click', function() {
+                if (!confirm('Seed 10 events, 10 tenders and 10 careers?')) return;
+                runAction('haraka_seed_dummy_data', seedBtn.getAttribute('data-nonce'), seedBtn, 'Seed Dummy Data');
+            });
+        }
+
+        var clearBtn = document.querySelector('.hrk-clear-btn');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+                if (!confirm('Clear all dummy data? This cannot be undone.')) return;
+                runAction('haraka_clear_dummy_data', clearBtn.getAttribute('data-nonce'), clearBtn, 'Clear Dummy Data');
+            });
+        }
+    })();
+    </script>
+    <?php endif; ?>
+
+    <?php
 }
 
 

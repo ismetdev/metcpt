@@ -660,3 +660,20 @@
     color: #0f172a;
     word-break: break-all;
 }
+
+/* ── Dummy Data Tools ── */
+.hrk-dummy-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 4px;
+}
+
+.hrk-dummy-status {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.hrk-dummy-ok  { color: #166534; }
+.hrk-dummy-err { color: #dc2626; }
