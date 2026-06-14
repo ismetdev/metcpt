@@ -28,5 +28,5 @@ function haraka_page_has_shortcode( $shortcode ) {
 }
 
 // ── Bootstrap ─────────────────────────────────────────────────────────────────
-require_once HARAKA_PLUGIN_DIR . 'includes/class-haraka.php';
+require_once HARAKA_PLUGIN_DIR . 'includes/core/class-haraka.php';
 Haraka::instance();

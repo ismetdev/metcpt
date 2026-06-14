@@ -44,7 +44,7 @@ class Haraka {
     private function load_modules() {
 
         // Core — always needed on every request
-        require_once HARAKA_PLUGIN_DIR . 'includes/post-types.php';
+        require_once HARAKA_PLUGIN_DIR . 'includes/core/post-types.php';
         require_once HARAKA_PLUGIN_DIR . 'includes/admin/cron.php';
 
         // Admin only
