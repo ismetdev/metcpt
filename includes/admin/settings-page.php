@@ -143,7 +143,7 @@ function haraka_settings_page_html() {
                     } elseif ( $active_tab === 'error-log' ) {
                         haraka_render_error_log_tab();
                     }
-                    } elseif ( $active_tab === 'how-to' ) {
+                    elseif ( $active_tab === 'how-to' ) {
                         haraka_render_docs_tab();
                     }                    
                     if ( $active_tab !== 'error-log' && $active_tab !== 'how-to' ) {
