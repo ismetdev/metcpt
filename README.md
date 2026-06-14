@@ -239,26 +239,29 @@ haraka/
 │   ├── events/
 │   │   ├── meta-boxes.php              # Event fields
 │   │   ├── shortcode-list.php          # [events_list]
-│   │   └── template-single.php         # Single event page
+│   │   ├── template-single.php         # Single event page
+│   │   └── template-archive.php        # Event archive page
 │   ├── tenders/
 │   │   ├── meta-boxes.php              # Tender fields
 │   │   ├── shortcode-list.php          # [tenders_list]
 │   │   ├── shortcode-preview.php       # [tenders_preview]
 │   │   ├── shortcode-template-b.php    # Template B renderer
-│   │   └── template-single.php         # Single tender page
+│   │   ├── template-single.php         # Single tender page
+│   │   └── template-archive.php        # Tender archive page
 │   ├── careers/
 │   │   ├── meta-boxes-company.php      # Company fields
 │   │   ├── meta-boxes-career.php       # Career fields
 │   │   ├── shortcode-list.php          # [careers_list]
 │   │   ├── shortcode-preview.php       # [careers_preview]
-│   │   └── template-single.php         # Single career page
+│   │   ├── template-single.php         # Single career page
+│   │   └── template-archive.php        # Career archive page
 │   └── posts/
 │       └── shortcode-news-grid.php     # [news_grid]
 └── assets/
     ├── style-general.css               # Base styles
-    ├── style-events.css                # Events styles
-    ├── style-tenders.css               # Tenders styles (both templates)
-    ├── style-careers.css               # Careers styles
+    ├── style-events.css                # Events styles + archive
+    ├── style-tenders.css               # Tenders styles (both templates + archive)
+    ├── style-careers.css               # Careers styles + archive
     ├── style-posts.css                 # News grid styles
     └── style-admin.css                 # Admin styles
 ```
@@ -307,28 +310,21 @@ No custom tables are created.
 
 ## Changelog
 
-### 2.3.0 (2026-05-13)
-- Fixed XSS vector in career_apply_url (now uses esc_url_raw)
-- Extracted inline styles to CSS files (CSP compliant)
+### 1.0.0 (2026-06-14)
+- Production release — version reset for live deployment
+- Added polished archive pages for Events, Tenders, and Careers
+- Added safe uninstall handler (data preserved by default)
+- All inline styles extracted to CSS files (CSP compliant)
+- Fixed XSS vector in career_apply_url (esc_url_raw)
 - Added dashboard widget transient caching (5-minute expiry)
-- Documented server cron setup for reliable notifications
-
-### 2.2.0 (2026-05-10)
-- Added Template B for Tenders (editorial layout)
 - Refactored all CPT queries (removed WordPress post category dependency)
-- Added [news_grid] shortcode for WordPress posts
-- Created Posts settings tab
-
-### 2.1.0 (2026-05-08)
-- Added Careers module with hrk_company CPT
-- Added Companies management system
-- Created [careers_list] and [careers_preview] shortcodes
-
-### 2.0.0 (2026-05-07)
-- Initial release
+- Added Template B for Tenders (editorial layout)
+- Added [news_grid] shortcode for WordPress default posts
+- Added Careers module with hrk_company relational CPT
 - Events and Tenders modules
-- Dashboard widget
-- Email notifications
+- Dashboard widget with content health monitoring
+- Email notifications for closing tenders
+- Server cron configured for reliable scheduling
 
 ## Support
 
@@ -343,4 +339,4 @@ Proprietary — Internal use only by IIUM Holdings Sdn Bhd and its subsidiaries.
 ## Credits
 
 Developed for IIUM Holdings Sdn Bhd  
-Version 2.3.0 | May 2026
+Version 1.0.0 | June 2026
