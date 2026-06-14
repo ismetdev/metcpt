@@ -443,6 +443,7 @@ function haraka_render_error_log_tab() {
     </div>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
     (function() {
 
         var wrap      = document.getElementById('hrk-log-wrap');
@@ -639,6 +640,7 @@ function haraka_render_error_log_tab() {
         }
 
     })();
+    }); // DOMContentLoaded
     </script>
 
     <?php
