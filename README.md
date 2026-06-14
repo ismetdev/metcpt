@@ -255,8 +255,8 @@ haraka/
 │   │   ├── template-single.php         # Single career page
 │   │   └── template-archive.php        # Career archive page
 │   └── posts/
-│       └── shortcode-general.php       # [category_posts]
-│       ├── shortcode-news-grid.php     # [news_grid]
+│       ├── shortcode-general.php       # [category_posts]
+│       └── shortcode-news-grid.php     # [news_grid]
 └── assets/
     ├── style-general.css               # Base styles
     ├── style-events.css                # Events styles + archive
