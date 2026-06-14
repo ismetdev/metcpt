@@ -20,6 +20,12 @@ define( 'HARAKA_VERSION',    '1.0.0' );
 define( 'HARAKA_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'HARAKA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function haraka_page_has_shortcode( $shortcode ) {
+    global $post;
+    return is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $shortcode );
+}
+
 // ── Load all modules ──────────────────────────────────────────────────────────
 
 // Core — always needed
@@ -108,12 +114,6 @@ function haraka_enqueue_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'haraka_enqueue_styles' );
 
-// ── Helper: check shortcode in page ───────────────────────────────────────────
-function haraka_page_has_shortcode( $shortcode ) {
-    global $post;
-    return is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $shortcode );
-}
-
 // ── Enqueue admin styles ──────────────────────────────────────────────────────
 function haraka_enqueue_admin_styles( $hook ) {
     $allowed_hooks = array(
@@ -122,6 +122,7 @@ function haraka_enqueue_admin_styles( $hook ) {
         'index.php',
         'settings_page_haraka-settings',
     );
+
     if ( ! in_array( $hook, $allowed_hooks ) ) {
         return;
     }
