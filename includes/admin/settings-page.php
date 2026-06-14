@@ -112,6 +112,10 @@ function haraka_settings_page_html() {
                    class="haraka-nav-item <?php echo $active_tab === 'posts'  ? 'active' : ''; ?>">
                     Posts
                 </a>
+                <a href="?page=haraka-settings&tab=error-log"
+                   class="haraka-nav-item hrk-nav-error-log <?php echo $active_tab === 'error-log' ? 'active' : ''; ?>">
+                    Error Log
+                </a>
             </nav>
 
             <div class="haraka-settings-content">
@@ -132,9 +136,12 @@ function haraka_settings_page_html() {
                     } elseif ( $active_tab === 'posts' ) {
                         settings_fields( 'haraka_posts' );
                         haraka_render_posts_settings();
+                    } elseif ( $active_tab === 'error-log' ) {
+                        haraka_render_error_log_tab();
                     }
-                    submit_button( 'Save Settings', 'primary', 'submit', true, array( 'class' => 'haraka-save-btn' ) );
-                    ?>
+                    if ( $active_tab !== 'error-log' ) {
+                        submit_button( 'Save Settings', 'primary', 'submit', true, array( 'class' => 'haraka-save-btn' ) );
+                    }                    ?>
                 </form>
             </div>
 

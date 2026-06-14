@@ -46,12 +46,15 @@ class Haraka {
         // Core — always needed on every request
         require_once HARAKA_PLUGIN_DIR . 'includes/core/post-types.php';
         require_once HARAKA_PLUGIN_DIR . 'includes/admin/cron.php';
+        require_once HARAKA_PLUGIN_DIR . 'includes/admin/error-log.php';
 
         // Admin only
         if ( is_admin() ) {
             require_once HARAKA_PLUGIN_DIR . 'includes/admin/settings-page.php';
             require_once HARAKA_PLUGIN_DIR . 'includes/admin/settings-fields.php';
             require_once HARAKA_PLUGIN_DIR . 'includes/admin/dashboard-widget.php';
+            require_once HARAKA_PLUGIN_DIR . 'includes/admin/error-log.php';
+            require_once HARAKA_PLUGIN_DIR . 'includes/admin/error-log-page.php';
             require_once HARAKA_PLUGIN_DIR . 'includes/careers/meta-boxes-company.php';
             require_once HARAKA_PLUGIN_DIR . 'includes/careers/meta-boxes-career.php';
             require_once HARAKA_PLUGIN_DIR . 'includes/events/meta-boxes.php';

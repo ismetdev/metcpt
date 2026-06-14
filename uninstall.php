@@ -89,4 +89,12 @@ $timestamp = wp_next_scheduled( 'haraka_daily_tender_check' );
 if ( $timestamp ) {
     wp_unschedule_event( $timestamp, 'haraka_daily_tender_check' );
 }
+$timestamp = wp_next_scheduled( 'haraka_purge_error_log' );
+if ( $timestamp ) {
+    wp_unschedule_event( $timestamp, 'haraka_purge_error_log' );
+}
+
+// Drop error log table
+$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}haraka_error_log" );
+delete_option( 'haraka_error_log_db_version' );
 */
