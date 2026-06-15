@@ -10,7 +10,7 @@ body .hrk-cr-archive-card {
 }
 
 body .hrk-cr-card-title {
-    color: #0f172a;
+    color: #0f172a !important;
 }
 
 body .hrk-cr-card-company {
@@ -1059,7 +1059,8 @@ body .hrk-cr-archive-card {
     border-radius: 12px;
     padding: 24px;
     transition: all 0.2s;
-    text-decoration: none;
+    text-decoration: none !important;
+    color: #0f172a !important;
 }
 
 body .hrk-cr-archive-card:hover {
