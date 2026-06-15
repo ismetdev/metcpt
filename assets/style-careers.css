@@ -975,7 +975,7 @@ body .hrk-cr-card-date {
    template-archive.php styles
    =================================== */
 
-.hrk-cr-archive-wrap {
+body .hrk-cr-archive-wrap {
     font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
     max-width: 1200px;
     margin: 0 auto;
@@ -983,12 +983,12 @@ body .hrk-cr-card-date {
     color: #0f172a;
 }
 
-.hrk-cr-archive-header {
+body .hrk-cr-archive-header {
     margin-bottom: 48px;
     text-align: center;
 }
 
-.hrk-cr-archive-label {
+body .hrk-cr-archive-label {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -997,7 +997,7 @@ body .hrk-cr-card-date {
     margin-bottom: 12px;
 }
 
-.hrk-cr-archive-title {
+body .hrk-cr-archive-title {
     font-size: 42px;
     font-weight: 700;
     color: #0f172a;
@@ -1005,7 +1005,7 @@ body .hrk-cr-card-date {
     margin: 0 0 16px;
 }
 
-.hrk-cr-archive-desc {
+body .hrk-cr-archive-desc {
     font-size: 16px;
     color: #475569;
     line-height: 1.7;
@@ -1013,7 +1013,7 @@ body .hrk-cr-card-date {
     margin: 0 auto;
 }
 
-.hrk-cr-archive-filters {
+body .hrk-cr-archive-filters {
     display: flex;
     justify-content: center;
     gap: 12px;
@@ -1021,7 +1021,7 @@ body .hrk-cr-card-date {
     flex-wrap: wrap;
 }
 
-.hrk-cr-filter-btn {
+body .hrk-cr-filter-btn {
     padding: 10px 24px;
     font-size: 13px;
     font-weight: 600;
@@ -1033,25 +1033,25 @@ body .hrk-cr-card-date {
     transition: all 0.2s;
 }
 
-.hrk-cr-filter-btn:hover {
+body .hrk-cr-filter-btn:hover {
     color: #0f172a;
     border-color: #cbd5e1;
 }
 
-.hrk-cr-filter-btn.active {
+body .hrk-cr-filter-btn.active {
     color: #ffffff;
     background: #0f172a;
     border-color: #0f172a;
 }
 
-.hrk-cr-archive-grid {
+body .hrk-cr-archive-grid {
     display: grid;
     grid-template-columns: repeat( auto-fill, minmax( 340px, 1fr ) );
     gap: 24px;
     margin-bottom: 48px;
 }
 
-.hrk-cr-archive-card {
+body .hrk-cr-archive-card {
     display: flex;
     flex-direction: column;
     background: #ffffff;
@@ -1062,13 +1062,13 @@ body .hrk-cr-card-date {
     text-decoration: none;
 }
 
-.hrk-cr-archive-card:hover {
+body .hrk-cr-archive-card:hover {
     border-color: #cbd5e1;
     box-shadow: 0 4px 12px rgba( 15, 23, 42, 0.08 );
     transform: translateY( -2px );
 }
 
-.hrk-cr-card-top {
+body .hrk-cr-card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1076,7 +1076,7 @@ body .hrk-cr-card-date {
     margin-bottom: 12px;
 }
 
-.hrk-cr-card-type {
+body .hrk-cr-card-type {
     font-size: 11px;
     font-weight: 600;
     padding: 3px 10px;
@@ -1087,7 +1087,7 @@ body .hrk-cr-card-date {
     letter-spacing: 0.04em;
 }
 
-.hrk-cr-card-status {
+body .hrk-cr-card-status {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -1101,34 +1101,34 @@ body .hrk-cr-card-date {
     flex-shrink: 0;
 }
 
-.hrk-cr-status-dot {
+body .hrk-cr-status-dot {
     width: 5px;
     height: 5px;
     border-radius: 50%;
 }
 
-.hrk-cr-status-open {
+body .hrk-cr-status-open {
     background: #dcfce7;
     color: #166534;
 }
 
-.hrk-cr-status-open .hrk-cr-status-dot { background: #16a34a; }
+body .hrk-cr-status-open .hrk-cr-status-dot { background: #16a34a; }
 
-.hrk-cr-status-soon {
+body .hrk-cr-status-soon {
     background: #fef9c3;
     color: #a16207;
 }
 
-.hrk-cr-status-soon .hrk-cr-status-dot { background: #ca8a04; }
+body .hrk-cr-status-soon .hrk-cr-status-dot { background: #ca8a04; }
 
-.hrk-cr-status-closed {
+body .hrk-cr-status-closed {
     background: #f1f5f9;
     color: #475569;
 }
 
-.hrk-cr-status-closed .hrk-cr-status-dot { background: #94a3b8; }
+body .hrk-cr-status-closed .hrk-cr-status-dot { background: #94a3b8; }
 
-.hrk-cr-card-title {
+body .hrk-cr-card-title {
     font-size: 17px;
     font-weight: 600;
     color: #0f172a;
@@ -1136,18 +1136,18 @@ body .hrk-cr-card-date {
     margin: 0 0 6px;
 }
 
-.hrk-cr-archive-card:hover .hrk-cr-card-title {
+body .hrk-cr-archive-card:hover .hrk-cr-card-title {
     color: #0056b3;
 }
 
-.hrk-cr-card-company {
+body .hrk-cr-card-company {
     font-size: 13px;
     font-weight: 500;
     color: #0056b3;
     margin-bottom: 16px;
 }
 
-.hrk-cr-card-meta {
+body .hrk-cr-card-meta {
     display: grid;
     grid-template-columns: repeat( 2, 1fr );
     gap: 12px;
@@ -1155,13 +1155,13 @@ body .hrk-cr-card-date {
     flex: 1;
 }
 
-.hrk-cr-card-meta-item {
+body .hrk-cr-card-meta-item {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.hrk-cr-card-meta-label {
+body .hrk-cr-card-meta-label {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -1169,13 +1169,13 @@ body .hrk-cr-card-date {
     color: #94a3b8;
 }
 
-.hrk-cr-card-meta-value {
+body .hrk-cr-card-meta-value {
     font-size: 13px;
     color: #334155;
     font-weight: 500;
 }
 
-.hrk-cr-card-footer {
+body .hrk-cr-card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1184,12 +1184,12 @@ body .hrk-cr-card-date {
     margin-top: auto;
 }
 
-.hrk-cr-card-date {
+body .hrk-cr-card-date {
     font-size: 12px;
     color: #64748b;
 }
 
-.hrk-cr-card-arrow {
+body .hrk-cr-card-arrow {
     width: 20px;
     height: 20px;
     display: flex;
@@ -1202,29 +1202,29 @@ body .hrk-cr-card-date {
     transition: all 0.2s;
 }
 
-.hrk-cr-archive-card:hover .hrk-cr-card-arrow {
+body .hrk-cr-archive-card:hover .hrk-cr-card-arrow {
     background: #0f172a;
     color: #ffffff;
 }
 
-.hrk-cr-archive-empty {
+body .hrk-cr-archive-empty {
     text-align: center;
     padding: 80px 24px;
 }
 
-.hrk-cr-empty-icon {
+body .hrk-cr-empty-icon {
     font-size: 48px;
     margin-bottom: 16px;
 }
 
-.hrk-cr-empty-title {
+body .hrk-cr-empty-title {
     font-size: 18px;
     font-weight: 600;
     color: #334155;
     margin: 0 0 8px;
 }
 
-.hrk-cr-empty-text {
+body .hrk-cr-empty-text {
     font-size: 14px;
     color: #64748b;
 }

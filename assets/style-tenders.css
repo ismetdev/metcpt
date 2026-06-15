@@ -356,7 +356,7 @@
    Haraka — Tender Single Page
    =================================== */
 
-.hrk-tender-page {
+body .hrk-tender-page {
     font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
     max-width: 860px;
     margin: 40px auto;
@@ -364,7 +364,7 @@
     color: #0f172a;
 }
 
-.hrk-t-back {
+body .hrk-t-back {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -374,9 +374,9 @@
     margin-bottom: 20px;
 }
 
-.hrk-t-back:hover { color: #0f172a; }
+body .hrk-t-back:hover { color: #0f172a; }
 
-.hrk-t-status {
+body .hrk-t-status {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -389,16 +389,16 @@
     margin-bottom: 10px;
 }
 
-.hrk-t-dot { width: 6px; height: 6px; border-radius: 50%; }
+body .hrk-t-dot { width: 6px; height: 6px; border-radius: 50%; }
 
-.hrk-t-status-open   { background: #dcfce7; color: #166534; }
-.hrk-t-status-open .hrk-t-dot   { background: #16a34a; }
-.hrk-t-status-soon   { background: #fef9c3; color: #a16207; }
-.hrk-t-status-soon .hrk-t-dot   { background: #ca8a04; }
-.hrk-t-status-closed { background: #f1f5f9; color: #475569; }
-.hrk-t-status-closed .hrk-t-dot { background: #94a3b8; }
+body .hrk-t-status-open   { background: #dcfce7; color: #166534; }
+body .hrk-t-status-open .hrk-t-dot   { background: #16a34a; }
+body .hrk-t-status-soon   { background: #fef9c3; color: #a16207; }
+body .hrk-t-status-soon .hrk-t-dot   { background: #ca8a04; }
+body .hrk-t-status-closed { background: #f1f5f9; color: #475569; }
+body .hrk-t-status-closed .hrk-t-dot { background: #94a3b8; }
 
-.hrk-t-cat {
+body .hrk-t-cat {
     display: inline-block;
     font-size: 11px;
     font-weight: 600;
@@ -411,7 +411,7 @@
     letter-spacing: 0.04em;
 }
 
-.hrk-t-title {
+body .hrk-t-title {
     font-size: 30px;
     font-weight: 700;
     color: #0f172a;
@@ -419,28 +419,28 @@
     margin: 0 0 12px;
 }
 
-.hrk-t-desc {
+body .hrk-t-desc {
     font-size: 15px;
     color: #475569;
     line-height: 1.7;
     margin: 0 0 24px;
 }
 
-.hrk-t-info-grid {
+body .hrk-t-info-grid {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax( 180px, 1fr ) );
     gap: 12px;
     margin-bottom: 32px;
 }
 
-.hrk-t-info-card {
+body .hrk-t-info-card {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 14px 16px;
 }
 
-.hrk-t-info-label {
+body .hrk-t-info-label {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -449,16 +449,16 @@
     margin-bottom: 5px;
 }
 
-.hrk-t-info-value {
+body .hrk-t-info-value {
     font-size: 13px;
     font-weight: 600;
     color: #0f172a;
     line-height: 1.4;
 }
 
-.hrk-t-section { margin-bottom: 32px; }
+body .hrk-t-section { margin-bottom: 32px; }
 
-.hrk-t-section-title {
+body .hrk-t-section-title {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -469,24 +469,24 @@
     margin-bottom: 18px;
 }
 
-.hrk-t-timeline-grid {
+body .hrk-t-timeline-grid {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax( 160px, 1fr ) );
     gap: 12px;
 }
 
-.hrk-t-timeline-card {
+body .hrk-t-timeline-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 16px;
 }
 
-.hrk-t-deadline {
+body .hrk-t-deadline {
     border-left: 3px solid #ef4444;
 }
 
-.hrk-t-timeline-label {
+body .hrk-t-timeline-label {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -495,21 +495,21 @@
     margin-bottom: 6px;
 }
 
-.hrk-t-timeline-date {
+body .hrk-t-timeline-date {
     font-size: 18px;
     font-weight: 700;
     color: #0f172a;
 }
 
-.hrk-t-deadline .hrk-t-timeline-date { color: #dc2626; }
+body .hrk-t-deadline .hrk-t-timeline-date { color: #dc2626; }
 
-.hrk-t-timeline-sub {
+body .hrk-t-timeline-sub {
     font-size: 12px;
     color: #64748b;
     margin-top: 2px;
 }
 
-.hrk-t-doc-box {
+body .hrk-t-doc-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -520,19 +520,19 @@
     gap: 16px;
 }
 
-.hrk-t-doc-title {
+body .hrk-t-doc-title {
     font-size: 14px;
     font-weight: 600;
     color: #0f172a;
 }
 
-.hrk-t-doc-fee {
+body .hrk-t-doc-fee {
     font-size: 12px;
     color: #64748b;
     margin-top: 3px;
 }
 
-.hrk-t-btn {
+body .hrk-t-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -546,21 +546,21 @@
     flex-shrink: 0;
 }
 
-.hrk-t-btn-primary {
+body .hrk-t-btn-primary {
     background: #0f172a;
     color: #ffffff !important;
 }
 
-.hrk-t-btn-primary:hover { background: #1e293b; }
+body .hrk-t-btn-primary:hover { background: #1e293b; }
 
-.hrk-t-submission-box {
+body .hrk-t-submission-box {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 18px 20px;
 }
 
-.hrk-t-submission-method {
+body .hrk-t-submission-method {
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
@@ -569,13 +569,13 @@
     margin-bottom: 10px;
 }
 
-.hrk-t-submission-address {
+body .hrk-t-submission-address {
     font-size: 13px;
     color: #334155;
     line-height: 1.7;
 }
 
-.hrk-t-contact-card {
+body .hrk-t-contact-card {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -585,7 +585,7 @@
     padding: 18px 20px;
 }
 
-.hrk-t-avatar {
+body .hrk-t-avatar {
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -599,10 +599,10 @@
     flex-shrink: 0;
 }
 
-.hrk-t-contact-name { font-size: 14px; font-weight: 600; color: #0f172a; }
-.hrk-t-contact-dept { font-size: 12px; color: #64748b; margin-bottom: 4px; }
-.hrk-t-contact-link { font-size: 12px; color: #0056b3; text-decoration: none; }
-.hrk-t-contact-link:hover { text-decoration: underline; }
+body .hrk-t-contact-name { font-size: 14px; font-weight: 600; color: #0f172a; }
+body .hrk-t-contact-dept { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+body .hrk-t-contact-link { font-size: 12px; color: #0056b3; text-decoration: none; }
+body .hrk-t-contact-link:hover { text-decoration: underline; }
 
 @media ( max-width: 640px ) {
     .hrk-t-title { font-size: 22px; }
@@ -927,7 +927,7 @@
    template-single.php styles
    =================================== */
 
-.hrk-tender-page {
+body .hrk-tender-page {
     font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
     max-width: 860px;
     margin: 40px auto;
@@ -935,7 +935,7 @@
     color: #0f172a;
 }
 
-.hrk-t-back {
+body .hrk-t-back {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -945,9 +945,9 @@
     margin-bottom: 20px;
 }
 
-.hrk-t-back:hover { color: #0f172a; }
+body .hrk-t-back:hover { color: #0f172a; }
 
-.hrk-t-status {
+body .hrk-t-status {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -960,20 +960,20 @@
     margin-bottom: 10px;
 }
 
-.hrk-t-dot {
+body .hrk-t-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
 }
 
-.hrk-t-status-open   { background: #dcfce7; color: #166534; }
-.hrk-t-status-open .hrk-t-dot   { background: #16a34a; }
-.hrk-t-status-soon   { background: #fef9c3; color: #a16207; }
-.hrk-t-status-soon .hrk-t-dot   { background: #ca8a04; }
-.hrk-t-status-closed { background: #f1f5f9; color: #475569; }
-.hrk-t-status-closed .hrk-t-dot { background: #94a3b8; }
+body .hrk-t-status-open   { background: #dcfce7; color: #166534; }
+body .hrk-t-status-open .hrk-t-dot   { background: #16a34a; }
+body .hrk-t-status-soon   { background: #fef9c3; color: #a16207; }
+body .hrk-t-status-soon .hrk-t-dot   { background: #ca8a04; }
+body .hrk-t-status-closed { background: #f1f5f9; color: #475569; }
+body .hrk-t-status-closed .hrk-t-dot { background: #94a3b8; }
 
-.hrk-t-cat {
+body .hrk-t-cat {
     display: inline-block;
     font-size: 11px;
     font-weight: 600;
@@ -986,7 +986,7 @@
     letter-spacing: 0.04em;
 }
 
-.hrk-t-title {
+body .hrk-t-title {
     font-size: 30px;
     font-weight: 700;
     color: #0f172a;
@@ -994,28 +994,28 @@
     margin: 0 0 12px;
 }
 
-.hrk-t-desc {
+body .hrk-t-desc {
     font-size: 15px;
     color: #475569;
     line-height: 1.7;
     margin: 0 0 24px;
 }
 
-.hrk-t-info-grid {
+body .hrk-t-info-grid {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax( 180px, 1fr ) );
     gap: 12px;
     margin-bottom: 32px;
 }
 
-.hrk-t-info-card {
+body .hrk-t-info-card {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 14px 16px;
 }
 
-.hrk-t-info-label {
+body .hrk-t-info-label {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -1024,16 +1024,16 @@
     margin-bottom: 5px;
 }
 
-.hrk-t-info-value {
+body .hrk-t-info-value {
     font-size: 13px;
     font-weight: 600;
     color: #0f172a;
     line-height: 1.4;
 }
 
-.hrk-t-section { margin-bottom: 32px; }
+body .hrk-t-section { margin-bottom: 32px; }
 
-.hrk-t-section-title {
+body .hrk-t-section-title {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -1044,24 +1044,24 @@
     margin-bottom: 18px;
 }
 
-.hrk-t-timeline-grid {
+body .hrk-t-timeline-grid {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax( 160px, 1fr ) );
     gap: 12px;
 }
 
-.hrk-t-timeline-card {
+body .hrk-t-timeline-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 16px;
 }
 
-.hrk-t-deadline {
+body .hrk-t-deadline {
     border-left: 3px solid #ef4444;
 }
 
-.hrk-t-timeline-label {
+body .hrk-t-timeline-label {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -1070,21 +1070,21 @@
     margin-bottom: 6px;
 }
 
-.hrk-t-timeline-date {
+body .hrk-t-timeline-date {
     font-size: 18px;
     font-weight: 700;
     color: #0f172a;
 }
 
-.hrk-t-deadline .hrk-t-timeline-date { color: #dc2626; }
+body .hrk-t-deadline .hrk-t-timeline-date { color: #dc2626; }
 
-.hrk-t-timeline-sub {
+body .hrk-t-timeline-sub {
     font-size: 12px;
     color: #64748b;
     margin-top: 2px;
 }
 
-.hrk-t-doc-box {
+body .hrk-t-doc-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1095,19 +1095,19 @@
     gap: 16px;
 }
 
-.hrk-t-doc-title {
+body .hrk-t-doc-title {
     font-size: 14px;
     font-weight: 600;
     color: #0f172a;
 }
 
-.hrk-t-doc-fee {
+body .hrk-t-doc-fee {
     font-size: 12px;
     color: #64748b;
     margin-top: 3px;
 }
 
-.hrk-t-btn {
+body .hrk-t-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -1121,21 +1121,21 @@
     flex-shrink: 0;
 }
 
-.hrk-t-btn-primary {
+body .hrk-t-btn-primary {
     background: #0f172a;
     color: #ffffff !important;
 }
 
-.hrk-t-btn-primary:hover { background: #1e293b; }
+body .hrk-t-btn-primary:hover { background: #1e293b; }
 
-.hrk-t-submission-box {
+body .hrk-t-submission-box {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 18px 20px;
 }
 
-.hrk-t-submission-method {
+body .hrk-t-submission-method {
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
@@ -1144,13 +1144,13 @@
     margin-bottom: 10px;
 }
 
-.hrk-t-submission-address {
+body .hrk-t-submission-address {
     font-size: 13px;
     color: #334155;
     line-height: 1.7;
 }
 
-.hrk-t-contact-card {
+body .hrk-t-contact-card {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -1160,7 +1160,7 @@
     padding: 18px 20px;
 }
 
-.hrk-t-avatar {
+body .hrk-t-avatar {
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -1174,10 +1174,10 @@
     flex-shrink: 0;
 }
 
-.hrk-t-contact-name  { font-size: 14px; font-weight: 600; color: #0f172a; }
-.hrk-t-contact-dept  { font-size: 12px; color: #64748b; margin-bottom: 4px; }
-.hrk-t-contact-link  { font-size: 12px; color: #0056b3; text-decoration: none; }
-.hrk-t-contact-link:hover { text-decoration: underline; }
+body .hrk-t-contact-name  { font-size: 14px; font-weight: 600; color: #0f172a; }
+body .hrk-t-contact-dept  { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+body .hrk-t-contact-link  { font-size: 12px; color: #0056b3; text-decoration: none; }
+body .hrk-t-contact-link:hover { text-decoration: underline; }
 
 @media ( max-width: 640px ) {
     .hrk-t-title     { font-size: 22px; }
@@ -1189,7 +1189,7 @@
    template-archive.php styles
    =================================== */
 
-.hrk-t-archive-wrap {
+body .hrk-t-archive-wrap {
     font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
     max-width: 1200px;
     margin: 0 auto;
@@ -1197,12 +1197,12 @@
     color: #0f172a;
 }
 
-.hrk-t-archive-header {
+body .hrk-t-archive-header {
     margin-bottom: 48px;
     text-align: center;
 }
 
-.hrk-t-archive-label {
+body .hrk-t-archive-label {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -1211,7 +1211,7 @@
     margin-bottom: 12px;
 }
 
-.hrk-t-archive-title {
+body .hrk-t-archive-title {
     font-size: 42px;
     font-weight: 700;
     color: #0f172a;
@@ -1219,7 +1219,7 @@
     margin: 0 0 16px;
 }
 
-.hrk-t-archive-desc {
+body .hrk-t-archive-desc {
     font-size: 16px;
     color: #475569;
     line-height: 1.7;
@@ -1227,7 +1227,7 @@
     margin: 0 auto;
 }
 
-.hrk-t-archive-filters {
+body .hrk-t-archive-filters {
     display: flex;
     justify-content: center;
     gap: 12px;
@@ -1235,7 +1235,7 @@
     flex-wrap: wrap;
 }
 
-.hrk-t-filter-btn {
+body .hrk-t-filter-btn {
     padding: 10px 24px;
     font-size: 13px;
     font-weight: 600;
@@ -1247,25 +1247,25 @@
     transition: all 0.2s;
 }
 
-.hrk-t-filter-btn:hover {
+body .hrk-t-filter-btn:hover {
     color: #0f172a;
     border-color: #cbd5e1;
 }
 
-.hrk-t-filter-btn.active {
+body .hrk-t-filter-btn.active {
     color: #ffffff;
     background: #0f172a;
     border-color: #0f172a;
 }
 
-.hrk-t-archive-grid {
+body .hrk-t-archive-grid {
     display: grid;
     grid-template-columns: repeat( auto-fill, minmax( 340px, 1fr ) );
     gap: 24px;
     margin-bottom: 48px;
 }
 
-.hrk-t-archive-card {
+body .hrk-t-archive-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
@@ -1275,13 +1275,13 @@
     display: block;
 }
 
-.hrk-t-archive-card:hover {
+body .hrk-t-archive-card:hover {
     border-color: #cbd5e1;
     box-shadow: 0 4px 12px rgba( 15, 23, 42, 0.08 );
     transform: translateY( -2px );
 }
 
-.hrk-t-card-header {
+body .hrk-t-card-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -1289,14 +1289,14 @@
     margin-bottom: 12px;
 }
 
-.hrk-t-card-ref {
+body .hrk-t-card-ref {
     font-size: 11px;
     font-family: 'Courier New', monospace;
     color: #64748b;
     font-weight: 600;
 }
 
-.hrk-t-card-status {
+body .hrk-t-card-status {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -1310,7 +1310,7 @@
     flex-shrink: 0;
 }
 
-.hrk-t-card-cat {
+body .hrk-t-card-cat {
     display: inline-block;
     font-size: 11px;
     font-weight: 600;
@@ -1323,7 +1323,7 @@
     letter-spacing: 0.04em;
 }
 
-.hrk-t-card-title {
+body .hrk-t-card-title {
     font-size: 17px;
     font-weight: 600;
     color: #0f172a;
@@ -1331,24 +1331,24 @@
     margin: 0 0 16px;
 }
 
-.hrk-t-archive-card:hover .hrk-t-card-title {
+body .hrk-t-archive-card:hover .hrk-t-card-title {
     color: #0056b3;
 }
 
-.hrk-t-card-meta {
+body .hrk-t-card-meta {
     display: grid;
     grid-template-columns: repeat( 2, 1fr );
     gap: 12px;
     margin-bottom: 16px;
 }
 
-.hrk-t-card-meta-item {
+body .hrk-t-card-meta-item {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.hrk-t-card-meta-label {
+body .hrk-t-card-meta-label {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -1356,13 +1356,13 @@
     color: #94a3b8;
 }
 
-.hrk-t-card-meta-value {
+body .hrk-t-card-meta-value {
     font-size: 13px;
     color: #334155;
     font-weight: 500;
 }
 
-.hrk-t-card-footer {
+body .hrk-t-card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1370,12 +1370,12 @@
     border-top: 1px solid #f1f5f9;
 }
 
-.hrk-t-card-date {
+body .hrk-t-card-date {
     font-size: 12px;
     color: #64748b;
 }
 
-.hrk-t-card-arrow {
+body .hrk-t-card-arrow {
     width: 20px;
     height: 20px;
     display: flex;
@@ -1388,29 +1388,29 @@
     transition: all 0.2s;
 }
 
-.hrk-t-archive-card:hover .hrk-t-card-arrow {
+body .hrk-t-archive-card:hover .hrk-t-card-arrow {
     background: #0f172a;
     color: #ffffff;
 }
 
-.hrk-t-archive-empty {
+body .hrk-t-archive-empty {
     text-align: center;
     padding: 80px 24px;
 }
 
-.hrk-t-empty-icon {
+body .hrk-t-empty-icon {
     font-size: 48px;
     margin-bottom: 16px;
 }
 
-.hrk-t-empty-title {
+body .hrk-t-empty-title {
     font-size: 18px;
     font-weight: 600;
     color: #334155;
     margin: 0 0 8px;
 }
 
-.hrk-t-empty-text {
+body .hrk-t-empty-text {
     font-size: 14px;
     color: #64748b;
 }
