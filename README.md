@@ -213,6 +213,14 @@ A comprehensive WordPress plugin built for IIUM Holdings Sdn Bhd to manage corpo
 | News Archive | `[news_grid category="news"]` |
 | CSR Page | `[category_posts category_slug="csr"]` |
 
+### Archive Display
+
+Haraka serves archive listings for Events, Tenders, and Careers through two complementary mechanisms:
+
+**Primary — WordPress pages with shortcodes.** The recommended setup is a standard WordPress page for each module (slugs `events`, `tenders`, `careers`) containing the relevant list shortcode (e.g. `[events_list]`). These pages use the active theme's page template, so they keep the site header, footer, and navigation, and they avoid conflicts with page builders such as Elementor that can intercept custom post type template loading. The archive URL fields under **Haraka Settings** point the single-page "Back" buttons at these pages.
+
+**Fallback — CPT archive templates.** Each module also ships a `template-archive.php` file (in `includes/events/`, `includes/tenders/`, and `includes/careers/`). These hook into WordPress's `template_include` filter and automatically provide a styled archive if a visitor reaches a raw custom post type archive URL directly (for example `?post_type=hrk_event`). They are an active fallback, not dead code — if removed, those raw archive URLs would fall back to the theme's default unstyled archive. The shortcode pages above remain the primary, recommended path.
+
 ## Server Cron Setup (Recommended)
 
 WordPress `wp_cron` is traffic-dependent. For reliable tender notifications:
