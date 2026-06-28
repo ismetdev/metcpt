@@ -1,0 +1,45 @@
+name: Build and Attach Plugin Zip on Release
+
+# Runs when you publish a release on GitHub. It builds a clean,
+# correctly-structured haraka.zip on Linux (forward-slash paths, so it never
+# suffers the Windows/PowerShell backslash corruption) and attaches it to the
+# release automatically. This zip is what the Plugin Update Checker delivers
+# to WordPress sites, so its structure must be exactly haraka/...
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-zip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Build clean plugin zip
+        run: |
+          # Stage the plugin inside a folder named exactly "haraka" so the zip
+          # unpacks to wp-content/plugins/haraka/ on the target site. Uses plain
+          # cp + zip (portable, forward-slash paths) so the archive is always
+          # valid on Linux/WordPress — never the Windows backslash corruption.
+          mkdir -p build/haraka
+          for item in $(ls -A | grep -vE '^(\.git|\.github|\.gitattributes|\.gitignore|node_modules|build)$'); do
+            cp -r "$item" build/haraka/
+          done
+          cd build
+          zip -rq ../haraka.zip haraka -x "*.zip"
+          cd ..
+          echo "---- zip contents (first 20 entries) ----"
+          unzip -l haraka.zip | head -20
+          echo "---- verifying main plugin file is present ----"
+          unzip -l haraka.zip | grep -q "haraka/haraka.php" && echo "OK: haraka/haraka.php present" || (echo "ERROR: main file missing" && exit 1)
+
+      - name: Attach zip to the release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: haraka.zip
