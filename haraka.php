@@ -35,6 +35,15 @@ $haraka_update_checker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpd
     'haraka'
 );
 $haraka_update_checker->setBranch( 'main' );
+
+// Authenticate with GitHub when a token is provided (required for private repos).
+// The token is defined in wp-config.php as HARAKA_GITHUB_TOKEN and is never
+// committed to the repository. If it is absent, the checker runs unauthenticated,
+// which still works while the repository is public.
+if ( defined( 'HARAKA_GITHUB_TOKEN' ) && HARAKA_GITHUB_TOKEN ) {
+    $haraka_update_checker->setAuthentication( HARAKA_GITHUB_TOKEN );
+}
+
 $haraka_update_checker->getVcsApi()->enableReleaseAssets();
 
 // ── Bootstrap ─────────────────────────────────────────────────────────────────
