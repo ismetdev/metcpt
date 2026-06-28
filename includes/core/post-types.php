@@ -21,12 +21,12 @@ function haraka_register_post_types() {
             'menu_name'          => 'Events',
         ),
         'public'              => true,
-        'has_archive'         => true,
+        'has_archive'         => false,
         'show_in_menu'        => true,
         'show_in_rest'        => true,
         'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
         'menu_icon'           => 'dashicons-calendar-alt',
-        'rewrite'             => array( 'slug' => 'events' ),
+        'rewrite'             => array( 'slug' => 'event' ),
         'menu_position'       => 5,
     ) );
 
@@ -46,12 +46,12 @@ function haraka_register_post_types() {
             'menu_name'          => 'Tenders',
         ),
         'public'              => true,
-        'has_archive'         => true,
+        'has_archive'         => false,
         'show_in_menu'        => true,
         'show_in_rest'        => true,
         'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
         'menu_icon'           => 'dashicons-media-document',
-        'rewrite'             => array( 'slug' => 'tenders' ),
+        'rewrite'             => array( 'slug' => 'tender' ),
         'menu_position'       => 6,
     ) );
 
@@ -98,12 +98,12 @@ function haraka_register_post_types() {
             'menu_name'          => 'Careers',
         ),
         'public'              => true,
-        'has_archive'         => true,
+        'has_archive'         => false,
         'show_in_menu'        => true,
         'show_in_rest'        => true,
         'supports'            => array( 'title', 'editor', 'excerpt' ),
         'menu_icon'           => 'dashicons-id-alt',
-        'rewrite'             => array( 'slug' => 'careers' ),
+        'rewrite'             => array( 'slug' => 'career' ),
         'menu_position'       => 7,
     ) );
 }

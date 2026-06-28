@@ -131,7 +131,10 @@ if ( ! function_exists( 'haraka_render_event_single' ) ) {
             : '';
 
         // ── Back link ─────────────────────────────────────────────────────────
-        $events_archive = get_post_type_archive_link( 'hrk_event' );
+        // Points at the configured Events page (set in Haraka Settings), matching
+        // how Tenders and Careers resolve their back links. The CPT archive is
+        // disabled (has_archive => false) so the page owns the /events/ URL.
+        $events_archive = get_option( 'haraka_events_archive_url', '/events' );
 
         ?>
         <!DOCTYPE html>
