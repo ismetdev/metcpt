@@ -9,13 +9,17 @@ function haraka_tenders_preview_shortcode( $atts ) {
         array(
             'posts_per_page' => 4,
             'view_all_url'   => get_option( 'haraka_tenders_page_url', home_url( '/tenders' ) ),
+            'template'       => '',
         ),
         $atts,
         'tenders_preview'
     );
 
     // ── Route to correct template ─────────────────────────────────────────────
-    $template = get_option( 'haraka_tenders_template', 'a' );
+    // An explicit template="a"|"b" overrides the global Active Template setting.
+    $template = $atts['template'] !== ''
+        ? strtolower( $atts['template'] )
+        : get_option( 'haraka_tenders_template', 'a' );
 
     if ( $template === 'b' ) {
         return haraka_tenders_render_template_b_preview( $atts );

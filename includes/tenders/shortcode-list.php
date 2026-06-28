@@ -15,13 +15,18 @@ function haraka_tenders_list_shortcode( $atts ) {
             'headline'        => '',
             'headline_italic' => '',
             'view_all_text'   => '',
+            'template'        => '',
         ),
         $atts,
         'tenders_list'
     );
 
     // ── Route to correct template ─────────────────────────────────────────────
-    $template = get_option( 'haraka_tenders_template', 'a' );
+    // An explicit template="a"|"b" on the shortcode overrides the global
+    // Active Template setting, so different pages can show different layouts.
+    $template = $atts['template'] !== ''
+        ? strtolower( $atts['template'] )
+        : get_option( 'haraka_tenders_template', 'a' );
 
     if ( $template === 'b' ) {
         return haraka_tenders_render_template_b_list( $atts );
