@@ -92,6 +92,22 @@ class Haraka {
     }
 
     /**
+     * Cache-busting version string for an asset.
+     *
+     * Returns the file's last-modified time so that any change to the file
+     * automatically produces a new version query string. This forces browsers
+     * and caching layers (e.g. LiteSpeed) to fetch the updated file instead of
+     * serving a stale copy. Falls back to HARAKA_VERSION if the file is missing.
+     *
+     * @param string $relative_path Path relative to the plugin root, e.g. 'assets/style-general.css'.
+     * @return string|int Version string for wp_enqueue_style().
+     */
+    private function asset_version( $relative_path ) {
+        $full_path = HARAKA_PLUGIN_DIR . $relative_path;
+        return file_exists( $full_path ) ? filemtime( $full_path ) : HARAKA_VERSION;
+    }
+
+    /**
      * Enqueue frontend CSS conditionally per module.
      */
     public function enqueue_frontend_styles() {
@@ -100,35 +116,35 @@ class Haraka {
             'haraka-general',
             HARAKA_PLUGIN_URL . 'assets/style-general.css',
             array(),
-            HARAKA_VERSION
+            $this->asset_version( 'assets/style-general.css' )
         );
 
         wp_enqueue_style(
             'haraka-events',
             HARAKA_PLUGIN_URL . 'assets/style-events.css',
             array(),
-            HARAKA_VERSION
+            $this->asset_version( 'assets/style-events.css' )
         );
 
         wp_enqueue_style(
             'haraka-tenders',
             HARAKA_PLUGIN_URL . 'assets/style-tenders.css',
             array(),
-            HARAKA_VERSION
+            $this->asset_version( 'assets/style-tenders.css' )
         );
 
         wp_enqueue_style(
             'haraka-careers',
             HARAKA_PLUGIN_URL . 'assets/style-careers.css',
             array(),
-            HARAKA_VERSION
+            $this->asset_version( 'assets/style-careers.css' )
         );
 
         wp_enqueue_style(
             'haraka-posts',
             HARAKA_PLUGIN_URL . 'assets/style-posts.css',
             array(),
-            HARAKA_VERSION
+            $this->asset_version( 'assets/style-posts.css' )
         );
     }
 
@@ -155,7 +171,7 @@ class Haraka {
             'haraka-admin',
             HARAKA_PLUGIN_URL . 'assets/style-admin.css',
             array(),
-            HARAKA_VERSION
+            $this->asset_version( 'assets/style-admin.css' )
         );
     }
 
