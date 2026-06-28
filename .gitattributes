@@ -1,0 +1,33 @@
+# Haraka — line ending normalization
+#
+# Normalizes all text files to LF in the repository so that diffs stay clean
+# and the live server stops accumulating doubled carriage returns. Binary
+# files are marked explicitly so git never alters them.
+
+# Default: treat everything as text and normalize to LF on commit.
+* text=auto eol=lf
+
+# Source and content files — force LF.
+*.php  text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.yml  text eol=lf
+*.po   text eol=lf
+*.pot  text eol=lf
+
+# Binary files — never normalize, never diff as text.
+*.mo    binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary
+*.zip   binary
