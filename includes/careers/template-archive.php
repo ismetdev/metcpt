@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * or press Back from a single career page.
  *
  * @package Haraka
- * @version 1.0.0
+ * @version 1.0.4
  */
 
 if ( ! function_exists( 'haraka_career_archive_template' ) ) {

@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Main plugin class — bootstraps all modules and hooks.
  *
  * @package Haraka
- * @version 1.0.0
+ * @version 1.0.4
  */
 class Haraka {
 
@@ -113,6 +113,13 @@ class Haraka {
     public function enqueue_frontend_styles() {
 
         wp_enqueue_style(
+            'haraka-tokens',
+            HARAKA_PLUGIN_URL . 'assets/style-tokens.css',
+            array(),
+            $this->asset_version( 'assets/style-tokens.css' )
+        );
+
+        wp_enqueue_style(
             'haraka-general',
             HARAKA_PLUGIN_URL . 'assets/style-general.css',
             array(),
@@ -129,7 +136,7 @@ class Haraka {
         wp_enqueue_style(
             'haraka-tenders',
             HARAKA_PLUGIN_URL . 'assets/style-tenders.css',
-            array(),
+            array( 'haraka-tokens' ),
             $this->asset_version( 'assets/style-tenders.css' )
         );
 
@@ -143,7 +150,7 @@ class Haraka {
         wp_enqueue_style(
             'haraka-posts',
             HARAKA_PLUGIN_URL . 'assets/style-posts.css',
-            array(),
+            array( 'haraka-tokens' ),
             $this->asset_version( 'assets/style-posts.css' )
         );
     }

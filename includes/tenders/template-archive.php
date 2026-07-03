@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * or press Back from a single tender page.
  *
  * @package Haraka
- * @version 1.0.0
+ * @version 1.0.4
  */
 
 // ── Hook into WordPress archive template filter ───────────────────────────────

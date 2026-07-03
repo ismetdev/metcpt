@@ -7,7 +7,7 @@ function haraka_tenders_preview_shortcode( $atts ) {
 
     $atts = shortcode_atts(
         array(
-            'posts_per_page' => 4,
+            'posts_per_page' => 5,
             'view_all_url'   => get_option( 'haraka_tenders_page_url', home_url( '/tenders' ) ),
             'template'       => '',
         ),
@@ -31,7 +31,7 @@ function haraka_tenders_preview_shortcode( $atts ) {
     $query_args = array(
         'post_type'      => 'hrk_tender',
         'post_status'    => 'publish',
-        'posts_per_page' => intval( $atts['posts_per_page'] ),
+        'posts_per_page' => max( 5, intval( $atts['posts_per_page'] ) ),
         'orderby'        => 'meta_value',
         'meta_key'       => 'tender_close_date',
         'order'          => 'ASC',
@@ -52,7 +52,7 @@ function haraka_tenders_preview_shortcode( $atts ) {
     ob_start();
     ?>
 
-    <div class="tdp-wrap">
+    <div class="tdp-wrap hrk-v2">
 
         <div class="tdp-header">
             <div class="tdp-header-left">

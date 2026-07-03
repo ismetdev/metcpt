@@ -9,7 +9,7 @@
  * To enable full cleanup, uncomment the block below.
  *
  * @package Haraka
- * @version 1.0.0
+ * @version 1.0.4
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {

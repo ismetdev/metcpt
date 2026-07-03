@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package Haraka
  * @subpackage Admin
- * @version 1.0.0
+ * @version 1.0.4
  */
 
 function haraka_render_docs_tab() {

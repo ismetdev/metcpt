@@ -67,7 +67,7 @@ function haraka_news_grid_shortcode( $atts ) {
     $query_args = array(
         'post_type'      => 'post',
         'post_status'    => 'publish',
-        'posts_per_page' => max( 4, intval( $atts['posts_per_page'] ) ),
+        'posts_per_page' => max( 6, intval( $atts['posts_per_page'] ) ),
         'order'          => sanitize_text_field( $atts['order'] ),
         'orderby'        => sanitize_text_field( $atts['orderby'] ),
     );
@@ -85,35 +85,14 @@ function haraka_news_grid_shortcode( $atts ) {
     }
 
     $query = new WP_Query( $query_args );
-
-    if ( ! $query->have_posts() ) {
-        return '<p class="hrk-ng-empty">No posts found.</p>';
-    }
-
     $posts = $query->posts;
 
     wp_reset_postdata();
 
-    // ── Separate featured post from sidebar posts ─────────────────────────
-    $featured = array_shift( $posts );
-    $sidebar  = array_slice( $posts, 0, 3 );
-
-    // ── Featured post data ────────────────────────────────────────────────
-    $f_id      = $featured->ID;
-    $f_title   = get_the_title( $f_id );
-    $f_url     = get_permalink( $f_id );
-    $f_excerpt = get_the_excerpt( $f_id );
-    $f_cat     = hrk_get_post_cat_label( $f_id );
-    $f_date    = hrk_get_post_date( $f_id, 'd F Y' );
-
-    $f_thumb = has_post_thumbnail( $f_id )
-        ? get_the_post_thumbnail_url( $f_id, 'large' )
-        : '';
-
     ob_start();
     ?>
 
-    <div class="hrk-ng-wrap">
+    <div class="hrk-ng-wrap hrk-v2">
 
         <!-- Header -->
         <div class="hrk-ng-header">
@@ -153,135 +132,65 @@ function haraka_news_grid_shortcode( $atts ) {
 
         </div>
 
-        <!-- Main Grid -->
-        <div class="hrk-ng-grid">
+        <?php if ( empty( $posts ) ) : ?>
 
-            <!-- Featured Post -->
-            <article class="hrk-ng-featured">
+            <p class="hrk-ng-empty">No posts found.</p>
 
-                <a href="<?php echo esc_url( $f_url ); ?>"
-                   class="hrk-ng-featured-img-link">
+        <?php else : ?>
 
-                    <?php if ( ! empty( $f_thumb ) ) : ?>
+            <!-- Main Grid -->
+            <div class="hrk-ng-grid">
 
-                        <img class="hrk-ng-featured-img"
-                             src="<?php echo esc_url( $f_thumb ); ?>"
-                             alt="<?php echo esc_attr( $f_title ); ?>" />
-
-                    <?php else : ?>
-
-                        <div class="hrk-ng-featured-img hrk-ng-featured-img-placeholder"></div>
-
-                    <?php endif; ?>
-
-                </a>
-
-                <div class="hrk-ng-featured-body">
-
-                    <div class="hrk-ng-meta">
-
-                        <?php if ( ! empty( $f_cat ) ) : ?>
-                            <span class="hrk-ng-cat">
-                                <?php echo esc_html( $f_cat ); ?>
-                            </span>
-                        <?php endif; ?>
-
-                        <span class="hrk-ng-date">
-                            <?php echo esc_html( $f_date ); ?>
-                        </span>
-
-                    </div>
-
-                    <h3 class="hrk-ng-featured-title">
-
-                        <a href="<?php echo esc_url( $f_url ); ?>">
-                            <?php echo esc_html( $f_title ); ?>
-                        </a>
-
-                    </h3>
-
-                    <?php if ( $atts['show_excerpt'] === 'yes' && ! empty( $f_excerpt ) ) : ?>
-
-                        <p class="hrk-ng-featured-excerpt">
-                            <?php echo esc_html( $f_excerpt ); ?>
-                        </p>
-
-                    <?php endif; ?>
-
-                    <a class="hrk-ng-read-link"
-                       href="<?php echo esc_url( $f_url ); ?>">
-
-                        Read story &nbsp;&rarr;
-
-                    </a>
-
-                </div>
-
-            </article>
-
-            <!-- Sidebar Posts -->
-            <div class="hrk-ng-sidebar">
-
-                <?php foreach ( $sidebar as $s_post ) : ?>
+                <?php foreach ( $posts as $n_post ) : ?>
 
                     <?php
-                    $s_id    = $s_post->ID;
-                    $s_title = get_the_title( $s_id );
-                    $s_url   = get_permalink( $s_id );
-                    $s_cat   = hrk_get_post_cat_label( $s_id );
-                    $s_date  = hrk_get_post_short_date( $s_id );
+                    $n_id    = $n_post->ID;
+                    $n_title = get_the_title( $n_id );
+                    $n_url   = get_permalink( $n_id );
+                    $n_cat   = hrk_get_post_cat_label( $n_id );
+                    $n_date  = hrk_get_post_short_date( $n_id );
 
-                    $s_thumb = has_post_thumbnail( $s_id )
-                        ? get_the_post_thumbnail_url( $s_id, 'medium' )
+                    $n_thumb = has_post_thumbnail( $n_id )
+                        ? get_the_post_thumbnail_url( $n_id, 'medium' )
                         : '';
                     ?>
 
-                    <article class="hrk-ng-small-post">
+                    <article class="hrk-ng-card">
 
-                        <a href="<?php echo esc_url( $s_url ); ?>"
-                           class="hrk-ng-small-thumb-link">
+                        <a href="<?php echo esc_url( $n_url ); ?>"
+                           class="hrk-ng-card-media-link">
 
-                            <?php if ( ! empty( $s_thumb ) ) : ?>
+                            <?php if ( ! empty( $n_thumb ) ) : ?>
 
-                                <img class="hrk-ng-small-thumb"
-                                     src="<?php echo esc_url( $s_thumb ); ?>"
-                                     alt="<?php echo esc_attr( $s_title ); ?>" />
+                                <img class="hrk-ng-card-media"
+                                     src="<?php echo esc_url( $n_thumb ); ?>"
+                                     alt="<?php echo esc_attr( $n_title ); ?>" />
 
                             <?php else : ?>
 
-                                <div class="hrk-ng-small-thumb hrk-ng-small-thumb-placeholder"></div>
+                                <div class="hrk-ng-card-media hrk-ng-card-media-placeholder"></div>
 
                             <?php endif; ?>
 
                         </a>
 
-                        <div class="hrk-ng-small-body">
+                        <div class="hrk-ng-card-body">
 
-                            <div class="hrk-ng-small-meta">
+                            <?php if ( ! empty( $n_cat ) ) : ?>
+                                <div class="hrk-ng-card-tag">
+                                    <?php echo esc_html( $n_cat ); ?>
+                                </div>
+                            <?php endif; ?>
 
-                                <?php if ( ! empty( $s_cat ) ) : ?>
-
-                                    <span class="hrk-ng-small-cat">
-                                        <?php echo esc_html( $s_cat ); ?>
-                                    </span>
-
-                                    <span class="hrk-ng-small-dot">&middot;</span>
-
-                                <?php endif; ?>
-
-                                <span class="hrk-ng-small-date">
-                                    <?php echo esc_html( $s_date ); ?>
-                                </span>
-
-                            </div>
-
-                            <h4 class="hrk-ng-small-title">
-
-                                <a href="<?php echo esc_url( $s_url ); ?>">
-                                    <?php echo esc_html( $s_title ); ?>
+                            <h3 class="hrk-ng-card-title">
+                                <a href="<?php echo esc_url( $n_url ); ?>">
+                                    <?php echo esc_html( $n_title ); ?>
                                 </a>
+                            </h3>
 
-                            </h4>
+                            <div class="hrk-ng-card-date">
+                                <?php echo esc_html( $n_date ); ?>
+                            </div>
 
                         </div>
 
@@ -291,7 +200,7 @@ function haraka_news_grid_shortcode( $atts ) {
 
             </div>
 
-        </div>
+        <?php endif; ?>
 
     </div>
 
