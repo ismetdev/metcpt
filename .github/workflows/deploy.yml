@@ -29,3 +29,4 @@ jobs:
             .github/**
             README.md
             CHANGELOG.md
+            PROJECT_AUDIT_AND_CONTEXT.md
