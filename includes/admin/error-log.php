@@ -207,17 +207,23 @@ function haraka_exception_handler( $exception ) {
     $line  = $exception->getLine();
     $trace = $exception->getTrace();
 
-    if ( ! haraka_error_is_in_scope( $file ) ) {
-        return;
+    if ( haraka_error_is_in_scope( $file ) ) {
+        haraka_error_log_insert(
+            'exception',
+            get_class( $exception ) . ': ' . $exception->getMessage(),
+            $file,
+            $line,
+            $trace
+        );
     }
 
-    haraka_error_log_insert(
-        'exception',
-        get_class( $exception ) . ': ' . $exception->getMessage(),
-        $file,
-        $line,
-        $trace
-    );
+    // Log and get out of the way. Returning here would silently swallow the
+    // exception (PHP terminates the request with no output once a custom
+    // exception handler returns), producing an unexplained white screen.
+    // Restoring and rethrowing lets PHP's own fatal-error handling run, which
+    // WordPress's fatal-error-handler.php can then catch and report normally.
+    restore_exception_handler();
+    throw $exception;
 }
 set_exception_handler( 'haraka_exception_handler' );
 
