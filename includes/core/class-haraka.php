@@ -180,6 +180,16 @@ class Haraka {
             array(),
             $this->asset_version( 'assets/style-admin.css' )
         );
+
+        // Settings-page-only styles (editorial paper + gold theme).
+        if ( $is_haraka_page ) {
+            wp_enqueue_style(
+                'haraka-settings',
+                HARAKA_PLUGIN_URL . 'assets/style-settings.css',
+                array(),
+                $this->asset_version( 'assets/style-settings.css' )
+            );
+        }
     }
 
     /**

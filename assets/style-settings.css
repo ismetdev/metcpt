@@ -1,0 +1,556 @@
+/**
+ * Haraka — Settings Page Styles
+ *
+ * Editorial "paper + gold" theme for the Haraka Settings admin page.
+ * Loaded only on the settings screen (see enqueue_admin_styles() in
+ * includes/core/class-haraka.php). Everything is scoped under
+ * .haraka-settings-wrap so nothing leaks into the WP admin chrome.
+ *
+ * Palette mirrors the frontend design tokens in assets/style-tokens.css.
+ *
+ * @package Haraka
+ * @subpackage Admin
+ */
+
+/* ── Tokens (scoped to the settings page) ─────────────────────────────────── */
+.haraka-settings-wrap {
+    --hrk-ink:             #0F1419;
+    --hrk-ink-soft:        #5A6168;
+    --hrk-ink-faint:       #8A9098;
+    --hrk-paper:           #F4EFE7;
+    --hrk-paper-cool:      #FFFFFF;
+    --hrk-gold:            #B98A2E;
+    --hrk-gold-soft:       #C99A3A;
+    --hrk-gold-wash:       rgba(185, 138, 46, 0.14);
+    --hrk-hairline:        rgba(15, 20, 25, 0.08);
+    --hrk-hairline-strong: rgba(15, 20, 25, 0.14);
+
+    --hrk-radius:    10px;
+    --hrk-radius-lg: 16px;
+
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0 0 40px 0;
+    background: transparent;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.haraka-settings-header {
+    background: var(--hrk-paper);
+    padding: 28px 32px 24px;
+    margin-left: -20px;
+    margin-top: -10px;
+    border-bottom: 1px solid var(--hrk-hairline);
+    position: relative;
+}
+.haraka-settings-header::after {
+    content: '';
+    position: absolute;
+    left: 32px;
+    bottom: -1px;
+    width: 64px;
+    height: 3px;
+    background: var(--hrk-gold);
+    border-radius: 2px;
+}
+.haraka-settings-header-inner {
+    max-width: 960px;
+}
+.haraka-settings-title {
+    color: var(--hrk-ink) !important;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    margin: 0 0 4px !important;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 !important;
+}
+.haraka-logo {
+    width: 36px;
+    height: 36px;
+    background: var(--hrk-gold);
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px var(--hrk-gold-wash);
+}
+.haraka-settings-subtitle {
+    color: var(--hrk-ink-soft);
+    font-size: 13px;
+    margin: 0;
+    padding-left: 50px;
+    letter-spacing: 0.01em;
+}
+
+/* ── Top tab bar ──────────────────────────────────────────────────────────── */
+.haraka-tabbar {
+    display: flex;
+    gap: 4px;
+    margin: 0 0 0 -20px;
+    padding: 0 32px;
+    background: var(--hrk-paper);
+    border-bottom: 1px solid var(--hrk-hairline);
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+.haraka-tab {
+    display: inline-block;
+    padding: 13px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hrk-ink-soft);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+}
+.haraka-tab:hover {
+    color: var(--hrk-ink);
+}
+.haraka-tab:focus {
+    box-shadow: none;
+    outline: none;
+    color: var(--hrk-ink);
+}
+.haraka-tab.active {
+    color: var(--hrk-ink);
+    border-bottom-color: var(--hrk-gold);
+}
+
+/* ── Body / content card ──────────────────────────────────────────────────── */
+.haraka-settings-body {
+    max-width: 960px;
+    margin-top: 28px;
+}
+.haraka-settings-body-full {
+    max-width: 100%;
+    margin-top: 24px;
+}
+.haraka-settings-content {
+    background: var(--hrk-paper-cool);
+    border: 1px solid var(--hrk-hairline);
+    border-radius: var(--hrk-radius-lg);
+    padding: 32px 36px;
+    box-shadow: 0 1px 2px rgba(15, 20, 25, 0.03);
+}
+.haraka-settings-content-wide {
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+}
+
+/* ── Section titles ───────────────────────────────────────────────────────── */
+.haraka-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--hrk-gold);
+    border-bottom: 1px solid var(--hrk-hairline);
+    padding-bottom: 10px;
+    margin: 32px 0 22px;
+}
+.haraka-section-title:first-child {
+    margin-top: 0;
+}
+
+/* ── Field rows ───────────────────────────────────────────────────────────── */
+.haraka-field-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: start;
+    margin-bottom: 22px;
+    gap: 20px;
+}
+.haraka-field-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hrk-ink);
+    padding-top: 6px;
+    line-height: 1.4;
+}
+.haraka-field-hint {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--hrk-ink-faint);
+    display: block;
+    margin-top: 4px;
+    line-height: 1.5;
+}
+
+.haraka-field-row input[type="text"],
+.haraka-field-row input[type="number"],
+.haraka-field-row input[type="email"],
+.haraka-field-row input[type="url"],
+.haraka-field-row select,
+.haraka-field-row textarea {
+    width: 100%;
+    max-width: 480px;
+    font-size: 13px;
+    padding: 8px 11px;
+    border: 1px solid var(--hrk-hairline-strong);
+    border-radius: var(--hrk-radius);
+    color: var(--hrk-ink);
+    background: #fff;
+    box-sizing: border-box;
+}
+.haraka-field-row input[type="color"] {
+    width: 60px;
+    height: 40px;
+    padding: 2px 4px;
+    border: 1px solid var(--hrk-hairline-strong);
+    border-radius: var(--hrk-radius);
+    cursor: pointer;
+    background: #fff;
+    box-sizing: border-box;
+}
+.haraka-field-row textarea {
+    height: 110px;
+    resize: vertical;
+    line-height: 1.5;
+}
+.haraka-field-row input:focus,
+.haraka-field-row select:focus,
+.haraka-field-row textarea:focus {
+    border-color: var(--hrk-gold);
+    outline: 2px solid var(--hrk-gold-wash);
+    outline-offset: 0;
+    box-shadow: none;
+}
+
+/* Small helper for narrow number/inline notes */
+.haraka-field-narrow { max-width: 100px !important; }
+.haraka-field-note {
+    font-size: 12px;
+    color: var(--hrk-ink-faint);
+    margin: 6px 0 0;
+}
+
+/* ── Toggle switch ────────────────────────────────────────────────────────── */
+.haraka-toggle-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 4px;
+}
+.haraka-toggle {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+.haraka-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+.haraka-toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #d6cfc2;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.haraka-toggle-slider:before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.2s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.haraka-toggle input:checked + .haraka-toggle-slider {
+    background: var(--hrk-gold);
+}
+.haraka-toggle input:checked + .haraka-toggle-slider:before {
+    transform: translateX(20px);
+}
+.haraka-toggle-label {
+    font-size: 13px;
+    color: var(--hrk-ink-soft);
+}
+
+/* ── Colour preview ───────────────────────────────────────────────────────── */
+.haraka-colour-preview {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+.haraka-colour-swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: 1px solid var(--hrk-hairline);
+}
+.haraka-colour-value {
+    font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--hrk-ink-soft);
+}
+
+/* ── Save button ──────────────────────────────────────────────────────────── */
+.haraka-save-btn {
+    margin-top: 12px !important;
+    background: var(--hrk-ink) !important;
+    border-color: var(--hrk-ink) !important;
+    color: #fff !important;
+    padding: 9px 26px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    border-radius: var(--hrk-radius) !important;
+    height: auto !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: background 0.15s, border-color 0.15s;
+}
+.haraka-save-btn:hover {
+    background: var(--hrk-gold) !important;
+    border-color: var(--hrk-gold) !important;
+}
+
+/* ── Dummy-data action buttons ────────────────────────────────────────────── */
+.hrk-dummy-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-top: 2px;
+}
+.hrk-dummy-status { font-size: 12px; }
+.hrk-dummy-ok  { color: #166534; }
+.hrk-dummy-err { color: #991b1b; }
+
+/* ── Success notice tint ──────────────────────────────────────────────────── */
+.haraka-settings-wrap .notice-success {
+    border-left-color: var(--hrk-gold) !important;
+}
+
+/* ── Radio "template" cards (Tenders tab) ─────────────────────────────────── */
+.haraka-radio-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 4px;
+}
+.haraka-radio-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+}
+.haraka-radio-card input[type="radio"] {
+    margin-top: 3px;
+    width: auto;
+    max-width: none;
+    flex-shrink: 0;
+}
+.haraka-radio-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hrk-ink);
+    margin-bottom: 4px;
+}
+.haraka-radio-desc {
+    font-size: 11px;
+    color: var(--hrk-ink-soft);
+    line-height: 1.5;
+}
+.haraka-mock {
+    margin-top: 10px;
+    border-radius: var(--hrk-radius);
+    padding: 12px 14px;
+}
+.haraka-mock-a {
+    background: #faf7f1;
+    border: 1px solid var(--hrk-hairline);
+}
+.haraka-mock-a-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.haraka-mock-bar {
+    height: 6px;
+    border-radius: 2px;
+}
+.haraka-mock-bar-gold { background: var(--hrk-gold); flex: 1; }
+.haraka-mock-bar-a { background: var(--hrk-hairline); width: 40px; }
+.haraka-mock-bar-b { background: var(--hrk-hairline); width: 60px; }
+.haraka-mock-a-rows {
+    display: grid;
+    grid-template-columns: 80px 1fr 50px 50px;
+    gap: 8px;
+    align-items: center;
+}
+.haraka-mock-cell {
+    height: 5px;
+    border-radius: 2px;
+    background: var(--hrk-hairline);
+}
+.haraka-mock-cell-strong { background: rgba(15, 20, 25, 0.16); }
+
+.haraka-mock-b {
+    background: var(--hrk-paper);
+    border: 1px solid var(--hrk-hairline-strong);
+}
+.haraka-mock-b-label {
+    font-size: 9px;
+    color: var(--hrk-ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+.haraka-mock-b-head {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--hrk-ink);
+    margin-bottom: 8px;
+}
+.haraka-mock-b-head em { font-style: italic; font-weight: 400; }
+.haraka-mock-b-panel { background: #fff; border-radius: 6px; padding: 8px 10px; }
+.haraka-mock-b-tabs {
+    display: flex;
+    gap: 12px;
+    border-bottom: 1px solid var(--hrk-hairline);
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+}
+.haraka-mock-b-tab-on {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--hrk-ink);
+    border-bottom: 1.5px solid var(--hrk-ink);
+    padding-bottom: 3px;
+}
+.haraka-mock-b-tab-off { font-size: 9px; color: var(--hrk-ink-faint); }
+.haraka-mock-b-row {
+    font-size: 9px;
+    color: var(--hrk-ink-soft);
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+}
+.haraka-mock-b-badge {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 1px 5px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* ── Live preview boxes (Tenders / Posts) ─────────────────────────────────── */
+.haraka-preview-box {
+    background: var(--hrk-paper);
+    border-radius: var(--hrk-radius);
+    padding: 20px 24px;
+    border: 1px solid var(--hrk-hairline-strong);
+}
+.haraka-preview-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--hrk-ink-faint);
+    margin: 0 0 6px;
+}
+.haraka-preview-headline {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--hrk-ink);
+    margin: 0 0 8px;
+    line-height: 1.3;
+}
+.haraka-preview-headline em { font-style: italic; font-weight: 400; }
+.haraka-preview-links {
+    font-size: 12px;
+    color: var(--hrk-ink-soft);
+    margin: 0;
+}
+.haraka-preview-links .muted {
+    font-size: 11px;
+    color: var(--hrk-ink-faint);
+}
+
+/* ── Shortcode reference table (Posts tab) ────────────────────────────────── */
+.haraka-table-scroll { overflow-x: auto; }
+.haraka-shortcode-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.haraka-shortcode-table thead th {
+    background: var(--hrk-ink);
+    color: #fff;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.haraka-shortcode-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--hrk-hairline);
+    vertical-align: top;
+}
+.haraka-shortcode-table tbody tr:nth-child(odd) { background: #faf7f1; }
+.haraka-shortcode-table tbody tr:last-child td { border-bottom: none; }
+.haraka-shortcode-code { color: var(--hrk-gold); white-space: nowrap; }
+.haraka-shortcode-desc { font-family: -apple-system, 'Segoe UI', sans-serif; color: var(--hrk-ink-soft); }
+
+.haraka-tip {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: var(--hrk-gold-wash);
+    border-left: 3px solid var(--hrk-gold);
+    border-radius: 0 var(--hrk-radius) var(--hrk-radius) 0;
+}
+.haraka-tip p {
+    font-size: 12px;
+    color: #7a5a12;
+    margin: 0;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media ( max-width: 782px ) {
+    .haraka-settings-header { padding: 22px 20px 18px; }
+    .haraka-settings-header::after { left: 20px; }
+    .haraka-settings-title { font-size: 20px !important; }
+    .haraka-settings-subtitle { padding-left: 0; margin-top: 6px; }
+    .haraka-tabbar { padding: 0 20px; }
+    .haraka-settings-content { padding: 22px 20px; }
+    .haraka-field-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    .haraka-field-label { padding-top: 0; }
+    .haraka-field-row input[type="text"],
+    .haraka-field-row input[type="number"],
+    .haraka-field-row input[type="email"],
+    .haraka-field-row input[type="url"],
+    .haraka-field-row select,
+    .haraka-field-row textarea {
+        max-width: 100%;
+    }
+}

@@ -79,13 +79,25 @@ function haraka_settings_page_html() {
     }
     ?>
 
+    <?php
+    $haraka_tabs = array(
+        'general'   => 'General',
+        'events'    => 'Events',
+        'tenders'   => 'Tenders',
+        'careers'   => 'Careers',
+        'posts'     => 'Posts',
+        'error-log' => 'Error Log',
+        'how-to'    => 'How To',
+    );
+    ?>
+
     <div class="wrap haraka-settings-wrap">
 
         <div class="haraka-settings-header">
             <div class="haraka-settings-header-inner">
                 <h1 class="haraka-settings-title">
                     <span class="haraka-logo">H</span>
-                    Haraka Settings
+                    Haraka
                 </h1>
                 <p class="haraka-settings-subtitle">
                     Corporate Content Hub — v<?php echo esc_html( HARAKA_VERSION ); ?>
@@ -93,24 +105,16 @@ function haraka_settings_page_html() {
             </div>
         </div>
 
-        <div class="haraka-settings-body <?php echo $is_full_page ? 'haraka-settings-body-full' : ''; ?>">
+        <nav class="haraka-tabbar">
+            <?php foreach ( $haraka_tabs as $tab_key => $tab_label ) : ?>
+                <a href="?page=haraka-settings&tab=<?php echo esc_attr( $tab_key ); ?>"
+                   class="haraka-tab <?php echo $active_tab === $tab_key ? 'active' : ''; ?>">
+                    <?php echo esc_html( $tab_label ); ?>
+                </a>
+            <?php endforeach; ?>
+        </nav>
 
-            <nav class="haraka-settings-nav">
-                <a href="?page=haraka-settings&tab=general"
-                   class="haraka-nav-item <?php echo $active_tab === 'general'    ? 'active' : ''; ?>">General</a>
-                <a href="?page=haraka-settings&tab=events"
-                   class="haraka-nav-item <?php echo $active_tab === 'events'     ? 'active' : ''; ?>">Events</a>
-                <a href="?page=haraka-settings&tab=tenders"
-                   class="haraka-nav-item <?php echo $active_tab === 'tenders'    ? 'active' : ''; ?>">Tenders</a>
-                <a href="?page=haraka-settings&tab=careers"
-                   class="haraka-nav-item <?php echo $active_tab === 'careers'    ? 'active' : ''; ?>">Careers</a>
-                <a href="?page=haraka-settings&tab=posts"
-                   class="haraka-nav-item <?php echo $active_tab === 'posts'      ? 'active' : ''; ?>">Posts</a>
-                <a href="?page=haraka-settings&tab=error-log"
-                   class="haraka-nav-item <?php echo $active_tab === 'error-log'  ? 'active' : ''; ?>">Error Log</a>
-                <a href="?page=haraka-settings&tab=how-to"
-                   class="haraka-nav-item <?php echo $active_tab === 'how-to'     ? 'active' : ''; ?>">How To</a>
-            </nav>
+        <div class="haraka-settings-body <?php echo $is_full_page ? 'haraka-settings-body-full' : ''; ?>">
 
             <div class="haraka-settings-content <?php echo $is_full_page ? 'haraka-settings-content-wide' : ''; ?>">
                 <form method="post" action="options.php">
@@ -145,253 +149,6 @@ function haraka_settings_page_html() {
         </div>
 
     </div>
-
-    <style>
-        .haraka-settings-wrap {
-            font-family: -apple-system, 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .haraka-settings-header {
-            background: #0f172a;
-            padding: 24px 32px;
-            margin-left: -20px;
-            margin-top: -10px;
-        }
-        .haraka-settings-header-inner {
-            max-width: 900px;
-        }
-        .haraka-settings-title {
-            color: #ffffff !important;
-            font-size: 20px !important;
-            font-weight: 700 !important;
-            margin: 0 0 4px !important;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .haraka-logo {
-            width: 32px;
-            height: 32px;
-            background: #0056b3;
-            border-radius: 8px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: 800;
-            color: #fff;
-            flex-shrink: 0;
-        }
-        .haraka-settings-subtitle {
-            color: #94a3b8;
-            font-size: 13px;
-            margin: 0;
-        }
-        .haraka-settings-body {
-            display: flex;
-            gap: 0;
-            max-width: 960px;
-            margin-top: 20px;
-        }
-        .haraka-settings-body-full {
-            max-width: 100%;
-            margin-top: 0;
-        }
-        .haraka-settings-nav {
-            width: 180px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            padding-top: 20px;
-            gap: 2px;
-        }
-        .haraka-settings-body-full .haraka-settings-nav {
-            display: none;
-        }
-        .haraka-nav-item {
-            display: block;
-            padding: 8px 14px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #475569;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: all 0.15s;
-        }
-        .haraka-nav-item:hover {
-            background: #f1f5f9;
-            color: #0f172a;
-        }
-        .haraka-nav-item.active {
-            background: #0056b3;
-            color: #ffffff;
-        }
-        .haraka-settings-content {
-            flex: 1;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 28px 32px;
-            margin-top: 20px;
-        }
-        .haraka-settings-content-wide {
-            padding: 0;
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            margin-top: 0;
-            width: 100%;
-        }
-        .haraka-section-title {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.07em;
-            color: #94a3b8;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 10px;
-            margin: 24px 0 20px;
-        }
-        .haraka-section-title:first-child {
-            margin-top: 0;
-        }
-        .haraka-field-row {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            align-items: start;
-            margin-bottom: 20px;
-            gap: 16px;
-        }
-        .haraka-field-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #1d2327;
-            padding-top: 6px;
-            line-height: 1.4;
-        }
-        .haraka-field-hint {
-            font-size: 11px;
-            font-weight: 400;
-            color: #94a3b8;
-            display: block;
-            margin-top: 3px;
-        }
-        .haraka-field-row input[type="text"],
-        .haraka-field-row input[type="number"],
-        .haraka-field-row input[type="url"],
-        .haraka-field-row input[type="color"],
-        .haraka-field-row select,
-        .haraka-field-row textarea {
-            width: 100%;
-            max-width: 480px;
-            font-size: 13px;
-            padding: 7px 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            color: #1d2327;
-            background: #fff;
-            box-sizing: border-box;
-        }
-        .haraka-field-row input[type="color"] {
-            width: 60px;
-            height: 38px;
-            padding: 2px 4px;
-            cursor: pointer;
-        }
-        .haraka-field-row textarea {
-            height: 100px;
-            resize: vertical;
-        }
-        .haraka-field-row input:focus,
-        .haraka-field-row select:focus,
-        .haraka-field-row textarea:focus {
-            border-color: #0056b3;
-            outline: 2px solid rgba( 0, 86, 179, 0.2 );
-            outline-offset: 0;
-        }
-        .haraka-toggle-wrap {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-top: 4px;
-        }
-        .haraka-toggle {
-            position: relative;
-            width: 44px;
-            height: 24px;
-            flex-shrink: 0;
-        }
-        .haraka-toggle input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-            position: absolute;
-        }
-        .haraka-toggle-slider {
-            position: absolute;
-            inset: 0;
-            background: #d1d5db;
-            border-radius: 24px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .haraka-toggle-slider:before {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            left: 3px;
-            top: 3px;
-            background: #fff;
-            border-radius: 50%;
-            transition: 0.2s;
-        }
-        .haraka-toggle input:checked + .haraka-toggle-slider {
-            background: #0056b3;
-        }
-        .haraka-toggle input:checked + .haraka-toggle-slider:before {
-            transform: translateX( 20px );
-        }
-        .haraka-toggle-label {
-            font-size: 13px;
-            color: #475569;
-        }
-        .haraka-colour-preview {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 8px;
-        }
-        .haraka-colour-swatch {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
-        }
-        .haraka-colour-value {
-            font-size: 12px;
-            font-family: monospace;
-            color: #64748b;
-        }
-        .haraka-save-btn {
-            margin-top: 8px !important;
-            background: #0f172a !important;
-            border-color: #0f172a !important;
-            padding: 8px 24px !important;
-            font-size: 13px !important;
-            font-weight: 600 !important;
-            border-radius: 6px !important;
-            height: auto !important;
-        }
-        .haraka-save-btn:hover {
-            background: #1e293b !important;
-            border-color: #1e293b !important;
-        }
-        .updated.notice {
-            border-left-color: #0056b3 !important;
-        }
-    </style>
 
     <script>
     (function() {

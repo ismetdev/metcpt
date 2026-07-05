@@ -262,12 +262,14 @@ function haraka_render_tenders_settings() {
             Closing Soon Threshold
             <span class="haraka-field-hint">How many days before close date the Closing Soon badge appears</span>
         </label>
-        <input type="number" id="haraka_closing_soon_days"
-               name="haraka_closing_soon_days"
-               value="<?php echo esc_attr( $closing_soon_days ); ?>"
-               min="1" max="90"
-               style="max-width: 100px;" />
-        <p style="font-size:12px;color:#94a3b8;margin:4px 0 0;">days before closing date</p>
+        <div>
+            <input type="number" id="haraka_closing_soon_days"
+                   name="haraka_closing_soon_days"
+                   value="<?php echo esc_attr( $closing_soon_days ); ?>"
+                   min="1" max="90"
+                   class="haraka-field-narrow" />
+            <p class="haraka-field-note">days before closing date</p>
+        </div>
     </div>
 
     <div class="haraka-section-title">Tender Categories</div>
@@ -337,7 +339,7 @@ function haraka_render_tenders_settings() {
                class="button button-secondary">
                 Run Cron Now
             </a>
-            <p style="font-size:11px;color:#94a3b8;margin:6px 0 0;">
+            <p class="haraka-field-note">
                 This simulates what happens automatically every day at midnight.
             </p>
         </div>
@@ -361,64 +363,58 @@ function haraka_render_tenders_settings() {
                 Applies globally to both [tenders_list] and [tenders_preview]
             </span>
         </label>
-        <div style="display:flex;flex-direction:column;gap:16px;padding-top:4px;">
+        <div class="haraka-radio-stack">
 
-            <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;">
+            <label class="haraka-radio-card">
                 <input type="radio"
                        name="haraka_tenders_template"
                        value="a"
                        <?php checked( $selected_template, 'a' ); ?>
-                       style="margin-top:3px;width:auto;max-width:none;flex-shrink:0;"
                        onchange="document.getElementById('hrk-tb-fields').style.display='none';" />
                 <div>
-                    <div style="font-size:13px;font-weight:600;color:#1d2327;margin-bottom:4px;">
-                        Template A — Table Layout
-                    </div>
-                    <div style="font-size:11px;color:#646970;line-height:1.5;">
+                    <div class="haraka-radio-title">Template A — Table Layout</div>
+                    <div class="haraka-radio-desc">
                         Searchable table with filter tabs, status badges, and document download button.
                         Best for dedicated tender listing pages.
                     </div>
-                    <div style="margin-top:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:12px 14px;">
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-                            <div style="height:6px;background:#0056b3;border-radius:2px;flex:1;"></div>
-                            <div style="height:6px;background:#e2e8f0;border-radius:2px;width:40px;"></div>
-                            <div style="height:6px;background:#e2e8f0;border-radius:2px;width:60px;"></div>
+                    <div class="haraka-mock haraka-mock-a">
+                        <div class="haraka-mock-a-head">
+                            <div class="haraka-mock-bar haraka-mock-bar-gold"></div>
+                            <div class="haraka-mock-bar haraka-mock-bar-a"></div>
+                            <div class="haraka-mock-bar haraka-mock-bar-b"></div>
                         </div>
-                        <div style="display:grid;grid-template-columns:80px 1fr 50px 50px;gap:8px;align-items:center;">
-                            <?php for($i=0;$i<8;$i++): ?>
-                            <div style="height:5px;background:<?php echo $i<4?'#f1f5f9':'#e2e8f0'; ?>;border-radius:2px;"></div>
+                        <div class="haraka-mock-a-rows">
+                            <?php for ( $i = 0; $i < 8; $i++ ) : ?>
+                            <div class="haraka-mock-cell <?php echo $i < 4 ? '' : 'haraka-mock-cell-strong'; ?>"></div>
                             <?php endfor; ?>
                         </div>
                     </div>
                 </div>
             </label>
 
-            <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;">
+            <label class="haraka-radio-card">
                 <input type="radio"
                        name="haraka_tenders_template"
                        value="b"
                        <?php checked( $selected_template, 'b' ); ?>
-                       style="margin-top:3px;width:auto;max-width:none;flex-shrink:0;"
                        onchange="document.getElementById('hrk-tb-fields').style.display='block';" />
                 <div style="flex:1;">
-                    <div style="font-size:13px;font-weight:600;color:#1d2327;margin-bottom:4px;">
-                        Template B — Editorial Layout
-                    </div>
-                    <div style="font-size:11px;color:#646970;line-height:1.5;">
+                    <div class="haraka-radio-title">Template B — Editorial Layout</div>
+                    <div class="haraka-radio-desc">
                         Cream background with large editorial headline, tabbed Open/Closed filter,
                         and clean row listing. Best for landing pages and homepages.
                     </div>
-                    <div style="margin-top:10px;background:#f5f0e8;border:1px solid #e2d9c8;border-radius:6px;padding:12px 14px;">
-                        <div style="font-size:9px;color:#7a6f60;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">— Tender Opportunities</div>
-                        <div style="font-size:13px;font-weight:700;color:#1a1410;margin-bottom:8px;">Open procurement <em style="font-style:italic;font-weight:400;">across the group.</em></div>
-                        <div style="background:#fff;border-radius:3px;padding:8px 10px;">
-                            <div style="display:flex;gap:12px;border-bottom:1px solid #f0ebe2;padding-bottom:6px;margin-bottom:6px;">
-                                <div style="font-size:9px;font-weight:600;color:#1a1410;border-bottom:1.5px solid #1a1410;padding-bottom:3px;">Open Tenders</div>
-                                <div style="font-size:9px;color:#8a7d6a;">Closed</div>
+                    <div class="haraka-mock haraka-mock-b">
+                        <div class="haraka-mock-b-label">— Tender Opportunities</div>
+                        <div class="haraka-mock-b-head">Open procurement <em>across the group.</em></div>
+                        <div class="haraka-mock-b-panel">
+                            <div class="haraka-mock-b-tabs">
+                                <div class="haraka-mock-b-tab-on">Open Tenders</div>
+                                <div class="haraka-mock-b-tab-off">Closed</div>
                             </div>
-                            <div style="font-size:9px;color:#4a3f30;display:flex;justify-content:space-between;padding:3px 0;">
+                            <div class="haraka-mock-b-row">
                                 <span>Tender title example...</span>
-                                <span style="background:#dcfce7;color:#15803d;padding:1px 5px;border-radius:8px;font-weight:600;">OPEN</span>
+                                <span class="haraka-mock-b-badge">OPEN</span>
                             </div>
                         </div>
                     </div>
@@ -495,20 +491,18 @@ function haraka_render_tenders_settings() {
 
         <div class="haraka-section-title">Template B — Live Preview</div>
 
-        <div style="background:#f5f0e8;border-radius:8px;padding:20px 24px;border:1px solid #e2d9c8;">
-            <p style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#7a6f60;margin:0 0 6px;">
+        <div class="haraka-preview-box">
+            <p class="haraka-preview-label">
                 — <span id="hrk-tb-preview-label"><?php echo esc_html( $tb_label ); ?></span>
             </p>
-            <p style="font-size:22px;font-weight:700;color:#1a1410;margin:0 0 8px;line-height:1.3;">
+            <p class="haraka-preview-headline">
                 <span id="hrk-tb-preview-headline"><?php echo esc_html( $tb_headline ); ?></span>
-                <em id="hrk-tb-preview-italic" style="font-style:italic;font-weight:400;">
-                    <?php echo esc_html( $tb_headline_italic ); ?>
-                </em>
+                <em id="hrk-tb-preview-italic"><?php echo esc_html( $tb_headline_italic ); ?></em>
             </p>
-            <p style="font-size:12px;color:#4a3f30;margin:0;">
+            <p class="haraka-preview-links">
                 <span id="hrk-tb-preview-all"><?php echo esc_html( $tb_all_text ); ?></span> &rarr;
                 &nbsp;&nbsp;
-                <span id="hrk-tb-preview-viewall" style="font-size:11px;color:#8a7d6a;"><?php echo esc_html( $tb_view_all_text ); ?> &rarr;</span>
+                <span id="hrk-tb-preview-viewall" class="muted"><?php echo esc_html( $tb_view_all_text ); ?> &rarr;</span>
             </p>
         </div>
 
@@ -685,17 +679,15 @@ function haraka_render_posts_settings() {
 
     <div class="haraka-section-title">Preview</div>
 
-    <div style="background: #f5f0e8; border-radius: 8px; padding: 20px 24px; border: 1px solid #e2d9c8;">
-        <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #7a6f60; margin: 0 0 6px;">
+    <div class="haraka-preview-box">
+        <p class="haraka-preview-label">
             — <span id="hrk-preview-label"><?php echo esc_html( $label ); ?></span>
         </p>
-        <p style="font-size: 20px; font-weight: 700; color: #1a1410; margin: 0 0 8px; line-height: 1.3;">
+        <p class="haraka-preview-headline">
             <span id="hrk-preview-headline"><?php echo esc_html( $headline ); ?></span>
-            <em id="hrk-preview-italic" style="font-style: italic; font-weight: 400;">
-                <?php echo esc_html( $headline_italic ); ?>
-            </em>
+            <em id="hrk-preview-italic"><?php echo esc_html( $headline_italic ); ?></em>
         </p>
-        <p style="font-size: 12px; color: #4a3f30; margin: 0;">
+        <p class="haraka-preview-links">
             <span id="hrk-preview-link"><?php echo esc_html( $view_all_text ); ?></span> &rarr;
         </p>
     </div>
@@ -722,61 +714,61 @@ function haraka_render_posts_settings() {
 
     <div class="haraka-section-title">Available Shortcodes — Reference</div>
 
-    <div style="overflow-x: auto;">
-        <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:monospace;">
+    <div class="haraka-table-scroll">
+        <table class="haraka-shortcode-table">
             <thead>
-                <tr style="background:#0f172a;color:#fff;">
-                    <th style="padding:8px 12px;text-align:left;font-weight:600;white-space:nowrap;">Shortcode</th>
-                    <th style="padding:8px 12px;text-align:left;font-weight:600;">Description</th>
+                <tr>
+                    <th>Shortcode</th>
+                    <th>Description</th>
                 </tr>
             </thead>
             <tbody>
-                <tr style="background:#f8fafc;">
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;white-space:nowrap;color:#0056b3;">[news_grid]</td>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-family:sans-serif;color:#334155;">Shows 4 most recent posts using settings defaults</td>
+                <tr>
+                    <td class="haraka-shortcode-code">[news_grid]</td>
+                    <td class="haraka-shortcode-desc">Shows 4 most recent posts using settings defaults</td>
                 </tr>
                 <tr>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;white-space:nowrap;color:#0056b3;">[news_grid category="csr"]</td>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-family:sans-serif;color:#334155;">Filter by category slug — replace <em>csr</em> with your slug</td>
-                </tr>
-                <tr style="background:#f8fafc;">
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;white-space:nowrap;color:#0056b3;">[news_grid posts_per_page="6"]</td>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-family:sans-serif;color:#334155;">Show more posts — minimum 4, featured is always first</td>
+                    <td class="haraka-shortcode-code">[news_grid category="csr"]</td>
+                    <td class="haraka-shortcode-desc">Filter by category slug — replace <em>csr</em> with your slug</td>
                 </tr>
                 <tr>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;white-space:nowrap;color:#0056b3;">[news_grid show_excerpt="no"]</td>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-family:sans-serif;color:#334155;">Hide the excerpt on the featured post</td>
-                </tr>
-                <tr style="background:#f8fafc;">
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;white-space:nowrap;color:#0056b3;">[news_grid order="ASC"]</td>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-family:sans-serif;color:#334155;">Oldest posts first — default is DESC (newest first)</td>
+                    <td class="haraka-shortcode-code">[news_grid posts_per_page="6"]</td>
+                    <td class="haraka-shortcode-desc">Show more posts — minimum 4, featured is always first</td>
                 </tr>
                 <tr>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;white-space:nowrap;color:#0056b3;">[news_grid orderby="title"]</td>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-family:sans-serif;color:#334155;">Sort by title — also accepts: date, modified, rand</td>
-                </tr>
-                <tr style="background:#f8fafc;">
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;white-space:nowrap;color:#0056b3;">[news_grid label="Our Stories"]</td>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-family:sans-serif;color:#334155;">Override the section label for this instance only</td>
+                    <td class="haraka-shortcode-code">[news_grid show_excerpt="no"]</td>
+                    <td class="haraka-shortcode-desc">Hide the excerpt on the featured post</td>
                 </tr>
                 <tr>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;white-space:nowrap;color:#0056b3;">[news_grid headline="Latest from" headline_italic="our team."]</td>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-family:sans-serif;color:#334155;">Override headline text for this instance only</td>
-                </tr>
-                <tr style="background:#f8fafc;">
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;white-space:nowrap;color:#0056b3;">[news_grid view_all_text="Read all" view_all_url="/news"]</td>
-                    <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-family:sans-serif;color:#334155;">Override the view all link text and URL</td>
+                    <td class="haraka-shortcode-code">[news_grid order="ASC"]</td>
+                    <td class="haraka-shortcode-desc">Oldest posts first — default is DESC (newest first)</td>
                 </tr>
                 <tr>
-                    <td style="padding:8px 12px;white-space:nowrap;color:#0056b3;">[news_grid category="csr" show_excerpt="no" order="DESC"]</td>
-                    <td style="padding:8px 12px;font-family:sans-serif;color:#334155;">Combine multiple parameters in one shortcode</td>
+                    <td class="haraka-shortcode-code">[news_grid orderby="title"]</td>
+                    <td class="haraka-shortcode-desc">Sort by title — also accepts: date, modified, rand</td>
+                </tr>
+                <tr>
+                    <td class="haraka-shortcode-code">[news_grid label="Our Stories"]</td>
+                    <td class="haraka-shortcode-desc">Override the section label for this instance only</td>
+                </tr>
+                <tr>
+                    <td class="haraka-shortcode-code">[news_grid headline="Latest from" headline_italic="our team."]</td>
+                    <td class="haraka-shortcode-desc">Override headline text for this instance only</td>
+                </tr>
+                <tr>
+                    <td class="haraka-shortcode-code">[news_grid view_all_text="Read all" view_all_url="/news"]</td>
+                    <td class="haraka-shortcode-desc">Override the view all link text and URL</td>
+                </tr>
+                <tr>
+                    <td class="haraka-shortcode-code">[news_grid category="csr" show_excerpt="no" order="DESC"]</td>
+                    <td class="haraka-shortcode-desc">Combine multiple parameters in one shortcode</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div style="margin-top:16px;padding:12px 16px;background:#f0fdf4;border-left:3px solid #16a34a;border-radius:0 4px 4px 0;">
-        <p style="font-size:12px;color:#166534;margin:0;font-family:sans-serif;">
+    <div class="haraka-tip">
+        <p>
             <strong>Tip:</strong> Parameters set in the shortcode always override the defaults above.
             Use Haraka Settings to set your site-wide defaults, and use shortcode parameters
             when you need a one-off variation on a specific page.
