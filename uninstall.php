@@ -9,7 +9,7 @@
  * To enable full cleanup, uncomment the block below.
  *
  * @package MetCPT
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {

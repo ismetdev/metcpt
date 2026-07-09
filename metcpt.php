@@ -3,7 +3,7 @@
  * Plugin Name:       MetCPT WP
  * Plugin URI:        https://github.com/ismetdev/metcpt
  * Description:       Corporate Content Hub for WordPress. Manage Events, Tenders, and Careers with beautiful structured listings and full single-page templates. Built for IIUM Holdings.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ismetdev
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Constants ─────────────────────────────────────────────────────────────────
-define( 'METCPT_VERSION',  '1.1.0' );
+define( 'METCPT_VERSION',  '1.2.0' );
 define( 'METCPT_FILE',     __FILE__ );
 define( 'METCPT_PATH',     plugin_dir_path( __FILE__ ) );
 define( 'METCPT_URL',      plugin_dir_url( __FILE__ ) );
