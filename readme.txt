@@ -4,7 +4,7 @@ Tags: corporate, events, careers, tenders, listings
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,10 @@ Yes. Developers can override or customize templates as needed.
 
 == Changelog ==
 
+= 1.2.1 =
+
+* Rewrite rules now flush automatically after a plugin update, so the manual Settings -> Permalinks -> Save step is no longer needed following an update
+
 = 1.2.0 =
 
 * Removed six settings that were registered and rendered but never read (accent colour, organisation name, events default order, events show-excerpt, default submission address, default tender fee)
@@ -69,6 +73,10 @@ Yes. Developers can override or customize templates as needed.
 * Polished archive pages for Events, Tenders, and Careers
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+
+Adds automatic rewrite-rule flushing after updates. Apply this update once via Settings -> Permalinks -> Save (the last manual flush you will need); every update after this one flushes automatically.
 
 = 1.2.0 =
 

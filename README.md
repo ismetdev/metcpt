@@ -1,6 +1,6 @@
 # MetCPT — Corporate Content Hub for WordPress
 
-![Version](https://img.shields.io/badge/version-1.2.0-0056b3.svg)
+![Version](https://img.shields.io/badge/version-1.2.1-0056b3.svg)
 ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b.svg)
 ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4.svg)
 ![License](https://img.shields.io/badge/license-Proprietary-lightgrey.svg)
@@ -256,6 +256,9 @@ MetCPT stores content in native WordPress tables (`wp_posts`, `wp_postmeta`, `wp
 
 ## Changelog
 
+### 1.2.1 (2026-07-10)
+- Rewrite rules now flush automatically once after each plugin update (version-gated, on `admin_init`), so the manual **Settings → Permalinks → Save** step is no longer needed following an update. Fresh installs already flushed on activation.
+
 ### 1.2.0 (2026-07-10)
 - Removed six settings that were registered and rendered but never read: accent colour, organisation name, events default order, events show-excerpt, default submission address, and default tender fee.
 - Removed the redundant News-Grid live preview from the Posts settings tab (the same preview remains in the How-To tab).
@@ -282,4 +285,4 @@ Proprietary — for internal use by IIUM Holdings Sdn Bhd and its subsidiaries.
 
 ---
 
-Developed for IIUM Holdings Sdn Bhd · v1.2.0 · July 2026
+Developed for IIUM Holdings Sdn Bhd · v1.2.1 · July 2026

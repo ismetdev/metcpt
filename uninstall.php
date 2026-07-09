@@ -9,7 +9,7 @@
  * To enable full cleanup, uncomment the block below.
  *
  * @package MetCPT
- * @version 1.2.0
+ * @version 1.2.1
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
@@ -88,7 +88,7 @@ $options = array(
     'metcpt_news_headline_italic', 'metcpt_news_view_all_text',
     'metcpt_news_view_all_url', 'metcpt_news_category',
     // Internal / migration guard
-    'metcpt_migrated_from_haraka',
+    'metcpt_migrated_from_haraka', 'metcpt_rewrite_version',
 );
 foreach ( $options as $option ) {
     delete_option( $option );

@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Main plugin class — bootstraps all modules and hooks.
  *
  * @package MetCPT
- * @version 1.2.0
+ * @version 1.2.1
  */
 class MetCPT {
 
@@ -204,6 +204,9 @@ class MetCPT {
         metcpt_register_post_types();
         metcpt_error_log_create_table();
         flush_rewrite_rules();
+        // Stamp the rewrite version so the admin_init auto-flush (see
+        // post-types.php) does not redundantly flush again on first admin load.
+        update_option( 'metcpt_rewrite_version', METCPT_VERSION );
     }
 
     /**

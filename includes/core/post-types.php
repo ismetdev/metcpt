@@ -108,3 +108,26 @@ function metcpt_register_post_types() {
     ) );
 }
 add_action( 'init', 'metcpt_register_post_types' );
+
+
+/**
+ * Flush rewrite rules once after a plugin update.
+ *
+ * WordPress runs the activation hook (which flushes) only on activation, never
+ * on update — and MetCPT updates arrive via the update screen. Without this, a
+ * release that changes CPT/rewrite registration would leave stale rewrite rules
+ * until an admin manually visited Settings → Permalinks → Save.
+ *
+ * Version-gated so the expensive flush_rewrite_rules() runs at most once per
+ * version. Post types are already registered here (init has fired). Admin-only:
+ * updates are admin-initiated, so this fires in the same session as the update.
+ * Mirrors the version-gate pattern used for metcpt_error_log_db_version.
+ */
+function metcpt_maybe_flush_rewrite_rules() {
+    if ( get_option( 'metcpt_rewrite_version' ) === METCPT_VERSION ) {
+        return;
+    }
+    flush_rewrite_rules();
+    update_option( 'metcpt_rewrite_version', METCPT_VERSION );
+}
+add_action( 'admin_init', 'metcpt_maybe_flush_rewrite_rules' );
