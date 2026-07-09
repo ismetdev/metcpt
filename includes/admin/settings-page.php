@@ -22,22 +22,16 @@ add_action( 'admin_menu', 'metcpt_admin_menu' );
 function metcpt_register_settings() {
 
     // ── General ───────────────────────────────────────────────────────────────
-    register_setting( 'metcpt_general', 'metcpt_accent_colour',       array( 'sanitize_callback' => 'sanitize_hex_color',      'default' => '#0056b3' ) );
-    register_setting( 'metcpt_general', 'metcpt_organisation_name',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'IIUM Holdings Sdn Bhd' ) );
     register_setting( 'metcpt_general', 'metcpt_enable_dummy_data',   array( 'sanitize_callback' => 'absint',                   'default' => 0 ) );
 
     // ── Events ────────────────────────────────────────────────────────────────
     register_setting( 'metcpt_events', 'metcpt_events_archive_url',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => '/events' ) );
-    register_setting( 'metcpt_events', 'metcpt_events_default_order', array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'ASC' ) );
-    register_setting( 'metcpt_events', 'metcpt_events_show_excerpt',  array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'yes' ) );
     register_setting( 'metcpt_events', 'metcpt_vip_roles',            array( 'sanitize_callback' => 'sanitize_textarea_field',  'default' => "Guest of Honour\nTazkirah\nNotable Attendee\nSpeaker\nMC" ) );
 
     // ── Tenders ───────────────────────────────────────────────────────────────
     register_setting( 'metcpt_tenders', 'metcpt_tenders_page_url',             array( 'sanitize_callback' => 'sanitize_text_field',     'default' => '/tenders' ) );
     register_setting( 'metcpt_tenders', 'metcpt_closing_soon_days',            array( 'sanitize_callback' => 'absint',                   'default' => 7 ) );
-    register_setting( 'metcpt_tenders', 'metcpt_default_submission_address',   array( 'sanitize_callback' => 'sanitize_textarea_field',  'default' => '' ) );
     register_setting( 'metcpt_tenders', 'metcpt_tender_categories',            array( 'sanitize_callback' => 'sanitize_textarea_field',  'default' => "Goods\nServices\nConstruction\nConsultancy\nOthers" ) );
-    register_setting( 'metcpt_tenders', 'metcpt_default_tender_fee',           array( 'sanitize_callback' => 'sanitize_text_field',      'default' => '' ) );
     register_setting( 'metcpt_tenders', 'metcpt_notify_email', array( 'sanitize_callback' => 'sanitize_email', 'default' => get_option( 'admin_email' ) ) );
     register_setting( 'metcpt_tenders', 'metcpt_tenders_template',        array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'a' ) );
     register_setting( 'metcpt_tenders', 'metcpt_tenders_b_label',         array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'Tender Opportunities' ) );
@@ -149,22 +143,6 @@ function metcpt_settings_page_html() {
         </div>
 
     </div>
-
-    <script>
-    (function() {
-        var picker = document.getElementById('metcpt_accent_colour');
-        var swatch = document.getElementById('metcpt-colour-swatch');
-        var value  = document.getElementById('metcpt-colour-value');
-        if ( picker && swatch && value ) {
-            function update() {
-                swatch.style.background = picker.value;
-                value.textContent       = picker.value;
-            }
-            picker.addEventListener('input', update);
-            update();
-        }
-    })();
-    </script>
 
     <?php
 }

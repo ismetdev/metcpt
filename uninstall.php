@@ -61,18 +61,34 @@ foreach ( $meta_keys as $key ) {
     ) );
 }
 
-// Delete plugin options
+// Delete plugin options.
+// Includes options no longer registered by the plugin (removed in v1.1.x) so
+// their orphaned rows are cleaned up too: metcpt_accent_colour,
+// metcpt_organisation_name, metcpt_events_default_order,
+// metcpt_events_show_excerpt, metcpt_default_submission_address,
+// metcpt_default_tender_fee.
 $options = array(
-    'metcpt_events_page_url', 'metcpt_tenders_page_url',
-    'metcpt_careers_page_url', 'metcpt_closing_soon_days',
-    'metcpt_notify_email', 'metcpt_tenders_template',
-    'metcpt_tenders_b_label', 'metcpt_tenders_b_headline',
-    'metcpt_tenders_b_headline_italic', 'metcpt_tenders_b_all_text',
-    'metcpt_tenders_b_view_all_text', 'metcpt_career_departments',
+    // General
+    'metcpt_accent_colour', 'metcpt_organisation_name',
+    'metcpt_enable_dummy_data',
+    // Events
+    'metcpt_events_archive_url', 'metcpt_events_default_order',
+    'metcpt_events_show_excerpt', 'metcpt_vip_roles',
+    // Tenders
+    'metcpt_tenders_page_url', 'metcpt_closing_soon_days',
+    'metcpt_default_submission_address', 'metcpt_tender_categories',
+    'metcpt_default_tender_fee', 'metcpt_notify_email',
+    'metcpt_tenders_template', 'metcpt_tenders_b_label',
+    'metcpt_tenders_b_headline', 'metcpt_tenders_b_headline_italic',
+    'metcpt_tenders_b_all_text', 'metcpt_tenders_b_view_all_text',
+    // Careers
+    'metcpt_career_departments', 'metcpt_careers_page_url',
+    // Posts / News grid
     'metcpt_news_label', 'metcpt_news_headline',
     'metcpt_news_headline_italic', 'metcpt_news_view_all_text',
     'metcpt_news_view_all_url', 'metcpt_news_category',
-    'metcpt_accent_color',
+    // Internal / migration guard
+    'metcpt_migrated_from_haraka',
 );
 foreach ( $options as $option ) {
     delete_option( $option );

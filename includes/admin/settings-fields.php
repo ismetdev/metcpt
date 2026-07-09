@@ -5,44 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // ── General Settings ──────────────────────────────────────────────────────────
 function metcpt_render_general_settings() {
-    $accent_colour     = get_option( 'metcpt_accent_colour',     '#0056b3' );
-    $organisation_name = get_option( 'metcpt_organisation_name', 'IIUM Holdings Sdn Bhd' );
     ?>
 
-    <div class="metcpt-section-title">Branding</div>
-
-    <div class="metcpt-field-row">
-        <label class="metcpt-field-label">
-            Accent Colour
-            <span class="metcpt-field-hint">Used for borders, links and badges across all listings</span>
-        </label>
-        <div>
-            <input type="color" id="metcpt_accent_colour"
-                   name="metcpt_accent_colour"
-                   value="<?php echo esc_attr( $accent_colour ); ?>" />
-            <div class="metcpt-colour-preview">
-                <div class="metcpt-colour-swatch" id="metcpt-colour-swatch"
-                     style="background: <?php echo esc_attr( $accent_colour ); ?>"></div>
-                <span class="metcpt-colour-value" id="metcpt-colour-value">
-                    <?php echo esc_html( $accent_colour ); ?>
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="metcpt-field-row">
-        <label class="metcpt-field-label" for="metcpt_organisation_name">
-            Organisation Name
-            <span class="metcpt-field-hint">Used as the default organiser in Events</span>
-        </label>
-        <input type="text" id="metcpt_organisation_name"
-               name="metcpt_organisation_name"
-               value="<?php echo esc_attr( $organisation_name ); ?>"
-               placeholder="e.g. IIUM Holdings Sdn Bhd" />
-    </div>
-
     <?php
-
     // ── Developer Tools ───────────────────────────────────────────────────────
     ?>
     <div class="metcpt-section-title">Developer Tools</div>
@@ -168,8 +133,6 @@ function metcpt_render_general_settings() {
 // ── Events Settings ───────────────────────────────────────────────────────────
 function metcpt_render_events_settings() {
     $archive_url    = get_option( 'metcpt_events_archive_url',   '/events' );
-    $default_order  = get_option( 'metcpt_events_default_order', 'ASC' );
-    $show_excerpt   = get_option( 'metcpt_events_show_excerpt',  'yes' );
     $vip_roles_raw  = get_option( 'metcpt_vip_roles',            "Guest of Honour\nTazkirah\nNotable Attendee\nSpeaker\nMC" );
     ?>
 
@@ -184,38 +147,6 @@ function metcpt_render_events_settings() {
                name="metcpt_events_archive_url"
                value="<?php echo esc_attr( $archive_url ); ?>"
                placeholder="e.g. /events or https://yoursite.com/events" />
-    </div>
-
-    <div class="metcpt-field-row">
-        <label class="metcpt-field-label" for="metcpt_events_default_order">
-            Default Event Order
-            <span class="metcpt-field-hint">How events are sorted in the listing</span>
-        </label>
-        <select id="metcpt_events_default_order" name="metcpt_events_default_order">
-            <option value="ASC"  <?php selected( $default_order, 'ASC' ); ?>>
-                ASC — Soonest first
-            </option>
-            <option value="DESC" <?php selected( $default_order, 'DESC' ); ?>>
-                DESC — Latest first
-            </option>
-        </select>
-    </div>
-
-    <div class="metcpt-field-row">
-        <label class="metcpt-field-label">
-            Show Excerpt by Default
-            <span class="metcpt-field-hint">Show post excerpt in the events listing</span>
-        </label>
-        <div class="metcpt-toggle-wrap">
-            <label class="metcpt-toggle">
-                <input type="checkbox" name="metcpt_events_show_excerpt"
-                       value="yes" <?php checked( $show_excerpt, 'yes' ); ?> />
-                <span class="metcpt-toggle-slider"></span>
-            </label>
-            <span class="metcpt-toggle-label">
-                <?php echo $show_excerpt === 'yes' ? 'Enabled' : 'Disabled'; ?>
-            </span>
-        </div>
     </div>
 
     <div class="metcpt-section-title">VIP Roles</div>
@@ -239,9 +170,7 @@ function metcpt_render_events_settings() {
 function metcpt_render_tenders_settings() {
     $tenders_url         = get_option( 'metcpt_tenders_page_url',           '/tenders' );
     $closing_soon_days   = get_option( 'metcpt_closing_soon_days',           7 );
-    $default_address     = get_option( 'metcpt_default_submission_address',  '' );
     $categories_raw      = get_option( 'metcpt_tender_categories',           "Goods\nServices\nConstruction\nConsultancy\nOthers" );
-    $default_fee         = get_option( 'metcpt_default_tender_fee',          '' );
     ?>
 
     <div class="metcpt-section-title">Display</div>
@@ -283,30 +212,6 @@ function metcpt_render_tenders_settings() {
                   name="metcpt_tender_categories"
                   rows="7"
                   placeholder="Goods&#10;Services&#10;Construction&#10;Consultancy&#10;Others"><?php echo esc_textarea( $categories_raw ); ?></textarea>
-    </div>
-
-    <div class="metcpt-section-title">Defaults</div>
-
-    <div class="metcpt-field-row">
-        <label class="metcpt-field-label" for="metcpt_default_tender_fee">
-            Default Tender Fee
-            <span class="metcpt-field-hint">Pre-filled when creating a new tender. Leave blank for no default.</span>
-        </label>
-        <input type="text" id="metcpt_default_tender_fee"
-               name="metcpt_default_tender_fee"
-               value="<?php echo esc_attr( $default_fee ); ?>"
-               placeholder="e.g. RM 50" />
-    </div>
-
-    <div class="metcpt-field-row">
-        <label class="metcpt-field-label" for="metcpt_default_submission_address">
-            Default Submission Address
-            <span class="metcpt-field-hint">Pre-filled in the Submission Address field for every new tender</span>
-        </label>
-        <textarea id="metcpt_default_submission_address"
-                  name="metcpt_default_submission_address"
-                  rows="5"
-                  placeholder="e.g. Procurement Unit, IIUM Holdings Sdn Bhd&#10;Level 3, Muhammad Abdul Rauf Building&#10;Jalan Gombak, 53100 Kuala Lumpur"><?php echo esc_textarea( $default_address ); ?></textarea>
     </div>
 
     <div class="metcpt-section-title">Email Notifications</div>
@@ -676,41 +581,6 @@ function metcpt_render_posts_settings() {
                value="<?php echo esc_attr( $category ); ?>"
                placeholder="e.g. csr or leave blank for all posts" />
     </div>
-
-    <div class="metcpt-section-title">Preview</div>
-
-    <div class="metcpt-preview-box">
-        <p class="metcpt-preview-label">
-            — <span id="hrk-preview-label"><?php echo esc_html( $label ); ?></span>
-        </p>
-        <p class="metcpt-preview-headline">
-            <span id="hrk-preview-headline"><?php echo esc_html( $headline ); ?></span>
-            <em id="hrk-preview-italic"><?php echo esc_html( $headline_italic ); ?></em>
-        </p>
-        <p class="metcpt-preview-links">
-            <span id="hrk-preview-link"><?php echo esc_html( $view_all_text ); ?></span> &rarr;
-        </p>
-    </div>
-
-    <script>
-    (function() {
-        var fields = {
-            'metcpt_news_label':          'hrk-preview-label',
-            'metcpt_news_headline':       'hrk-preview-headline',
-            'metcpt_news_headline_italic':'hrk-preview-italic',
-            'metcpt_news_view_all_text':  'hrk-preview-link',
-        };
-        Object.keys(fields).forEach(function(fieldId) {
-            var input   = document.getElementById(fieldId);
-            var preview = document.getElementById(fields[fieldId]);
-            if ( input && preview ) {
-                input.addEventListener('input', function() {
-                    preview.textContent = this.value;
-                });
-            }
-        });
-    })();
-    </script>
 
     <div class="metcpt-section-title">Available Shortcodes — Reference</div>
 
