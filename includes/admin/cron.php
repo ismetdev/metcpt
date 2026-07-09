@@ -148,7 +148,8 @@ function metcpt_manual_cron_trigger() {
     if ( ! current_user_can( 'manage_options' ) ) {
         return;
     }
-    if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'metcpt_run_cron' ) ) {
+    if ( ! isset( $_GET['_wpnonce'] ) ||
+         ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'metcpt_run_cron' ) ) {
         return;
     }
     metcpt_daily_tender_check();

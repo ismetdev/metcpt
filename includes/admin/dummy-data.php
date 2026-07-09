@@ -488,6 +488,26 @@ function metcpt_seed_dummy_careers() {
     }
 }
 
+// ── Count existing dummy posts ────────────────────────────────────────────────
+// Used to keep seeding idempotent: if dummy content already exists, a second
+// Seed click would otherwise stack another 30 duplicate posts on top.
+function metcpt_dummy_data_count() {
+    $existing = get_posts( array(
+        'post_type'      => array( 'metcpt_event', 'metcpt_tender', 'metcpt_career', 'metcpt_company' ),
+        'post_status'    => 'any',
+        'posts_per_page' => 1,
+        'fields'         => 'ids',
+        'no_found_rows'  => true,
+        'meta_query'     => array(
+            array(
+                'key'   => '_metcpt_dummy',
+                'value' => '1',
+            ),
+        ),
+    ) );
+    return count( $existing );
+}
+
 // ── Clear all dummy data ──────────────────────────────────────────────────────
 function metcpt_clear_dummy_data() {
     global $wpdb;
@@ -524,6 +544,14 @@ function metcpt_ajax_seed_dummy_data() {
 
     if ( ! metcpt_dummy_data_enabled() ) {
         wp_send_json_error( array( 'message' => 'Dummy data is not enabled.' ) );
+    }
+
+    // Idempotency guard — refuse to seed a second time so repeated clicks can't
+    // stack duplicate content. Clear first, then re-seed.
+    if ( metcpt_dummy_data_count() > 0 ) {
+        wp_send_json_error( array(
+            'message' => 'Dummy data already exists. Clear it first before seeding again.',
+        ) );
     }
 
     metcpt_seed_dummy_events();
