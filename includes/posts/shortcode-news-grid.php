@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /* ──────────────────────────────────────────────────────────────────────────
  * Helper: Category Label
  * ────────────────────────────────────────────────────────────────────────── */
-function hrk_get_post_cat_label( $post_id ) {
+function metcpt_get_post_cat_label( $post_id ) {
 
     $cats = get_the_category( $post_id );
 
@@ -29,14 +29,14 @@ function hrk_get_post_cat_label( $post_id ) {
 /* ──────────────────────────────────────────────────────────────────────────
  * Helper: Full Date
  * ────────────────────────────────────────────────────────────────────────── */
-function hrk_get_post_date( $post_id, $format = 'd M Y' ) {
+function metcpt_get_post_date( $post_id, $format = 'd M Y' ) {
     return get_the_date( $format, $post_id );
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
  * Helper: Short Date
  * ────────────────────────────────────────────────────────────────────────── */
-function hrk_get_post_short_date( $post_id ) {
+function metcpt_get_post_short_date( $post_id ) {
     return get_the_date( 'd M', $post_id );
 }
 
@@ -44,16 +44,16 @@ function hrk_get_post_short_date( $post_id ) {
 /* ──────────────────────────────────────────────────────────────────────────
  * News Grid Shortcode
  * ────────────────────────────────────────────────────────────────────────── */
-function haraka_news_grid_shortcode( $atts ) {
+function metcpt_news_grid_shortcode( $atts ) {
 
     $atts = shortcode_atts(
         array(
-            'label'           => get_option( 'haraka_news_label', 'Impact & Activities' ),
-            'headline'        => get_option( 'haraka_news_headline', 'News, milestones, and' ),
-            'headline_italic' => get_option( 'haraka_news_headline_italic', 'community work.' ),
-            'view_all_text'   => get_option( 'haraka_news_view_all_text', 'View newsroom' ),
-            'view_all_url'    => get_option( 'haraka_news_view_all_url', '/newsroom' ),
-            'category'        => get_option( 'haraka_news_category', '' ),
+            'label'           => get_option( 'metcpt_news_label', 'Impact & Activities' ),
+            'headline'        => get_option( 'metcpt_news_headline', 'News, milestones, and' ),
+            'headline_italic' => get_option( 'metcpt_news_headline_italic', 'community work.' ),
+            'view_all_text'   => get_option( 'metcpt_news_view_all_text', 'View newsroom' ),
+            'view_all_url'    => get_option( 'metcpt_news_view_all_url', '/newsroom' ),
+            'category'        => get_option( 'metcpt_news_category', '' ),
             'posts_per_page'  => 4,
             'show_excerpt'    => 'yes',
             'order'           => 'DESC',
@@ -147,8 +147,8 @@ function haraka_news_grid_shortcode( $atts ) {
                     $n_id    = $n_post->ID;
                     $n_title = get_the_title( $n_id );
                     $n_url   = get_permalink( $n_id );
-                    $n_cat   = hrk_get_post_cat_label( $n_id );
-                    $n_date  = hrk_get_post_short_date( $n_id );
+                    $n_cat   = metcpt_get_post_cat_label( $n_id );
+                    $n_date  = metcpt_get_post_short_date( $n_id );
 
                     $n_thumb = has_post_thumbnail( $n_id )
                         ? get_the_post_thumbnail_url( $n_id, 'medium' )
@@ -209,4 +209,4 @@ function haraka_news_grid_shortcode( $atts ) {
     return ob_get_clean();
 }
 
-add_shortcode( 'news_grid', 'haraka_news_grid_shortcode' );
+add_shortcode( 'news_grid', 'metcpt_news_grid_shortcode' );

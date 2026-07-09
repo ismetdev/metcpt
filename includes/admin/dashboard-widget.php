@@ -4,42 +4,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Register the dashboard widget ─────────────────────────────────────────────
-function haraka_register_dashboard_widget() {
+function metcpt_register_dashboard_widget() {
     wp_add_dashboard_widget(
-        'haraka_dashboard_widget',
-        'Haraka — Content Health',
-        'haraka_dashboard_widget_html'
+        'metcpt_dashboard_widget',
+        'MetCPT — Content Health',
+        'metcpt_dashboard_widget_html'
     );
 }
-add_action( 'wp_dashboard_setup', 'haraka_register_dashboard_widget' );
+add_action( 'wp_dashboard_setup', 'metcpt_register_dashboard_widget' );
 
 
-// ── Invalidate cache when any Haraka post is saved or deleted ─────────────────
-function haraka_invalidate_dashboard_cache( $post_id ) {
+// ── Invalidate cache when any MetCPT post is saved or deleted ─────────────────
+function metcpt_invalidate_dashboard_cache( $post_id ) {
     $post_type = get_post_type( $post_id );
-    if ( in_array( $post_type, array( 'hrk_event', 'hrk_tender', 'hrk_career' ), true ) ) {
-        delete_transient( 'haraka_dashboard_counts' );
+    if ( in_array( $post_type, array( 'metcpt_event', 'metcpt_tender', 'metcpt_career' ), true ) ) {
+        delete_transient( 'metcpt_dashboard_counts' );
     }
 }
-add_action( 'save_post',   'haraka_invalidate_dashboard_cache' );
-add_action( 'delete_post', 'haraka_invalidate_dashboard_cache' );
-add_action( 'trash_post',  'haraka_invalidate_dashboard_cache' );
+add_action( 'save_post',   'metcpt_invalidate_dashboard_cache' );
+add_action( 'delete_post', 'metcpt_invalidate_dashboard_cache' );
+add_action( 'trash_post',  'metcpt_invalidate_dashboard_cache' );
 
 
 // ── Compute dashboard counts — cached for 5 minutes ──────────────────────────
-function haraka_get_dashboard_counts() {
+function metcpt_get_dashboard_counts() {
 
-    $cached = get_transient( 'haraka_dashboard_counts' );
+    $cached = get_transient( 'metcpt_dashboard_counts' );
     if ( $cached !== false ) {
         return $cached;
     }
 
     $today     = date( 'Y-m-d' );
-    $threshold = (int) get_option( 'haraka_closing_soon_days', 7 );
+    $threshold = (int) get_option( 'metcpt_closing_soon_days', 7 );
 
     // ── Events ────────────────────────────────────────────────────────────────
     $events_upcoming = new WP_Query( array(
-        'post_type'      => 'hrk_event',
+        'post_type'      => 'metcpt_event',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
         'fields'         => 'ids',
@@ -54,7 +54,7 @@ function haraka_get_dashboard_counts() {
     ) );
 
     $events_past = new WP_Query( array(
-        'post_type'      => 'hrk_event',
+        'post_type'      => 'metcpt_event',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
         'fields'         => 'ids',
@@ -69,7 +69,7 @@ function haraka_get_dashboard_counts() {
     ) );
 
     $events_no_date = new WP_Query( array(
-        'post_type'      => 'hrk_event',
+        'post_type'      => 'metcpt_event',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
         'fields'         => 'ids',
@@ -89,7 +89,7 @@ function haraka_get_dashboard_counts() {
 
     // ── Tenders ───────────────────────────────────────────────────────────────
     $all_tenders = new WP_Query( array(
-        'post_type'      => 'hrk_tender',
+        'post_type'      => 'metcpt_tender',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
         'meta_query'     => array(
@@ -145,7 +145,7 @@ function haraka_get_dashboard_counts() {
     endif;
 
     $count_no_close_date = ( new WP_Query( array(
-        'post_type'      => 'hrk_tender',
+        'post_type'      => 'metcpt_tender',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
         'fields'         => 'ids',
@@ -165,7 +165,7 @@ function haraka_get_dashboard_counts() {
 
     // ── Careers ───────────────────────────────────────────────────────────────
     $all_careers = new WP_Query( array(
-        'post_type'      => 'hrk_career',
+        'post_type'      => 'metcpt_career',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
         'meta_query'     => array(
@@ -213,7 +213,7 @@ function haraka_get_dashboard_counts() {
     endif;
 
     $count_no_career_date = ( new WP_Query( array(
-        'post_type'      => 'hrk_career',
+        'post_type'      => 'metcpt_career',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
         'fields'         => 'ids',
@@ -250,17 +250,17 @@ function haraka_get_dashboard_counts() {
     );
 
     // ── Cache for 5 minutes ───────────────────────────────────────────────────
-    set_transient( 'haraka_dashboard_counts', $counts, 5 * MINUTE_IN_SECONDS );
+    set_transient( 'metcpt_dashboard_counts', $counts, 5 * MINUTE_IN_SECONDS );
 
     return $counts;
 }
 
 
 // ── Widget HTML ───────────────────────────────────────────────────────────────
-function haraka_dashboard_widget_html() {
+function metcpt_dashboard_widget_html() {
 
-    $threshold = (int) get_option( 'haraka_closing_soon_days', 7 );
-    $c         = haraka_get_dashboard_counts();
+    $threshold = (int) get_option( 'metcpt_closing_soon_days', 7 );
+    $c         = metcpt_get_dashboard_counts();
 
     $total_issues = $c['events_no_date']
                   + $c['count_no_ref']
@@ -270,7 +270,7 @@ function haraka_dashboard_widget_html() {
     ?>
 
     <style>
-        #haraka_dashboard_widget .inside { margin:0; padding:0; }
+        #metcpt_dashboard_widget .inside { margin:0; padding:0; }
         .hrk-dw-wrap { font-family:-apple-system,'Segoe UI',sans-serif; font-size:13px; }
         .hrk-dw-section { padding:14px 16px; border-bottom:1px solid #f1f5f9; }
         .hrk-dw-section:last-child { border-bottom:none; }
@@ -405,7 +405,7 @@ function haraka_dashboard_widget_html() {
                     <div>
                         <strong><?php echo esc_html( $c['events_no_date'] ); ?></strong>
                         event<?php echo $c['events_no_date'] > 1 ? 's' : ''; ?> missing an event date
-                        &mdash; <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=hrk_event' ) ); ?>">fix now</a>
+                        &mdash; <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_event' ) ); ?>">fix now</a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -416,7 +416,7 @@ function haraka_dashboard_widget_html() {
                     <div>
                         <strong><?php echo esc_html( $c['count_no_ref'] ); ?></strong>
                         tender<?php echo $c['count_no_ref'] > 1 ? 's' : ''; ?> missing a reference number
-                        &mdash; <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=hrk_tender' ) ); ?>">fix now</a>
+                        &mdash; <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_tender' ) ); ?>">fix now</a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -427,7 +427,7 @@ function haraka_dashboard_widget_html() {
                     <div>
                         <strong><?php echo esc_html( $c['count_no_close_date'] ); ?></strong>
                         tender<?php echo $c['count_no_close_date'] > 1 ? 's' : ''; ?> missing a closing date
-                        &mdash; <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=hrk_tender' ) ); ?>">fix now</a>
+                        &mdash; <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_tender' ) ); ?>">fix now</a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -438,7 +438,7 @@ function haraka_dashboard_widget_html() {
                     <div>
                         <strong><?php echo esc_html( $c['count_no_company'] ); ?></strong>
                         position<?php echo $c['count_no_company'] > 1 ? 's' : ''; ?> missing a company assignment
-                        &mdash; <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=hrk_career' ) ); ?>">fix now</a>
+                        &mdash; <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_career' ) ); ?>">fix now</a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -449,7 +449,7 @@ function haraka_dashboard_widget_html() {
                     <div>
                         <strong><?php echo esc_html( $c['count_no_career_date'] ); ?></strong>
                         position<?php echo $c['count_no_career_date'] > 1 ? 's' : ''; ?> missing a closing date
-                        &mdash; <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=hrk_career' ) ); ?>">fix now</a>
+                        &mdash; <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_career' ) ); ?>">fix now</a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -459,21 +459,21 @@ function haraka_dashboard_widget_html() {
 
         <?php /* ── Footer links ── */ ?>
         <div class="hrk-dw-footer">
-            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=hrk_event' ) ); ?>">Events</a>
+            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_event' ) ); ?>">Events</a>
             <span class="hrk-dw-footer-sep">|</span>
-            <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=hrk_event' ) ); ?>">+ Event</a>
+            <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=metcpt_event' ) ); ?>">+ Event</a>
             <span class="hrk-dw-footer-sep">|</span>
-            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=hrk_tender' ) ); ?>">Tenders</a>
+            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_tender' ) ); ?>">Tenders</a>
             <span class="hrk-dw-footer-sep">|</span>
-            <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=hrk_tender' ) ); ?>">+ Tender</a>
+            <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=metcpt_tender' ) ); ?>">+ Tender</a>
             <span class="hrk-dw-footer-sep">|</span>
-            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=hrk_career' ) ); ?>">Careers</a>
+            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_career' ) ); ?>">Careers</a>
             <span class="hrk-dw-footer-sep">|</span>
-            <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=hrk_career' ) ); ?>">+ Career</a>
+            <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=metcpt_career' ) ); ?>">+ Career</a>
             <span class="hrk-dw-footer-sep">|</span>
-            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=hrk_company' ) ); ?>">Companies</a>
+            <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_company' ) ); ?>">Companies</a>
             <span class="hrk-dw-footer-sep">|</span>
-            <a href="<?php echo esc_url( admin_url( 'admin.php?page=haraka-settings' ) ); ?>">Settings</a>
+            <a href="<?php echo esc_url( admin_url( 'admin.php?page=metcpt-settings' ) ); ?>">Settings</a>
         </div>
 
         <div class="hrk-dw-cache-note">

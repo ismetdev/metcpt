@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Helper: career status from close date ─────────────────────────────────────
-if ( ! function_exists( 'haraka_get_career_status' ) ) {
-    function haraka_get_career_status( $close_date_str ) {
+if ( ! function_exists( 'metcpt_get_career_status' ) ) {
+    function metcpt_get_career_status( $close_date_str ) {
         if ( empty( $close_date_str ) ) {
             return 'open';
         }
@@ -26,8 +26,8 @@ if ( ! function_exists( 'haraka_get_career_status' ) ) {
 }
 
 // ── Helper: format career close date ─────────────────────────────────────────
-if ( ! function_exists( 'haraka_format_career_date' ) ) {
-    function haraka_format_career_date( $close_date_str ) {
+if ( ! function_exists( 'metcpt_format_career_date' ) ) {
+    function metcpt_format_career_date( $close_date_str ) {
         if ( empty( $close_date_str ) ) {
             return 'TBC';
         }
@@ -38,12 +38,12 @@ if ( ! function_exists( 'haraka_format_career_date' ) ) {
 
 
 // ── [careers_list] shortcode ──────────────────────────────────────────────────
-function haraka_careers_list_shortcode( $atts ) {
+function metcpt_careers_list_shortcode( $atts ) {
 
     $atts = shortcode_atts(
         array(
             'filter'         => 'all',   // all | open | closed
-            'company'        => '',      // hrk_company post slug
+            'company'        => '',      // metcpt_company post slug
             'department'     => '',      // e.g. ICT
             'location'       => '',      // partial text match
             'type'           => '',      // Full Time | Part Time | Contract | Internship
@@ -115,7 +115,7 @@ function haraka_careers_list_shortcode( $atts ) {
         $company_post = get_page_by_path(
             sanitize_text_field( $atts['company'] ),
             OBJECT,
-            'hrk_company'
+            'metcpt_company'
         );
         if ( $company_post ) {
             $meta_query[] = array(
@@ -128,7 +128,7 @@ function haraka_careers_list_shortcode( $atts ) {
     }
 
     $query_args = array(
-        'post_type'      => 'hrk_career',
+        'post_type'      => 'metcpt_career',
         'post_status'    => 'publish',
         'posts_per_page' => intval( $atts['posts_per_page'] ),
         'orderby'        => 'meta_value',
@@ -164,8 +164,8 @@ function haraka_careers_list_shortcode( $atts ) {
                 'location'     => get_post_meta( $post_id, 'career_location',    true ),
                 'type'         => get_post_meta( $post_id, 'career_type',        true ),
                 'close_date'   => $close_date,
-                'close_fmt'    => haraka_format_career_date( $close_date ),
-                'status'       => haraka_get_career_status( $close_date ),
+                'close_fmt'    => metcpt_format_career_date( $close_date ),
+                'status'       => metcpt_get_career_status( $close_date ),
             );
         endwhile;
         wp_reset_postdata();
@@ -307,4 +307,4 @@ function haraka_careers_list_shortcode( $atts ) {
     <?php
     return ob_get_clean();
 }
-add_shortcode( 'careers_list', 'haraka_careers_list_shortcode' );
+add_shortcode( 'careers_list', 'metcpt_careers_list_shortcode' );

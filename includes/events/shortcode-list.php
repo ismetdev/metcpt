@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-function haraka_events_list_shortcode( $atts ) {
+function metcpt_events_list_shortcode( $atts ) {
 
     $atts = shortcode_atts(
         array(
@@ -45,9 +45,9 @@ function haraka_events_list_shortcode( $atts ) {
         );
     }
 
-    // ── Base query — always uses hrk_event CPT ────────────────────────────────
+    // ── Base query — always uses metcpt_event CPT ────────────────────────────────
     $query_args = array(
-        'post_type'      => 'hrk_event',
+        'post_type'      => 'metcpt_event',
         'post_status'    => 'publish',
         'posts_per_page' => intval( $atts['posts_per_page'] ),
         'orderby'        => 'meta_value',
@@ -171,4 +171,4 @@ function haraka_events_list_shortcode( $atts ) {
 
     return ob_get_clean();
 }
-add_shortcode( 'events_list', 'haraka_events_list_shortcode' );
+add_shortcode( 'events_list', 'metcpt_events_list_shortcode' );

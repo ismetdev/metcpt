@@ -4,65 +4,65 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Register settings menu ────────────────────────────────────────────────────
-function haraka_admin_menu() {
+function metcpt_admin_menu() {
     add_menu_page(
-        'Haraka Settings',
-        'Haraka Settings',
+        'MetCPT Settings',
+        'MetCPT Settings',
         'manage_options',
-        'haraka-settings',
-        'haraka_settings_page_html',
+        'metcpt-settings',
+        'metcpt_settings_page_html',
         'dashicons-screenoptions',
         8
     );
 }
-add_action( 'admin_menu', 'haraka_admin_menu' );
+add_action( 'admin_menu', 'metcpt_admin_menu' );
 
 
 // ── Register all settings ─────────────────────────────────────────────────────
-function haraka_register_settings() {
+function metcpt_register_settings() {
 
     // ── General ───────────────────────────────────────────────────────────────
-    register_setting( 'haraka_general', 'haraka_accent_colour',       array( 'sanitize_callback' => 'sanitize_hex_color',      'default' => '#0056b3' ) );
-    register_setting( 'haraka_general', 'haraka_organisation_name',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'IIUM Holdings Sdn Bhd' ) );
-    register_setting( 'haraka_general', 'haraka_enable_dummy_data',   array( 'sanitize_callback' => 'absint',                   'default' => 0 ) );
+    register_setting( 'metcpt_general', 'metcpt_accent_colour',       array( 'sanitize_callback' => 'sanitize_hex_color',      'default' => '#0056b3' ) );
+    register_setting( 'metcpt_general', 'metcpt_organisation_name',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'IIUM Holdings Sdn Bhd' ) );
+    register_setting( 'metcpt_general', 'metcpt_enable_dummy_data',   array( 'sanitize_callback' => 'absint',                   'default' => 0 ) );
 
     // ── Events ────────────────────────────────────────────────────────────────
-    register_setting( 'haraka_events', 'haraka_events_archive_url',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => '/events' ) );
-    register_setting( 'haraka_events', 'haraka_events_default_order', array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'ASC' ) );
-    register_setting( 'haraka_events', 'haraka_events_show_excerpt',  array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'yes' ) );
-    register_setting( 'haraka_events', 'haraka_vip_roles',            array( 'sanitize_callback' => 'sanitize_textarea_field',  'default' => "Guest of Honour\nTazkirah\nNotable Attendee\nSpeaker\nMC" ) );
+    register_setting( 'metcpt_events', 'metcpt_events_archive_url',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => '/events' ) );
+    register_setting( 'metcpt_events', 'metcpt_events_default_order', array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'ASC' ) );
+    register_setting( 'metcpt_events', 'metcpt_events_show_excerpt',  array( 'sanitize_callback' => 'sanitize_text_field',      'default' => 'yes' ) );
+    register_setting( 'metcpt_events', 'metcpt_vip_roles',            array( 'sanitize_callback' => 'sanitize_textarea_field',  'default' => "Guest of Honour\nTazkirah\nNotable Attendee\nSpeaker\nMC" ) );
 
     // ── Tenders ───────────────────────────────────────────────────────────────
-    register_setting( 'haraka_tenders', 'haraka_tenders_page_url',             array( 'sanitize_callback' => 'sanitize_text_field',     'default' => '/tenders' ) );
-    register_setting( 'haraka_tenders', 'haraka_closing_soon_days',            array( 'sanitize_callback' => 'absint',                   'default' => 7 ) );
-    register_setting( 'haraka_tenders', 'haraka_default_submission_address',   array( 'sanitize_callback' => 'sanitize_textarea_field',  'default' => '' ) );
-    register_setting( 'haraka_tenders', 'haraka_tender_categories',            array( 'sanitize_callback' => 'sanitize_textarea_field',  'default' => "Goods\nServices\nConstruction\nConsultancy\nOthers" ) );
-    register_setting( 'haraka_tenders', 'haraka_default_tender_fee',           array( 'sanitize_callback' => 'sanitize_text_field',      'default' => '' ) );
-    register_setting( 'haraka_tenders', 'haraka_notify_email', array( 'sanitize_callback' => 'sanitize_email', 'default' => get_option( 'admin_email' ) ) );
-    register_setting( 'haraka_tenders', 'haraka_tenders_template',        array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'a' ) );
-    register_setting( 'haraka_tenders', 'haraka_tenders_b_label',         array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'Tender Opportunities' ) );
-    register_setting( 'haraka_tenders', 'haraka_tenders_b_headline',      array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'Open procurement' ) );
-    register_setting( 'haraka_tenders', 'haraka_tenders_b_headline_italic',array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'across the group.' ) );
-    register_setting( 'haraka_tenders', 'haraka_tenders_b_all_text',      array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'All tenders' ) );
-    register_setting( 'haraka_tenders', 'haraka_tenders_b_view_all_text', array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'View all' ) );
+    register_setting( 'metcpt_tenders', 'metcpt_tenders_page_url',             array( 'sanitize_callback' => 'sanitize_text_field',     'default' => '/tenders' ) );
+    register_setting( 'metcpt_tenders', 'metcpt_closing_soon_days',            array( 'sanitize_callback' => 'absint',                   'default' => 7 ) );
+    register_setting( 'metcpt_tenders', 'metcpt_default_submission_address',   array( 'sanitize_callback' => 'sanitize_textarea_field',  'default' => '' ) );
+    register_setting( 'metcpt_tenders', 'metcpt_tender_categories',            array( 'sanitize_callback' => 'sanitize_textarea_field',  'default' => "Goods\nServices\nConstruction\nConsultancy\nOthers" ) );
+    register_setting( 'metcpt_tenders', 'metcpt_default_tender_fee',           array( 'sanitize_callback' => 'sanitize_text_field',      'default' => '' ) );
+    register_setting( 'metcpt_tenders', 'metcpt_notify_email', array( 'sanitize_callback' => 'sanitize_email', 'default' => get_option( 'admin_email' ) ) );
+    register_setting( 'metcpt_tenders', 'metcpt_tenders_template',        array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'a' ) );
+    register_setting( 'metcpt_tenders', 'metcpt_tenders_b_label',         array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'Tender Opportunities' ) );
+    register_setting( 'metcpt_tenders', 'metcpt_tenders_b_headline',      array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'Open procurement' ) );
+    register_setting( 'metcpt_tenders', 'metcpt_tenders_b_headline_italic',array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'across the group.' ) );
+    register_setting( 'metcpt_tenders', 'metcpt_tenders_b_all_text',      array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'All tenders' ) );
+    register_setting( 'metcpt_tenders', 'metcpt_tenders_b_view_all_text', array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'View all' ) );
 
     // ── Careers ───────────────────────────────────────────────────────────────
-    register_setting( 'haraka_careers', 'haraka_career_departments', array( 'sanitize_callback' => 'sanitize_textarea_field', 'default' => "Finance\nHuman Resource\nICT\nOperations\nProcurement\nLegal\nMarketing\nAdministration" ) );
-    register_setting( 'haraka_careers', 'haraka_careers_page_url',   array( 'sanitize_callback' => 'sanitize_text_field',     'default' => '/careers' ) );
+    register_setting( 'metcpt_careers', 'metcpt_career_departments', array( 'sanitize_callback' => 'sanitize_textarea_field', 'default' => "Finance\nHuman Resource\nICT\nOperations\nProcurement\nLegal\nMarketing\nAdministration" ) );
+    register_setting( 'metcpt_careers', 'metcpt_careers_page_url',   array( 'sanitize_callback' => 'sanitize_text_field',     'default' => '/careers' ) );
 
     // ── Posts Templates ───────────────────────────────────────────────────────
-    register_setting( 'haraka_posts', 'haraka_news_label',         array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'Impact & Activities' ) );
-    register_setting( 'haraka_posts', 'haraka_news_headline',      array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'News, milestones, and' ) );
-    register_setting( 'haraka_posts', 'haraka_news_headline_italic',array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'community work.' ) );
-    register_setting( 'haraka_posts', 'haraka_news_view_all_text', array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'View newsroom' ) );
-    register_setting( 'haraka_posts', 'haraka_news_view_all_url',  array( 'sanitize_callback' => 'sanitize_text_field',  'default' => '/newsroom' ) );
-    register_setting( 'haraka_posts', 'haraka_news_category',      array( 'sanitize_callback' => 'sanitize_text_field',  'default' => '' ) );
+    register_setting( 'metcpt_posts', 'metcpt_news_label',         array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'Impact & Activities' ) );
+    register_setting( 'metcpt_posts', 'metcpt_news_headline',      array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'News, milestones, and' ) );
+    register_setting( 'metcpt_posts', 'metcpt_news_headline_italic',array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'community work.' ) );
+    register_setting( 'metcpt_posts', 'metcpt_news_view_all_text', array( 'sanitize_callback' => 'sanitize_text_field',  'default' => 'View newsroom' ) );
+    register_setting( 'metcpt_posts', 'metcpt_news_view_all_url',  array( 'sanitize_callback' => 'sanitize_text_field',  'default' => '/newsroom' ) );
+    register_setting( 'metcpt_posts', 'metcpt_news_category',      array( 'sanitize_callback' => 'sanitize_text_field',  'default' => '' ) );
 }
-add_action( 'admin_init', 'haraka_register_settings' );
+add_action( 'admin_init', 'metcpt_register_settings' );
 
 
 // ── Settings page HTML ────────────────────────────────────────────────────────
-function haraka_settings_page_html() {
+function metcpt_settings_page_html() {
     if ( ! current_user_can( 'manage_options' ) ) {
         return;
     }
@@ -71,16 +71,16 @@ function haraka_settings_page_html() {
     $is_full_page = in_array( $active_tab, array( 'error-log', 'how-to' ), true );
 
     if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] === 'true' ) {
-        echo '<div class="notice notice-success is-dismissible"><p><strong>Haraka Settings saved successfully.</strong></p></div>';
+        echo '<div class="notice notice-success is-dismissible"><p><strong>MetCPT Settings saved successfully.</strong></p></div>';
     }
 
     if ( $active_tab === 'how-to' ) {
-        echo '<link rel="stylesheet" href="' . esc_url( HARAKA_PLUGIN_URL . 'assets/style-docs.css?v=' . HARAKA_VERSION ) . '">';
+        echo '<link rel="stylesheet" href="' . esc_url( METCPT_URL . 'assets/style-docs.css?v=' . METCPT_VERSION ) . '">';
     }
     ?>
 
     <?php
-    $haraka_tabs = array(
+    $metcpt_tabs = array(
         'general'   => 'General',
         'events'    => 'Events',
         'tenders'   => 'Tenders',
@@ -91,56 +91,56 @@ function haraka_settings_page_html() {
     );
     ?>
 
-    <div class="wrap haraka-settings-wrap">
+    <div class="wrap metcpt-settings-wrap">
 
-        <div class="haraka-settings-header">
-            <div class="haraka-settings-header-inner">
-                <h1 class="haraka-settings-title">
-                    <span class="haraka-logo">H</span>
-                    Haraka
+        <div class="metcpt-settings-header">
+            <div class="metcpt-settings-header-inner">
+                <h1 class="metcpt-settings-title">
+                    <span class="metcpt-logo">H</span>
+                    MetCPT
                 </h1>
-                <p class="haraka-settings-subtitle">
-                    Corporate Content Hub — v<?php echo esc_html( HARAKA_VERSION ); ?>
+                <p class="metcpt-settings-subtitle">
+                    Corporate Content Hub — v<?php echo esc_html( METCPT_VERSION ); ?>
                 </p>
             </div>
         </div>
 
-        <nav class="haraka-tabbar">
-            <?php foreach ( $haraka_tabs as $tab_key => $tab_label ) : ?>
-                <a href="?page=haraka-settings&tab=<?php echo esc_attr( $tab_key ); ?>"
-                   class="haraka-tab <?php echo $active_tab === $tab_key ? 'active' : ''; ?>">
+        <nav class="metcpt-tabbar">
+            <?php foreach ( $metcpt_tabs as $tab_key => $tab_label ) : ?>
+                <a href="?page=metcpt-settings&tab=<?php echo esc_attr( $tab_key ); ?>"
+                   class="metcpt-tab <?php echo $active_tab === $tab_key ? 'active' : ''; ?>">
                     <?php echo esc_html( $tab_label ); ?>
                 </a>
             <?php endforeach; ?>
         </nav>
 
-        <div class="haraka-settings-body <?php echo $is_full_page ? 'haraka-settings-body-full' : ''; ?>">
+        <div class="metcpt-settings-body <?php echo $is_full_page ? 'metcpt-settings-body-full' : ''; ?>">
 
-            <div class="haraka-settings-content <?php echo $is_full_page ? 'haraka-settings-content-wide' : ''; ?>">
+            <div class="metcpt-settings-content <?php echo $is_full_page ? 'metcpt-settings-content-wide' : ''; ?>">
                 <form method="post" action="options.php">
                     <?php
                     if ( $active_tab === 'general' ) {
-                        settings_fields( 'haraka_general' );
-                        haraka_render_general_settings();
+                        settings_fields( 'metcpt_general' );
+                        metcpt_render_general_settings();
                     } elseif ( $active_tab === 'events' ) {
-                        settings_fields( 'haraka_events' );
-                        haraka_render_events_settings();
+                        settings_fields( 'metcpt_events' );
+                        metcpt_render_events_settings();
                     } elseif ( $active_tab === 'tenders' ) {
-                        settings_fields( 'haraka_tenders' );
-                        haraka_render_tenders_settings();
+                        settings_fields( 'metcpt_tenders' );
+                        metcpt_render_tenders_settings();
                     } elseif ( $active_tab === 'careers' ) {
-                        settings_fields( 'haraka_careers' );
-                        haraka_render_careers_settings();
+                        settings_fields( 'metcpt_careers' );
+                        metcpt_render_careers_settings();
                     } elseif ( $active_tab === 'posts' ) {
-                        settings_fields( 'haraka_posts' );
-                        haraka_render_posts_settings();
+                        settings_fields( 'metcpt_posts' );
+                        metcpt_render_posts_settings();
                     } elseif ( $active_tab === 'error-log' ) {
-                        haraka_render_error_log_tab();
+                        metcpt_render_error_log_tab();
                     } elseif ( $active_tab === 'how-to' ) {
-                        haraka_render_docs_tab();
+                        metcpt_render_docs_tab();
                     }
                     if ( ! $is_full_page ) {
-                        submit_button( 'Save Settings', 'primary', 'submit', true, array( 'class' => 'haraka-save-btn' ) );
+                        submit_button( 'Save Settings', 'primary', 'submit', true, array( 'class' => 'metcpt-save-btn' ) );
                     }
                     ?>
                 </form>
@@ -152,9 +152,9 @@ function haraka_settings_page_html() {
 
     <script>
     (function() {
-        var picker = document.getElementById('haraka_accent_colour');
-        var swatch = document.getElementById('haraka-colour-swatch');
-        var value  = document.getElementById('haraka-colour-value');
+        var picker = document.getElementById('metcpt_accent_colour');
+        var swatch = document.getElementById('metcpt-colour-swatch');
+        var value  = document.getElementById('metcpt-colour-value');
         if ( picker && swatch && value ) {
             function update() {
                 swatch.style.background = picker.value;

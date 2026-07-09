@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Helper: career initials ───────────────────────────────────────────────────
-if ( ! function_exists( 'haraka_career_initials' ) ) {
-    function haraka_career_initials( $name ) {
+if ( ! function_exists( 'metcpt_career_initials' ) ) {
+    function metcpt_career_initials( $name ) {
         $words    = explode( ' ', trim( $name ) );
         $initials = '';
         foreach ( $words as $word ) {
@@ -18,24 +18,24 @@ if ( ! function_exists( 'haraka_career_initials' ) ) {
     }
 }
 
-// ── Override single template for hrk_career ───────────────────────────────────
-if ( ! function_exists( 'haraka_career_single_template' ) ) {
-    function haraka_career_single_template( $template ) {
-        if ( is_singular( 'hrk_career' ) ) {
-            if ( ! defined( 'HARAKA_CAREER_TEMPLATE_LOADED' ) ) {
-                define( 'HARAKA_CAREER_TEMPLATE_LOADED', true );
-                return HARAKA_PLUGIN_DIR . 'includes/careers/template-single.php';
+// ── Override single template for metcpt_career ───────────────────────────────────
+if ( ! function_exists( 'metcpt_career_single_template' ) ) {
+    function metcpt_career_single_template( $template ) {
+        if ( is_singular( 'metcpt_career' ) ) {
+            if ( ! defined( 'METCPT_CAREER_TEMPLATE_LOADED' ) ) {
+                define( 'METCPT_CAREER_TEMPLATE_LOADED', true );
+                return METCPT_PATH . 'includes/careers/template-single.php';
             }
         }
         return $template;
     }
-    add_filter( 'single_template', 'haraka_career_single_template' );
+    add_filter( 'single_template', 'metcpt_career_single_template' );
 }
 
 // ── Render single career page ─────────────────────────────────────────────────
-if ( ! function_exists( 'haraka_render_career_single' ) ) {
-    function haraka_render_career_single() {
-        if ( ! is_singular( 'hrk_career' ) ) {
+if ( ! function_exists( 'metcpt_render_career_single' ) ) {
+    function metcpt_render_career_single() {
+        if ( ! is_singular( 'metcpt_career' ) ) {
             return;
         }
 
@@ -75,8 +75,8 @@ if ( ! function_exists( 'haraka_render_career_single' ) ) {
         $display_company = $company_short ? $company_short : $company_name;
 
         // ── Status ────────────────────────────────────────────────────────────
-        $status       = haraka_get_career_status( $close_date );
-        $close_fmt    = haraka_format_career_date( $close_date );
+        $status       = metcpt_get_career_status( $close_date );
+        $close_fmt    = metcpt_format_career_date( $close_date );
         $publish_date = get_the_date( 'd M Y', $post_id );
         $excerpt      = get_the_excerpt( $post_id );
 
@@ -91,7 +91,7 @@ if ( ! function_exists( 'haraka_render_career_single' ) ) {
         }
 
         // ── Archive link ──────────────────────────────────────────────────────
-        $careers_archive = get_option( 'haraka_careers_page_url', '/careers' );
+        $careers_archive = get_option( 'metcpt_careers_page_url', '/careers' );
 
         ?>
         <!DOCTYPE html>
@@ -262,7 +262,7 @@ if ( ! function_exists( 'haraka_render_career_single' ) ) {
                 <div class="hrk-c-section-title">HR Contact &amp; Enquiries</div>
                 <div class="hrk-c-contact-card">
                     <div class="hrk-c-avatar">
-                        <?php echo esc_html( haraka_career_initials( $contact_name ) ); ?>
+                        <?php echo esc_html( metcpt_career_initials( $contact_name ) ); ?>
                     </div>
                     <div>
                         <div class="hrk-c-contact-dept">Human Resource</div>
@@ -301,11 +301,11 @@ if ( ! function_exists( 'haraka_render_career_single' ) ) {
 }
 
 // ── Run renderer when loaded as template ──────────────────────────────────────
-if ( defined( 'HARAKA_CAREER_TEMPLATE_LOADED' ) ) {
+if ( defined( 'METCPT_CAREER_TEMPLATE_LOADED' ) ) {
     global $wp_query;
     if ( $wp_query->have_posts() ) {
         $wp_query->the_post();
-        haraka_render_career_single();
+        metcpt_render_career_single();
         wp_reset_postdata();
     }
 }

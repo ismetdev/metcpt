@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap');
 
 /* ===================================
-   Haraka — Events List [events_list]
+   MetCPT — Events List [events_list]
    =================================== */
 
 .ev-wrap {
@@ -160,7 +160,7 @@
 }
 
 /* ===================================
-   Haraka — Event Single Page
+   MetCPT — Event Single Page
    template-single.php styles
    =================================== */
 
@@ -516,7 +516,7 @@
 }
 
 /* ===================================
-   Haraka — Event Archive Page
+   MetCPT — Event Archive Page
    template-archive.php styles
    =================================== */
 

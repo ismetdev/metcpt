@@ -4,13 +4,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── [careers_preview] shortcode ───────────────────────────────────────────────
-function haraka_careers_preview_shortcode( $atts ) {
+function metcpt_careers_preview_shortcode( $atts ) {
 
     $atts = shortcode_atts(
         array(
             'posts_per_page' => 4,
             'company'        => '',
-            'view_all_url'   => get_option( 'haraka_careers_page_url', '/careers' ),
+            'view_all_url'   => get_option( 'metcpt_careers_page_url', '/careers' ),
         ),
         $atts,
         'careers_preview'
@@ -34,7 +34,7 @@ function haraka_careers_preview_shortcode( $atts ) {
         $company_post = get_page_by_path(
             sanitize_text_field( $atts['company'] ),
             OBJECT,
-            'hrk_company'
+            'metcpt_company'
         );
         if ( $company_post ) {
             $meta_query[] = array(
@@ -47,7 +47,7 @@ function haraka_careers_preview_shortcode( $atts ) {
     }
 
     $query_args = array(
-        'post_type'      => 'hrk_career',
+        'post_type'      => 'metcpt_career',
         'post_status'    => 'publish',
         'posts_per_page' => intval( $atts['posts_per_page'] ),
         'orderby'        => 'meta_value',
@@ -89,8 +89,8 @@ function haraka_careers_preview_shortcode( $atts ) {
                 $close_date = get_post_meta( $post_id, 'career_close_date', true );
                 $department = get_post_meta( $post_id, 'career_department',  true );
                 $type       = get_post_meta( $post_id, 'career_type',        true );
-                $status     = haraka_get_career_status( $close_date );
-                $close_fmt  = haraka_format_career_date( $close_date );
+                $status     = metcpt_get_career_status( $close_date );
+                $close_fmt  = metcpt_format_career_date( $close_date );
 
                 // Resolve company name
                 $company_name = '';
@@ -145,4 +145,4 @@ function haraka_careers_preview_shortcode( $atts ) {
     <?php
     return ob_get_clean();
 }
-add_shortcode( 'careers_preview', 'haraka_careers_preview_shortcode' );
+add_shortcode( 'careers_preview', 'metcpt_careers_preview_shortcode' );

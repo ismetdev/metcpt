@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Template B: Full list renderer ────────────────────────────────────────────
-if ( ! function_exists( 'haraka_tenders_render_template_b_list' ) ) {
-    function haraka_tenders_render_template_b_list( $atts ) {
+if ( ! function_exists( 'metcpt_tenders_render_template_b_list' ) ) {
+    function metcpt_tenders_render_template_b_list( $atts ) {
 
         $today  = date( 'Y-m-d' );
         $filter = sanitize_text_field( $atts['filter'] );
@@ -35,9 +35,9 @@ if ( ! function_exists( 'haraka_tenders_render_template_b_list' ) ) {
             );
         }
 
-        // ── Always query hrk_tender CPT ───────────────────────────────────────
+        // ── Always query metcpt_tender CPT ───────────────────────────────────────
         $query_args = array(
-            'post_type'      => 'hrk_tender',
+            'post_type'      => 'metcpt_tender',
             'post_status'    => 'publish',
             'posts_per_page' => intval( $atts['posts_per_page'] ),
             'orderby'        => 'meta_value',
@@ -80,20 +80,20 @@ if ( ! function_exists( 'haraka_tenders_render_template_b_list' ) ) {
                     'ref'       => get_post_meta( $post_id, 'tender_ref',          true ),
                     'doc_url'   => get_post_meta( $post_id, 'tender_document_url', true ),
                     'close_date'=> $close_date,
-                    'close_fmt' => haraka_format_tender_date( $close_date ),
-                    'status'    => haraka_get_tender_status( $close_date ),
+                    'close_fmt' => metcpt_format_tender_date( $close_date ),
+                    'status'    => metcpt_get_tender_status( $close_date ),
                 );
             endwhile;
             wp_reset_postdata();
         endif;
 
         // ── Pull settings ─────────────────────────────────────────────────────
-        $label           = ! empty( $atts['label'] )           ? $atts['label']           : get_option( 'haraka_tenders_b_label',           'Tender Opportunities' );
-        $headline        = ! empty( $atts['headline'] )        ? $atts['headline']        : get_option( 'haraka_tenders_b_headline',        'Open procurement' );
-        $headline_italic = ! empty( $atts['headline_italic'] ) ? $atts['headline_italic'] : get_option( 'haraka_tenders_b_headline_italic', 'across the group.' );
-        $all_text        = ! empty( $atts['view_all_text'] )   ? $atts['view_all_text']   : get_option( 'haraka_tenders_b_all_text',        'All tenders' );
-        $view_all_text   = get_option( 'haraka_tenders_b_view_all_text', 'View all' );
-        $view_all_url    = get_option( 'haraka_tenders_page_url', home_url( '/tenders' ) );
+        $label           = ! empty( $atts['label'] )           ? $atts['label']           : get_option( 'metcpt_tenders_b_label',           'Tender Opportunities' );
+        $headline        = ! empty( $atts['headline'] )        ? $atts['headline']        : get_option( 'metcpt_tenders_b_headline',        'Open procurement' );
+        $headline_italic = ! empty( $atts['headline_italic'] ) ? $atts['headline_italic'] : get_option( 'metcpt_tenders_b_headline_italic', 'across the group.' );
+        $all_text        = ! empty( $atts['view_all_text'] )   ? $atts['view_all_text']   : get_option( 'metcpt_tenders_b_all_text',        'All tenders' );
+        $view_all_text   = get_option( 'metcpt_tenders_b_view_all_text', 'View all' );
+        $view_all_url    = get_option( 'metcpt_tenders_page_url', home_url( '/tenders' ) );
 
         $uid = 'tdb-' . uniqid();
 
@@ -229,14 +229,14 @@ if ( ! function_exists( 'haraka_tenders_render_template_b_list' ) ) {
 
 
 // ── Template B: Preview strip renderer ───────────────────────────────────────
-if ( ! function_exists( 'haraka_tenders_render_template_b_preview' ) ) {
-    function haraka_tenders_render_template_b_preview( $atts ) {
+if ( ! function_exists( 'metcpt_tenders_render_template_b_preview' ) ) {
+    function metcpt_tenders_render_template_b_preview( $atts ) {
 
         $today = date( 'Y-m-d' );
 
-        // ── Always query hrk_tender CPT ───────────────────────────────────────
+        // ── Always query metcpt_tender CPT ───────────────────────────────────────
         $query_args = array(
-            'post_type'      => 'hrk_tender',
+            'post_type'      => 'metcpt_tender',
             'post_status'    => 'publish',
             'posts_per_page' => intval( $atts['posts_per_page'] ),
             'orderby'        => 'meta_value',
@@ -253,12 +253,12 @@ if ( ! function_exists( 'haraka_tenders_render_template_b_preview' ) ) {
         );
 
         $query           = new WP_Query( $query_args );
-        $label           = get_option( 'haraka_tenders_b_label',           'Tender Opportunities' );
-        $headline        = get_option( 'haraka_tenders_b_headline',        'Open procurement' );
-        $headline_italic = get_option( 'haraka_tenders_b_headline_italic', 'across the group.' );
-        $all_text        = get_option( 'haraka_tenders_b_all_text',        'All tenders' );
-        $view_all_text   = get_option( 'haraka_tenders_b_view_all_text',   'View all' );
-        $view_all_url    = get_option( 'haraka_tenders_page_url',          home_url( '/tenders' ) );
+        $label           = get_option( 'metcpt_tenders_b_label',           'Tender Opportunities' );
+        $headline        = get_option( 'metcpt_tenders_b_headline',        'Open procurement' );
+        $headline_italic = get_option( 'metcpt_tenders_b_headline_italic', 'across the group.' );
+        $all_text        = get_option( 'metcpt_tenders_b_all_text',        'All tenders' );
+        $view_all_text   = get_option( 'metcpt_tenders_b_view_all_text',   'View all' );
+        $view_all_url    = get_option( 'metcpt_tenders_page_url',          home_url( '/tenders' ) );
         $total           = $query->post_count;
         $uid             = 'tbp-' . uniqid();
 
@@ -312,8 +312,8 @@ if ( ! function_exists( 'haraka_tenders_render_template_b_preview' ) ) {
                             $post_id    = get_the_ID();
                             $close_date = get_post_meta( $post_id, 'tender_close_date', true );
                             $ref        = get_post_meta( $post_id, 'tender_ref',        true );
-                            $status     = haraka_get_tender_status( $close_date );
-                            $close_fmt  = haraka_format_tender_date( $close_date );
+                            $status     = metcpt_get_tender_status( $close_date );
+                            $close_fmt  = metcpt_format_tender_date( $close_date );
                             ?>
                             <div class="hrk-tb-row">
                                 <span class="hrk-tb-ref">

@@ -4,18 +4,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Haraka — How To / Documentation Page
+ * MetCPT — How To / Documentation Page
  *
- * Renders the How To tab inside Haraka Settings.
+ * Renders the How To tab inside MetCPT Settings.
  * Covers all shortcodes with parameters, code examples,
  * and frontend preview mockups.
  *
- * @package Haraka
+ * @package MetCPT
  * @subpackage Admin
  * @version 1.0.4
  */
 
-function haraka_render_docs_tab() {
+function metcpt_render_docs_tab() {
     ?>
 
     <div class="hrk-docs-wrap">
@@ -58,7 +58,7 @@ function haraka_render_docs_tab() {
                 <div class="hrk-docs-section-eyebrow">Introduction</div>
                 <h2 class="hrk-docs-section-title">Getting Started</h2>
                 <p class="hrk-docs-section-desc">
-                    Haraka is a corporate content management plugin for WordPress. It manages
+                    MetCPT is a corporate content management plugin for WordPress. It manages
                     Events, Tenders, Careers, and News across your organisation using simple shortcodes
                     that you place on any page.
                 </p>
@@ -82,7 +82,7 @@ function haraka_render_docs_tab() {
                         <div class="hrk-docs-step-num">3</div>
                         <div>
                             <div class="hrk-docs-step-title">Configure settings</div>
-                            <div class="hrk-docs-step-desc">Go to Haraka Settings and fill in the page URLs, notification email, and content defaults for each module.</div>
+                            <div class="hrk-docs-step-desc">Go to MetCPT Settings and fill in the page URLs, notification email, and content defaults for each module.</div>
                         </div>
                     </div>
                     <div class="hrk-docs-step">
@@ -227,7 +227,7 @@ function haraka_render_docs_tab() {
                 <p class="hrk-docs-section-desc">
                     Displays all tenders in a full listing. Supports two templates — Template A
                     (searchable table with filter tabs) and Template B (editorial layout with Open/Closed tabs).
-                    The template is selected globally in Haraka Settings → Tenders.
+                    The template is selected globally in MetCPT Settings → Tenders.
                 </p>
 
                 <div class="hrk-docs-callout hrk-docs-callout-info">
@@ -901,7 +901,7 @@ function haraka_render_docs_tab() {
                 <div class="hrk-docs-section-eyebrow">Reference</div>
                 <h2 class="hrk-docs-section-title">Settings vs Shortcode Parameters</h2>
                 <p class="hrk-docs-section-desc">
-                    Haraka Settings act as site-wide defaults. Shortcode parameters override those defaults
+                    MetCPT Settings act as site-wide defaults. Shortcode parameters override those defaults
                     for that specific instance only.
                 </p>
 
@@ -917,7 +917,7 @@ function haraka_render_docs_tab() {
 
                 <div class="hrk-docs-callout hrk-docs-callout-warning">
                     <span class="hrk-docs-callout-icon">⚠</span>
-                    <div>An empty shortcode parameter falls back to the Settings default. For example <code>[news_grid category=""]</code> is the same as <code>[news_grid]</code> — both use whatever category is set in Haraka Settings → Posts.</div>
+                    <div>An empty shortcode parameter falls back to the Settings default. For example <code>[news_grid category=""]</code> is the same as <code>[news_grid]</code> — both use whatever category is set in MetCPT Settings → Posts.</div>
                 </div>
             </div>
 

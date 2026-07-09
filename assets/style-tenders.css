@@ -1,5 +1,5 @@
 /* ===================================
-   Haraka — Tenders Full Table
+   MetCPT — Tenders Full Table
    =================================== */
 
 .tdl-wrap {
@@ -192,7 +192,7 @@
 }
 
 /* ===================================
-   Haraka — Tenders Preview Strip
+   MetCPT — Tenders Preview Strip
    =================================== */
 
 .tdp-wrap {
@@ -314,7 +314,7 @@
 }
 
 /* ===================================
-   Haraka — Tender Single Page
+   MetCPT — Tender Single Page
    =================================== */
 
 body .hrk-tender-page {
@@ -571,7 +571,7 @@ body .hrk-t-contact-link:hover { text-decoration: underline; }
 }
 
 /* ===================================
-   Haraka — Tenders Template B
+   MetCPT — Tenders Template B
    Editorial Layout [tenders_list] + [tenders_preview]
    =================================== */
 
@@ -884,7 +884,7 @@ body .hrk-t-contact-link:hover { text-decoration: underline; }
 }
 
 /* ===================================
-   Haraka — Tender Single Page
+   MetCPT — Tender Single Page
    template-single.php styles
    =================================== */
 
@@ -1146,7 +1146,7 @@ body .hrk-t-contact-link:hover { text-decoration: underline; }
 }
 
 /* ===================================
-   Haraka — Tender Archive Page
+   MetCPT — Tender Archive Page
    template-archive.php styles
    =================================== */
 

@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Helper: get initials from name ────────────────────────────────────────────
-if ( ! function_exists( 'haraka_get_initials' ) ) {
-    function haraka_get_initials( $name ) {
+if ( ! function_exists( 'metcpt_get_initials' ) ) {
+    function metcpt_get_initials( $name ) {
         $words    = explode( ' ', trim( $name ) );
         $initials = '';
         foreach ( $words as $word ) {
@@ -19,8 +19,8 @@ if ( ! function_exists( 'haraka_get_initials' ) ) {
 }
 
 // ── Helper: VIP role badge class ──────────────────────────────────────────────
-if ( ! function_exists( 'haraka_vip_role_class' ) ) {
-    function haraka_vip_role_class( $role ) {
+if ( ! function_exists( 'metcpt_vip_role_class' ) ) {
+    function metcpt_vip_role_class( $role ) {
         $map = array(
             'Guest of Honour'  => 'hrk-vip-goh',
             'Tazkirah'         => 'hrk-vip-tazkirah',
@@ -32,24 +32,24 @@ if ( ! function_exists( 'haraka_vip_role_class' ) ) {
     }
 }
 
-// ── Override single template for hrk_event ───────────────────────────────────
-if ( ! function_exists( 'haraka_event_single_template' ) ) {
-    function haraka_event_single_template( $template ) {
-        if ( is_singular( 'hrk_event' ) ) {
-            if ( ! defined( 'HARAKA_EVENT_TEMPLATE_LOADED' ) ) {
-                define( 'HARAKA_EVENT_TEMPLATE_LOADED', true );
-                return HARAKA_PLUGIN_DIR . 'includes/events/template-single.php';
+// ── Override single template for metcpt_event ───────────────────────────────────
+if ( ! function_exists( 'metcpt_event_single_template' ) ) {
+    function metcpt_event_single_template( $template ) {
+        if ( is_singular( 'metcpt_event' ) ) {
+            if ( ! defined( 'METCPT_EVENT_TEMPLATE_LOADED' ) ) {
+                define( 'METCPT_EVENT_TEMPLATE_LOADED', true );
+                return METCPT_PATH . 'includes/events/template-single.php';
             }
         }
         return $template;
     }
-    add_filter( 'single_template', 'haraka_event_single_template' );
+    add_filter( 'single_template', 'metcpt_event_single_template' );
 }
 
 // ── Render the single event page ──────────────────────────────────────────────
-if ( ! function_exists( 'haraka_render_event_single' ) ) {
-    function haraka_render_event_single() {
-        if ( ! is_singular( 'hrk_event' ) ) {
+if ( ! function_exists( 'metcpt_render_event_single' ) ) {
+    function metcpt_render_event_single() {
+        if ( ! is_singular( 'metcpt_event' ) ) {
             return;
         }
 
@@ -131,10 +131,10 @@ if ( ! function_exists( 'haraka_render_event_single' ) ) {
             : '';
 
         // ── Back link ─────────────────────────────────────────────────────────
-        // Points at the configured Events page (set in Haraka Settings), matching
+        // Points at the configured Events page (set in MetCPT Settings), matching
         // how Tenders and Careers resolve their back links. The CPT archive is
         // disabled (has_archive => false) so the page owns the /events/ URL.
-        $events_archive = get_option( 'haraka_events_archive_url', '/events' );
+        $events_archive = get_option( 'metcpt_events_archive_url', '/events' );
 
         ?>
         <!DOCTYPE html>
@@ -212,7 +212,7 @@ if ( ! function_exists( 'haraka_render_event_single' ) ) {
                     <?php if ( empty( $vip['name'] ) ) continue; ?>
                     <div class="hrk-vip-row">
                         <div class="hrk-avatar">
-                            <?php echo esc_html( haraka_get_initials( $vip['name'] ) ); ?>
+                            <?php echo esc_html( metcpt_get_initials( $vip['name'] ) ); ?>
                         </div>
                         <div>
                             <div class="hrk-vip-name"><?php echo esc_html( $vip['name'] ); ?></div>
@@ -221,7 +221,7 @@ if ( ! function_exists( 'haraka_render_event_single' ) ) {
                             <?php endif; ?>
                         </div>
                         <?php if ( ! empty( $vip['role'] ) ) : ?>
-                            <span class="hrk-vip-tag <?php echo esc_attr( haraka_vip_role_class( $vip['role'] ) ); ?>">
+                            <span class="hrk-vip-tag <?php echo esc_attr( metcpt_vip_role_class( $vip['role'] ) ); ?>">
                                 <?php echo esc_html( $vip['role'] ); ?>
                             </span>
                         <?php endif; ?>
@@ -341,7 +341,7 @@ if ( ! function_exists( 'haraka_render_event_single' ) ) {
                 <div class="hrk-section-title">Contact &amp; Secretariat</div>
                 <div class="hrk-contact-card">
                     <div class="hrk-avatar" style="width:50px;height:50px;font-size:15px;flex-shrink:0;">
-                        <?php echo esc_html( haraka_get_initials( $event_contact_name ) ); ?>
+                        <?php echo esc_html( metcpt_get_initials( $event_contact_name ) ); ?>
                     </div>
                     <div>
                         <?php if ( ! empty( $event_contact_dept ) ) : ?>
@@ -379,11 +379,11 @@ if ( ! function_exists( 'haraka_render_event_single' ) ) {
 }
 
 // ── Run the renderer when this file is loaded as the template ─────────────────
-if ( defined( 'HARAKA_EVENT_TEMPLATE_LOADED' ) ) {
+if ( defined( 'METCPT_EVENT_TEMPLATE_LOADED' ) ) {
     global $wp_query;
     if ( $wp_query->have_posts() ) {
         $wp_query->the_post();
-        haraka_render_event_single();
+        metcpt_render_event_single();
         wp_reset_postdata();
     }
 }

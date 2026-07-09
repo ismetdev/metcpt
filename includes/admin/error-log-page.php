@@ -4,30 +4,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Haraka Error Log — Admin Dashboard UI
+ * MetCPT Error Log — Admin Dashboard UI
  *
- * Renders the Error Log tab inside Haraka Settings.
+ * Renders the Error Log tab inside MetCPT Settings.
  * Includes summary cards, 7-day trend chart, level
  * distribution, filterable log table, detail modal,
  * Mark Resolved, and Copy for Claude.
  *
- * @package Haraka
+ * @package MetCPT
  * @subpackage Admin
  * @version 1.0.4
  */
 
 // ── Fetch all logs (unfiltered) for stats ─────────────────────────────────────
-function haraka_error_log_get_all_stats() {
+function metcpt_error_log_get_all_stats() {
     global $wpdb;
-    $table = haraka_error_log_table();
+    $table = metcpt_error_log_table();
     return $wpdb->get_results( "SELECT level, resolved, created_at FROM {$table} ORDER BY created_at DESC", ARRAY_A );
 }
 
 // ── Fetch filtered logs for table ─────────────────────────────────────────────
-function haraka_error_log_get_entries( $filters = array() ) {
+function metcpt_error_log_get_entries( $filters = array() ) {
     global $wpdb;
 
-    $table  = haraka_error_log_table();
+    $table  = metcpt_error_log_table();
     $where  = array( '1=1' );
     $values = array();
 
@@ -52,18 +52,18 @@ function haraka_error_log_get_entries( $filters = array() ) {
 }
 
 // ── Render the Error Log tab ──────────────────────────────────────────────────
-function haraka_render_error_log_tab() {
+function metcpt_render_error_log_tab() {
 
     $filter_level    = isset( $_GET['log_level'] )    ? sanitize_text_field( $_GET['log_level'] )    : 'all';
     $filter_resolved = isset( $_GET['log_resolved'] ) ? sanitize_text_field( $_GET['log_resolved'] ) : '0';
 
-    $all_stats = haraka_error_log_get_all_stats();
-    $entries   = haraka_error_log_get_entries( array(
+    $all_stats = metcpt_error_log_get_all_stats();
+    $entries   = metcpt_error_log_get_entries( array(
         'level'    => $filter_level,
         'resolved' => $filter_resolved === 'all' ? 'all' : (int) $filter_resolved,
     ) );
 
-    $nonce = wp_create_nonce( 'haraka_error_log' );
+    $nonce = wp_create_nonce( 'metcpt_error_log' );
 
     // ── Compute summary stats ─────────────────────────────────────────────────
     $stat_total      = 0;
@@ -336,7 +336,7 @@ function haraka_render_error_log_tab() {
                     <div class="hrk-eld-empty-icon">✓</div>
                     <p class="hrk-eld-empty-title">No log entries found</p>
                     <p class="hrk-eld-empty-desc">
-                        Haraka will capture errors, warnings, exceptions, and fatal errors
+                        MetCPT will capture errors, warnings, exceptions, and fatal errors
                         from its own files and display them here.
                     </p>
                 </div>
@@ -475,7 +475,7 @@ function haraka_render_error_log_tab() {
             var id    = btn.getAttribute('data-id');
             var nonce = btn.getAttribute('data-nonce');
             openModal();
-            fetch(ajaxUrl + '?action=haraka_get_log_entry&id=' + id + '&nonce=' + nonce)
+            fetch(ajaxUrl + '?action=metcpt_get_log_entry&id=' + id + '&nonce=' + nonce)
                 .then(function(r) { return r.json(); })
                 .then(function(data) {
                     if (!data.success) { modalBody.innerHTML = '<p style="color:#dc2626;padding:20px;">Failed to load.</p>'; return; }
@@ -532,7 +532,7 @@ function haraka_render_error_log_tab() {
             btn.disabled = true;
             btn.textContent = '…';
             var body = new FormData();
-            body.append('action', 'haraka_resolve_log');
+            body.append('action', 'metcpt_resolve_log');
             body.append('nonce',  nonce);
             body.append('id',     id);
             fetch(ajaxUrl, { method: 'POST', body: body })
@@ -579,7 +579,7 @@ function haraka_render_error_log_tab() {
             }).join('\n');
 
             var prompt = [
-                '## Haraka Plugin Error Report',
+                '## MetCPT Plugin Error Report',
                 '',
                 '**Level:** '    + level.toUpperCase(),
                 '**Message:** '  + message,
@@ -627,7 +627,7 @@ function haraka_render_error_log_tab() {
                 clearBtn.disabled = true;
                 clearBtn.textContent = 'Clearing…';
                 var body = new FormData();
-                body.append('action', 'haraka_clear_resolved');
+                body.append('action', 'metcpt_clear_resolved');
                 body.append('nonce',  nonce);
                 fetch(ajaxUrl, { method: 'POST', body: body })
                     .then(function(r) { return r.json(); })

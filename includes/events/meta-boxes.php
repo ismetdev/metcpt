@@ -4,22 +4,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Register the Events meta box ──────────────────────────────────────────────
-function haraka_events_add_meta_boxes() {
+function metcpt_events_add_meta_boxes() {
     add_meta_box(
-        'haraka_event_details',
+        'metcpt_event_details',
         'Event Details',
-        'haraka_event_meta_box_html',
-        'hrk_event',
+        'metcpt_event_meta_box_html',
+        'metcpt_event',
         'normal',
         'high'
     );
 }
-add_action( 'add_meta_boxes', 'haraka_events_add_meta_boxes' );
+add_action( 'add_meta_boxes', 'metcpt_events_add_meta_boxes' );
 
 
 // ── Meta box HTML — all 8 sections ────────────────────────────────────────────
-function haraka_event_meta_box_html( $post ) {
-    wp_nonce_field( 'haraka_event_meta_save', 'haraka_event_nonce' );
+function metcpt_event_meta_box_html( $post ) {
+    wp_nonce_field( 'metcpt_event_meta_save', 'metcpt_event_nonce' );
 
     $event_date          = get_post_meta( $post->ID, 'event_date',          true );
     $event_time          = get_post_meta( $post->ID, 'event_time',          true );
@@ -90,64 +90,64 @@ function haraka_event_meta_box_html( $post ) {
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_date">
+            <label for="metcpt_event_date">
                 Event Date <span class="hrk-required">*</span>
                 <span class="hrk-hint">When does this event take place?</span>
             </label>
-            <input type="date" id="haraka_event_date" name="haraka_event_date"
+            <input type="date" id="metcpt_event_date" name="metcpt_event_date"
                    value="<?php echo esc_attr( $event_date ); ?>" />
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_time">
+            <label for="metcpt_event_time">
                 Event Time
                 <span class="hrk-hint">e.g. 9:00 AM - 5:00 PM</span>
             </label>
-            <input type="text" id="haraka_event_time" name="haraka_event_time"
+            <input type="text" id="metcpt_event_time" name="metcpt_event_time"
                    value="<?php echo esc_attr( $event_time ); ?>"
                    placeholder="e.g. 9:00 AM - 5:00 PM" />
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_venue">
+            <label for="metcpt_event_venue">
                 Venue / Location
                 <span class="hrk-hint">e.g. Dewan Besar, IIUM Gombak</span>
             </label>
-            <input type="text" id="haraka_event_venue" name="haraka_event_venue"
+            <input type="text" id="metcpt_event_venue" name="metcpt_event_venue"
                    value="<?php echo esc_attr( $event_venue ); ?>"
                    placeholder="e.g. Dewan Besar, IIUM Gombak" />
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_organiser">
+            <label for="metcpt_event_organiser">
                 Organiser
                 <span class="hrk-hint">e.g. IIUM Holdings Sdn Bhd</span>
             </label>
-            <input type="text" id="haraka_event_organiser" name="haraka_event_organiser"
+            <input type="text" id="metcpt_event_organiser" name="metcpt_event_organiser"
                    value="<?php echo esc_attr( $event_organiser ); ?>"
                    placeholder="e.g. IIUM Holdings Sdn Bhd" />
         </div>
 
         <div class="hrk-meta-section-title">Section 2 — VIPs &amp; Key Figures</div>
 
-        <div id="haraka-vips-wrap">
+        <div id="metcpt-vips-wrap">
             <?php foreach ( $vips as $i => $vip ) : ?>
             <div class="hrk-repeatable-row" data-type="vip">
                 <div class="hrk-repeatable-fields">
                     <input type="text"
-                           name="haraka_vips[<?php echo $i; ?>][name]"
+                           name="metcpt_vips[<?php echo $i; ?>][name]"
                            value="<?php echo esc_attr( $vip['name'] ); ?>"
                            placeholder="Full name (e.g. YBhg. Dato Dr. Ahmad)" />
                     <input type="text"
-                           name="haraka_vips[<?php echo $i; ?>][title]"
+                           name="metcpt_vips[<?php echo $i; ?>][title]"
                            value="<?php echo esc_attr( $vip['title'] ); ?>"
                            placeholder="Title / Position (e.g. Chairman, IIUM Holdings)" />
                     <?php
-                        $vip_roles_raw = get_option( 'haraka_vip_roles', "Guest of Honour\nTazkirah\nNotable Attendee\nSpeaker\nMC" );
+                        $vip_roles_raw = get_option( 'metcpt_vip_roles', "Guest of Honour\nTazkirah\nNotable Attendee\nSpeaker\nMC" );
                         $vip_roles     = array_filter( array_map( 'trim', explode( "\n", $vip_roles_raw ) ) );
                         ?>
 
-                        <select name="haraka_vips[<?php echo $i; ?>][role]">
+                        <select name="metcpt_vips[<?php echo $i; ?>][role]">
                             <option value="">-- Select Role --</option>
                             <?php foreach ( $vip_roles as $role ) : ?>
                                 <option value="<?php echo esc_attr( $role ); ?>" <?php selected( $vip['role'], $role ); ?>>
@@ -161,7 +161,7 @@ function haraka_event_meta_box_html( $post ) {
             <?php endforeach; ?>
         </div>
         <button type="button" class="hrk-add-row button"
-                data-target="haraka-vips-wrap" data-type="vip">
+                data-target="metcpt-vips-wrap" data-type="vip">
             + Add VIP / Key Figure
         </button>
 
@@ -174,20 +174,20 @@ function haraka_event_meta_box_html( $post ) {
             <span></span>
         </div>
 
-        <div id="haraka-itinerary-wrap">
+        <div id="metcpt-itinerary-wrap">
             <?php foreach ( $itinerary as $i => $item ) : ?>
             <div class="hrk-repeatable-row hrk-itinerary-row" data-type="itinerary">
                 <div class="hrk-repeatable-fields hrk-itinerary-fields">
                     <input type="text"
-                           name="haraka_itinerary[<?php echo $i; ?>][time]"
+                           name="metcpt_itinerary[<?php echo $i; ?>][time]"
                            value="<?php echo esc_attr( $item['time'] ); ?>"
                            placeholder="e.g. 9:00 AM" />
                     <input type="text"
-                           name="haraka_itinerary[<?php echo $i; ?>][activity]"
+                           name="metcpt_itinerary[<?php echo $i; ?>][activity]"
                            value="<?php echo esc_attr( $item['activity'] ); ?>"
                            placeholder="e.g. Arrival and Registration" />
                     <input type="text"
-                           name="haraka_itinerary[<?php echo $i; ?>][pic]"
+                           name="metcpt_itinerary[<?php echo $i; ?>][pic]"
                            value="<?php echo esc_attr( $item['pic'] ); ?>"
                            placeholder="e.g. Protocol Unit" />
                 </div>
@@ -196,53 +196,53 @@ function haraka_event_meta_box_html( $post ) {
             <?php endforeach; ?>
         </div>
         <button type="button" class="hrk-add-row button"
-                data-target="haraka-itinerary-wrap" data-type="itinerary">
+                data-target="metcpt-itinerary-wrap" data-type="itinerary">
             + Add Itinerary Row
         </button>
 
         <div class="hrk-meta-section-title">Section 4 — Attendance &amp; Capacity</div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_audience">
+            <label for="metcpt_event_audience">
                 Who Should Attend
                 <span class="hrk-hint">e.g. All IIUM Holdings staff and subsidiary representatives</span>
             </label>
-            <input type="text" id="haraka_event_audience" name="haraka_event_audience"
+            <input type="text" id="metcpt_event_audience" name="metcpt_event_audience"
                    value="<?php echo esc_attr( $event_audience ); ?>"
                    placeholder="e.g. All staff and invited shareholders" />
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_capacity">
+            <label for="metcpt_event_capacity">
                 Capacity
                 <span class="hrk-hint">e.g. 300 pax</span>
             </label>
-            <input type="text" id="haraka_event_capacity" name="haraka_event_capacity"
+            <input type="text" id="metcpt_event_capacity" name="metcpt_event_capacity"
                    value="<?php echo esc_attr( $event_capacity ); ?>"
                    placeholder="e.g. 300 pax" />
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_rsvp_url">
+            <label for="metcpt_event_rsvp_url">
                 RSVP / Registration Link
                 <span class="hrk-hint">Paste the URL to your RSVP form or Google Form</span>
             </label>
-            <input type="url" id="haraka_event_rsvp_url" name="haraka_event_rsvp_url"
+            <input type="url" id="metcpt_event_rsvp_url" name="metcpt_event_rsvp_url"
                    value="<?php echo esc_attr( $event_rsvp_url ); ?>"
                    placeholder="https://forms.google.com/..." />
         </div>
 
         <div class="hrk-meta-section-title">Section 5 — Frequently Asked Questions</div>
 
-        <div id="haraka-faqs-wrap">
+        <div id="metcpt-faqs-wrap">
             <?php foreach ( $faqs as $i => $faq ) : ?>
             <div class="hrk-repeatable-row hrk-faq-row" data-type="faq">
                 <div class="hrk-repeatable-fields hrk-faq-fields">
                     <input type="text"
-                           name="haraka_faqs[<?php echo $i; ?>][question]"
+                           name="metcpt_faqs[<?php echo $i; ?>][question]"
                            value="<?php echo esc_attr( $faq['question'] ); ?>"
                            placeholder="e.g. Is parking available?" />
-                    <textarea name="haraka_faqs[<?php echo $i; ?>][answer]"
+                    <textarea name="metcpt_faqs[<?php echo $i; ?>][answer]"
                               placeholder="e.g. Yes. Staff may park at Car Park B..."
                               rows="2"><?php echo esc_textarea( $faq['answer'] ); ?></textarea>
                 </div>
@@ -251,18 +251,18 @@ function haraka_event_meta_box_html( $post ) {
             <?php endforeach; ?>
         </div>
         <button type="button" class="hrk-add-row button"
-                data-target="haraka-faqs-wrap" data-type="faq">
+                data-target="metcpt-faqs-wrap" data-type="faq">
             + Add FAQ
         </button>
 
         <div class="hrk-meta-section-title">Section 6 — Guidelines &amp; Important Notes</div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_guidelines">
+            <label for="metcpt_event_guidelines">
                 Guidelines
                 <span class="hrk-hint">One guideline per line. Each line becomes a bullet point.</span>
             </label>
-            <textarea id="haraka_event_guidelines" name="haraka_event_guidelines"
+            <textarea id="metcpt_event_guidelines" name="metcpt_event_guidelines"
                       rows="5"
                       placeholder="Smart casual attire. No shorts or sleeveless tops.
 Please arrive by 10:30 AM.
@@ -273,11 +273,11 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
         <div class="hrk-meta-section-title">Section 7 — Call to Action</div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_cal_url">
+            <label for="metcpt_event_cal_url">
                 Add to Calendar URL
                 <span class="hrk-hint">Paste a Google Calendar event link. Leave blank to auto-generate.</span>
             </label>
-            <input type="url" id="haraka_event_cal_url" name="haraka_event_cal_url"
+            <input type="url" id="metcpt_event_cal_url" name="metcpt_event_cal_url"
                    value="<?php echo esc_attr( $event_cal_url ); ?>"
                    placeholder="https://calendar.google.com/..." />
         </div>
@@ -285,39 +285,39 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
         <div class="hrk-meta-section-title">Section 8 — Contact &amp; Secretariat</div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_contact_name">
+            <label for="metcpt_event_contact_name">
                 PIC Name
                 <span class="hrk-hint">Person in charge for this event</span>
             </label>
-            <input type="text" id="haraka_event_contact_name" name="haraka_event_contact_name"
+            <input type="text" id="metcpt_event_contact_name" name="metcpt_event_contact_name"
                    value="<?php echo esc_attr( $event_contact_name ); ?>"
                    placeholder="e.g. Puan Siti Nabilah" />
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_contact_dept">
+            <label for="metcpt_event_contact_dept">
                 Department
                 <span class="hrk-hint">e.g. Corporate Affairs Unit</span>
             </label>
-            <input type="text" id="haraka_event_contact_dept" name="haraka_event_contact_dept"
+            <input type="text" id="metcpt_event_contact_dept" name="metcpt_event_contact_dept"
                    value="<?php echo esc_attr( $event_contact_dept ); ?>"
                    placeholder="e.g. Corporate Affairs Unit" />
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_contact_email">
+            <label for="metcpt_event_contact_email">
                 Email
             </label>
-            <input type="text" id="haraka_event_contact_email" name="haraka_event_contact_email"
+            <input type="text" id="metcpt_event_contact_email" name="metcpt_event_contact_email"
                    value="<?php echo esc_attr( $event_contact_email ); ?>"
                    placeholder="e.g. events@iiumholdings.com.my" />
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_event_contact_phone">
+            <label for="metcpt_event_contact_phone">
                 Phone
             </label>
-            <input type="text" id="haraka_event_contact_phone" name="haraka_event_contact_phone"
+            <input type="text" id="metcpt_event_contact_phone" name="metcpt_event_contact_phone"
                    value="<?php echo esc_attr( $event_contact_phone ); ?>"
                    placeholder="e.g. +603-6421 4331" />
         </div>
@@ -367,9 +367,9 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
 
                 if ( type === 'vip' ) {
                     fields = '<div class="hrk-repeatable-fields">'
-                        + '<input type="text" name="haraka_vips[' + count + '][name]" placeholder="Full name" />'
-                        + '<input type="text" name="haraka_vips[' + count + '][title]" placeholder="Title / Position" />'
-                        + '<select name="haraka_vips[' + count + '][role]">'
+                        + '<input type="text" name="metcpt_vips[' + count + '][name]" placeholder="Full name" />'
+                        + '<input type="text" name="metcpt_vips[' + count + '][title]" placeholder="Title / Position" />'
+                        + '<select name="metcpt_vips[' + count + '][role]">'
                         + '<option value="">-- Select Role --</option>'
                         <?php foreach ( $vip_roles as $role ) : ?>
                         + '<option value="<?php echo esc_js( $role ); ?>"><?php echo esc_js( $role ); ?></option>'
@@ -378,14 +378,14 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
                         + '</div>';
                 } else if ( type === 'itinerary' ) {
                     fields = '<div class="hrk-repeatable-fields hrk-itinerary-fields">'
-                        + '<input type="text" name="haraka_itinerary[' + count + '][time]" placeholder="e.g. 9:00 AM" />'
-                        + '<input type="text" name="haraka_itinerary[' + count + '][activity]" placeholder="e.g. Arrival and Registration" />'
-                        + '<input type="text" name="haraka_itinerary[' + count + '][pic]" placeholder="e.g. Protocol Unit" />'
+                        + '<input type="text" name="metcpt_itinerary[' + count + '][time]" placeholder="e.g. 9:00 AM" />'
+                        + '<input type="text" name="metcpt_itinerary[' + count + '][activity]" placeholder="e.g. Arrival and Registration" />'
+                        + '<input type="text" name="metcpt_itinerary[' + count + '][pic]" placeholder="e.g. Protocol Unit" />'
                         + '</div>';
                 } else if ( type === 'faq' ) {
                     fields = '<div class="hrk-repeatable-fields hrk-faq-fields">'
-                        + '<input type="text" name="haraka_faqs[' + count + '][question]" placeholder="e.g. Is parking available?" />'
-                        + '<textarea name="haraka_faqs[' + count + '][answer]" placeholder="Answer..." rows="2"></textarea>'
+                        + '<input type="text" name="metcpt_faqs[' + count + '][question]" placeholder="e.g. Is parking available?" />'
+                        + '<textarea name="metcpt_faqs[' + count + '][answer]" placeholder="Answer..." rows="2"></textarea>'
                         + '</div>';
                 }
 
@@ -404,10 +404,10 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
 
 
 // ── Save all event meta ───────────────────────────────────────────────────────
-function haraka_save_event_meta( $post_id ) {
+function metcpt_save_event_meta( $post_id ) {
 
-    if ( ! isset( $_POST['haraka_event_nonce'] ) ||
-         ! wp_verify_nonce( $_POST['haraka_event_nonce'], 'haraka_event_meta_save' ) ) {
+    if ( ! isset( $_POST['metcpt_event_nonce'] ) ||
+         ! wp_verify_nonce( $_POST['metcpt_event_nonce'], 'metcpt_event_meta_save' ) ) {
         return;
     }
 
@@ -419,22 +419,22 @@ function haraka_save_event_meta( $post_id ) {
         return;
     }
 
-    if ( get_post_type( $post_id ) !== 'hrk_event' ) {
+    if ( get_post_type( $post_id ) !== 'metcpt_event' ) {
         return;
     }
 
     // ── Simple text fields ────────────────────────────────────────────────────
     $text_fields = array(
-        'haraka_event_date'          => 'event_date',
-        'haraka_event_time'          => 'event_time',
-        'haraka_event_venue'         => 'event_venue',
-        'haraka_event_organiser'     => 'event_organiser',
-        'haraka_event_audience'      => 'event_audience',
-        'haraka_event_capacity'      => 'event_capacity',
-        'haraka_event_contact_name'  => 'event_contact_name',
-        'haraka_event_contact_dept'  => 'event_contact_dept',
-        'haraka_event_contact_email' => 'event_contact_email',
-        'haraka_event_contact_phone' => 'event_contact_phone',
+        'metcpt_event_date'          => 'event_date',
+        'metcpt_event_time'          => 'event_time',
+        'metcpt_event_venue'         => 'event_venue',
+        'metcpt_event_organiser'     => 'event_organiser',
+        'metcpt_event_audience'      => 'event_audience',
+        'metcpt_event_capacity'      => 'event_capacity',
+        'metcpt_event_contact_name'  => 'event_contact_name',
+        'metcpt_event_contact_dept'  => 'event_contact_dept',
+        'metcpt_event_contact_email' => 'event_contact_email',
+        'metcpt_event_contact_phone' => 'event_contact_phone',
     );
 
     foreach ( $text_fields as $post_key => $meta_key ) {
@@ -449,8 +449,8 @@ function haraka_save_event_meta( $post_id ) {
 
     // ── URL fields ────────────────────────────────────────────────────────────
     $url_fields = array(
-        'haraka_event_rsvp_url' => 'event_rsvp_url',
-        'haraka_event_cal_url'  => 'event_cal_url',
+        'metcpt_event_rsvp_url' => 'event_rsvp_url',
+        'metcpt_event_cal_url'  => 'event_cal_url',
     );
 
     foreach ( $url_fields as $post_key => $meta_key ) {
@@ -464,18 +464,18 @@ function haraka_save_event_meta( $post_id ) {
     }
 
     // ── Textarea fields ───────────────────────────────────────────────────────
-    if ( isset( $_POST['haraka_event_guidelines'] ) ) {
+    if ( isset( $_POST['metcpt_event_guidelines'] ) ) {
         update_post_meta(
             $post_id,
             'event_guidelines',
-            sanitize_textarea_field( wp_unslash( $_POST['haraka_event_guidelines'] ) )
+            sanitize_textarea_field( wp_unslash( $_POST['metcpt_event_guidelines'] ) )
         );
     }
 
     // ── Repeatable: VIPs ─────────────────────────────────────────────────────
-    if ( isset( $_POST['haraka_vips'] ) && is_array( $_POST['haraka_vips'] ) ) {
+    if ( isset( $_POST['metcpt_vips'] ) && is_array( $_POST['metcpt_vips'] ) ) {
         $vips = array();
-        foreach ( $_POST['haraka_vips'] as $vip ) {
+        foreach ( $_POST['metcpt_vips'] as $vip ) {
             $name = sanitize_text_field( wp_unslash( isset( $vip['name'] ) ? $vip['name'] : '' ) );
             if ( ! empty( $name ) ) {
                 $vips[] = array(
@@ -489,9 +489,9 @@ function haraka_save_event_meta( $post_id ) {
     }
 
     // ── Repeatable: Itinerary ─────────────────────────────────────────────────
-    if ( isset( $_POST['haraka_itinerary'] ) && is_array( $_POST['haraka_itinerary'] ) ) {
+    if ( isset( $_POST['metcpt_itinerary'] ) && is_array( $_POST['metcpt_itinerary'] ) ) {
         $itinerary = array();
-        foreach ( $_POST['haraka_itinerary'] as $item ) {
+        foreach ( $_POST['metcpt_itinerary'] as $item ) {
             $activity = sanitize_text_field( wp_unslash( isset( $item['activity'] ) ? $item['activity'] : '' ) );
             if ( ! empty( $activity ) ) {
                 $itinerary[] = array(
@@ -505,9 +505,9 @@ function haraka_save_event_meta( $post_id ) {
     }
 
     // ── Repeatable: FAQs ─────────────────────────────────────────────────────
-    if ( isset( $_POST['haraka_faqs'] ) && is_array( $_POST['haraka_faqs'] ) ) {
+    if ( isset( $_POST['metcpt_faqs'] ) && is_array( $_POST['metcpt_faqs'] ) ) {
         $faqs = array();
-        foreach ( $_POST['haraka_faqs'] as $faq ) {
+        foreach ( $_POST['metcpt_faqs'] as $faq ) {
             $question = sanitize_text_field( wp_unslash( isset( $faq['question'] ) ? $faq['question'] : '' ) );
             if ( ! empty( $question ) ) {
                 $faqs[] = array(
@@ -519,4 +519,4 @@ function haraka_save_event_meta( $post_id ) {
         update_post_meta( $post_id, 'event_faqs', wp_json_encode( $faqs ) );
     }
 }
-add_action( 'save_post', 'haraka_save_event_meta' );
+add_action( 'save_post', 'metcpt_save_event_meta' );

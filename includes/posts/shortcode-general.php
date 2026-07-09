@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-function haraka_category_posts_shortcode( $atts ) {
+function metcpt_category_posts_shortcode( $atts ) {
 
     $atts = shortcode_atts(
         array(
@@ -84,4 +84,4 @@ function haraka_category_posts_shortcode( $atts ) {
 
     return ob_get_clean();
 }
-add_shortcode( 'category_posts', 'haraka_category_posts_shortcode' );
+add_shortcode( 'category_posts', 'metcpt_category_posts_shortcode' );

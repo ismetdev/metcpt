@@ -4,31 +4,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Haraka Dummy Data
+ * MetCPT Dummy Data
  *
  * Seeds and clears dummy content for local testing.
- * All dummy posts are tagged with _haraka_dummy = 1
+ * All dummy posts are tagged with _metcpt_dummy = 1
  * so real content is never affected.
  *
- * Only available when enabled in Haraka Settings → General.
+ * Only available when enabled in MetCPT Settings → General.
  *
- * @package Haraka
+ * @package MetCPT
  * @subpackage Admin
  * @version 1.0.4
  */
 
 // ── Guard: only run when dummy data is enabled ────────────────────────────────
-function haraka_dummy_data_enabled() {
-    return (bool) get_option( 'haraka_enable_dummy_data', 0 );
+function metcpt_dummy_data_enabled() {
+    return (bool) get_option( 'metcpt_enable_dummy_data', 0 );
 }
 
 // ── Helper: relative date string ──────────────────────────────────────────────
-function haraka_dummy_date( $offset_days ) {
+function metcpt_dummy_date( $offset_days ) {
     return date( 'Y-m-d', strtotime( $offset_days . ' days' ) );
 }
 
 // ── Seed dummy events ─────────────────────────────────────────────────────────
-function haraka_seed_dummy_events() {
+function metcpt_seed_dummy_events() {
     $today = date( 'Y-m-d' );
 
     $events = array(
@@ -37,7 +37,7 @@ function haraka_seed_dummy_events() {
         array(
             'title'     => '[DUMMY] Annual Corporate Dinner 2024',
             'excerpt'   => 'Annual corporate dinner celebrating IIUM Holdings achievements.',
-            'date'      => haraka_dummy_date( -120 ),
+            'date'      => metcpt_dummy_date( -120 ),
             'time'      => '7:00 PM - 10:00 PM',
             'venue'     => 'Grand Ballroom, Putrajaya Marriott Hotel',
             'organiser' => 'IIUM Holdings Sdn Bhd',
@@ -47,7 +47,7 @@ function haraka_seed_dummy_events() {
         array(
             'title'     => '[DUMMY] RISE2030 Strategy Briefing',
             'excerpt'   => 'Briefing session on the RISE2030 Strategic Blueprint for all subsidiaries.',
-            'date'      => haraka_dummy_date( -90 ),
+            'date'      => metcpt_dummy_date( -90 ),
             'time'      => '9:00 AM - 12:00 PM',
             'venue'     => 'Dewan Besar, IIUM Gombak',
             'organiser' => 'IIUM Holdings Sdn Bhd',
@@ -57,7 +57,7 @@ function haraka_seed_dummy_events() {
         array(
             'title'     => '[DUMMY] Kasih Ramadan 2025 — Iftar Programme',
             'excerpt'   => 'Annual Ramadan charity programme distributing iftar packs to communities.',
-            'date'      => haraka_dummy_date( -60 ),
+            'date'      => metcpt_dummy_date( -60 ),
             'time'      => '5:30 PM - 8:00 PM',
             'venue'     => 'Masjid IIUM, Gombak',
             'organiser' => 'Daya Bersih Sdn Bhd',
@@ -67,7 +67,7 @@ function haraka_seed_dummy_events() {
         array(
             'title'     => '[DUMMY] Board of Directors Meeting Q1',
             'excerpt'   => 'Quarterly Board of Directors meeting to review Q1 performance.',
-            'date'      => haraka_dummy_date( -45 ),
+            'date'      => metcpt_dummy_date( -45 ),
             'time'      => '10:00 AM - 1:00 PM',
             'venue'     => 'Boardroom, IIUM Holdings HQ',
             'organiser' => 'IIUM Holdings Sdn Bhd',
@@ -77,7 +77,7 @@ function haraka_seed_dummy_events() {
         array(
             'title'     => '[DUMMY] Staff Excellence Award Ceremony',
             'excerpt'   => 'Recognition ceremony honouring outstanding staff across all subsidiaries.',
-            'date'      => haraka_dummy_date( -15 ),
+            'date'      => metcpt_dummy_date( -15 ),
             'time'      => '2:00 PM - 5:00 PM',
             'venue'     => 'Auditorium, IIUM Cultural Centre',
             'organiser' => 'Human Resource Division',
@@ -89,7 +89,7 @@ function haraka_seed_dummy_events() {
         array(
             'title'     => '[DUMMY] IIUM Holdings 25th Anniversary Gala',
             'excerpt'   => 'Grand gala dinner celebrating 25 years of IIUM Holdings.',
-            'date'      => haraka_dummy_date( 14 ),
+            'date'      => metcpt_dummy_date( 14 ),
             'time'      => '7:00 PM - 11:00 PM',
             'venue'     => 'Putrajaya International Convention Centre',
             'organiser' => 'IIUM Holdings Sdn Bhd',
@@ -99,7 +99,7 @@ function haraka_seed_dummy_events() {
         array(
             'title'     => '[DUMMY] Subsidiary CEO Roundtable Q2',
             'excerpt'   => 'Quarterly roundtable discussion among all subsidiary CEOs.',
-            'date'      => haraka_dummy_date( 21 ),
+            'date'      => metcpt_dummy_date( 21 ),
             'time'      => '9:00 AM - 11:00 AM',
             'venue'     => 'Boardroom, IIUM Holdings HQ',
             'organiser' => 'IIUM Holdings Sdn Bhd',
@@ -109,7 +109,7 @@ function haraka_seed_dummy_events() {
         array(
             'title'     => '[DUMMY] Health and Wellness Day 2026',
             'excerpt'   => 'Annual staff health screening and wellness programme.',
-            'date'      => haraka_dummy_date( 30 ),
+            'date'      => metcpt_dummy_date( 30 ),
             'time'      => '8:00 AM - 4:00 PM',
             'venue'     => 'IIUM Medical Centre, Kuantan',
             'organiser' => 'IIUM Medical Specialist Centre',
@@ -119,7 +119,7 @@ function haraka_seed_dummy_events() {
         array(
             'title'     => '[DUMMY] Graduate Recruitment Fair 2026',
             'excerpt'   => 'Annual recruitment fair for fresh graduates across all divisions.',
-            'date'      => haraka_dummy_date( 45 ),
+            'date'      => metcpt_dummy_date( 45 ),
             'time'      => '9:00 AM - 5:00 PM',
             'venue'     => 'Main Hall, IIUM Gombak',
             'organiser' => 'Human Resource Division',
@@ -129,7 +129,7 @@ function haraka_seed_dummy_events() {
         array(
             'title'     => '[DUMMY] IIUM Holdings Innovation Summit',
             'excerpt'   => 'Annual innovation summit showcasing projects from all subsidiaries.',
-            'date'      => haraka_dummy_date( 60 ),
+            'date'      => metcpt_dummy_date( 60 ),
             'time'      => '8:30 AM - 5:30 PM',
             'venue'     => 'IIUM Convention Centre, Gombak',
             'organiser' => 'ICI — IIUM Consultancy & Innovation',
@@ -143,12 +143,12 @@ function haraka_seed_dummy_events() {
             'post_title'   => $data['title'],
             'post_excerpt' => $data['excerpt'],
             'post_status'  => 'publish',
-            'post_type'    => 'hrk_event',
+            'post_type'    => 'metcpt_event',
         ) );
 
         if ( is_wp_error( $post_id ) ) continue;
 
-        update_post_meta( $post_id, '_haraka_dummy',        1 );
+        update_post_meta( $post_id, '_metcpt_dummy',        1 );
         update_post_meta( $post_id, 'event_date',           $data['date'] );
         update_post_meta( $post_id, 'event_time',           $data['time'] );
         update_post_meta( $post_id, 'event_venue',          $data['venue'] );
@@ -173,7 +173,7 @@ function haraka_seed_dummy_events() {
 }
 
 // ── Seed dummy tenders ────────────────────────────────────────────────────────
-function haraka_seed_dummy_tenders() {
+function metcpt_seed_dummy_tenders() {
 
     $tenders = array(
 
@@ -185,7 +185,7 @@ function haraka_seed_dummy_tenders() {
             'issuer'     => 'IIUM Holdings Sdn Bhd',
             'category'   => 'Goods',
             'location'   => 'Gombak, Selangor',
-            'close_date' => haraka_dummy_date( -90 ),
+            'close_date' => metcpt_dummy_date( -90 ),
             'close_time' => '4:00 PM',
             'fee'        => 'RM 50.00',
             'validity'   => '90 days',
@@ -198,7 +198,7 @@ function haraka_seed_dummy_tenders() {
             'issuer'     => 'IIUM Schools Sdn Bhd',
             'category'   => 'Services',
             'location'   => 'Multiple Locations',
-            'close_date' => haraka_dummy_date( -60 ),
+            'close_date' => metcpt_dummy_date( -60 ),
             'close_time' => '4:00 PM',
             'fee'        => 'RM 100.00',
             'validity'   => '120 days',
@@ -211,7 +211,7 @@ function haraka_seed_dummy_tenders() {
             'issuer'     => 'IIUM Educare Sdn Bhd',
             'category'   => 'Construction',
             'location'   => 'Gombak, Selangor',
-            'close_date' => haraka_dummy_date( -45 ),
+            'close_date' => metcpt_dummy_date( -45 ),
             'close_time' => '12:00 PM',
             'fee'        => 'RM 50.00',
             'validity'   => '90 days',
@@ -224,7 +224,7 @@ function haraka_seed_dummy_tenders() {
             'issuer'     => 'IIUM Holdings Sdn Bhd',
             'category'   => 'Goods',
             'location'   => 'Gombak, Selangor',
-            'close_date' => haraka_dummy_date( -30 ),
+            'close_date' => metcpt_dummy_date( -30 ),
             'close_time' => '4:00 PM',
             'fee'        => 'RM 200.00',
             'validity'   => '120 days',
@@ -237,7 +237,7 @@ function haraka_seed_dummy_tenders() {
             'issuer'     => 'ICI — IIUM Consultancy & Innovation',
             'category'   => 'Consultancy',
             'location'   => 'Gombak, Selangor',
-            'close_date' => haraka_dummy_date( -14 ),
+            'close_date' => metcpt_dummy_date( -14 ),
             'close_time' => '4:00 PM',
             'fee'        => 'RM 300.00',
             'validity'   => '180 days',
@@ -252,7 +252,7 @@ function haraka_seed_dummy_tenders() {
             'issuer'     => 'IIUM Holdings Sdn Bhd',
             'category'   => 'Goods',
             'location'   => 'Gombak, Selangor',
-            'close_date' => haraka_dummy_date( 30 ),
+            'close_date' => metcpt_dummy_date( 30 ),
             'close_time' => '4:00 PM',
             'fee'        => 'RM 100.00',
             'validity'   => '90 days',
@@ -265,7 +265,7 @@ function haraka_seed_dummy_tenders() {
             'issuer'     => 'IIUM Medical Specialist Centre',
             'category'   => 'Services',
             'location'   => 'Kuantan, Pahang',
-            'close_date' => haraka_dummy_date( 45 ),
+            'close_date' => metcpt_dummy_date( 45 ),
             'close_time' => '4:00 PM',
             'fee'        => 'RM 50.00',
             'validity'   => '120 days',
@@ -278,7 +278,7 @@ function haraka_seed_dummy_tenders() {
             'issuer'     => 'Setiabudi Schools Sdn Bhd',
             'category'   => 'Construction',
             'location'   => 'Gombak, Selangor',
-            'close_date' => haraka_dummy_date( 60 ),
+            'close_date' => metcpt_dummy_date( 60 ),
             'close_time' => '4:00 PM',
             'fee'        => 'RM 500.00',
             'validity'   => '180 days',
@@ -291,7 +291,7 @@ function haraka_seed_dummy_tenders() {
             'issuer'     => 'IIUM Higher Education Sdn Bhd',
             'category'   => 'Goods',
             'location'   => 'Gombak, Selangor',
-            'close_date' => haraka_dummy_date( 75 ),
+            'close_date' => metcpt_dummy_date( 75 ),
             'close_time' => '4:00 PM',
             'fee'        => 'RM 200.00',
             'validity'   => '90 days',
@@ -304,7 +304,7 @@ function haraka_seed_dummy_tenders() {
             'issuer'     => 'IIUM Properties Sdn Bhd',
             'category'   => 'Consultancy',
             'location'   => 'Kuala Lumpur',
-            'close_date' => haraka_dummy_date( 90 ),
+            'close_date' => metcpt_dummy_date( 90 ),
             'close_time' => '4:00 PM',
             'fee'        => 'RM 150.00',
             'validity'   => '120 days',
@@ -317,12 +317,12 @@ function haraka_seed_dummy_tenders() {
             'post_title'   => $data['title'],
             'post_excerpt' => $data['excerpt'],
             'post_status'  => 'publish',
-            'post_type'    => 'hrk_tender',
+            'post_type'    => 'metcpt_tender',
         ) );
 
         if ( is_wp_error( $post_id ) ) continue;
 
-        update_post_meta( $post_id, '_haraka_dummy',              1 );
+        update_post_meta( $post_id, '_metcpt_dummy',              1 );
         update_post_meta( $post_id, 'tender_ref',                 $data['ref'] );
         update_post_meta( $post_id, 'tender_issuer',              $data['issuer'] );
         update_post_meta( $post_id, 'tender_category',            $data['category'] );
@@ -340,11 +340,11 @@ function haraka_seed_dummy_tenders() {
 }
 
 // ── Seed dummy careers ────────────────────────────────────────────────────────
-function haraka_seed_dummy_careers() {
+function metcpt_seed_dummy_careers() {
 
     // Get first available company or create a dummy one
     $companies = get_posts( array(
-        'post_type'      => 'hrk_company',
+        'post_type'      => 'metcpt_company',
         'post_status'    => 'publish',
         'posts_per_page' => 1,
         'fields'         => 'ids',
@@ -354,10 +354,10 @@ function haraka_seed_dummy_careers() {
         $company_id = wp_insert_post( array(
             'post_title'  => '[DUMMY] IIUM Holdings Sdn Bhd',
             'post_status' => 'publish',
-            'post_type'   => 'hrk_company',
+            'post_type'   => 'metcpt_company',
         ) );
         if ( ! is_wp_error( $company_id ) ) {
-            update_post_meta( $company_id, '_haraka_dummy',      1 );
+            update_post_meta( $company_id, '_metcpt_dummy',      1 );
             update_post_meta( $company_id, 'company_short_name', 'IIUMH' );
             update_post_meta( $company_id, 'company_full_name',  'IIUM Holdings Sdn Bhd' );
             update_post_meta( $company_id, 'company_website',    'https://iiumholdings.com.my' );
@@ -377,7 +377,7 @@ function haraka_seed_dummy_careers() {
             'location'   => 'Gombak, Selangor',
             'type'       => 'Full Time',
             'salary'     => 'RM 3,500 - RM 5,000',
-            'close_date' => haraka_dummy_date( -60 ),
+            'close_date' => metcpt_dummy_date( -60 ),
         ),
         array(
             'title'      => '[DUMMY] ICT Support Specialist',
@@ -386,7 +386,7 @@ function haraka_seed_dummy_careers() {
             'location'   => 'Gombak, Selangor',
             'type'       => 'Full Time',
             'salary'     => 'RM 3,000 - RM 4,500',
-            'close_date' => haraka_dummy_date( -45 ),
+            'close_date' => metcpt_dummy_date( -45 ),
         ),
         array(
             'title'      => '[DUMMY] Marketing Intern',
@@ -395,7 +395,7 @@ function haraka_seed_dummy_careers() {
             'location'   => 'Gombak, Selangor',
             'type'       => 'Internship',
             'salary'     => 'RM 800 allowance',
-            'close_date' => haraka_dummy_date( -30 ),
+            'close_date' => metcpt_dummy_date( -30 ),
         ),
         array(
             'title'      => '[DUMMY] Legal Counsel',
@@ -404,7 +404,7 @@ function haraka_seed_dummy_careers() {
             'location'   => 'Kuala Lumpur',
             'type'       => 'Full Time',
             'salary'     => 'RM 6,000 - RM 9,000',
-            'close_date' => haraka_dummy_date( -20 ),
+            'close_date' => metcpt_dummy_date( -20 ),
         ),
         array(
             'title'      => '[DUMMY] Procurement Officer',
@@ -413,7 +413,7 @@ function haraka_seed_dummy_careers() {
             'location'   => 'Gombak, Selangor',
             'type'       => 'Contract',
             'salary'     => 'RM 4,000 - RM 5,500',
-            'close_date' => haraka_dummy_date( -10 ),
+            'close_date' => metcpt_dummy_date( -10 ),
         ),
 
         // 5 open positions
@@ -424,7 +424,7 @@ function haraka_seed_dummy_careers() {
             'location'   => 'Gombak, Selangor',
             'type'       => 'Full Time',
             'salary'     => 'RM 7,000 - RM 10,000',
-            'close_date' => haraka_dummy_date( 30 ),
+            'close_date' => metcpt_dummy_date( 30 ),
         ),
         array(
             'title'      => '[DUMMY] Operations Executive',
@@ -433,7 +433,7 @@ function haraka_seed_dummy_careers() {
             'location'   => 'Gombak, Selangor',
             'type'       => 'Full Time',
             'salary'     => 'RM 3,500 - RM 5,000',
-            'close_date' => haraka_dummy_date( 45 ),
+            'close_date' => metcpt_dummy_date( 45 ),
         ),
         array(
             'title'      => '[DUMMY] Administration Assistant',
@@ -442,7 +442,7 @@ function haraka_seed_dummy_careers() {
             'location'   => 'Gombak, Selangor',
             'type'       => 'Part Time',
             'salary'     => 'RM 1,800 - RM 2,500',
-            'close_date' => haraka_dummy_date( 60 ),
+            'close_date' => metcpt_dummy_date( 60 ),
         ),
         array(
             'title'      => '[DUMMY] Finance Manager',
@@ -451,7 +451,7 @@ function haraka_seed_dummy_careers() {
             'location'   => 'Kuala Lumpur',
             'type'       => 'Full Time',
             'salary'     => 'RM 8,000 - RM 12,000',
-            'close_date' => haraka_dummy_date( 75 ),
+            'close_date' => metcpt_dummy_date( 75 ),
         ),
         array(
             'title'      => '[DUMMY] ICT Project Manager',
@@ -460,7 +460,7 @@ function haraka_seed_dummy_careers() {
             'location'   => 'Gombak, Selangor',
             'type'       => 'Contract',
             'salary'     => 'RM 6,000 - RM 8,000',
-            'close_date' => haraka_dummy_date( 90 ),
+            'close_date' => metcpt_dummy_date( 90 ),
         ),
     );
 
@@ -469,12 +469,12 @@ function haraka_seed_dummy_careers() {
             'post_title'   => $data['title'],
             'post_excerpt' => $data['excerpt'],
             'post_status'  => 'publish',
-            'post_type'    => 'hrk_career',
+            'post_type'    => 'metcpt_career',
         ) );
 
         if ( is_wp_error( $post_id ) ) continue;
 
-        update_post_meta( $post_id, '_haraka_dummy',       1 );
+        update_post_meta( $post_id, '_metcpt_dummy',       1 );
         update_post_meta( $post_id, 'career_company_id',   $company_id );
         update_post_meta( $post_id, 'career_department',   $data['department'] );
         update_post_meta( $post_id, 'career_location',     $data['location'] );
@@ -489,10 +489,10 @@ function haraka_seed_dummy_careers() {
 }
 
 // ── Clear all dummy data ──────────────────────────────────────────────────────
-function haraka_clear_dummy_data() {
+function metcpt_clear_dummy_data() {
     global $wpdb;
 
-    $post_types = array( 'hrk_event', 'hrk_tender', 'hrk_career', 'hrk_company' );
+    $post_types = array( 'metcpt_event', 'metcpt_tender', 'metcpt_career', 'metcpt_company' );
 
     foreach ( $post_types as $post_type ) {
         $ids = get_posts( array(
@@ -502,7 +502,7 @@ function haraka_clear_dummy_data() {
             'fields'         => 'ids',
             'meta_query'     => array(
                 array(
-                    'key'   => '_haraka_dummy',
+                    'key'   => '_metcpt_dummy',
                     'value' => '1',
                 ),
             ),
@@ -515,75 +515,75 @@ function haraka_clear_dummy_data() {
 }
 
 // ── AJAX: seed all dummy data ─────────────────────────────────────────────────
-function haraka_ajax_seed_dummy_data() {
-    check_ajax_referer( 'haraka_dummy_data', 'nonce' );
+function metcpt_ajax_seed_dummy_data() {
+    check_ajax_referer( 'metcpt_dummy_data', 'nonce' );
 
     if ( ! current_user_can( 'manage_options' ) ) {
         wp_send_json_error( array( 'message' => 'Unauthorised.' ), 403 );
     }
 
-    if ( ! haraka_dummy_data_enabled() ) {
+    if ( ! metcpt_dummy_data_enabled() ) {
         wp_send_json_error( array( 'message' => 'Dummy data is not enabled.' ) );
     }
 
-    haraka_seed_dummy_events();
-    haraka_seed_dummy_tenders();
-    haraka_seed_dummy_careers();
+    metcpt_seed_dummy_events();
+    metcpt_seed_dummy_tenders();
+    metcpt_seed_dummy_careers();
 
     wp_send_json_success( array(
         'message' => 'Dummy data seeded — 10 events, 10 tenders, 10 careers.',
     ) );
 }
-add_action( 'wp_ajax_haraka_seed_dummy_data', 'haraka_ajax_seed_dummy_data' );
+add_action( 'wp_ajax_metcpt_seed_dummy_data', 'metcpt_ajax_seed_dummy_data' );
 
 // ── AJAX: clear all dummy data ────────────────────────────────────────────────
-function haraka_ajax_clear_dummy_data() {
-    check_ajax_referer( 'haraka_dummy_data', 'nonce' );
+function metcpt_ajax_clear_dummy_data() {
+    check_ajax_referer( 'metcpt_dummy_data', 'nonce' );
 
     if ( ! current_user_can( 'manage_options' ) ) {
         wp_send_json_error( array( 'message' => 'Unauthorised.' ), 403 );
     }
 
-    if ( ! haraka_dummy_data_enabled() ) {
+    if ( ! metcpt_dummy_data_enabled() ) {
         wp_send_json_error( array( 'message' => 'Dummy data is not enabled.' ) );
     }
 
-    haraka_clear_dummy_data();
+    metcpt_clear_dummy_data();
 
     wp_send_json_success( array(
         'message' => 'All dummy data cleared successfully.',
     ) );
 }
-add_action( 'wp_ajax_haraka_clear_dummy_data', 'haraka_ajax_clear_dummy_data' );
+add_action( 'wp_ajax_metcpt_clear_dummy_data', 'metcpt_ajax_clear_dummy_data' );
 
 // ── AJAX: seed dummy error log entries (dev only) ─────────────────────────────
-function haraka_ajax_seed_dummy_errors() {
-    check_ajax_referer( 'haraka_dummy_data', 'nonce' );
+function metcpt_ajax_seed_dummy_errors() {
+    check_ajax_referer( 'metcpt_dummy_data', 'nonce' );
 
     if ( ! current_user_can( 'manage_options' ) ) {
         wp_send_json_error( array( 'message' => 'Unauthorised.' ), 403 );
     }
 
-    if ( ! haraka_dummy_data_enabled() ) {
+    if ( ! metcpt_dummy_data_enabled() ) {
         wp_send_json_error( array( 'message' => 'Dummy data is not enabled.' ) );
     }
 
     global $wpdb;
-    $table = haraka_error_log_table();
+    $table = metcpt_error_log_table();
 
     $dummy_errors = array(
-        array( 'level' => 'fatal',     'message' => 'Maximum execution time of 30 seconds exceeded',              'source' => 'includes/tenders/shortcode-list.php',     'file' => HARAKA_PLUGIN_DIR . 'includes/tenders/shortcode-list.php',     'function' => 'haraka_tenders_list_shortcode()', 'line' => 45,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-6 days' ) ) ),
-        array( 'level' => 'error',     'message' => 'Call to undefined function haraka_get_tender_meta()',        'source' => 'includes/tenders/template-single.php',    'file' => HARAKA_PLUGIN_DIR . 'includes/tenders/template-single.php',    'function' => 'haraka_render_tender_single()',   'line' => 112, 'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-6 days' ) ) ),
-        array( 'level' => 'warning',   'message' => 'Undefined index: tender_close_time',                         'source' => 'includes/tenders/meta-boxes.php',         'file' => HARAKA_PLUGIN_DIR . 'includes/tenders/meta-boxes.php',         'function' => 'haraka_tender_meta_box_html()',   'line' => 78,  'resolved' => 1, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-5 days' ) ) ),
-        array( 'level' => 'notice',    'message' => 'Undefined variable: event_cal_url',                          'source' => 'includes/events/template-single.php',     'file' => HARAKA_PLUGIN_DIR . 'includes/events/template-single.php',     'function' => 'haraka_render_event_single()',    'line' => 203, 'resolved' => 1, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-5 days' ) ) ),
-        array( 'level' => 'exception', 'message' => 'InvalidArgumentException: Invalid date format provided',     'source' => 'includes/admin/cron.php',                 'file' => HARAKA_PLUGIN_DIR . 'includes/admin/cron.php',                 'function' => 'haraka_daily_tender_check()',     'line' => 34,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-4 days' ) ) ),
-        array( 'level' => 'error',     'message' => 'wpdb::prepare was called incorrectly — query does not contain placeholders', 'source' => 'includes/careers/shortcode-list.php', 'file' => HARAKA_PLUGIN_DIR . 'includes/careers/shortcode-list.php', 'function' => 'haraka_careers_list_shortcode()', 'line' => 67, 'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-3 days' ) ) ),
-        array( 'level' => 'warning',   'message' => 'array_map() expects parameter 2 to be array, null given',   'source' => 'includes/admin/settings-fields.php',      'file' => HARAKA_PLUGIN_DIR . 'includes/admin/settings-fields.php',      'function' => 'haraka_render_tenders_settings()','line' => 91,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-3 days' ) ) ),
-        array( 'level' => 'fatal',     'message' => 'Allowed memory size of 268435456 bytes exhausted',           'source' => 'includes/events/shortcode-list.php',      'file' => HARAKA_PLUGIN_DIR . 'includes/events/shortcode-list.php',      'function' => 'haraka_events_list_shortcode()', 'line' => 89,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-2 days' ) ) ),
-        array( 'level' => 'notice',    'message' => 'Trying to get property of non-object',                       'source' => 'includes/careers/template-single.php',    'file' => HARAKA_PLUGIN_DIR . 'includes/careers/template-single.php',    'function' => 'haraka_render_career_single()',   'line' => 145, 'resolved' => 1, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-1 day' ) ) ),
-        array( 'level' => 'error',     'message' => 'Cannot redeclare haraka_format_tender_date()',               'source' => 'includes/tenders/shortcode-preview.php',  'file' => HARAKA_PLUGIN_DIR . 'includes/tenders/shortcode-preview.php',  'function' => 'haraka_tenders_preview_shortcode()','line' => 22, 'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-1 day' ) ) ),
-        array( 'level' => 'warning',   'message' => 'Division by zero in dashboard widget count',                 'source' => 'includes/admin/dashboard-widget.php',     'file' => HARAKA_PLUGIN_DIR . 'includes/admin/dashboard-widget.php',     'function' => 'haraka_get_dashboard_counts()',   'line' => 56,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-4 hours' ) ) ),
-        array( 'level' => 'exception', 'message' => 'RuntimeException: Failed to write transient cache',          'source' => 'includes/admin/dashboard-widget.php',     'file' => HARAKA_PLUGIN_DIR . 'includes/admin/dashboard-widget.php',     'function' => 'haraka_get_dashboard_counts()',   'line' => 78,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-2 hours' ) ) ),
+        array( 'level' => 'fatal',     'message' => 'Maximum execution time of 30 seconds exceeded',              'source' => 'includes/tenders/shortcode-list.php',     'file' => METCPT_PATH . 'includes/tenders/shortcode-list.php',     'function' => 'metcpt_tenders_list_shortcode()', 'line' => 45,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-6 days' ) ) ),
+        array( 'level' => 'error',     'message' => 'Call to undefined function metcpt_get_tender_meta()',        'source' => 'includes/tenders/template-single.php',    'file' => METCPT_PATH . 'includes/tenders/template-single.php',    'function' => 'metcpt_render_tender_single()',   'line' => 112, 'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-6 days' ) ) ),
+        array( 'level' => 'warning',   'message' => 'Undefined index: tender_close_time',                         'source' => 'includes/tenders/meta-boxes.php',         'file' => METCPT_PATH . 'includes/tenders/meta-boxes.php',         'function' => 'metcpt_tender_meta_box_html()',   'line' => 78,  'resolved' => 1, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-5 days' ) ) ),
+        array( 'level' => 'notice',    'message' => 'Undefined variable: event_cal_url',                          'source' => 'includes/events/template-single.php',     'file' => METCPT_PATH . 'includes/events/template-single.php',     'function' => 'metcpt_render_event_single()',    'line' => 203, 'resolved' => 1, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-5 days' ) ) ),
+        array( 'level' => 'exception', 'message' => 'InvalidArgumentException: Invalid date format provided',     'source' => 'includes/admin/cron.php',                 'file' => METCPT_PATH . 'includes/admin/cron.php',                 'function' => 'metcpt_daily_tender_check()',     'line' => 34,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-4 days' ) ) ),
+        array( 'level' => 'error',     'message' => 'wpdb::prepare was called incorrectly — query does not contain placeholders', 'source' => 'includes/careers/shortcode-list.php', 'file' => METCPT_PATH . 'includes/careers/shortcode-list.php', 'function' => 'metcpt_careers_list_shortcode()', 'line' => 67, 'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-3 days' ) ) ),
+        array( 'level' => 'warning',   'message' => 'array_map() expects parameter 2 to be array, null given',   'source' => 'includes/admin/settings-fields.php',      'file' => METCPT_PATH . 'includes/admin/settings-fields.php',      'function' => 'metcpt_render_tenders_settings()','line' => 91,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-3 days' ) ) ),
+        array( 'level' => 'fatal',     'message' => 'Allowed memory size of 268435456 bytes exhausted',           'source' => 'includes/events/shortcode-list.php',      'file' => METCPT_PATH . 'includes/events/shortcode-list.php',      'function' => 'metcpt_events_list_shortcode()', 'line' => 89,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-2 days' ) ) ),
+        array( 'level' => 'notice',    'message' => 'Trying to get property of non-object',                       'source' => 'includes/careers/template-single.php',    'file' => METCPT_PATH . 'includes/careers/template-single.php',    'function' => 'metcpt_render_career_single()',   'line' => 145, 'resolved' => 1, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-1 day' ) ) ),
+        array( 'level' => 'error',     'message' => 'Cannot redeclare metcpt_format_tender_date()',               'source' => 'includes/tenders/shortcode-preview.php',  'file' => METCPT_PATH . 'includes/tenders/shortcode-preview.php',  'function' => 'metcpt_tenders_preview_shortcode()','line' => 22, 'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-1 day' ) ) ),
+        array( 'level' => 'warning',   'message' => 'Division by zero in dashboard widget count',                 'source' => 'includes/admin/dashboard-widget.php',     'file' => METCPT_PATH . 'includes/admin/dashboard-widget.php',     'function' => 'metcpt_get_dashboard_counts()',   'line' => 56,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-4 hours' ) ) ),
+        array( 'level' => 'exception', 'message' => 'RuntimeException: Failed to write transient cache',          'source' => 'includes/admin/dashboard-widget.php',     'file' => METCPT_PATH . 'includes/admin/dashboard-widget.php',     'function' => 'metcpt_get_dashboard_counts()',   'line' => 78,  'resolved' => 0, 'created_at' => date( 'Y-m-d H:i:s', strtotime( '-2 hours' ) ) ),
     );
 
     $context = wp_json_encode( array( 'url' => '/wp-admin/', 'method' => 'GET', 'user_id' => get_current_user_id(), 'wp_version' => get_bloginfo('version'), 'php_version' => PHP_VERSION ) );
@@ -606,4 +606,4 @@ function haraka_ajax_seed_dummy_errors() {
 
     wp_send_json_success( array( 'message' => '12 dummy error log entries seeded across 7 days.' ) );
 }
-add_action( 'wp_ajax_haraka_seed_dummy_errors', 'haraka_ajax_seed_dummy_errors' );
+add_action( 'wp_ajax_metcpt_seed_dummy_errors', 'metcpt_ajax_seed_dummy_errors' );

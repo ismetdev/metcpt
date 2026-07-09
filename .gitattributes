@@ -1,4 +1,4 @@
-# Haraka — line ending normalization
+# MetCPT — line ending normalization
 #
 # Normalizes all text files to LF in the repository so that diffs stay clean
 # and the live server stops accumulating doubled carriage returns. Binary

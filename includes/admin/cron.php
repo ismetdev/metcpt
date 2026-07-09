@@ -4,35 +4,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Schedule daily cron on plugin activation ───────────────────────────────
-function haraka_schedule_cron() {
-    if ( ! wp_next_scheduled( 'haraka_daily_tender_check' ) ) {
-        wp_schedule_event( time(), 'daily', 'haraka_daily_tender_check' );
+function metcpt_schedule_cron() {
+    if ( ! wp_next_scheduled( 'metcpt_daily_tender_check' ) ) {
+        wp_schedule_event( time(), 'daily', 'metcpt_daily_tender_check' );
     }
 }
-add_action( 'wp', 'haraka_schedule_cron' );
+add_action( 'wp', 'metcpt_schedule_cron' );
 
 
 // ── Clear cron on plugin deactivation ──────────────────────────────────────
-function haraka_clear_cron() {
-    $timestamp = wp_next_scheduled( 'haraka_daily_tender_check' );
+function metcpt_clear_cron() {
+    $timestamp = wp_next_scheduled( 'metcpt_daily_tender_check' );
     if ( $timestamp ) {
-        wp_unschedule_event( $timestamp, 'haraka_daily_tender_check' );
+        wp_unschedule_event( $timestamp, 'metcpt_daily_tender_check' );
     }
 }
 register_deactivation_hook(
-    plugin_dir_path( __DIR__ ) . '../../haraka.php',
-    'haraka_clear_cron'
+    plugin_dir_path( __DIR__ ) . '../../metcpt.php',
+    'metcpt_clear_cron'
 );
 
 
 // ── Main daily task ────────────────────────────────────────────────────────
-function haraka_daily_tender_check() {
+function metcpt_daily_tender_check() {
     $today     = date( 'Y-m-d' );
-    $threshold = (int) get_option( 'haraka_closing_soon_days', 7 );
+    $threshold = (int) get_option( 'metcpt_closing_soon_days', 7 );
 
     // Query all published tenders
     $query = new WP_Query( array(
-        'post_type'      => 'hrk_tender',
+        'post_type'      => 'metcpt_tender',
         'post_status'    => 'publish',
         'posts_per_page' => -1,
         'meta_query'     => array(
@@ -68,7 +68,7 @@ function haraka_daily_tender_check() {
         $is_past    = $date_obj < $today_obj;
 
         // ── Flag tender as notified to avoid duplicate emails ──────────────
-        $already_notified = get_post_meta( $post_id, 'haraka_closing_notified', true );
+        $already_notified = get_post_meta( $post_id, 'metcpt_closing_notified', true );
 
         // Send email if within threshold and not already notified
         if ( ! $is_past && $days_left <= $threshold && ! $already_notified ) {
@@ -81,13 +81,13 @@ function haraka_daily_tender_check() {
                 'url'        => get_permalink(),
             );
             // Mark as notified so we don't email again
-            update_post_meta( $post_id, 'haraka_closing_notified', '1' );
+            update_post_meta( $post_id, 'metcpt_closing_notified', '1' );
         }
 
         // ── Reset notification flag if tender is re-opened ─────────────────
         // (e.g. close date extended — allow new notification)
         if ( $is_past ) {
-            delete_post_meta( $post_id, 'haraka_closing_notified' );
+            delete_post_meta( $post_id, 'metcpt_closing_notified' );
         }
     }
 
@@ -95,18 +95,18 @@ function haraka_daily_tender_check() {
 
     // ── Send email if there are tenders to notify ──────────────────────────
     if ( ! empty( $notify_tenders ) ) {
-        haraka_send_closing_notification( $notify_tenders );
+        metcpt_send_closing_notification( $notify_tenders );
     }
 }
-add_action( 'haraka_daily_tender_check', 'haraka_daily_tender_check' );
+add_action( 'metcpt_daily_tender_check', 'metcpt_daily_tender_check' );
 
 
 // ── Send closing notification email ───────────────────────────────────────
-function haraka_send_closing_notification( $tenders ) {
+function metcpt_send_closing_notification( $tenders ) {
 
-    $recipient  = get_option( 'haraka_notify_email', get_option( 'admin_email' ) );
+    $recipient  = get_option( 'metcpt_notify_email', get_option( 'admin_email' ) );
     $site_name  = get_bloginfo( 'name' );
-    $threshold  = (int) get_option( 'haraka_closing_soon_days', 7 );
+    $threshold  = (int) get_option( 'metcpt_closing_soon_days', 7 );
 
     if ( empty( $recipient ) ) {
         return;
@@ -117,7 +117,7 @@ function haraka_send_closing_notification( $tenders ) {
 
     // ── Build email body ───────────────────────────────────────────────────
     $body  = 'Dear Administrator,' . "\n\n";
-    $body .= 'This is an automated reminder from Haraka on ' . $site_name . '.' . "\n\n";
+    $body .= 'This is an automated reminder from MetCPT on ' . $site_name . '.' . "\n\n";
     $body .= 'The following ' . ( $count > 1 ? 'tenders are' : 'tender is' ) . ' closing within ' . $threshold . ' days:' . "\n\n";
     $body .= str_repeat( '-', 60 ) . "\n\n";
 
@@ -131,8 +131,8 @@ function haraka_send_closing_notification( $tenders ) {
     }
 
     $body .= 'Please ensure these tenders are handled before their closing dates.' . "\n\n";
-    $body .= 'This email was sent automatically by Haraka — Corporate Content Hub.' . "\n";
-    $body .= 'To manage notification settings, visit: ' . admin_url( 'admin.php?page=haraka-settings&tab=tenders' );
+    $body .= 'This email was sent automatically by MetCPT — Corporate Content Hub.' . "\n";
+    $body .= 'To manage notification settings, visit: ' . admin_url( 'admin.php?page=metcpt-settings&tab=tenders' );
 
     $headers = array( 'Content-Type: text/plain; charset=UTF-8' );
 
@@ -141,21 +141,21 @@ function haraka_send_closing_notification( $tenders ) {
 
 
 // ── Manual trigger — for testing from admin ────────────────────────────────
-function haraka_manual_cron_trigger() {
-    if ( ! isset( $_GET['haraka_run_cron'] ) ) {
+function metcpt_manual_cron_trigger() {
+    if ( ! isset( $_GET['metcpt_run_cron'] ) ) {
         return;
     }
     if ( ! current_user_can( 'manage_options' ) ) {
         return;
     }
-    if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'haraka_run_cron' ) ) {
+    if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'metcpt_run_cron' ) ) {
         return;
     }
-    haraka_daily_tender_check();
+    metcpt_daily_tender_check();
     add_action( 'admin_notices', function() {
         echo '<div class="notice notice-success is-dismissible">';
-        echo '<p><strong>Haraka:</strong> Cron task ran successfully. Check your email if any tenders are closing soon.</p>';
+        echo '<p><strong>MetCPT:</strong> Cron task ran successfully. Check your email if any tenders are closing soon.</p>';
         echo '</div>';
     } );
 }
-add_action( 'admin_init', 'haraka_manual_cron_trigger' );
+add_action( 'admin_init', 'metcpt_manual_cron_trigger' );

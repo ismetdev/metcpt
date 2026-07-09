@@ -1,4 +1,4 @@
-# Haraka — Corporate Content Hub for WordPress
+# MetCPT — Corporate Content Hub for WordPress
 
 A comprehensive WordPress plugin built for IIUM Holdings Sdn Bhd to manage corporate events, procurement tenders, career vacancies, and news content across multiple subsidiary companies.
 
@@ -26,7 +26,7 @@ A comprehensive WordPress plugin built for IIUM Holdings Sdn Bhd to manage corpo
 
 **Careers Management**
 - Custom post type for job vacancies
-- Relational company system (hrk_company CPT)
+- Relational company system (metcpt_company CPT)
 - Controlled department dropdown from settings
 - Job type categories (Full Time/Part Time/Contract/Internship)
 - Application tracking with closing dates
@@ -64,8 +64,8 @@ A comprehensive WordPress plugin built for IIUM Holdings Sdn Bhd to manage corpo
 
 **Error Log**
 - Captures PHP errors, uncaught exceptions, fatal errors, and WP_Error events
-- Scoped strictly to Haraka plugin files — other plugins ignored
-- Stores logs in dedicated `wp_haraka_error_log` database table
+- Scoped strictly to MetCPT plugin files — other plugins ignored
+- Stores logs in dedicated `wp_metcpt_error_log` database table
 - Filterable admin UI — filter by level (error, warning, notice, exception, fatal) and resolved status
 - View Details modal shows full stack trace and request context
 - Mark Resolved per entry via AJAX — no page reload
@@ -80,19 +80,19 @@ A comprehensive WordPress plugin built for IIUM Holdings Sdn Bhd to manage corpo
 - MySQL 5.7 or higher
 
 ### Via WordPress Admin
-1. Download `haraka.zip` from releases
+1. Download `metcpt.zip` from releases
 2. Go to **Plugins → Add New → Upload Plugin**
 3. Upload the zip file and click **Install Now**
 4. Click **Activate Plugin**
 
 ### Via FTP/cPanel
-1. Extract `haraka.zip` to `/wp-content/plugins/haraka/`
+1. Extract `metcpt.zip` to `/wp-content/plugins/metcpt/`
 2. Go to **Plugins** in WordPress admin
-3. Find **Haraka** and click **Activate**
+3. Find **MetCPT** and click **Activate**
 
 ### Post-Activation Setup
 1. Go to **Settings → Permalinks** and click **Save Changes** (flushes rewrite rules)
-2. Go to **Haraka Settings** and configure:
+2. Go to **MetCPT Settings** and configure:
    - Tenders Page URL
    - Careers Page URL
    - Notification Email
@@ -215,11 +215,11 @@ A comprehensive WordPress plugin built for IIUM Holdings Sdn Bhd to manage corpo
 
 ### Archive Display
 
-Haraka serves archive listings for Events, Tenders, and Careers through two complementary mechanisms:
+MetCPT serves archive listings for Events, Tenders, and Careers through two complementary mechanisms:
 
-**Primary — WordPress pages with shortcodes.** The recommended setup is a standard WordPress page for each module (slugs `events`, `tenders`, `careers`) containing the relevant list shortcode (e.g. `[events_list]`). These pages use the active theme's page template, so they keep the site header, footer, and navigation, and they avoid conflicts with page builders such as Elementor that can intercept custom post type template loading. The archive URL fields under **Haraka Settings** point the single-page "Back" buttons at these pages.
+**Primary — WordPress pages with shortcodes.** The recommended setup is a standard WordPress page for each module (slugs `events`, `tenders`, `careers`) containing the relevant list shortcode (e.g. `[events_list]`). These pages use the active theme's page template, so they keep the site header, footer, and navigation, and they avoid conflicts with page builders such as Elementor that can intercept custom post type template loading. The archive URL fields under **MetCPT Settings** point the single-page "Back" buttons at these pages.
 
-**Fallback — CPT archive templates.** Each module also ships a `template-archive.php` file (in `includes/events/`, `includes/tenders/`, and `includes/careers/`). These hook into WordPress's `template_include` filter and automatically provide a styled archive if a visitor reaches a raw custom post type archive URL directly (for example `?post_type=hrk_event`). They are an active fallback, not dead code — if removed, those raw archive URLs would fall back to the theme's default unstyled archive. The shortcode pages above remain the primary, recommended path.
+**Fallback — CPT archive templates.** Each module also ships a `template-archive.php` file (in `includes/events/`, `includes/tenders/`, and `includes/careers/`). These hook into WordPress's `template_include` filter and automatically provide a styled archive if a visitor reaches a raw custom post type archive URL directly (for example `?post_type=metcpt_event`). They are an active fallback, not dead code — if removed, those raw archive URLs would fall back to the theme's default unstyled archive. The shortcode pages above remain the primary, recommended path.
 
 ## Server Cron Setup (Recommended)
 
@@ -243,14 +243,14 @@ php /path/to/your/wordpress/wp-cron.php
 ## File Structure
 
 ```
-haraka/
-├── haraka.php                              # Plugin entry point
+metcpt/
+├── metcpt.php                              # Plugin entry point
 ├── uninstall.php                           # Cleanup on deletion
 ├── libs/
 │   └── plugin-update-checker/          # Auto-update library (YahnisElsts)
 ├── includes/
 │   ├── core/
-│   │   ├── class-haraka.php               # Main loader class
+│   │   ├── class-metcpt.php               # Main loader class
 │   │   └── post-types.php                 # CPT registration
 │   ├── admin/
 │   │   ├── settings-page.php              # Settings UI
@@ -297,14 +297,14 @@ haraka/
 
 | CPT | Slug | Purpose |
 |---|---|---|
-| Events | `hrk_event` | Corporate events |
-| Tenders | `hrk_tender` | Procurement opportunities |
-| Careers | `hrk_career` | Job vacancies |
-| Companies | `hrk_company` | Subsidiary company profiles |
+| Events | `metcpt_event` | Corporate events |
+| Tenders | `metcpt_tender` | Procurement opportunities |
+| Careers | `metcpt_career` | Job vacancies |
+| Companies | `metcpt_company` | Subsidiary company profiles |
 
 ## Database Tables
 
-Haraka uses native WordPress tables:
+MetCPT uses native WordPress tables:
 - `wp_posts` — all CPT records
 - `wp_postmeta` — all custom field values
 - `wp_options` — plugin settings
@@ -348,7 +348,7 @@ No custom tables are created.
 - Refactored all CPT queries (removed WordPress post category dependency)
 - Added Template B for Tenders (editorial layout)
 - Added [news_grid] shortcode for WordPress default posts
-- Added Careers module with hrk_company relational CPT
+- Added Careers module with metcpt_company relational CPT
 - Events and Tenders modules
 - Dashboard widget with content health monitoring
 - Email notifications for closing tenders
@@ -358,7 +358,7 @@ No custom tables are created.
 
 For issues, feature requests, or questions:
 - **Internal:** Contact IIUM Holdings Web Development Team
-- **GitHub Issues:** [github.com/ismetdev/haraka/issues](https://github.com/ismetdev/haraka/issues)
+- **GitHub Issues:** [github.com/ismetdev/metcpt/issues](https://github.com/ismetdev/metcpt/issues)
 
 ## License
 
@@ -367,4 +367,4 @@ Proprietary — Internal use only by IIUM Holdings Sdn Bhd and its subsidiaries.
 ## Credits
 
 Developed for IIUM Holdings Sdn Bhd  
-Version 1.0.0 | June 2026
+Version 1.1.0 | June 2026

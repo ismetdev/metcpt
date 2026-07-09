@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-function haraka_tenders_list_shortcode( $atts ) {
+function metcpt_tenders_list_shortcode( $atts ) {
 
     $atts = shortcode_atts(
         array(
@@ -26,10 +26,10 @@ function haraka_tenders_list_shortcode( $atts ) {
     // Active Template setting, so different pages can show different layouts.
     $template = $atts['template'] !== ''
         ? strtolower( $atts['template'] )
-        : get_option( 'haraka_tenders_template', 'a' );
+        : get_option( 'metcpt_tenders_template', 'a' );
 
     if ( $template === 'b' ) {
-        return haraka_tenders_render_template_b_list( $atts );
+        return metcpt_tenders_render_template_b_list( $atts );
     }
 
     // ── Template A — table layout ─────────────────────────────────────────────
@@ -60,9 +60,9 @@ function haraka_tenders_list_shortcode( $atts ) {
         );
     }
 
-    // ── Base query — always uses hrk_tender CPT ───────────────────────────────
+    // ── Base query — always uses metcpt_tender CPT ───────────────────────────────
     $query_args = array(
-        'post_type'      => 'hrk_tender',
+        'post_type'      => 'metcpt_tender',
         'post_status'    => 'publish',
         'posts_per_page' => intval( $atts['posts_per_page'] ),
         'orderby'        => 'meta_value',
@@ -109,8 +109,8 @@ function haraka_tenders_list_shortcode( $atts ) {
                 'category'  => get_post_meta( $post_id, 'tender_category',     true ),
                 'doc_url'   => get_post_meta( $post_id, 'tender_document_url', true ),
                 'close_date'=> $close_date,
-                'close_fmt' => haraka_format_tender_date( $close_date ),
-                'status'    => haraka_get_tender_status( $close_date ),
+                'close_fmt' => metcpt_format_tender_date( $close_date ),
+                'status'    => metcpt_get_tender_status( $close_date ),
             );
         endwhile;
         wp_reset_postdata();
@@ -272,4 +272,4 @@ function haraka_tenders_list_shortcode( $atts ) {
     <?php
     return ob_get_clean();
 }
-add_shortcode( 'tenders_list', 'haraka_tenders_list_shortcode' );
+add_shortcode( 'tenders_list', 'metcpt_tenders_list_shortcode' );

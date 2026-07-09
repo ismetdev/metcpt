@@ -4,39 +4,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Haraka Error Log
+ * MetCPT Error Log
  *
  * Handles database table creation, PHP error capture,
  * exception handling, AJAX actions, and cron cleanup.
- * Scope is strictly limited to Haraka plugin files only.
+ * Scope is strictly limited to MetCPT plugin files only.
  *
- * @package Haraka
+ * @package MetCPT
  * @subpackage Admin
  * @version 1.0.4
  */
 
 // ── Constants ─────────────────────────────────────────────────────────────────
-define( 'HARAKA_ERROR_LOG_TABLE_VERSION', '1.0.0' );
-define( 'HARAKA_ERROR_LOG_PURGE_DAYS',   30 );
+define( 'METCPT_ERROR_LOG_TABLE_VERSION', '1.0.0' );
+define( 'METCPT_ERROR_LOG_PURGE_DAYS',   30 );
 
 // ── Table name helper ─────────────────────────────────────────────────────────
-function haraka_error_log_table() {
+function metcpt_error_log_table() {
     global $wpdb;
-    return $wpdb->prefix . 'haraka_error_log';
+    return $wpdb->prefix . 'metcpt_error_log';
 }
 
 // ── Create table on plugin activation ────────────────────────────────────────
-function haraka_error_log_create_table() {
+function metcpt_error_log_create_table() {
     global $wpdb;
 
-    $table      = haraka_error_log_table();
+    $table      = metcpt_error_log_table();
     $charset    = $wpdb->get_charset_collate();
-    $db_version = get_option( 'haraka_error_log_db_version', '' );
+    $db_version = get_option( 'metcpt_error_log_db_version', '' );
 
     // Check version AND confirm table actually exists
     // Prevents stale version option blocking recreation after failed install
     $table_exists = $wpdb->get_var( "SHOW TABLES LIKE '{$table}'" );
-    if ( $db_version === HARAKA_ERROR_LOG_TABLE_VERSION && $table_exists ) {
+    if ( $db_version === METCPT_ERROR_LOG_TABLE_VERSION && $table_exists ) {
         return;
     }
 
@@ -61,32 +61,32 @@ function haraka_error_log_create_table() {
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
     dbDelta( $sql );
 
-    update_option( 'haraka_error_log_db_version', HARAKA_ERROR_LOG_TABLE_VERSION );
+    update_option( 'metcpt_error_log_db_version', METCPT_ERROR_LOG_TABLE_VERSION );
 }
-register_activation_hook( HARAKA_PLUGIN_FILE, 'haraka_error_log_create_table' );
+register_activation_hook( METCPT_FILE, 'metcpt_error_log_create_table' );
 
-// ── Scope guard — only log Haraka files ──────────────────────────────────────
-function haraka_error_is_in_scope( $file ) {
+// ── Scope guard — only log MetCPT files ──────────────────────────────────────
+function metcpt_error_is_in_scope( $file ) {
     if ( empty( $file ) ) {
         return false;
     }
-    return strpos( realpath( $file ) ?: $file, realpath( HARAKA_PLUGIN_DIR ) ?: HARAKA_PLUGIN_DIR ) === 0;
+    return strpos( realpath( $file ) ?: $file, realpath( METCPT_PATH ) ?: METCPT_PATH ) === 0;
 }
 
 // ── Resolve relative source path ─────────────────────────────────────────────
-function haraka_error_source( $file ) {
-    $plugin_dir = realpath( HARAKA_PLUGIN_DIR ) ?: HARAKA_PLUGIN_DIR;
+function metcpt_error_source( $file ) {
+    $plugin_dir = realpath( METCPT_PATH ) ?: METCPT_PATH;
     $real_file  = realpath( $file ) ?: $file;
     return ltrim( str_replace( $plugin_dir, '', $real_file ), DIRECTORY_SEPARATOR );
 }
 
 // ── Resolve calling function from trace ──────────────────────────────────────
-function haraka_error_calling_function( $trace ) {
+function metcpt_error_calling_function( $trace ) {
     if ( empty( $trace ) || ! is_array( $trace ) ) {
         return '';
     }
     foreach ( $trace as $frame ) {
-        if ( isset( $frame['file'] ) && haraka_error_is_in_scope( $frame['file'] ) ) {
+        if ( isset( $frame['file'] ) && metcpt_error_is_in_scope( $frame['file'] ) ) {
             $class    = isset( $frame['class'] )    ? $frame['class'] . '::' : '';
             $function = isset( $frame['function'] ) ? $frame['function']     : '';
             return $class . $function . '()';
@@ -96,7 +96,7 @@ function haraka_error_calling_function( $trace ) {
 }
 
 // ── Sanitise trace for storage ────────────────────────────────────────────────
-function haraka_error_sanitise_trace( $trace ) {
+function metcpt_error_sanitise_trace( $trace ) {
     if ( empty( $trace ) || ! is_array( $trace ) ) {
         return array();
     }
@@ -108,14 +108,14 @@ function haraka_error_sanitise_trace( $trace ) {
             'function' => isset( $frame['function'] ) ? $frame['function']                        : '',
             'class'    => isset( $frame['class'] )    ? $frame['class']                           : '',
             'type'     => isset( $frame['type'] )     ? $frame['type']                            : '',
-            'args'     => isset( $frame['args'] )     ? array_map( 'haraka_error_arg_summary', $frame['args'] ) : array(),
+            'args'     => isset( $frame['args'] )     ? array_map( 'metcpt_error_arg_summary', $frame['args'] ) : array(),
         );
     }
     return $clean;
 }
 
 // ── Summarise arg to avoid storing large objects ──────────────────────────────
-function haraka_error_arg_summary( $arg ) {
+function metcpt_error_arg_summary( $arg ) {
     if ( is_null( $arg ) )    return 'null';
     if ( is_bool( $arg ) )    return $arg ? 'true' : 'false';
     if ( is_int( $arg ) )     return $arg;
@@ -127,7 +127,7 @@ function haraka_error_arg_summary( $arg ) {
 }
 
 // ── Build request context ─────────────────────────────────────────────────────
-function haraka_error_request_context() {
+function metcpt_error_request_context() {
     return array(
         'url'        => isset( $_SERVER['REQUEST_URI'] )  ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) )  : '',
         'method'     => isset( $_SERVER['REQUEST_METHOD'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) : '',
@@ -139,27 +139,27 @@ function haraka_error_request_context() {
 }
 
 // ── Core insert function ──────────────────────────────────────────────────────
-function haraka_error_log_insert( $level, $message, $file, $line, $trace = array(), $extra_context = array() ) {
+function metcpt_error_log_insert( $level, $message, $file, $line, $trace = array(), $extra_context = array() ) {
     global $wpdb;
 
-    if ( ! haraka_error_is_in_scope( $file ) ) {
+    if ( ! metcpt_error_is_in_scope( $file ) ) {
         return false;
     }
 
-    $context = array_merge( haraka_error_request_context(), $extra_context );
-    $table   = haraka_error_log_table();
+    $context = array_merge( metcpt_error_request_context(), $extra_context );
+    $table   = metcpt_error_log_table();
 
     return $wpdb->insert(
         $table,
         array(
             'created_at' => current_time( 'mysql' ),
             'level'      => sanitize_text_field( $level ),
-            'source'     => haraka_error_source( $file ),
+            'source'     => metcpt_error_source( $file ),
             'message'    => wp_strip_all_tags( $message ),
             'file'       => $file,
-            'function'   => haraka_error_calling_function( $trace ),
+            'function'   => metcpt_error_calling_function( $trace ),
             'line'       => absint( $line ),
-            'trace'      => wp_json_encode( haraka_error_sanitise_trace( $trace ) ),
+            'trace'      => wp_json_encode( metcpt_error_sanitise_trace( $trace ) ),
             'context'    => wp_json_encode( $context ),
             'resolved'   => 0,
         ),
@@ -168,14 +168,14 @@ function haraka_error_log_insert( $level, $message, $file, $line, $trace = array
 }
 
 // ── PHP error handler ─────────────────────────────────────────────────────────
-function haraka_php_error_handler( $errno, $errstr, $errfile, $errline ) {
+function metcpt_php_error_handler( $errno, $errstr, $errfile, $errline ) {
 
     // Respect @ operator (error suppression)
     if ( ! ( error_reporting() & $errno ) ) {
         return false;
     }
 
-    if ( ! haraka_error_is_in_scope( $errfile ) ) {
+    if ( ! metcpt_error_is_in_scope( $errfile ) ) {
         return false;
     }
 
@@ -194,21 +194,21 @@ function haraka_php_error_handler( $errno, $errstr, $errfile, $errline ) {
     $level = isset( $level_map[ $errno ] ) ? $level_map[ $errno ] : 'error';
     $trace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 20 );
 
-    haraka_error_log_insert( $level, $errstr, $errfile, $errline, $trace );
+    metcpt_error_log_insert( $level, $errstr, $errfile, $errline, $trace );
 
     // Return false to allow WordPress default handler to also run
     return false;
 }
-set_error_handler( 'haraka_php_error_handler' );
+set_error_handler( 'metcpt_php_error_handler' );
 
 // ── Uncaught exception handler ────────────────────────────────────────────────
-function haraka_exception_handler( $exception ) {
+function metcpt_exception_handler( $exception ) {
     $file  = $exception->getFile();
     $line  = $exception->getLine();
     $trace = $exception->getTrace();
 
-    if ( haraka_error_is_in_scope( $file ) ) {
-        haraka_error_log_insert(
+    if ( metcpt_error_is_in_scope( $file ) ) {
+        metcpt_error_log_insert(
             'exception',
             get_class( $exception ) . ': ' . $exception->getMessage(),
             $file,
@@ -225,10 +225,10 @@ function haraka_exception_handler( $exception ) {
     restore_exception_handler();
     throw $exception;
 }
-set_exception_handler( 'haraka_exception_handler' );
+set_exception_handler( 'metcpt_exception_handler' );
 
 // ── Fatal error handler — runs on shutdown ────────────────────────────────────
-function haraka_fatal_error_handler() {
+function metcpt_fatal_error_handler() {
     $error = error_get_last();
 
     if ( empty( $error ) ) {
@@ -241,11 +241,11 @@ function haraka_fatal_error_handler() {
         return;
     }
 
-    if ( ! haraka_error_is_in_scope( $error['file'] ) ) {
+    if ( ! metcpt_error_is_in_scope( $error['file'] ) ) {
         return;
     }
 
-    haraka_error_log_insert(
+    metcpt_error_log_insert(
         'fatal',
         $error['message'],
         $error['file'],
@@ -253,10 +253,10 @@ function haraka_fatal_error_handler() {
         array()
     );
 }
-register_shutdown_function( 'haraka_fatal_error_handler' );
+register_shutdown_function( 'metcpt_fatal_error_handler' );
 
 // ── WP_Error capture — call this manually where WP_Error may occur ───────────
-function haraka_capture_wp_error( $result, $context_label = '' ) {
+function metcpt_capture_wp_error( $result, $context_label = '' ) {
     if ( ! is_wp_error( $result ) ) {
         return $result;
     }
@@ -265,8 +265,8 @@ function haraka_capture_wp_error( $result, $context_label = '' ) {
     $file  = isset( $trace[0]['file'] ) ? $trace[0]['file'] : '';
     $line  = isset( $trace[0]['line'] ) ? $trace[0]['line'] : 0;
 
-    if ( haraka_error_is_in_scope( $file ) ) {
-        haraka_error_log_insert(
+    if ( metcpt_error_is_in_scope( $file ) ) {
+        metcpt_error_log_insert(
             'error',
             ( $context_label ? "[{$context_label}] " : '' ) . $result->get_error_message(),
             $file,
@@ -279,8 +279,8 @@ function haraka_capture_wp_error( $result, $context_label = '' ) {
 }
 
 // ── AJAX: mark log entry as resolved ─────────────────────────────────────────
-function haraka_ajax_resolve_log() {
-    check_ajax_referer( 'haraka_error_log', 'nonce' );
+function metcpt_ajax_resolve_log() {
+    check_ajax_referer( 'metcpt_error_log', 'nonce' );
 
     if ( ! current_user_can( 'manage_options' ) ) {
         wp_send_json_error( array( 'message' => 'Unauthorised.' ), 403 );
@@ -294,7 +294,7 @@ function haraka_ajax_resolve_log() {
 
     global $wpdb;
     $updated = $wpdb->update(
-        haraka_error_log_table(),
+        metcpt_error_log_table(),
         array( 'resolved' => 1 ),
         array( 'id'       => $id ),
         array( '%d' ),
@@ -307,11 +307,11 @@ function haraka_ajax_resolve_log() {
 
     wp_send_json_success( array( 'id' => $id ) );
 }
-add_action( 'wp_ajax_haraka_resolve_log',   'haraka_ajax_resolve_log' );
+add_action( 'wp_ajax_metcpt_resolve_log',   'metcpt_ajax_resolve_log' );
 
 // ── AJAX: fetch single log entry for modal ────────────────────────────────────
-function haraka_ajax_get_log_entry() {
-    check_ajax_referer( 'haraka_error_log', 'nonce' );
+function metcpt_ajax_get_log_entry() {
+    check_ajax_referer( 'metcpt_error_log', 'nonce' );
 
     if ( ! current_user_can( 'manage_options' ) ) {
         wp_send_json_error( array( 'message' => 'Unauthorised.' ), 403 );
@@ -326,7 +326,7 @@ function haraka_ajax_get_log_entry() {
     global $wpdb;
     $row = $wpdb->get_row(
         $wpdb->prepare(
-            'SELECT * FROM ' . haraka_error_log_table() . ' WHERE id = %d',
+            'SELECT * FROM ' . metcpt_error_log_table() . ' WHERE id = %d',
             $id
         ),
         ARRAY_A
@@ -341,11 +341,11 @@ function haraka_ajax_get_log_entry() {
 
     wp_send_json_success( $row );
 }
-add_action( 'wp_ajax_haraka_get_log_entry', 'haraka_ajax_get_log_entry' );
+add_action( 'wp_ajax_metcpt_get_log_entry', 'metcpt_ajax_get_log_entry' );
 
 // ── AJAX: clear all resolved logs ─────────────────────────────────────────────
-function haraka_ajax_clear_resolved() {
-    check_ajax_referer( 'haraka_error_log', 'nonce' );
+function metcpt_ajax_clear_resolved() {
+    check_ajax_referer( 'metcpt_error_log', 'nonce' );
 
     if ( ! current_user_can( 'manage_options' ) ) {
         wp_send_json_error( array( 'message' => 'Unauthorised.' ), 403 );
@@ -353,32 +353,32 @@ function haraka_ajax_clear_resolved() {
 
     global $wpdb;
     $deleted = $wpdb->query(
-        'DELETE FROM ' . haraka_error_log_table() . ' WHERE resolved = 1'
+        'DELETE FROM ' . metcpt_error_log_table() . ' WHERE resolved = 1'
     );
 
     wp_send_json_success( array( 'deleted' => $deleted ) );
 }
-add_action( 'wp_ajax_haraka_clear_resolved', 'haraka_ajax_clear_resolved' );
+add_action( 'wp_ajax_metcpt_clear_resolved', 'metcpt_ajax_clear_resolved' );
 
 // ── Cron: purge resolved logs older than 30 days ─────────────────────────────
-function haraka_purge_old_error_logs() {
+function metcpt_purge_old_error_logs() {
     global $wpdb;
 
     $wpdb->query(
         $wpdb->prepare(
-            'DELETE FROM ' . haraka_error_log_table() . '
+            'DELETE FROM ' . metcpt_error_log_table() . '
              WHERE resolved = 1
              AND created_at < %s',
-            gmdate( 'Y-m-d H:i:s', strtotime( '-' . HARAKA_ERROR_LOG_PURGE_DAYS . ' days' ) )
+            gmdate( 'Y-m-d H:i:s', strtotime( '-' . METCPT_ERROR_LOG_PURGE_DAYS . ' days' ) )
         )
     );
 }
-add_action( 'haraka_purge_error_log', 'haraka_purge_old_error_logs' );
+add_action( 'metcpt_purge_error_log', 'metcpt_purge_old_error_logs' );
 
 // ── Schedule purge cron ───────────────────────────────────────────────────────
-function haraka_schedule_error_log_purge() {
-    if ( ! wp_next_scheduled( 'haraka_purge_error_log' ) ) {
-        wp_schedule_event( time(), 'daily', 'haraka_purge_error_log' );
+function metcpt_schedule_error_log_purge() {
+    if ( ! wp_next_scheduled( 'metcpt_purge_error_log' ) ) {
+        wp_schedule_event( time(), 'daily', 'metcpt_purge_error_log' );
     }
 }
-add_action( 'wp', 'haraka_schedule_error_log_purge' );
+add_action( 'wp', 'metcpt_schedule_error_log_purge' );

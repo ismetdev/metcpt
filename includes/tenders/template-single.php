@@ -4,22 +4,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Helper: tender status ─────────────────────────────────────────────────────
-if ( ! function_exists( 'haraka_get_tender_status' ) ) {
-    function haraka_get_tender_status( $close_date_str ) {
+if ( ! function_exists( 'metcpt_get_tender_status' ) ) {
+    function metcpt_get_tender_status( $close_date_str ) {
         if ( empty( $close_date_str ) ) return 'open';
         $today      = new DateTime( 'today' );
         $close_date = date_create( $close_date_str );
         if ( ! $close_date ) return 'open';
         if ( $close_date < $today ) return 'closed';
-        $threshold = (int) get_option( 'haraka_closing_soon_days', 7 );
+        $threshold = (int) get_option( 'metcpt_closing_soon_days', 7 );
         if ( (int) $today->diff( $close_date )->days <= $threshold ) return 'soon';
         return 'open';
     }
 }
 
 // ── Helper: format tender date ────────────────────────────────────────────────
-if ( ! function_exists( 'haraka_format_tender_date' ) ) {
-    function haraka_format_tender_date( $close_date_str ) {
+if ( ! function_exists( 'metcpt_format_tender_date' ) ) {
+    function metcpt_format_tender_date( $close_date_str ) {
         if ( empty( $close_date_str ) ) return 'TBC';
         $date = date_create( $close_date_str );
         return $date ? $date->format( 'd M Y' ) : esc_html( $close_date_str );
@@ -27,8 +27,8 @@ if ( ! function_exists( 'haraka_format_tender_date' ) ) {
 }
 
 // ── Helper: tender initials ───────────────────────────────────────────────────
-if ( ! function_exists( 'haraka_tender_initials' ) ) {
-    function haraka_tender_initials( $name ) {
+if ( ! function_exists( 'metcpt_tender_initials' ) ) {
+    function metcpt_tender_initials( $name ) {
         $words    = explode( ' ', trim( $name ) );
         $initials = '';
         foreach ( $words as $word ) {
@@ -41,24 +41,24 @@ if ( ! function_exists( 'haraka_tender_initials' ) ) {
     }
 }
 
-// ── Override single template for hrk_tender ──────────────────────────────────
-if ( ! function_exists( 'haraka_tender_single_template' ) ) {
-    function haraka_tender_single_template( $template ) {
-        if ( is_singular( 'hrk_tender' ) ) {
-            if ( ! defined( 'HARAKA_TENDER_TEMPLATE_LOADED' ) ) {
-                define( 'HARAKA_TENDER_TEMPLATE_LOADED', true );
-                return HARAKA_PLUGIN_DIR . 'includes/tenders/template-single.php';
+// ── Override single template for metcpt_tender ──────────────────────────────────
+if ( ! function_exists( 'metcpt_tender_single_template' ) ) {
+    function metcpt_tender_single_template( $template ) {
+        if ( is_singular( 'metcpt_tender' ) ) {
+            if ( ! defined( 'METCPT_TENDER_TEMPLATE_LOADED' ) ) {
+                define( 'METCPT_TENDER_TEMPLATE_LOADED', true );
+                return METCPT_PATH . 'includes/tenders/template-single.php';
             }
         }
         return $template;
     }
-    add_filter( 'single_template', 'haraka_tender_single_template' );
+    add_filter( 'single_template', 'metcpt_tender_single_template' );
 }
 
 // ── Render the single tender page ─────────────────────────────────────────────
-if ( ! function_exists( 'haraka_render_tender_single' ) ) {
-    function haraka_render_tender_single() {
-        if ( ! is_singular( 'hrk_tender' ) ) return;
+if ( ! function_exists( 'metcpt_render_tender_single' ) ) {
+    function metcpt_render_tender_single() {
+        if ( ! is_singular( 'metcpt_tender' ) ) return;
 
         global $post;
         $post_id = $post->ID;
@@ -79,8 +79,8 @@ if ( ! function_exists( 'haraka_render_tender_single' ) ) {
         $tender_contact_phone     = get_post_meta( $post_id, 'tender_contact_phone',     true );
 
         // ── Status ────────────────────────────────────────────────────────────
-        $status       = haraka_get_tender_status( $tender_close_date );
-        $close_fmt    = haraka_format_tender_date( $tender_close_date );
+        $status       = metcpt_get_tender_status( $tender_close_date );
+        $close_fmt    = metcpt_format_tender_date( $tender_close_date );
         $publish_date = get_the_date( 'd M Y', $post_id );
         $excerpt      = get_the_excerpt( $post_id );
 
@@ -94,7 +94,7 @@ if ( ! function_exists( 'haraka_render_tender_single' ) ) {
             $status_class = 'hrk-t-status-closed';
         }
 
-        $tenders_archive = get_post_type_archive_link( 'hrk_tender' );
+        $tenders_archive = get_post_type_archive_link( 'metcpt_tender' );
         ?>
 
         <!DOCTYPE html>
@@ -238,7 +238,7 @@ if ( ! function_exists( 'haraka_render_tender_single' ) ) {
                 <div class="hrk-t-section-title">Contact &amp; Enquiries</div>
                 <div class="hrk-t-contact-card">
                     <div class="hrk-t-avatar">
-                        <?php echo esc_html( haraka_tender_initials( $tender_contact_name ) ); ?>
+                        <?php echo esc_html( metcpt_tender_initials( $tender_contact_name ) ); ?>
                     </div>
                     <div>
                         <div class="hrk-t-contact-dept">Procurement Unit</div>
@@ -275,11 +275,11 @@ if ( ! function_exists( 'haraka_render_tender_single' ) ) {
 }
 
 // ── Run renderer when loaded as template ──────────────────────────────────────
-if ( defined( 'HARAKA_TENDER_TEMPLATE_LOADED' ) ) {
+if ( defined( 'METCPT_TENDER_TEMPLATE_LOADED' ) ) {
     global $wp_query;
     if ( $wp_query->have_posts() ) {
         $wp_query->the_post();
-        haraka_render_tender_single();
+        metcpt_render_tender_single();
         wp_reset_postdata();
     }
 }

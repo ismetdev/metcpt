@@ -1,10 +1,10 @@
-=== Haraka ===
+=== MetCPT ===
 Contributors: Ismet Fitri
 Tags: corporate, events, careers, tenders, listings
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 8.0
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Corporate Content Hub for WordPress. Manage Events, Tenders, and Careers with st
 
 == Description ==
 
-Haraka is a corporate content management plugin designed for enterprise and institutional websites.
+MetCPT is a corporate content management plugin designed for enterprise and institutional websites.
 
 Features include:
 
@@ -27,7 +27,7 @@ Perfect for corporate websites that need organized public information publishing
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/haraka` directory
+1. Upload the plugin files to the `/wp-content/plugins/metcpt` directory
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Configure content from the WordPress admin dashboard
 
@@ -58,4 +58,4 @@ Yes. Developers can override or customize templates as needed.
 
 = 1.0.0 =
 
-Initial production release of Haraka.
+Initial production release of MetCPT.

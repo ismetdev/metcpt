@@ -4,31 +4,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Archive Template for hrk_career
+ * Archive Template for metcpt_career
  *
  * Automatically used when users navigate to the career archive URL
  * or press Back from a single career page.
  *
- * @package Haraka
+ * @package MetCPT
  * @version 1.0.4
  */
 
-if ( ! function_exists( 'haraka_career_archive_template' ) ) {
-    function haraka_career_archive_template( $template ) {
-        if ( is_post_type_archive( 'hrk_career' ) ) {
-            if ( ! defined( 'HARAKA_CAREER_ARCHIVE_LOADED' ) ) {
-                define( 'HARAKA_CAREER_ARCHIVE_LOADED', true );
-                return HARAKA_PLUGIN_DIR . 'includes/careers/template-archive.php';
+if ( ! function_exists( 'metcpt_career_archive_template' ) ) {
+    function metcpt_career_archive_template( $template ) {
+        if ( is_post_type_archive( 'metcpt_career' ) ) {
+            if ( ! defined( 'METCPT_CAREER_ARCHIVE_LOADED' ) ) {
+                define( 'METCPT_CAREER_ARCHIVE_LOADED', true );
+                return METCPT_PATH . 'includes/careers/template-archive.php';
             }
         }
         return $template;
     }
-    add_filter( 'archive_template', 'haraka_career_archive_template' );
+    add_filter( 'archive_template', 'metcpt_career_archive_template' );
 }
 
-if ( ! function_exists( 'haraka_render_career_archive' ) ) {
-    function haraka_render_career_archive() {
-        if ( ! is_post_type_archive( 'hrk_career' ) ) return;
+if ( ! function_exists( 'metcpt_render_career_archive' ) ) {
+    function metcpt_render_career_archive() {
+        if ( ! is_post_type_archive( 'metcpt_career' ) ) return;
         ?>
 
         <!DOCTYPE html>
@@ -64,10 +64,10 @@ if ( ! function_exists( 'haraka_render_career_archive' ) ) {
             <div class="hrk-cr-archive-grid">
                 <?php
                 $today     = date( 'Y-m-d' );
-                $threshold = (int) get_option( 'haraka_closing_soon_days', 7 );
+                $threshold = (int) get_option( 'metcpt_closing_soon_days', 7 );
 
                 $query = new WP_Query( array(
-                    'post_type'      => 'hrk_career',
+                    'post_type'      => 'metcpt_career',
                     'post_status'    => 'publish',
                     'posts_per_page' => -1,
                     'meta_key'       => 'career_close_date',
@@ -226,6 +226,6 @@ if ( ! function_exists( 'haraka_render_career_archive' ) ) {
     }
 }
 
-if ( defined( 'HARAKA_CAREER_ARCHIVE_LOADED' ) ) {
-    haraka_render_career_archive();
+if ( defined( 'METCPT_CAREER_ARCHIVE_LOADED' ) ) {
+    metcpt_render_career_archive();
 }

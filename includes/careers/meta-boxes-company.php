@@ -4,22 +4,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Register Company meta box ─────────────────────────────────────────────────
-function haraka_company_add_meta_boxes() {
+function metcpt_company_add_meta_boxes() {
     add_meta_box(
-        'haraka_company_details',
+        'metcpt_company_details',
         'Company Details',
-        'haraka_company_meta_box_html',
-        'hrk_company',
+        'metcpt_company_meta_box_html',
+        'metcpt_company',
         'normal',
         'high'
     );
 }
-add_action( 'add_meta_boxes', 'haraka_company_add_meta_boxes' );
+add_action( 'add_meta_boxes', 'metcpt_company_add_meta_boxes' );
 
 
 // ── Company meta box HTML ─────────────────────────────────────────────────────
-function haraka_company_meta_box_html( $post ) {
-    wp_nonce_field( 'haraka_company_meta_save', 'haraka_company_nonce' );
+function metcpt_company_meta_box_html( $post ) {
+    wp_nonce_field( 'metcpt_company_meta_save', 'metcpt_company_nonce' );
 
     $full_name   = get_post_meta( $post->ID, 'company_full_name',   true );
     $short_name  = get_post_meta( $post->ID, 'company_short_name',  true );
@@ -33,39 +33,39 @@ function haraka_company_meta_box_html( $post ) {
         <div class="hrk-meta-section-title">Section 1 — Identity</div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_company_full_name">
+            <label for="metcpt_company_full_name">
                 Full Legal Name <span class="hrk-required">*</span>
                 <span class="hrk-hint">e.g. Daya Bersih Sdn Bhd</span>
             </label>
             <input type="text"
-                   id="haraka_company_full_name"
-                   name="haraka_company_full_name"
+                   id="metcpt_company_full_name"
+                   name="metcpt_company_full_name"
                    value="<?php echo esc_attr( $full_name ); ?>"
                    placeholder="e.g. Daya Bersih Sdn Bhd" />
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_company_short_name">
+            <label for="metcpt_company_short_name">
                 Short / Display Name
                 <span class="hrk-hint">
                     Used in listings and dropdowns e.g. Daya Bersih
                 </span>
             </label>
             <input type="text"
-                   id="haraka_company_short_name"
-                   name="haraka_company_short_name"
+                   id="metcpt_company_short_name"
+                   name="metcpt_company_short_name"
                    value="<?php echo esc_attr( $short_name ); ?>"
                    placeholder="e.g. Daya Bersih" />
         </div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_company_website">
+            <label for="metcpt_company_website">
                 Company Website
                 <span class="hrk-hint">e.g. https://dayabersih.com.my</span>
             </label>
             <input type="url"
-                   id="haraka_company_website"
-                   name="haraka_company_website"
+                   id="metcpt_company_website"
+                   name="metcpt_company_website"
                    value="<?php echo esc_attr( $website ); ?>"
                    placeholder="https://example.com.my" />
         </div>
@@ -73,12 +73,12 @@ function haraka_company_meta_box_html( $post ) {
         <div class="hrk-meta-section-title">Section 2 — Location</div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_company_address">
+            <label for="metcpt_company_address">
                 Office Address
                 <span class="hrk-hint">Full address of the company office</span>
             </label>
-            <textarea id="haraka_company_address"
-                      name="haraka_company_address"
+            <textarea id="metcpt_company_address"
+                      name="metcpt_company_address"
                       rows="4"
                       placeholder="e.g. Level 3, Muhammad Abdul Rauf Building&#10;International Islamic University Malaysia&#10;Jalan Gombak, 53100 Kuala Lumpur"><?php echo esc_textarea( $address ); ?></textarea>
         </div>
@@ -86,14 +86,14 @@ function haraka_company_meta_box_html( $post ) {
         <div class="hrk-meta-section-title">Section 3 — About</div>
 
         <div class="hrk-meta-row">
-            <label for="haraka_company_description">
+            <label for="metcpt_company_description">
                 Company Description
                 <span class="hrk-hint">
                     One short paragraph shown on career listings for this company
                 </span>
             </label>
-            <textarea id="haraka_company_description"
-                      name="haraka_company_description"
+            <textarea id="metcpt_company_description"
+                      name="metcpt_company_description"
                       rows="4"
                       placeholder="e.g. Daya Bersih Sdn Bhd is a facilities management subsidiary of IIUM Holdings..."><?php echo esc_textarea( $description ); ?></textarea>
         </div>
@@ -135,9 +135,9 @@ function haraka_company_meta_box_html( $post ) {
 
 
 // ── Save company meta ─────────────────────────────────────────────────────────
-function haraka_save_company_meta( $post_id ) {
-    if ( ! isset( $_POST['haraka_company_nonce'] ) ||
-         ! wp_verify_nonce( $_POST['haraka_company_nonce'], 'haraka_company_meta_save' ) ) {
+function metcpt_save_company_meta( $post_id ) {
+    if ( ! isset( $_POST['metcpt_company_nonce'] ) ||
+         ! wp_verify_nonce( $_POST['metcpt_company_nonce'], 'metcpt_company_meta_save' ) ) {
         return;
     }
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -146,13 +146,13 @@ function haraka_save_company_meta( $post_id ) {
     if ( ! current_user_can( 'edit_post', $post_id ) ) {
         return;
     }
-    if ( get_post_type( $post_id ) !== 'hrk_company' ) {
+    if ( get_post_type( $post_id ) !== 'metcpt_company' ) {
         return;
     }
 
     $text_fields = array(
-        'haraka_company_full_name'  => 'company_full_name',
-        'haraka_company_short_name' => 'company_short_name',
+        'metcpt_company_full_name'  => 'company_full_name',
+        'metcpt_company_short_name' => 'company_short_name',
     );
 
     foreach ( $text_fields as $post_key => $meta_key ) {
@@ -166,18 +166,18 @@ function haraka_save_company_meta( $post_id ) {
     }
 
     // URL field
-    if ( isset( $_POST['haraka_company_website'] ) ) {
+    if ( isset( $_POST['metcpt_company_website'] ) ) {
         update_post_meta(
             $post_id,
             'company_website',
-            esc_url_raw( wp_unslash( $_POST['haraka_company_website'] ) )
+            esc_url_raw( wp_unslash( $_POST['metcpt_company_website'] ) )
         );
     }
 
     // Textarea fields
     $textarea_fields = array(
-        'haraka_company_address'     => 'company_address',
-        'haraka_company_description' => 'company_description',
+        'metcpt_company_address'     => 'company_address',
+        'metcpt_company_description' => 'company_description',
     );
 
     foreach ( $textarea_fields as $post_key => $meta_key ) {
@@ -190,4 +190,4 @@ function haraka_save_company_meta( $post_id ) {
         }
     }
 }
-add_action( 'save_post', 'haraka_save_company_meta' );
+add_action( 'save_post', 'metcpt_save_company_meta' );

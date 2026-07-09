@@ -4,33 +4,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Archive Template for hrk_tender
+ * Archive Template for metcpt_tender
  *
  * Automatically used when users navigate to the tender archive URL
  * or press Back from a single tender page.
  *
- * @package Haraka
+ * @package MetCPT
  * @version 1.0.4
  */
 
 // ── Hook into WordPress archive template filter ───────────────────────────────
-if ( ! function_exists( 'haraka_tender_archive_template' ) ) {
-    function haraka_tender_archive_template( $template ) {
-        if ( is_post_type_archive( 'hrk_tender' ) ) {
-            if ( ! defined( 'HARAKA_TENDER_ARCHIVE_LOADED' ) ) {
-                define( 'HARAKA_TENDER_ARCHIVE_LOADED', true );
-                return HARAKA_PLUGIN_DIR . 'includes/tenders/template-archive.php';
+if ( ! function_exists( 'metcpt_tender_archive_template' ) ) {
+    function metcpt_tender_archive_template( $template ) {
+        if ( is_post_type_archive( 'metcpt_tender' ) ) {
+            if ( ! defined( 'METCPT_TENDER_ARCHIVE_LOADED' ) ) {
+                define( 'METCPT_TENDER_ARCHIVE_LOADED', true );
+                return METCPT_PATH . 'includes/tenders/template-archive.php';
             }
         }
         return $template;
     }
-    add_filter( 'archive_template', 'haraka_tender_archive_template' );
+    add_filter( 'archive_template', 'metcpt_tender_archive_template' );
 }
 
 // ── Render the archive page ───────────────────────────────────────────────────
-if ( ! function_exists( 'haraka_render_tender_archive' ) ) {
-    function haraka_render_tender_archive() {
-        if ( ! is_post_type_archive( 'hrk_tender' ) ) return;
+if ( ! function_exists( 'metcpt_render_tender_archive' ) ) {
+    function metcpt_render_tender_archive() {
+        if ( ! is_post_type_archive( 'metcpt_tender' ) ) return;
         ?>
 
         <!DOCTYPE html>
@@ -66,7 +66,7 @@ if ( ! function_exists( 'haraka_render_tender_archive' ) ) {
             <div class="hrk-t-archive-grid">
                 <?php
                 $query = new WP_Query( array(
-                    'post_type'      => 'hrk_tender',
+                    'post_type'      => 'metcpt_tender',
                     'post_status'    => 'publish',
                     'posts_per_page' => -1,
                     'orderby'        => 'meta_value',
@@ -91,8 +91,8 @@ if ( ! function_exists( 'haraka_render_tender_archive' ) ) {
 
                         if ( empty( $close_date ) ) continue;
 
-                        $status    = haraka_get_tender_status( $close_date );
-                        $close_fmt = haraka_format_tender_date( $close_date );
+                        $status    = metcpt_get_tender_status( $close_date );
+                        $close_fmt = metcpt_format_tender_date( $close_date );
 
                         $status_label = 'Open';
                         $status_class = 'hrk-t-status-open';
@@ -207,6 +207,6 @@ if ( ! function_exists( 'haraka_render_tender_archive' ) ) {
 }
 
 // Only render when loaded as the active template
-if ( defined( 'HARAKA_TENDER_ARCHIVE_LOADED' ) ) {
-    haraka_render_tender_archive();
+if ( defined( 'METCPT_TENDER_ARCHIVE_LOADED' ) ) {
+    metcpt_render_tender_archive();
 }

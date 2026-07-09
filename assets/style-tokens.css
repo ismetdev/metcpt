@@ -1,11 +1,11 @@
 /**
- * Haraka Design Tokens (v2)
+ * MetCPT Design Tokens (v2)
  *
  * Shared CSS custom properties for the redesigned Newsroom and Tenders-preview
  * sections. Scoped under .hrk-v2 (not :root) so nothing leaks globally and
  * nothing collides with Hello Elementor / Elementor's own custom properties.
  *
- * @package Haraka
+ * @package MetCPT
  * @version 1.0.4
  */
 

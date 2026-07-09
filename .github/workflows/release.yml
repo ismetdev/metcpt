@@ -1,0 +1,50 @@
+name: Build zip and publish release on tag
+
+# Runs when you push a version tag like v1.1.0. It builds a clean, correctly
+# structured metcpt.zip on Linux (forward-slash paths, so it never suffers the
+# Windows/PowerShell backslash corruption), creates the matching GitHub Release,
+# and attaches the zip. The bundled Plugin Update Checker delivers this zip to
+# WordPress sites, so its structure must be exactly metcpt/...
+#
+# Note: there is deliberately no push-to-branch FTP deploy. Sites update only
+# when an admin clicks "Update" on the Plugins/Updates screen — never silently.
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Build clean plugin zip
+        run: |
+          # Stage the plugin inside a folder named exactly "metcpt" so the zip
+          # unpacks to wp-content/plugins/metcpt/ on the target site. Plain
+          # cp + zip keeps forward-slash paths, always valid on Linux/WordPress.
+          mkdir -p build/metcpt
+          for item in $(ls -A | grep -vE '^(\.git|\.github|\.gitattributes|\.gitignore|\.claude|node_modules|build)$'); do
+            cp -r "$item" build/metcpt/
+          done
+          cd build
+          zip -rq ../metcpt.zip metcpt -x "*.zip"
+          cd ..
+          echo "---- zip contents (first 20 entries) ----"
+          unzip -l metcpt.zip | head -20
+          echo "---- verifying main plugin file is present ----"
+          unzip -l metcpt.zip | grep -q "metcpt/metcpt.php" && echo "OK: metcpt/metcpt.php present" || (echo "ERROR: main file missing" && exit 1)
+          echo "---- verifying update library is present ----"
+          unzip -l metcpt.zip | grep -q "metcpt/libs/plugin-update-checker/plugin-update-checker.php" && echo "OK: update library present" || (echo "ERROR: update library missing" && exit 1)
+
+      - name: Create release and attach zip
+        uses: softprops/action-gh-release@v2
+        with:
+          files: metcpt.zip

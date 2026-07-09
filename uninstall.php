@@ -1,6 +1,6 @@
 <?php
 /**
- * Haraka Uninstall Handler
+ * MetCPT Uninstall Handler
  *
  * Runs only when the plugin is DELETED via WordPress Admin → Plugins.
  * Deactivation alone never triggers this file.
@@ -8,8 +8,8 @@
  * Default behaviour: preserve all data (safe uninstall).
  * To enable full cleanup, uncomment the block below.
  *
- * @package Haraka
- * @version 1.0.4
+ * @package MetCPT
+ * @version 1.1.0
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
@@ -24,8 +24,8 @@ if ( ! current_user_can( 'activate_plugins' ) ) {
 /*
 global $wpdb;
 
-// Delete all Haraka CPT posts
-foreach ( array( 'hrk_event', 'hrk_tender', 'hrk_career', 'hrk_company' ) as $post_type ) {
+// Delete all MetCPT CPT posts
+foreach ( array( 'metcpt_event', 'metcpt_tender', 'metcpt_career', 'metcpt_company' ) as $post_type ) {
     $ids = get_posts( array(
         'post_type'      => $post_type,
         'post_status'    => 'any',
@@ -48,7 +48,7 @@ $meta_keys = array(
     'tender_close_date', 'tender_close_time', 'tender_validity', 'tender_fee',
     'tender_submission_method', 'tender_submission_address',
     'tender_document_url', 'tender_contact_name', 'tender_contact_email',
-    'tender_contact_phone', 'haraka_closing_notified',
+    'tender_contact_phone', 'metcpt_closing_notified',
     'career_company_id', 'career_department', 'career_location',
     'career_type', 'career_close_date', 'career_salary', 'career_apply_url',
     'career_contact_name', 'career_contact_email', 'career_contact_phone',
@@ -63,38 +63,38 @@ foreach ( $meta_keys as $key ) {
 
 // Delete plugin options
 $options = array(
-    'haraka_events_page_url', 'haraka_tenders_page_url',
-    'haraka_careers_page_url', 'haraka_closing_soon_days',
-    'haraka_notify_email', 'haraka_tenders_template',
-    'haraka_tenders_b_label', 'haraka_tenders_b_headline',
-    'haraka_tenders_b_headline_italic', 'haraka_tenders_b_all_text',
-    'haraka_tenders_b_view_all_text', 'haraka_career_departments',
-    'haraka_news_label', 'haraka_news_headline',
-    'haraka_news_headline_italic', 'haraka_news_view_all_text',
-    'haraka_news_view_all_url', 'haraka_news_category',
-    'haraka_accent_color',
+    'metcpt_events_page_url', 'metcpt_tenders_page_url',
+    'metcpt_careers_page_url', 'metcpt_closing_soon_days',
+    'metcpt_notify_email', 'metcpt_tenders_template',
+    'metcpt_tenders_b_label', 'metcpt_tenders_b_headline',
+    'metcpt_tenders_b_headline_italic', 'metcpt_tenders_b_all_text',
+    'metcpt_tenders_b_view_all_text', 'metcpt_career_departments',
+    'metcpt_news_label', 'metcpt_news_headline',
+    'metcpt_news_headline_italic', 'metcpt_news_view_all_text',
+    'metcpt_news_view_all_url', 'metcpt_news_category',
+    'metcpt_accent_color',
 );
 foreach ( $options as $option ) {
     delete_option( $option );
 }
 
 // Clear transients and cron
-delete_transient( 'haraka_dashboard_counts' );
+delete_transient( 'metcpt_dashboard_counts' );
 $wpdb->query(
     "DELETE FROM {$wpdb->options}
-     WHERE option_name LIKE '_transient_haraka_%'
-     OR option_name LIKE '_transient_timeout_haraka_%'"
+     WHERE option_name LIKE '_transient_metcpt_%'
+     OR option_name LIKE '_transient_timeout_metcpt_%'"
 );
-$timestamp = wp_next_scheduled( 'haraka_daily_tender_check' );
+$timestamp = wp_next_scheduled( 'metcpt_daily_tender_check' );
 if ( $timestamp ) {
-    wp_unschedule_event( $timestamp, 'haraka_daily_tender_check' );
+    wp_unschedule_event( $timestamp, 'metcpt_daily_tender_check' );
 }
-$timestamp = wp_next_scheduled( 'haraka_purge_error_log' );
+$timestamp = wp_next_scheduled( 'metcpt_purge_error_log' );
 if ( $timestamp ) {
-    wp_unschedule_event( $timestamp, 'haraka_purge_error_log' );
+    wp_unschedule_event( $timestamp, 'metcpt_purge_error_log' );
 }
 
 // Drop error log table
-$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}haraka_error_log" );
-delete_option( 'haraka_error_log_db_version' );
+$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}metcpt_error_log" );
+delete_option( 'metcpt_error_log_db_version' );
 */

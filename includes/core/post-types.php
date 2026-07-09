@@ -3,10 +3,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-function haraka_register_post_types() {
+function metcpt_register_post_types() {
 
     // ── Events CPT ────────────────────────────────────────────────────────────
-    register_post_type( 'hrk_event', array(
+    register_post_type( 'metcpt_event', array(
         'labels' => array(
             'name'               => 'Events',
             'singular_name'      => 'Event',
@@ -31,7 +31,7 @@ function haraka_register_post_types() {
     ) );
 
     // ── Tenders CPT ───────────────────────────────────────────────────────────
-    register_post_type( 'hrk_tender', array(
+    register_post_type( 'metcpt_tender', array(
         'labels' => array(
             'name'               => 'Tenders',
             'singular_name'      => 'Tender',
@@ -56,7 +56,7 @@ function haraka_register_post_types() {
     ) );
 
     // ── Companies CPT ─────────────────────────────────────────────────────────
-    register_post_type( 'hrk_company', array(
+    register_post_type( 'metcpt_company', array(
         'labels' => array(
             'name'               => 'Companies',
             'singular_name'      => 'Company',
@@ -83,7 +83,7 @@ function haraka_register_post_types() {
     ) );
 
     // ── Careers CPT ───────────────────────────────────────────────────────────
-    register_post_type( 'hrk_career', array(
+    register_post_type( 'metcpt_career', array(
         'labels' => array(
             'name'               => 'Careers',
             'singular_name'      => 'Career',
@@ -107,4 +107,4 @@ function haraka_register_post_types() {
         'menu_position'       => 7,
     ) );
 }
-add_action( 'init', 'haraka_register_post_types' );
+add_action( 'init', 'metcpt_register_post_types' );

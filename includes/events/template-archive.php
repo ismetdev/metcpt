@@ -4,31 +4,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Archive Template for hrk_event
+ * Archive Template for metcpt_event
  *
  * Automatically used when users navigate to the event archive URL
  * or press Back from a single event page.
  *
- * @package Haraka
+ * @package MetCPT
  * @version 1.0.4
  */
 
-if ( ! function_exists( 'haraka_event_archive_template' ) ) {
-    function haraka_event_archive_template( $template ) {
-        if ( is_post_type_archive( 'hrk_event' ) ) {
-            if ( ! defined( 'HARAKA_EVENT_ARCHIVE_LOADED' ) ) {
-                define( 'HARAKA_EVENT_ARCHIVE_LOADED', true );
-                return HARAKA_PLUGIN_DIR . 'includes/events/template-archive.php';
+if ( ! function_exists( 'metcpt_event_archive_template' ) ) {
+    function metcpt_event_archive_template( $template ) {
+        if ( is_post_type_archive( 'metcpt_event' ) ) {
+            if ( ! defined( 'METCPT_EVENT_ARCHIVE_LOADED' ) ) {
+                define( 'METCPT_EVENT_ARCHIVE_LOADED', true );
+                return METCPT_PATH . 'includes/events/template-archive.php';
             }
         }
         return $template;
     }
-    add_filter( 'archive_template', 'haraka_event_archive_template' );
+    add_filter( 'archive_template', 'metcpt_event_archive_template' );
 }
 
-if ( ! function_exists( 'haraka_render_event_archive' ) ) {
-    function haraka_render_event_archive() {
-        if ( ! is_post_type_archive( 'hrk_event' ) ) return;
+if ( ! function_exists( 'metcpt_render_event_archive' ) ) {
+    function metcpt_render_event_archive() {
+        if ( ! is_post_type_archive( 'metcpt_event' ) ) return;
 
         $today = date( 'Y-m-d' );
         ?>
@@ -66,7 +66,7 @@ if ( ! function_exists( 'haraka_render_event_archive' ) ) {
             <div class="hrk-ev-archive-grid">
                 <?php
                 $query = new WP_Query( array(
-                    'post_type'      => 'hrk_event',
+                    'post_type'      => 'metcpt_event',
                     'post_status'    => 'publish',
                     'posts_per_page' => -1,
                     'meta_key'       => 'event_date',
@@ -210,6 +210,6 @@ if ( ! function_exists( 'haraka_render_event_archive' ) ) {
     }
 }
 
-if ( defined( 'HARAKA_EVENT_ARCHIVE_LOADED' ) ) {
-    haraka_render_event_archive();
+if ( defined( 'METCPT_EVENT_ARCHIVE_LOADED' ) ) {
+    metcpt_render_event_archive();
 }
