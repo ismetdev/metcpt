@@ -4,8 +4,8 @@
  * Plugin URI:        https://v2.iiumholdings.com.my
  * Description:       Corporate Content Hub for WordPress. Manage Events, Tenders, and Careers with beautiful structured listings and full single-page templates. Built for IIUM Holdings.
  * Version:           1.0.4
- * Author:            Ismet Fitri
- * Author URI:        https://v2.iiumholdings.com.my
+ * Author:            ismetdev
+ * Author URI:        https://github.com/ismetdev
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       haraka
