@@ -94,15 +94,6 @@ if ( ! function_exists( 'metcpt_render_career_single' ) ) {
         $careers_archive = get_option( 'metcpt_careers_page_url', '/careers' );
 
         ?>
-        <!DOCTYPE html>
-        <html <?php language_attributes(); ?>>
-        <head>
-            <meta charset="<?php bloginfo( 'charset' ); ?>">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <?php wp_head(); ?>
-        </head>
-        <body <?php body_class(); ?>>
-        <?php wp_body_open(); ?>
         <?php get_header(); ?>
 
         <main>
@@ -292,9 +283,6 @@ if ( ! function_exists( 'metcpt_render_career_single' ) ) {
         </main>
 
         <?php get_footer(); ?>
-        <?php wp_footer(); ?>
-        </body>
-        </html>
 
         <?php
     }

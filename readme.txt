@@ -4,7 +4,7 @@ Tags: corporate, events, careers, tenders, listings
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,14 @@ Yes, but it works best with themes that support modern WordPress templating.
 Yes. Developers can override or customize templates as needed.
 
 == Changelog ==
+
+= 1.3.1 =
+
+* Fixed single Event, Tender, and Career pages rendering a duplicate page structure (two document shells, a repeated page title, and the head section loading twice) — pages now output clean, valid HTML with a single title, improving SEO and load weight. No visual change.
+* Fixed the deactivation cleanup so scheduled background tasks are properly unscheduled when the plugin is deactivated (previously the hook was registered against the wrong path and never ran)
+* Added a flood guard to the error logger so a repeated error can no longer write thousands of rows in a single request
+* Capped the error-log table size (keeps the most recent entries, pruned daily) so it can no longer grow without bound
+* Removed a redundant per-request database check on every page load
 
 = 1.3.0 =
 
@@ -82,6 +90,10 @@ Yes. Developers can override or customize templates as needed.
 * Polished archive pages for Events, Tenders, and Careers
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+
+Stability and SEO fix release. Cleans up duplicate HTML on single Event/Tender/Career pages (fixes a doubled page title), hardens the error logger against runaway growth, and fixes deactivation cleanup. No visual changes; your content and configuration are unaffected.
 
 = 1.3.0 =
 

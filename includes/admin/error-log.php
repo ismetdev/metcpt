@@ -18,6 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 // ── Constants ─────────────────────────────────────────────────────────────────
 define( 'METCPT_ERROR_LOG_TABLE_VERSION', '1.0.0' );
 define( 'METCPT_ERROR_LOG_PURGE_DAYS',   30 );
+// Flood guard: max rows a single request may write, so a runaway error (e.g. a
+// notice inside a loop) cannot fill the table and slow the whole site.
+define( 'METCPT_ERROR_LOG_MAX_PER_REQUEST', 25 );
+// Hard ceiling on total rows kept, pruned daily by cron. Bounds table growth
+// (including unresolved rows) and keeps the stats read cheap. Generous enough to
+// never trigger in normal operation.
+define( 'METCPT_ERROR_LOG_MAX_ROWS', 5000 );
 
 // ── Table name helper ─────────────────────────────────────────────────────────
 function metcpt_error_log_table() {
@@ -29,16 +36,19 @@ function metcpt_error_log_table() {
 function metcpt_error_log_create_table() {
     global $wpdb;
 
-    $table      = metcpt_error_log_table();
-    $charset    = $wpdb->get_charset_collate();
+    // Fast path: when the stored schema version already matches, the table is in
+    // place and current, so return immediately. This runs on every request (see
+    // bootstrap in metcpt.php), so we must NOT hit the database here in the common
+    // case. get_option() is served from the autoloaded options cache. The heavier
+    // SHOW TABLES probe below only runs right after install/upgrade, when the
+    // version differs or is unset.
     $db_version = get_option( 'metcpt_error_log_db_version', '' );
-
-    // Check version AND confirm table actually exists
-    // Prevents stale version option blocking recreation after failed install
-    $table_exists = $wpdb->get_var( "SHOW TABLES LIKE '{$table}'" );
-    if ( $db_version === METCPT_ERROR_LOG_TABLE_VERSION && $table_exists ) {
+    if ( $db_version === METCPT_ERROR_LOG_TABLE_VERSION ) {
         return;
     }
+
+    $table   = metcpt_error_log_table();
+    $charset = $wpdb->get_charset_collate();
 
     $sql = "CREATE TABLE {$table} (
         id          BIGINT(20)   UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -145,6 +155,27 @@ function metcpt_error_log_insert( $level, $message, $file, $line, $trace = array
     if ( ! metcpt_error_is_in_scope( $file ) ) {
         return false;
     }
+
+    // ── Flood guard ───────────────────────────────────────────────────────────
+    // The global error handlers can fire many times in a single request (e.g. a
+    // repeated notice inside a loop). Without a limit, one runaway error could
+    // insert thousands of rows in one page load, bloating the table and slowing
+    // the whole site. Cap the rows written per request, and collapse exact
+    // duplicates (same level + file + line + message) within the request. Both
+    // guards are per-request (static), so recurring errors are still recorded on
+    // later requests — only same-request floods are suppressed.
+    static $insert_count = 0;
+    static $seen = array();
+
+    if ( $insert_count >= METCPT_ERROR_LOG_MAX_PER_REQUEST ) {
+        return false;
+    }
+    $dedup_key = md5( $level . '|' . $file . '|' . $line . '|' . $message );
+    if ( isset( $seen[ $dedup_key ] ) ) {
+        return false;
+    }
+    $seen[ $dedup_key ] = true;
+    $insert_count++;
 
     $context = array_merge( metcpt_error_request_context(), $extra_context );
     $table   = metcpt_error_log_table();
@@ -360,18 +391,38 @@ function metcpt_ajax_clear_resolved() {
 }
 add_action( 'wp_ajax_metcpt_clear_resolved', 'metcpt_ajax_clear_resolved' );
 
-// ── Cron: purge resolved logs older than 30 days ─────────────────────────────
+// ── Cron: purge resolved logs older than 30 days + cap total rows ────────────
 function metcpt_purge_old_error_logs() {
     global $wpdb;
 
+    $table = metcpt_error_log_table();
+
+    // 1. Clear out resolved entries older than the retention window.
     $wpdb->query(
         $wpdb->prepare(
-            'DELETE FROM ' . metcpt_error_log_table() . '
+            "DELETE FROM {$table}
              WHERE resolved = 1
-             AND created_at < %s',
+             AND created_at < %s",
             gmdate( 'Y-m-d H:i:s', strtotime( '-' . METCPT_ERROR_LOG_PURGE_DAYS . ' days' ) )
         )
     );
+
+    // 2. Hard ceiling: keep only the most recent MAX_ROWS entries. The resolved
+    //    purge above never removes unresolved rows, so without this the table
+    //    could grow without bound. id is the auto-increment PRIMARY KEY, so
+    //    ordering by it matches insertion order and the delete is index-driven.
+    //    With MAX_ROWS+1 rows or fewer, OFFSET returns NULL and nothing is cut.
+    $threshold_id = $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT id FROM {$table} ORDER BY id DESC LIMIT 1 OFFSET %d",
+            METCPT_ERROR_LOG_MAX_ROWS
+        )
+    );
+    if ( $threshold_id ) {
+        $wpdb->query(
+            $wpdb->prepare( "DELETE FROM {$table} WHERE id <= %d", $threshold_id )
+        );
+    }
 }
 add_action( 'metcpt_purge_error_log', 'metcpt_purge_old_error_logs' );
 

@@ -137,15 +137,6 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
         $events_archive = get_option( 'metcpt_events_archive_url', '/events' );
 
         ?>
-        <!DOCTYPE html>
-        <html <?php language_attributes(); ?>>
-        <head>
-            <meta charset="<?php bloginfo( 'charset' ); ?>">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <?php wp_head(); ?>            
-        </head>
-        <body <?php body_class(); ?>>
-        <?php wp_body_open(); ?>
         <?php get_header(); ?>
 
         <main>
@@ -371,9 +362,6 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
         </main>
 
         <?php get_footer(); ?>
-        <?php wp_footer(); ?>
-        </body>
-        </html>
         <?php
     }
 }

@@ -13,16 +13,16 @@ add_action( 'wp', 'metcpt_schedule_cron' );
 
 
 // ── Clear cron on plugin deactivation ──────────────────────────────────────
+// Unschedules every MetCPT background task. wp_clear_scheduled_hook() removes
+// all pending occurrences of each hook in one call.
 function metcpt_clear_cron() {
-    $timestamp = wp_next_scheduled( 'metcpt_daily_tender_check' );
-    if ( $timestamp ) {
-        wp_unschedule_event( $timestamp, 'metcpt_daily_tender_check' );
-    }
+    wp_clear_scheduled_hook( 'metcpt_daily_tender_check' );
+    wp_clear_scheduled_hook( 'metcpt_purge_error_log' );
 }
-register_deactivation_hook(
-    plugin_dir_path( __DIR__ ) . '../../metcpt.php',
-    'metcpt_clear_cron'
-);
+// Register against the real main-file constant. The previous relative path
+// ( plugin_dir_path( __DIR__ ) . '../../metcpt.php' ) resolved ABOVE the plugin
+// folder, so the deactivation hook name never matched and this cleanup never ran.
+register_deactivation_hook( METCPT_FILE, 'metcpt_clear_cron' );
 
 
 // ── Main daily task ────────────────────────────────────────────────────────
