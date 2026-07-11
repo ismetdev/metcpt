@@ -4,7 +4,7 @@ Tags: corporate, events, careers, tenders, listings
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,6 @@ Features include:
 * Career opportunities
 * Structured custom post types
 * Beautiful single-page templates
-* Built for IIUM Holdings
 
 Perfect for corporate websites that need organized public information publishing.
 
@@ -42,6 +41,10 @@ Yes, but it works best with themes that support modern WordPress templating.
 Yes. Developers can override or customize templates as needed.
 
 == Changelog ==
+
+= 1.2.2 =
+
+* Rewrote the plugin description to a clearer, standards-based summary of what the plugin does
 
 = 1.2.1 =
 
@@ -73,6 +76,10 @@ Yes. Developers can override or customize templates as needed.
 * Polished archive pages for Events, Tenders, and Careers
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+
+Metadata-only update: clarifies the plugin description. No functional changes; your content and configuration are unaffected.
 
 = 1.2.1 =
 
