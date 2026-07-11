@@ -64,27 +64,27 @@ function metcpt_career_meta_box_html( $post ) {
         $close_obj  = date_create( $close_date );
         if ( $close_obj ) {
             if ( $close_obj < $today ) {
-                $status_html = '<span class="hrk-admin-badge hrk-badge-past">Closed</span>';
+                $status_html = '<span class="mcpt-admin-badge mcpt-badge-past">Closed</span>';
             } elseif ( (int) $today->diff( $close_obj )->days <= 7 ) {
-                $status_html = '<span class="hrk-admin-badge hrk-badge-today">Closing Soon</span>';
+                $status_html = '<span class="mcpt-admin-badge mcpt-badge-today">Closing Soon</span>';
             } else {
-                $status_html = '<span class="hrk-admin-badge hrk-badge-upcoming">Open</span>';
+                $status_html = '<span class="mcpt-admin-badge mcpt-badge-upcoming">Open</span>';
             }
         }
     }
     ?>
 
-    <div class="hrk-meta-wrap">
+    <div class="mcpt-meta-wrap">
 
         <?php /* ── SECTION 1: Company & Role ── */ ?>
-        <div class="hrk-meta-section-title">
+        <div class="mcpt-meta-section-title">
             Section 1 — Company &amp; Role <?php echo $status_html; ?>
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_career_company_id">
-                Hiring Company <span class="hrk-required">*</span>
-                <span class="hrk-hint">
+                Hiring Company <span class="mcpt-required">*</span>
+                <span class="mcpt-hint">
                     Select the company offering this position.
                     If not listed, add it first under Companies in the sidebar.
                 </span>
@@ -111,10 +111,10 @@ function metcpt_career_meta_box_html( $post ) {
             <?php endif; ?>
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_career_department">
-                Department <span class="hrk-required">*</span>
-                <span class="hrk-hint">
+                Department <span class="mcpt-required">*</span>
+                <span class="mcpt-hint">
                     Manage department options under MetCPT Settings → Careers
                 </span>
             </label>
@@ -130,10 +130,10 @@ function metcpt_career_meta_box_html( $post ) {
             </select>
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_career_type">
-                Job Type <span class="hrk-required">*</span>
-                <span class="hrk-hint">Employment basis for this position</span>
+                Job Type <span class="mcpt-required">*</span>
+                <span class="mcpt-hint">Employment basis for this position</span>
             </label>
             <select id="metcpt_career_type"
                     name="metcpt_career_type">
@@ -148,12 +148,12 @@ function metcpt_career_meta_box_html( $post ) {
         </div>
 
         <?php /* ── SECTION 2: Location & Compensation ── */ ?>
-        <div class="hrk-meta-section-title">Section 2 — Location &amp; Compensation</div>
+        <div class="mcpt-meta-section-title">Section 2 — Location &amp; Compensation</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_career_location">
                 Work Location
-                <span class="hrk-hint">e.g. Gombak, Selangor or Remote</span>
+                <span class="mcpt-hint">e.g. Gombak, Selangor or Remote</span>
             </label>
             <input type="text"
                    id="metcpt_career_location"
@@ -162,10 +162,10 @@ function metcpt_career_meta_box_html( $post ) {
                    placeholder="e.g. Gombak, Selangor" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_career_salary">
                 Salary Range
-                <span class="hrk-hint">Optional — e.g. RM 3,000 – RM 4,500 per month</span>
+                <span class="mcpt-hint">Optional — e.g. RM 3,000 – RM 4,500 per month</span>
             </label>
             <input type="text"
                    id="metcpt_career_salary"
@@ -175,12 +175,12 @@ function metcpt_career_meta_box_html( $post ) {
         </div>
 
         <?php /* ── SECTION 3: Application Details ── */ ?>
-        <div class="hrk-meta-section-title">Section 3 — Application Details</div>
+        <div class="mcpt-meta-section-title">Section 3 — Application Details</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_career_close_date">
-                Application Closing Date <span class="hrk-required">*</span>
-                <span class="hrk-hint">
+                Application Closing Date <span class="mcpt-required">*</span>
+                <span class="mcpt-hint">
                     Plugin auto-determines Open / Closing Soon / Closed from this date
                 </span>
             </label>
@@ -190,10 +190,10 @@ function metcpt_career_meta_box_html( $post ) {
                    value="<?php echo esc_attr( $close_date ); ?>" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_career_apply_url">
                 Application Link
-                <span class="hrk-hint">
+                <span class="mcpt-hint">
                     URL to the application form or email link.
                     e.g. https://forms.google.com/... or mailto:hr@company.com
                 </span>
@@ -206,12 +206,12 @@ function metcpt_career_meta_box_html( $post ) {
         </div>
 
         <?php /* ── SECTION 4: HR Contact ── */ ?>
-        <div class="hrk-meta-section-title">Section 4 — HR Contact</div>
+        <div class="mcpt-meta-section-title">Section 4 — HR Contact</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_career_contact_name">
                 Contact Person
-                <span class="hrk-hint">HR representative handling this vacancy</span>
+                <span class="mcpt-hint">HR representative handling this vacancy</span>
             </label>
             <input type="text"
                    id="metcpt_career_contact_name"
@@ -220,7 +220,7 @@ function metcpt_career_meta_box_html( $post ) {
                    placeholder="e.g. Puan Aishah" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_career_contact_email">
                 Contact Email
             </label>
@@ -231,7 +231,7 @@ function metcpt_career_meta_box_html( $post ) {
                    placeholder="e.g. hr@iiumholdings.com.my" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_career_contact_phone">
                 Contact Phone
             </label>

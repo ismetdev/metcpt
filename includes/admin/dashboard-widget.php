@@ -271,117 +271,117 @@ function metcpt_dashboard_widget_html() {
 
     <style>
         #metcpt_dashboard_widget .inside { margin:0; padding:0; }
-        .hrk-dw-wrap { font-family:-apple-system,'Segoe UI',sans-serif; font-size:13px; }
-        .hrk-dw-section { padding:14px 16px; border-bottom:1px solid #f1f5f9; }
-        .hrk-dw-section:last-child { border-bottom:none; }
-        .hrk-dw-section-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:#94a3b8; margin-bottom:10px; }
-        .hrk-dw-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
-        .hrk-dw-stat { background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 12px; text-align:center; }
-        .hrk-dw-stat-number { font-size:22px; font-weight:700; color:#0f172a; line-height:1; display:block; margin-bottom:4px; }
-        .hrk-dw-stat-label { font-size:11px; color:#64748b; }
-        .hrk-dw-stat-upcoming .hrk-dw-stat-number { color:#16a34a; }
-        .hrk-dw-stat-past     .hrk-dw-stat-number { color:#94a3b8; }
-        .hrk-dw-stat-open     .hrk-dw-stat-number { color:#16a34a; }
-        .hrk-dw-stat-soon     .hrk-dw-stat-number { color:#d97706; }
-        .hrk-dw-stat-closed   .hrk-dw-stat-number { color:#94a3b8; }
-        .hrk-dw-closing-item { display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f8fafc; gap:10px; }
-        .hrk-dw-closing-item:last-child { border-bottom:none; }
-        .hrk-dw-closing-title { font-size:12px; font-weight:500; color:#0f172a; flex:1; line-height:1.35; }
-        .hrk-dw-closing-ref { font-size:11px; color:#94a3b8; font-family:monospace; }
-        .hrk-dw-closing-days { font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
-        .hrk-dw-days-urgent  { background:#fee2e2; color:#991b1b; }
-        .hrk-dw-days-warning { background:#fef9c3; color:#a16207; }
-        .hrk-dw-issue-row { display:flex; align-items:center; gap:8px; padding:6px 0; font-size:12px; color:#475569; border-bottom:1px solid #f8fafc; }
-        .hrk-dw-issue-row:last-child { border-bottom:none; }
-        .hrk-dw-issue-icon { width:18px; height:18px; border-radius:50%; background:#fef9c3; color:#a16207; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; flex-shrink:0; }
-        .hrk-dw-all-good { display:flex; align-items:center; gap:8px; padding:8px 0; font-size:12px; color:#16a34a; font-weight:500; }
-        .hrk-dw-footer { padding:10px 16px; background:#f8fafc; border-top:1px solid #e2e8f0; display:flex; gap:10px; flex-wrap:wrap; }
-        .hrk-dw-footer a { font-size:12px; font-weight:500; color:#0056b3; text-decoration:none; }
-        .hrk-dw-footer a:hover { text-decoration:underline; }
-        .hrk-dw-footer-sep { color:#e2e8f0; }
-        .hrk-dw-cache-note { font-size:10px; color:#cbd5e1; padding:4px 16px 6px; text-align:right; }
+        .mcpt-dw-wrap { font-family:-apple-system,'Segoe UI',sans-serif; font-size:13px; }
+        .mcpt-dw-section { padding:14px 16px; border-bottom:1px solid #f1f5f9; }
+        .mcpt-dw-section:last-child { border-bottom:none; }
+        .mcpt-dw-section-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:#94a3b8; margin-bottom:10px; }
+        .mcpt-dw-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+        .mcpt-dw-stat { background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:10px 12px; text-align:center; }
+        .mcpt-dw-stat-number { font-size:22px; font-weight:700; color:#0f172a; line-height:1; display:block; margin-bottom:4px; }
+        .mcpt-dw-stat-label { font-size:11px; color:#64748b; }
+        .mcpt-dw-stat-upcoming .mcpt-dw-stat-number { color:#16a34a; }
+        .mcpt-dw-stat-past     .mcpt-dw-stat-number { color:#94a3b8; }
+        .mcpt-dw-stat-open     .mcpt-dw-stat-number { color:#16a34a; }
+        .mcpt-dw-stat-soon     .mcpt-dw-stat-number { color:#d97706; }
+        .mcpt-dw-stat-closed   .mcpt-dw-stat-number { color:#94a3b8; }
+        .mcpt-dw-closing-item { display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f8fafc; gap:10px; }
+        .mcpt-dw-closing-item:last-child { border-bottom:none; }
+        .mcpt-dw-closing-title { font-size:12px; font-weight:500; color:#0f172a; flex:1; line-height:1.35; }
+        .mcpt-dw-closing-ref { font-size:11px; color:#94a3b8; font-family:monospace; }
+        .mcpt-dw-closing-days { font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+        .mcpt-dw-days-urgent  { background:#fee2e2; color:#991b1b; }
+        .mcpt-dw-days-warning { background:#fef9c3; color:#a16207; }
+        .mcpt-dw-issue-row { display:flex; align-items:center; gap:8px; padding:6px 0; font-size:12px; color:#475569; border-bottom:1px solid #f8fafc; }
+        .mcpt-dw-issue-row:last-child { border-bottom:none; }
+        .mcpt-dw-issue-icon { width:18px; height:18px; border-radius:50%; background:#fef9c3; color:#a16207; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; flex-shrink:0; }
+        .mcpt-dw-all-good { display:flex; align-items:center; gap:8px; padding:8px 0; font-size:12px; color:#16a34a; font-weight:500; }
+        .mcpt-dw-footer { padding:10px 16px; background:#f8fafc; border-top:1px solid #e2e8f0; display:flex; gap:10px; flex-wrap:wrap; }
+        .mcpt-dw-footer a { font-size:12px; font-weight:500; color:#0056b3; text-decoration:none; }
+        .mcpt-dw-footer a:hover { text-decoration:underline; }
+        .mcpt-dw-footer-sep { color:#e2e8f0; }
+        .mcpt-dw-cache-note { font-size:10px; color:#cbd5e1; padding:4px 16px 6px; text-align:right; }
     </style>
 
-    <div class="hrk-dw-wrap">
+    <div class="mcpt-dw-wrap">
 
         <?php /* ── Events ── */ ?>
-        <div class="hrk-dw-section">
-            <div class="hrk-dw-section-title">Events</div>
-            <div class="hrk-dw-stats">
-                <div class="hrk-dw-stat hrk-dw-stat-upcoming">
-                    <span class="hrk-dw-stat-number"><?php echo esc_html( $c['events_upcoming'] ); ?></span>
-                    <span class="hrk-dw-stat-label">Upcoming</span>
+        <div class="mcpt-dw-section">
+            <div class="mcpt-dw-section-title">Events</div>
+            <div class="mcpt-dw-stats">
+                <div class="mcpt-dw-stat mcpt-dw-stat-upcoming">
+                    <span class="mcpt-dw-stat-number"><?php echo esc_html( $c['events_upcoming'] ); ?></span>
+                    <span class="mcpt-dw-stat-label">Upcoming</span>
                 </div>
-                <div class="hrk-dw-stat hrk-dw-stat-past">
-                    <span class="hrk-dw-stat-number"><?php echo esc_html( $c['events_past'] ); ?></span>
-                    <span class="hrk-dw-stat-label">Past</span>
+                <div class="mcpt-dw-stat mcpt-dw-stat-past">
+                    <span class="mcpt-dw-stat-number"><?php echo esc_html( $c['events_past'] ); ?></span>
+                    <span class="mcpt-dw-stat-label">Past</span>
                 </div>
-                <div class="hrk-dw-stat">
-                    <span class="hrk-dw-stat-number"><?php echo esc_html( $c['events_upcoming'] + $c['events_past'] ); ?></span>
-                    <span class="hrk-dw-stat-label">Total</span>
+                <div class="mcpt-dw-stat">
+                    <span class="mcpt-dw-stat-number"><?php echo esc_html( $c['events_upcoming'] + $c['events_past'] ); ?></span>
+                    <span class="mcpt-dw-stat-label">Total</span>
                 </div>
             </div>
         </div>
 
         <?php /* ── Tenders ── */ ?>
-        <div class="hrk-dw-section">
-            <div class="hrk-dw-section-title">Tenders</div>
-            <div class="hrk-dw-stats">
-                <div class="hrk-dw-stat hrk-dw-stat-open">
-                    <span class="hrk-dw-stat-number"><?php echo esc_html( $c['count_t_open'] ); ?></span>
-                    <span class="hrk-dw-stat-label">Open</span>
+        <div class="mcpt-dw-section">
+            <div class="mcpt-dw-section-title">Tenders</div>
+            <div class="mcpt-dw-stats">
+                <div class="mcpt-dw-stat mcpt-dw-stat-open">
+                    <span class="mcpt-dw-stat-number"><?php echo esc_html( $c['count_t_open'] ); ?></span>
+                    <span class="mcpt-dw-stat-label">Open</span>
                 </div>
-                <div class="hrk-dw-stat hrk-dw-stat-soon">
-                    <span class="hrk-dw-stat-number"><?php echo esc_html( $c['count_t_soon'] ); ?></span>
-                    <span class="hrk-dw-stat-label">Closing Soon</span>
+                <div class="mcpt-dw-stat mcpt-dw-stat-soon">
+                    <span class="mcpt-dw-stat-number"><?php echo esc_html( $c['count_t_soon'] ); ?></span>
+                    <span class="mcpt-dw-stat-label">Closing Soon</span>
                 </div>
-                <div class="hrk-dw-stat hrk-dw-stat-closed">
-                    <span class="hrk-dw-stat-number"><?php echo esc_html( $c['count_t_closed'] ); ?></span>
-                    <span class="hrk-dw-stat-label">Closed</span>
+                <div class="mcpt-dw-stat mcpt-dw-stat-closed">
+                    <span class="mcpt-dw-stat-number"><?php echo esc_html( $c['count_t_closed'] ); ?></span>
+                    <span class="mcpt-dw-stat-label">Closed</span>
                 </div>
             </div>
         </div>
 
         <?php /* ── Careers ── */ ?>
-        <div class="hrk-dw-section">
-            <div class="hrk-dw-section-title">Careers</div>
-            <div class="hrk-dw-stats">
-                <div class="hrk-dw-stat hrk-dw-stat-open">
-                    <span class="hrk-dw-stat-number"><?php echo esc_html( $c['count_c_open'] ); ?></span>
-                    <span class="hrk-dw-stat-label">Open</span>
+        <div class="mcpt-dw-section">
+            <div class="mcpt-dw-section-title">Careers</div>
+            <div class="mcpt-dw-stats">
+                <div class="mcpt-dw-stat mcpt-dw-stat-open">
+                    <span class="mcpt-dw-stat-number"><?php echo esc_html( $c['count_c_open'] ); ?></span>
+                    <span class="mcpt-dw-stat-label">Open</span>
                 </div>
-                <div class="hrk-dw-stat hrk-dw-stat-soon">
-                    <span class="hrk-dw-stat-number"><?php echo esc_html( $c['count_c_soon'] ); ?></span>
-                    <span class="hrk-dw-stat-label">Closing Soon</span>
+                <div class="mcpt-dw-stat mcpt-dw-stat-soon">
+                    <span class="mcpt-dw-stat-number"><?php echo esc_html( $c['count_c_soon'] ); ?></span>
+                    <span class="mcpt-dw-stat-label">Closing Soon</span>
                 </div>
-                <div class="hrk-dw-stat hrk-dw-stat-closed">
-                    <span class="hrk-dw-stat-number"><?php echo esc_html( $c['count_c_closed'] ); ?></span>
-                    <span class="hrk-dw-stat-label">Closed</span>
+                <div class="mcpt-dw-stat mcpt-dw-stat-closed">
+                    <span class="mcpt-dw-stat-number"><?php echo esc_html( $c['count_c_closed'] ); ?></span>
+                    <span class="mcpt-dw-stat-label">Closed</span>
                 </div>
             </div>
         </div>
 
         <?php /* ── Closing Soon List ── */ ?>
         <?php if ( ! empty( $c['closing_soon_list'] ) ) : ?>
-        <div class="hrk-dw-section">
-            <div class="hrk-dw-section-title">
+        <div class="mcpt-dw-section">
+            <div class="mcpt-dw-section-title">
                 Tenders Closing Within <?php echo esc_html( $threshold ); ?> Days
             </div>
             <?php foreach ( $c['closing_soon_list'] as $item ) : ?>
-                <div class="hrk-dw-closing-item">
+                <div class="mcpt-dw-closing-item">
                     <div>
-                        <div class="hrk-dw-closing-title">
+                        <div class="mcpt-dw-closing-title">
                             <a href="<?php echo esc_url( $item['edit_url'] ); ?>">
                                 <?php echo esc_html( $item['title'] ); ?>
                             </a>
                         </div>
                         <?php if ( ! empty( $item['ref'] ) ) : ?>
-                            <div class="hrk-dw-closing-ref">
+                            <div class="mcpt-dw-closing-ref">
                                 <?php echo esc_html( $item['ref'] ); ?>
                             </div>
                         <?php endif; ?>
                     </div>
-                    <span class="hrk-dw-closing-days <?php echo $item['days_left'] <= 3 ? 'hrk-dw-days-urgent' : 'hrk-dw-days-warning'; ?>">
+                    <span class="mcpt-dw-closing-days <?php echo $item['days_left'] <= 3 ? 'mcpt-dw-days-urgent' : 'mcpt-dw-days-warning'; ?>">
                         <?php echo esc_html( $item['days_left'] ); ?>d left
                     </span>
                 </div>
@@ -390,18 +390,18 @@ function metcpt_dashboard_widget_html() {
         <?php endif; ?>
 
         <?php /* ── Content Health ── */ ?>
-        <div class="hrk-dw-section">
-            <div class="hrk-dw-section-title">Content Health</div>
+        <div class="mcpt-dw-section">
+            <div class="mcpt-dw-section-title">Content Health</div>
 
             <?php if ( $total_issues === 0 ) : ?>
-                <div class="hrk-dw-all-good">
+                <div class="mcpt-dw-all-good">
                     &#10003; All content looks good &mdash; no missing fields detected
                 </div>
             <?php else : ?>
 
                 <?php if ( $c['events_no_date'] > 0 ) : ?>
-                <div class="hrk-dw-issue-row">
-                    <div class="hrk-dw-issue-icon">!</div>
+                <div class="mcpt-dw-issue-row">
+                    <div class="mcpt-dw-issue-icon">!</div>
                     <div>
                         <strong><?php echo esc_html( $c['events_no_date'] ); ?></strong>
                         event<?php echo $c['events_no_date'] > 1 ? 's' : ''; ?> missing an event date
@@ -411,8 +411,8 @@ function metcpt_dashboard_widget_html() {
                 <?php endif; ?>
 
                 <?php if ( $c['count_no_ref'] > 0 ) : ?>
-                <div class="hrk-dw-issue-row">
-                    <div class="hrk-dw-issue-icon">!</div>
+                <div class="mcpt-dw-issue-row">
+                    <div class="mcpt-dw-issue-icon">!</div>
                     <div>
                         <strong><?php echo esc_html( $c['count_no_ref'] ); ?></strong>
                         tender<?php echo $c['count_no_ref'] > 1 ? 's' : ''; ?> missing a reference number
@@ -422,8 +422,8 @@ function metcpt_dashboard_widget_html() {
                 <?php endif; ?>
 
                 <?php if ( $c['count_no_close_date'] > 0 ) : ?>
-                <div class="hrk-dw-issue-row">
-                    <div class="hrk-dw-issue-icon">!</div>
+                <div class="mcpt-dw-issue-row">
+                    <div class="mcpt-dw-issue-icon">!</div>
                     <div>
                         <strong><?php echo esc_html( $c['count_no_close_date'] ); ?></strong>
                         tender<?php echo $c['count_no_close_date'] > 1 ? 's' : ''; ?> missing a closing date
@@ -433,8 +433,8 @@ function metcpt_dashboard_widget_html() {
                 <?php endif; ?>
 
                 <?php if ( $c['count_no_company'] > 0 ) : ?>
-                <div class="hrk-dw-issue-row">
-                    <div class="hrk-dw-issue-icon">!</div>
+                <div class="mcpt-dw-issue-row">
+                    <div class="mcpt-dw-issue-icon">!</div>
                     <div>
                         <strong><?php echo esc_html( $c['count_no_company'] ); ?></strong>
                         position<?php echo $c['count_no_company'] > 1 ? 's' : ''; ?> missing a company assignment
@@ -444,8 +444,8 @@ function metcpt_dashboard_widget_html() {
                 <?php endif; ?>
 
                 <?php if ( $c['count_no_career_date'] > 0 ) : ?>
-                <div class="hrk-dw-issue-row">
-                    <div class="hrk-dw-issue-icon">!</div>
+                <div class="mcpt-dw-issue-row">
+                    <div class="mcpt-dw-issue-icon">!</div>
                     <div>
                         <strong><?php echo esc_html( $c['count_no_career_date'] ); ?></strong>
                         position<?php echo $c['count_no_career_date'] > 1 ? 's' : ''; ?> missing a closing date
@@ -458,25 +458,25 @@ function metcpt_dashboard_widget_html() {
         </div>
 
         <?php /* ── Footer links ── */ ?>
-        <div class="hrk-dw-footer">
+        <div class="mcpt-dw-footer">
             <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_event' ) ); ?>">Events</a>
-            <span class="hrk-dw-footer-sep">|</span>
+            <span class="mcpt-dw-footer-sep">|</span>
             <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=metcpt_event' ) ); ?>">+ Event</a>
-            <span class="hrk-dw-footer-sep">|</span>
+            <span class="mcpt-dw-footer-sep">|</span>
             <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_tender' ) ); ?>">Tenders</a>
-            <span class="hrk-dw-footer-sep">|</span>
+            <span class="mcpt-dw-footer-sep">|</span>
             <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=metcpt_tender' ) ); ?>">+ Tender</a>
-            <span class="hrk-dw-footer-sep">|</span>
+            <span class="mcpt-dw-footer-sep">|</span>
             <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_career' ) ); ?>">Careers</a>
-            <span class="hrk-dw-footer-sep">|</span>
+            <span class="mcpt-dw-footer-sep">|</span>
             <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=metcpt_career' ) ); ?>">+ Career</a>
-            <span class="hrk-dw-footer-sep">|</span>
+            <span class="mcpt-dw-footer-sep">|</span>
             <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=metcpt_company' ) ); ?>">Companies</a>
-            <span class="hrk-dw-footer-sep">|</span>
+            <span class="mcpt-dw-footer-sep">|</span>
             <a href="<?php echo esc_url( admin_url( 'admin.php?page=metcpt-settings' ) ); ?>">Settings</a>
         </div>
 
-        <div class="hrk-dw-cache-note">
+        <div class="mcpt-dw-cache-note">
             Counts cached &mdash; refreshes every 5 minutes or on post save
         </div>
 

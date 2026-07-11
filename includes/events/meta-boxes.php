@@ -73,67 +73,67 @@ function metcpt_event_meta_box_html( $post ) {
         $date_obj = date_create( $event_date );
         if ( $date_obj ) {
             if ( $date_obj < $today ) {
-                $status_html = '<span class="hrk-admin-badge hrk-badge-past">Past</span>';
+                $status_html = '<span class="mcpt-admin-badge mcpt-badge-past">Past</span>';
             } elseif ( $date_obj->format( 'Y-m-d' ) === $today->format( 'Y-m-d' ) ) {
-                $status_html = '<span class="hrk-admin-badge hrk-badge-today">Today</span>';
+                $status_html = '<span class="mcpt-admin-badge mcpt-badge-today">Today</span>';
             } else {
-                $status_html = '<span class="hrk-admin-badge hrk-badge-upcoming">Upcoming</span>';
+                $status_html = '<span class="mcpt-admin-badge mcpt-badge-upcoming">Upcoming</span>';
             }
         }
     }
     ?>
 
-    <div class="hrk-meta-wrap">
+    <div class="mcpt-meta-wrap">
 
-        <div class="hrk-meta-section-title">
+        <div class="mcpt-meta-section-title">
             Section 1 — Event Schedule <?php echo $status_html; ?>
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_date">
-                Event Date <span class="hrk-required">*</span>
-                <span class="hrk-hint">When does this event take place?</span>
+                Event Date <span class="mcpt-required">*</span>
+                <span class="mcpt-hint">When does this event take place?</span>
             </label>
             <input type="date" id="metcpt_event_date" name="metcpt_event_date"
                    value="<?php echo esc_attr( $event_date ); ?>" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_time">
                 Event Time
-                <span class="hrk-hint">e.g. 9:00 AM - 5:00 PM</span>
+                <span class="mcpt-hint">e.g. 9:00 AM - 5:00 PM</span>
             </label>
             <input type="text" id="metcpt_event_time" name="metcpt_event_time"
                    value="<?php echo esc_attr( $event_time ); ?>"
                    placeholder="e.g. 9:00 AM - 5:00 PM" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_venue">
                 Venue / Location
-                <span class="hrk-hint">e.g. Dewan Besar, IIUM Gombak</span>
+                <span class="mcpt-hint">e.g. Dewan Besar, IIUM Gombak</span>
             </label>
             <input type="text" id="metcpt_event_venue" name="metcpt_event_venue"
                    value="<?php echo esc_attr( $event_venue ); ?>"
                    placeholder="e.g. Dewan Besar, IIUM Gombak" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_organiser">
                 Organiser
-                <span class="hrk-hint">e.g. IIUM Holdings Sdn Bhd</span>
+                <span class="mcpt-hint">e.g. IIUM Holdings Sdn Bhd</span>
             </label>
             <input type="text" id="metcpt_event_organiser" name="metcpt_event_organiser"
                    value="<?php echo esc_attr( $event_organiser ); ?>"
                    placeholder="e.g. IIUM Holdings Sdn Bhd" />
         </div>
 
-        <div class="hrk-meta-section-title">Section 2 — VIPs &amp; Key Figures</div>
+        <div class="mcpt-meta-section-title">Section 2 — VIPs &amp; Key Figures</div>
 
         <div id="metcpt-vips-wrap">
             <?php foreach ( $vips as $i => $vip ) : ?>
-            <div class="hrk-repeatable-row" data-type="vip">
-                <div class="hrk-repeatable-fields">
+            <div class="mcpt-repeatable-row" data-type="vip">
+                <div class="mcpt-repeatable-fields">
                     <input type="text"
                            name="metcpt_vips[<?php echo $i; ?>][name]"
                            value="<?php echo esc_attr( $vip['name'] ); ?>"
@@ -156,18 +156,18 @@ function metcpt_event_meta_box_html( $post ) {
                             <?php endforeach; ?>
                         </select>
                 </div>
-                <button type="button" class="hrk-remove-row button">Remove</button>
+                <button type="button" class="mcpt-remove-row button">Remove</button>
             </div>
             <?php endforeach; ?>
         </div>
-        <button type="button" class="hrk-add-row button"
+        <button type="button" class="mcpt-add-row button"
                 data-target="metcpt-vips-wrap" data-type="vip">
             + Add VIP / Key Figure
         </button>
 
-        <div class="hrk-meta-section-title">Section 3 — Programme Itinerary</div>
+        <div class="mcpt-meta-section-title">Section 3 — Programme Itinerary</div>
 
-        <div class="hrk-itinerary-header">
+        <div class="mcpt-itinerary-header">
             <span>Time</span>
             <span>Activity</span>
             <span>Person in Charge</span>
@@ -176,8 +176,8 @@ function metcpt_event_meta_box_html( $post ) {
 
         <div id="metcpt-itinerary-wrap">
             <?php foreach ( $itinerary as $i => $item ) : ?>
-            <div class="hrk-repeatable-row hrk-itinerary-row" data-type="itinerary">
-                <div class="hrk-repeatable-fields hrk-itinerary-fields">
+            <div class="mcpt-repeatable-row mcpt-itinerary-row" data-type="itinerary">
+                <div class="mcpt-repeatable-fields mcpt-itinerary-fields">
                     <input type="text"
                            name="metcpt_itinerary[<?php echo $i; ?>][time]"
                            value="<?php echo esc_attr( $item['time'] ); ?>"
@@ -191,53 +191,53 @@ function metcpt_event_meta_box_html( $post ) {
                            value="<?php echo esc_attr( $item['pic'] ); ?>"
                            placeholder="e.g. Protocol Unit" />
                 </div>
-                <button type="button" class="hrk-remove-row button">Remove</button>
+                <button type="button" class="mcpt-remove-row button">Remove</button>
             </div>
             <?php endforeach; ?>
         </div>
-        <button type="button" class="hrk-add-row button"
+        <button type="button" class="mcpt-add-row button"
                 data-target="metcpt-itinerary-wrap" data-type="itinerary">
             + Add Itinerary Row
         </button>
 
-        <div class="hrk-meta-section-title">Section 4 — Attendance &amp; Capacity</div>
+        <div class="mcpt-meta-section-title">Section 4 — Attendance &amp; Capacity</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_audience">
                 Who Should Attend
-                <span class="hrk-hint">e.g. All IIUM Holdings staff and subsidiary representatives</span>
+                <span class="mcpt-hint">e.g. All IIUM Holdings staff and subsidiary representatives</span>
             </label>
             <input type="text" id="metcpt_event_audience" name="metcpt_event_audience"
                    value="<?php echo esc_attr( $event_audience ); ?>"
                    placeholder="e.g. All staff and invited shareholders" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_capacity">
                 Capacity
-                <span class="hrk-hint">e.g. 300 pax</span>
+                <span class="mcpt-hint">e.g. 300 pax</span>
             </label>
             <input type="text" id="metcpt_event_capacity" name="metcpt_event_capacity"
                    value="<?php echo esc_attr( $event_capacity ); ?>"
                    placeholder="e.g. 300 pax" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_rsvp_url">
                 RSVP / Registration Link
-                <span class="hrk-hint">Paste the URL to your RSVP form or Google Form</span>
+                <span class="mcpt-hint">Paste the URL to your RSVP form or Google Form</span>
             </label>
             <input type="url" id="metcpt_event_rsvp_url" name="metcpt_event_rsvp_url"
                    value="<?php echo esc_attr( $event_rsvp_url ); ?>"
                    placeholder="https://forms.google.com/..." />
         </div>
 
-        <div class="hrk-meta-section-title">Section 5 — Frequently Asked Questions</div>
+        <div class="mcpt-meta-section-title">Section 5 — Frequently Asked Questions</div>
 
         <div id="metcpt-faqs-wrap">
             <?php foreach ( $faqs as $i => $faq ) : ?>
-            <div class="hrk-repeatable-row hrk-faq-row" data-type="faq">
-                <div class="hrk-repeatable-fields hrk-faq-fields">
+            <div class="mcpt-repeatable-row mcpt-faq-row" data-type="faq">
+                <div class="mcpt-repeatable-fields mcpt-faq-fields">
                     <input type="text"
                            name="metcpt_faqs[<?php echo $i; ?>][question]"
                            value="<?php echo esc_attr( $faq['question'] ); ?>"
@@ -246,21 +246,21 @@ function metcpt_event_meta_box_html( $post ) {
                               placeholder="e.g. Yes. Staff may park at Car Park B..."
                               rows="2"><?php echo esc_textarea( $faq['answer'] ); ?></textarea>
                 </div>
-                <button type="button" class="hrk-remove-row button">Remove</button>
+                <button type="button" class="mcpt-remove-row button">Remove</button>
             </div>
             <?php endforeach; ?>
         </div>
-        <button type="button" class="hrk-add-row button"
+        <button type="button" class="mcpt-add-row button"
                 data-target="metcpt-faqs-wrap" data-type="faq">
             + Add FAQ
         </button>
 
-        <div class="hrk-meta-section-title">Section 6 — Guidelines &amp; Important Notes</div>
+        <div class="mcpt-meta-section-title">Section 6 — Guidelines &amp; Important Notes</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_guidelines">
                 Guidelines
-                <span class="hrk-hint">One guideline per line. Each line becomes a bullet point.</span>
+                <span class="mcpt-hint">One guideline per line. Each line becomes a bullet point.</span>
             </label>
             <textarea id="metcpt_event_guidelines" name="metcpt_event_guidelines"
                       rows="5"
@@ -270,41 +270,41 @@ Please stand when the Guest of Honour arrives.
 Photography is permitted during the event."><?php echo esc_textarea( $event_guidelines ); ?></textarea>
         </div>
 
-        <div class="hrk-meta-section-title">Section 7 — Call to Action</div>
+        <div class="mcpt-meta-section-title">Section 7 — Call to Action</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_cal_url">
                 Add to Calendar URL
-                <span class="hrk-hint">Paste a Google Calendar event link. Leave blank to auto-generate.</span>
+                <span class="mcpt-hint">Paste a Google Calendar event link. Leave blank to auto-generate.</span>
             </label>
             <input type="url" id="metcpt_event_cal_url" name="metcpt_event_cal_url"
                    value="<?php echo esc_attr( $event_cal_url ); ?>"
                    placeholder="https://calendar.google.com/..." />
         </div>
 
-        <div class="hrk-meta-section-title">Section 8 — Contact &amp; Secretariat</div>
+        <div class="mcpt-meta-section-title">Section 8 — Contact &amp; Secretariat</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_contact_name">
                 PIC Name
-                <span class="hrk-hint">Person in charge for this event</span>
+                <span class="mcpt-hint">Person in charge for this event</span>
             </label>
             <input type="text" id="metcpt_event_contact_name" name="metcpt_event_contact_name"
                    value="<?php echo esc_attr( $event_contact_name ); ?>"
                    placeholder="e.g. Puan Siti Nabilah" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_contact_dept">
                 Department
-                <span class="hrk-hint">e.g. Corporate Affairs Unit</span>
+                <span class="mcpt-hint">e.g. Corporate Affairs Unit</span>
             </label>
             <input type="text" id="metcpt_event_contact_dept" name="metcpt_event_contact_dept"
                    value="<?php echo esc_attr( $event_contact_dept ); ?>"
                    placeholder="e.g. Corporate Affairs Unit" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_contact_email">
                 Email
             </label>
@@ -313,7 +313,7 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
                    placeholder="e.g. events@iiumholdings.com.my" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_event_contact_phone">
                 Phone
             </label>
@@ -327,7 +327,7 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
     <script>
     (function() {
         function reindexRows( wrap ) {
-            var rows = wrap.querySelectorAll( '.hrk-repeatable-row' );
+            var rows = wrap.querySelectorAll( '.mcpt-repeatable-row' );
             rows.forEach( function( row, i ) {
                 row.querySelectorAll( 'input, textarea, select' ).forEach( function( el ) {
                     if ( el.name ) {
@@ -338,7 +338,7 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
         }
 
         function makeRemovable( row, wrap ) {
-            var btn = row.querySelector( '.hrk-remove-row' );
+            var btn = row.querySelector( '.mcpt-remove-row' );
             if ( btn ) {
                 btn.addEventListener( 'click', function() {
                     row.remove();
@@ -347,26 +347,26 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
             }
         }
 
-        document.querySelectorAll( '.hrk-repeatable-row' ).forEach( function( row ) {
+        document.querySelectorAll( '.mcpt-repeatable-row' ).forEach( function( row ) {
             var wrap = row.closest( '[id$="-wrap"]' );
             if ( wrap ) {
                 makeRemovable( row, wrap );
             }
         } );
 
-        document.querySelectorAll( '.hrk-add-row' ).forEach( function( btn ) {
+        document.querySelectorAll( '.mcpt-add-row' ).forEach( function( btn ) {
             btn.addEventListener( 'click', function() {
                 var wrapId = btn.getAttribute( 'data-target' );
                 var type   = btn.getAttribute( 'data-type' );
                 var wrap   = document.getElementById( wrapId );
-                var count  = wrap.querySelectorAll( '.hrk-repeatable-row' ).length;
+                var count  = wrap.querySelectorAll( '.mcpt-repeatable-row' ).length;
                 var row    = document.createElement( 'div' );
-                row.className = 'hrk-repeatable-row';
+                row.className = 'mcpt-repeatable-row';
 
                 var fields = '';
 
                 if ( type === 'vip' ) {
-                    fields = '<div class="hrk-repeatable-fields">'
+                    fields = '<div class="mcpt-repeatable-fields">'
                         + '<input type="text" name="metcpt_vips[' + count + '][name]" placeholder="Full name" />'
                         + '<input type="text" name="metcpt_vips[' + count + '][title]" placeholder="Title / Position" />'
                         + '<select name="metcpt_vips[' + count + '][role]">'
@@ -377,20 +377,20 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
                         + '</select>'
                         + '</div>';
                 } else if ( type === 'itinerary' ) {
-                    fields = '<div class="hrk-repeatable-fields hrk-itinerary-fields">'
+                    fields = '<div class="mcpt-repeatable-fields mcpt-itinerary-fields">'
                         + '<input type="text" name="metcpt_itinerary[' + count + '][time]" placeholder="e.g. 9:00 AM" />'
                         + '<input type="text" name="metcpt_itinerary[' + count + '][activity]" placeholder="e.g. Arrival and Registration" />'
                         + '<input type="text" name="metcpt_itinerary[' + count + '][pic]" placeholder="e.g. Protocol Unit" />'
                         + '</div>';
                 } else if ( type === 'faq' ) {
-                    fields = '<div class="hrk-repeatable-fields hrk-faq-fields">'
+                    fields = '<div class="mcpt-repeatable-fields mcpt-faq-fields">'
                         + '<input type="text" name="metcpt_faqs[' + count + '][question]" placeholder="e.g. Is parking available?" />'
                         + '<textarea name="metcpt_faqs[' + count + '][answer]" placeholder="Answer..." rows="2"></textarea>'
                         + '</div>';
                 }
 
                 row.innerHTML = fields
-                    + '<button type="button" class="hrk-remove-row button">Remove</button>';
+                    + '<button type="button" class="mcpt-remove-row button">Remove</button>';
 
                 wrap.appendChild( row );
                 makeRemovable( row, wrap );

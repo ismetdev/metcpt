@@ -100,70 +100,70 @@ if ( ! function_exists( 'metcpt_tenders_render_template_b_list' ) ) {
         ob_start();
         ?>
 
-        <div class="hrk-tb-wrap" id="<?php echo esc_attr( $uid ); ?>">
+        <div class="mcpt-tb-wrap" id="<?php echo esc_attr( $uid ); ?>">
 
-            <div class="hrk-tb-header">
-                <div class="hrk-tb-header-left">
+            <div class="mcpt-tb-header">
+                <div class="mcpt-tb-header-left">
                     <?php if ( ! empty( $label ) ) : ?>
-                        <div class="hrk-tb-label">
-                            <span class="hrk-tb-label-dash">&mdash;</span>
+                        <div class="mcpt-tb-label">
+                            <span class="mcpt-tb-label-dash">&mdash;</span>
                             <?php echo esc_html( $label ); ?>
                         </div>
                     <?php endif; ?>
-                    <h2 class="hrk-tb-headline">
+                    <h2 class="mcpt-tb-headline">
                         <?php echo esc_html( $headline ); ?>
                         <?php if ( ! empty( $headline_italic ) ) : ?>
                             <em><?php echo esc_html( $headline_italic ); ?></em>
                         <?php endif; ?>
                     </h2>
                 </div>
-                <a class="hrk-tb-all-link"
+                <a class="mcpt-tb-all-link"
                    href="<?php echo esc_url( $view_all_url ); ?>">
                     <?php echo esc_html( $all_text ); ?> &nbsp;&rarr;
                 </a>
             </div>
 
-            <div class="hrk-tb-panel">
+            <div class="mcpt-tb-panel">
 
-                <div class="hrk-tb-tabs">
-                    <button class="hrk-tb-tab active" data-tab="open">
-                        <span class="hrk-tb-tab-dot hrk-tb-dot-green"></span>
+                <div class="mcpt-tb-tabs">
+                    <button class="mcpt-tb-tab active" data-tab="open">
+                        <span class="mcpt-tb-tab-dot mcpt-tb-dot-green"></span>
                         Open Tenders
                     </button>
-                    <button class="hrk-tb-tab" data-tab="closed">
-                        <span class="hrk-tb-tab-dot hrk-tb-dot-gray"></span>
+                    <button class="mcpt-tb-tab" data-tab="closed">
+                        <span class="mcpt-tb-tab-dot mcpt-tb-dot-gray"></span>
                         Closed
                     </button>
-                    <a class="hrk-tb-tab-viewall"
+                    <a class="mcpt-tb-tab-viewall"
                        href="<?php echo esc_url( $view_all_url ); ?>">
                         <?php echo esc_html( $view_all_text ); ?> &rarr;
                     </a>
                 </div>
 
-                <div class="hrk-tb-list" data-panel="open">
+                <div class="mcpt-tb-list" data-panel="open">
                     <?php
                     $open_tenders = array_filter( $tenders, function( $t ) {
                         return $t['status'] === 'open' || $t['status'] === 'soon';
                     } );
                     ?>
                     <?php if ( empty( $open_tenders ) ) : ?>
-                        <div class="hrk-tb-empty">No open tenders at this time.</div>
+                        <div class="mcpt-tb-empty">No open tenders at this time.</div>
                     <?php else : ?>
                         <?php foreach ( $open_tenders as $t ) : ?>
-                            <div class="hrk-tb-row">
-                                <span class="hrk-tb-ref">
+                            <div class="mcpt-tb-row">
+                                <span class="mcpt-tb-ref">
                                     <?php echo esc_html( $t['ref'] ? $t['ref'] : '—' ); ?>
                                 </span>
-                                <a class="hrk-tb-title"
+                                <a class="mcpt-tb-title"
                                    href="<?php echo esc_url( $t['permalink'] ); ?>">
                                     <?php echo esc_html( $t['title'] ); ?>
                                 </a>
                                 <?php if ( $t['status'] === 'soon' ) : ?>
-                                    <span class="hrk-tb-badge hrk-tb-badge-soon">Closing Soon</span>
+                                    <span class="mcpt-tb-badge mcpt-tb-badge-soon">Closing Soon</span>
                                 <?php else : ?>
-                                    <span class="hrk-tb-badge hrk-tb-badge-open">Open</span>
+                                    <span class="mcpt-tb-badge mcpt-tb-badge-open">Open</span>
                                 <?php endif; ?>
-                                <span class="hrk-tb-date">
+                                <span class="mcpt-tb-date">
                                     Closes <?php echo esc_html( $t['close_fmt'] ); ?>
                                 </span>
                             </div>
@@ -171,26 +171,26 @@ if ( ! function_exists( 'metcpt_tenders_render_template_b_list' ) ) {
                     <?php endif; ?>
                 </div>
 
-                <div class="hrk-tb-list" data-panel="closed" style="display:none;">
+                <div class="mcpt-tb-list" data-panel="closed" style="display:none;">
                     <?php
                     $closed_tenders = array_filter( $tenders, function( $t ) {
                         return $t['status'] === 'closed';
                     } );
                     ?>
                     <?php if ( empty( $closed_tenders ) ) : ?>
-                        <div class="hrk-tb-empty">No closed tenders found.</div>
+                        <div class="mcpt-tb-empty">No closed tenders found.</div>
                     <?php else : ?>
                         <?php foreach ( $closed_tenders as $t ) : ?>
-                            <div class="hrk-tb-row">
-                                <span class="hrk-tb-ref">
+                            <div class="mcpt-tb-row">
+                                <span class="mcpt-tb-ref">
                                     <?php echo esc_html( $t['ref'] ? $t['ref'] : '—' ); ?>
                                 </span>
-                                <a class="hrk-tb-title"
+                                <a class="mcpt-tb-title"
                                    href="<?php echo esc_url( $t['permalink'] ); ?>">
                                     <?php echo esc_html( $t['title'] ); ?>
                                 </a>
-                                <span class="hrk-tb-badge hrk-tb-badge-closed">Closed</span>
-                                <span class="hrk-tb-date">
+                                <span class="mcpt-tb-badge mcpt-tb-badge-closed">Closed</span>
+                                <span class="mcpt-tb-date">
                                     Closed <?php echo esc_html( $t['close_fmt'] ); ?>
                                 </span>
                             </div>
@@ -205,8 +205,8 @@ if ( ! function_exists( 'metcpt_tenders_render_template_b_list' ) ) {
         <script>
         (function() {
             var wrap = document.getElementById('<?php echo esc_js( $uid ); ?>');
-            var tabs = wrap.querySelectorAll('.hrk-tb-tab');
-            var panels = wrap.querySelectorAll('.hrk-tb-list');
+            var tabs = wrap.querySelectorAll('.mcpt-tb-tab');
+            var panels = wrap.querySelectorAll('.mcpt-tb-list');
 
             tabs.forEach(function(tab) {
                 tab.addEventListener('click', function() {
@@ -265,47 +265,47 @@ if ( ! function_exists( 'metcpt_tenders_render_template_b_preview' ) ) {
         ob_start();
         ?>
 
-        <div class="hrk-tb-wrap" id="<?php echo esc_attr( $uid ); ?>">
+        <div class="mcpt-tb-wrap" id="<?php echo esc_attr( $uid ); ?>">
 
-            <div class="hrk-tb-header">
-                <div class="hrk-tb-header-left">
+            <div class="mcpt-tb-header">
+                <div class="mcpt-tb-header-left">
                     <?php if ( ! empty( $label ) ) : ?>
-                        <div class="hrk-tb-label">
-                            <span class="hrk-tb-label-dash">&mdash;</span>
+                        <div class="mcpt-tb-label">
+                            <span class="mcpt-tb-label-dash">&mdash;</span>
                             <?php echo esc_html( $label ); ?>
                         </div>
                     <?php endif; ?>
-                    <h2 class="hrk-tb-headline">
+                    <h2 class="mcpt-tb-headline">
                         <?php echo esc_html( $headline ); ?>
                         <?php if ( ! empty( $headline_italic ) ) : ?>
                             <em><?php echo esc_html( $headline_italic ); ?></em>
                         <?php endif; ?>
                     </h2>
                 </div>
-                <a class="hrk-tb-all-link"
+                <a class="mcpt-tb-all-link"
                    href="<?php echo esc_url( $view_all_url ); ?>">
                     <?php echo esc_html( $all_text ); ?> &nbsp;&rarr;
                 </a>
             </div>
 
-            <div class="hrk-tb-panel">
-                <div class="hrk-tb-tabs hrk-tb-tabs-preview">
-                    <div class="hrk-tb-tab active hrk-tb-tab-static">
-                        <span class="hrk-tb-tab-dot hrk-tb-dot-green"></span>
+            <div class="mcpt-tb-panel">
+                <div class="mcpt-tb-tabs mcpt-tb-tabs-preview">
+                    <div class="mcpt-tb-tab active mcpt-tb-tab-static">
+                        <span class="mcpt-tb-tab-dot mcpt-tb-dot-green"></span>
                         Open Tenders
                         <?php if ( $total > 0 ) : ?>
-                            <span class="hrk-tb-tab-count">
+                            <span class="mcpt-tb-tab-count">
                                 <?php echo esc_html( $total ); ?>
                             </span>
                         <?php endif; ?>
                     </div>
-                    <a class="hrk-tb-tab-viewall"
+                    <a class="mcpt-tb-tab-viewall"
                        href="<?php echo esc_url( $view_all_url ); ?>">
                         <?php echo esc_html( $view_all_text ); ?> &rarr;
                     </a>
                 </div>
 
-                <div class="hrk-tb-list">
+                <div class="mcpt-tb-list">
                     <?php if ( $query->have_posts() ) : ?>
                         <?php while ( $query->have_posts() ) : $query->the_post(); ?>
                             <?php
@@ -315,31 +315,31 @@ if ( ! function_exists( 'metcpt_tenders_render_template_b_preview' ) ) {
                             $status     = metcpt_get_tender_status( $close_date );
                             $close_fmt  = metcpt_format_tender_date( $close_date );
                             ?>
-                            <div class="hrk-tb-row">
-                                <span class="hrk-tb-ref">
+                            <div class="mcpt-tb-row">
+                                <span class="mcpt-tb-ref">
                                     <?php echo esc_html( $ref ? $ref : '—' ); ?>
                                 </span>
-                                <a class="hrk-tb-title"
+                                <a class="mcpt-tb-title"
                                    href="<?php echo esc_url( get_permalink() ); ?>">
                                     <?php echo esc_html( get_the_title() ); ?>
                                 </a>
                                 <?php if ( $status === 'soon' ) : ?>
-                                    <span class="hrk-tb-badge hrk-tb-badge-soon">Closing Soon</span>
+                                    <span class="mcpt-tb-badge mcpt-tb-badge-soon">Closing Soon</span>
                                 <?php else : ?>
-                                    <span class="hrk-tb-badge hrk-tb-badge-open">Open</span>
+                                    <span class="mcpt-tb-badge mcpt-tb-badge-open">Open</span>
                                 <?php endif; ?>
-                                <span class="hrk-tb-date">
+                                <span class="mcpt-tb-date">
                                     Closes <?php echo esc_html( $close_fmt ); ?>
                                 </span>
                             </div>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <div class="hrk-tb-empty">No open tenders at this time.</div>
+                        <div class="mcpt-tb-empty">No open tenders at this time.</div>
                     <?php endif; ?>
 
-                    <div class="hrk-tb-footer-row">
-                        <a class="hrk-tb-footer-link"
+                    <div class="mcpt-tb-footer-row">
+                        <a class="mcpt-tb-footer-link"
                            href="<?php echo esc_url( $view_all_url ); ?>">
                             View all tender opportunities &rarr;
                         </a>

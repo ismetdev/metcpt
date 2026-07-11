@@ -45,25 +45,25 @@ if ( ! function_exists( 'metcpt_render_event_archive' ) ) {
         <?php get_header(); ?>
 
         <main>
-        <div class="hrk-ev-archive-wrap">
+        <div class="mcpt-ev-archive-wrap">
 
-            <div class="hrk-ev-archive-header">
-                <div class="hrk-ev-archive-label">&mdash; Corporate Events</div>
-                <h1 class="hrk-ev-archive-title">Events &amp; programmes</h1>
-                <p class="hrk-ev-archive-desc">
+            <div class="mcpt-ev-archive-header">
+                <div class="mcpt-ev-archive-label">&mdash; Corporate Events</div>
+                <h1 class="mcpt-ev-archive-title">Events &amp; programmes</h1>
+                <p class="mcpt-ev-archive-desc">
                     Corporate events, ceremonies, and programmes hosted by IIUM Holdings
                     and its subsidiary companies.
                 </p>
             </div>
 
-            <div class="hrk-ev-archive-filters">
-                <button class="hrk-ev-filter-btn active" data-filter="all">All Events</button>
-                <button class="hrk-ev-filter-btn" data-filter="upcoming">Upcoming</button>
-                <button class="hrk-ev-filter-btn" data-filter="today">Today</button>
-                <button class="hrk-ev-filter-btn" data-filter="past">Past</button>
+            <div class="mcpt-ev-archive-filters">
+                <button class="mcpt-ev-filter-btn active" data-filter="all">All Events</button>
+                <button class="mcpt-ev-filter-btn" data-filter="upcoming">Upcoming</button>
+                <button class="mcpt-ev-filter-btn" data-filter="today">Today</button>
+                <button class="mcpt-ev-filter-btn" data-filter="past">Past</button>
             </div>
 
-            <div class="hrk-ev-archive-grid">
+            <div class="mcpt-ev-archive-grid">
                 <?php
                 $query = new WP_Query( array(
                     'post_type'      => 'metcpt_event',
@@ -108,56 +108,56 @@ if ( ! function_exists( 'metcpt_render_event_archive' ) ) {
                         ?>
 
                         <a href="<?php echo esc_url( get_permalink() ); ?>"
-                           class="hrk-ev-archive-card"
+                           class="mcpt-ev-archive-card"
                            data-status="<?php echo esc_attr( $status ); ?>">
 
                             <?php if ( $thumb ) : ?>
-                                <div class="hrk-ev-card-thumb"
+                                <div class="mcpt-ev-card-thumb"
                                      style="background-image: url('<?php echo esc_url( $thumb ); ?>');">
                                 </div>
                             <?php else : ?>
-                                <div class="hrk-ev-card-thumb hrk-ev-card-thumb-placeholder">
+                                <div class="mcpt-ev-card-thumb mcpt-ev-card-thumb-placeholder">
                                     <span><?php echo esc_html( $month_str ?? 'EVT' ); ?></span>
                                 </div>
                             <?php endif; ?>
 
-                            <div class="hrk-ev-card-body">
+                            <div class="mcpt-ev-card-body">
 
-                                <div class="hrk-ev-card-header">
+                                <div class="mcpt-ev-card-header">
                                     <?php if ( ! empty( $date_fmt ) ) : ?>
-                                        <div class="hrk-ev-card-date-badge">
-                                            <span class="hrk-ev-date-day"><?php echo esc_html( $day_num ); ?></span>
-                                            <span class="hrk-ev-date-month"><?php echo esc_html( $month_str . ' ' . $year_str ); ?></span>
+                                        <div class="mcpt-ev-card-date-badge">
+                                            <span class="mcpt-ev-date-day"><?php echo esc_html( $day_num ); ?></span>
+                                            <span class="mcpt-ev-date-month"><?php echo esc_html( $month_str . ' ' . $year_str ); ?></span>
                                         </div>
                                     <?php endif; ?>
-                                    <span class="hrk-ev-card-status hrk-ev-status-<?php echo esc_attr( $status ); ?>">
-                                        <span class="hrk-ev-status-dot"></span>
+                                    <span class="mcpt-ev-card-status mcpt-ev-status-<?php echo esc_attr( $status ); ?>">
+                                        <span class="mcpt-ev-status-dot"></span>
                                         <?php echo esc_html( $status_label ); ?>
                                     </span>
                                 </div>
 
-                                <h2 class="hrk-ev-card-title"><?php echo esc_html( get_the_title() ); ?></h2>
+                                <h2 class="mcpt-ev-card-title"><?php echo esc_html( get_the_title() ); ?></h2>
 
-                                <div class="hrk-ev-card-meta">
+                                <div class="mcpt-ev-card-meta">
                                     <?php if ( ! empty( $venue ) ) : ?>
-                                        <div class="hrk-ev-card-meta-item">
-                                            <div class="hrk-ev-card-meta-label">Venue</div>
-                                            <div class="hrk-ev-card-meta-value"><?php echo esc_html( $venue ); ?></div>
+                                        <div class="mcpt-ev-card-meta-item">
+                                            <div class="mcpt-ev-card-meta-label">Venue</div>
+                                            <div class="mcpt-ev-card-meta-value"><?php echo esc_html( $venue ); ?></div>
                                         </div>
                                     <?php endif; ?>
                                     <?php if ( ! empty( $organiser ) ) : ?>
-                                        <div class="hrk-ev-card-meta-item">
-                                            <div class="hrk-ev-card-meta-label">Organiser</div>
-                                            <div class="hrk-ev-card-meta-value"><?php echo esc_html( $organiser ); ?></div>
+                                        <div class="mcpt-ev-card-meta-item">
+                                            <div class="mcpt-ev-card-meta-label">Organiser</div>
+                                            <div class="mcpt-ev-card-meta-value"><?php echo esc_html( $organiser ); ?></div>
                                         </div>
                                     <?php endif; ?>
                                 </div>
 
-                                <div class="hrk-ev-card-footer">
+                                <div class="mcpt-ev-card-footer">
                                     <?php if ( ! empty( $event_time ) ) : ?>
-                                        <div class="hrk-ev-card-time"><?php echo esc_html( $event_time ); ?></div>
+                                        <div class="mcpt-ev-card-time"><?php echo esc_html( $event_time ); ?></div>
                                     <?php endif; ?>
-                                    <div class="hrk-ev-card-arrow">&rarr;</div>
+                                    <div class="mcpt-ev-card-arrow">&rarr;</div>
                                 </div>
 
                             </div>
@@ -169,10 +169,10 @@ if ( ! function_exists( 'metcpt_render_event_archive' ) ) {
                     wp_reset_postdata();
                 else :
                     ?>
-                    <div class="hrk-ev-archive-empty" style="grid-column: 1 / -1;">
-                        <div class="hrk-ev-empty-icon">📅</div>
-                        <h3 class="hrk-ev-empty-title">No Events Available</h3>
-                        <p class="hrk-ev-empty-text">There are currently no events published.</p>
+                    <div class="mcpt-ev-archive-empty" style="grid-column: 1 / -1;">
+                        <div class="mcpt-ev-empty-icon">📅</div>
+                        <h3 class="mcpt-ev-empty-title">No Events Available</h3>
+                        <p class="mcpt-ev-empty-text">There are currently no events published.</p>
                     </div>
                 <?php endif; ?>
             </div>
@@ -182,8 +182,8 @@ if ( ! function_exists( 'metcpt_render_event_archive' ) ) {
 
         <script>
         (function() {
-            var filters = document.querySelectorAll('.hrk-ev-filter-btn');
-            var cards   = document.querySelectorAll('.hrk-ev-archive-card');
+            var filters = document.querySelectorAll('.mcpt-ev-filter-btn');
+            var cards   = document.querySelectorAll('.mcpt-ev-archive-card');
 
             filters.forEach(function(btn) {
                 btn.addEventListener('click', function() {

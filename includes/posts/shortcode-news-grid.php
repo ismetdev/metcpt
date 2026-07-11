@@ -92,21 +92,21 @@ function metcpt_news_grid_shortcode( $atts ) {
     ob_start();
     ?>
 
-    <div class="hrk-ng-wrap hrk-v2">
+    <div class="mcpt-ng-wrap mcpt-v2">
 
         <!-- Header -->
-        <div class="hrk-ng-header">
+        <div class="mcpt-ng-header">
 
-            <div class="hrk-ng-header-left">
+            <div class="mcpt-ng-header-left">
 
                 <?php if ( ! empty( $atts['label'] ) ) : ?>
-                    <div class="hrk-ng-label">
-                        <span class="hrk-ng-label-dash">&mdash;</span>
+                    <div class="mcpt-ng-label">
+                        <span class="mcpt-ng-label-dash">&mdash;</span>
                         <?php echo esc_html( $atts['label'] ); ?>
                     </div>
                 <?php endif; ?>
 
-                <h2 class="hrk-ng-headline">
+                <h2 class="mcpt-ng-headline">
 
                     <?php echo esc_html( $atts['headline'] ); ?>
 
@@ -120,7 +120,7 @@ function metcpt_news_grid_shortcode( $atts ) {
 
             <?php if ( ! empty( $atts['view_all_url'] ) ) : ?>
 
-                <a class="hrk-ng-view-link"
+                <a class="mcpt-ng-view-link"
                    href="<?php echo esc_url( $atts['view_all_url'] ); ?>">
 
                     <?php echo esc_html( $atts['view_all_text'] ); ?>
@@ -134,12 +134,12 @@ function metcpt_news_grid_shortcode( $atts ) {
 
         <?php if ( empty( $posts ) ) : ?>
 
-            <p class="hrk-ng-empty">No posts found.</p>
+            <p class="mcpt-ng-empty">No posts found.</p>
 
         <?php else : ?>
 
             <!-- Main Grid -->
-            <div class="hrk-ng-grid">
+            <div class="mcpt-ng-grid">
 
                 <?php foreach ( $posts as $n_post ) : ?>
 
@@ -155,40 +155,40 @@ function metcpt_news_grid_shortcode( $atts ) {
                         : '';
                     ?>
 
-                    <article class="hrk-ng-card">
+                    <article class="mcpt-ng-card">
 
                         <a href="<?php echo esc_url( $n_url ); ?>"
-                           class="hrk-ng-card-media-link">
+                           class="mcpt-ng-card-media-link">
 
                             <?php if ( ! empty( $n_thumb ) ) : ?>
 
-                                <img class="hrk-ng-card-media"
+                                <img class="mcpt-ng-card-media"
                                      src="<?php echo esc_url( $n_thumb ); ?>"
                                      alt="<?php echo esc_attr( $n_title ); ?>" />
 
                             <?php else : ?>
 
-                                <div class="hrk-ng-card-media hrk-ng-card-media-placeholder"></div>
+                                <div class="mcpt-ng-card-media mcpt-ng-card-media-placeholder"></div>
 
                             <?php endif; ?>
 
                         </a>
 
-                        <div class="hrk-ng-card-body">
+                        <div class="mcpt-ng-card-body">
 
                             <?php if ( ! empty( $n_cat ) ) : ?>
-                                <div class="hrk-ng-card-tag">
+                                <div class="mcpt-ng-card-tag">
                                     <?php echo esc_html( $n_cat ); ?>
                                 </div>
                             <?php endif; ?>
 
-                            <h3 class="hrk-ng-card-title">
+                            <h3 class="mcpt-ng-card-title">
                                 <a href="<?php echo esc_url( $n_url ); ?>">
                                     <?php echo esc_html( $n_title ); ?>
                                 </a>
                             </h3>
 
-                            <div class="hrk-ng-card-date">
+                            <div class="mcpt-ng-card-date">
                                 <?php echo esc_html( $n_date ); ?>
                             </div>
 

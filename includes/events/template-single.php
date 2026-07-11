@@ -22,13 +22,13 @@ if ( ! function_exists( 'metcpt_get_initials' ) ) {
 if ( ! function_exists( 'metcpt_vip_role_class' ) ) {
     function metcpt_vip_role_class( $role ) {
         $map = array(
-            'Guest of Honour'  => 'hrk-vip-goh',
-            'Tazkirah'         => 'hrk-vip-tazkirah',
-            'Notable Attendee' => 'hrk-vip-notable',
-            'Speaker'          => 'hrk-vip-speaker',
-            'MC'               => 'hrk-vip-mc',
+            'Guest of Honour'  => 'mcpt-vip-goh',
+            'Tazkirah'         => 'mcpt-vip-tazkirah',
+            'Notable Attendee' => 'mcpt-vip-notable',
+            'Speaker'          => 'mcpt-vip-speaker',
+            'MC'               => 'mcpt-vip-mc',
         );
-        return isset( $map[ $role ] ) ? $map[ $role ] : 'hrk-vip-notable';
+        return isset( $map[ $role ] ) ? $map[ $role ] : 'mcpt-vip-notable';
     }
 }
 
@@ -84,7 +84,7 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
 
         // ── Status ────────────────────────────────────────────────────────────
         $status_label = 'Upcoming';
-        $status_class = 'hrk-status-upcoming';
+        $status_class = 'mcpt-status-upcoming';
 
         if ( ! empty( $event_date ) ) {
             $today    = new DateTime( 'today' );
@@ -92,10 +92,10 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
             if ( $date_obj ) {
                 if ( $date_obj->format( 'Y-m-d' ) === $today->format( 'Y-m-d' ) ) {
                     $status_label = 'Today';
-                    $status_class = 'hrk-status-today';
+                    $status_class = 'mcpt-status-today';
                 } elseif ( $date_obj < $today ) {
                     $status_label = 'Past Event';
-                    $status_class = 'hrk-status-past';
+                    $status_class = 'mcpt-status-past';
                 }
             }
         }
@@ -149,79 +149,79 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
         <?php get_header(); ?>
 
         <main>
-        <article class="hrk-event-page">
+        <article class="mcpt-event-page">
 
-            <a class="hrk-back-link"
+            <a class="mcpt-back-link"
                href="<?php echo esc_url( $events_archive ? $events_archive : home_url( '/events' ) ); ?>">
                 &larr; Back to Events
             </a>
 
-            <span class="hrk-event-status <?php echo esc_attr( $status_class ); ?>">
-                <span class="hrk-status-dot"></span>
+            <span class="mcpt-event-status <?php echo esc_attr( $status_class ); ?>">
+                <span class="mcpt-status-dot"></span>
                 <?php echo esc_html( $status_label ); ?>
             </span>
 
-            <h1 class="hrk-event-title">
+            <h1 class="mcpt-event-title">
                 <?php echo esc_html( get_the_title( $post_id ) ); ?>
             </h1>
 
             <?php $excerpt = get_the_excerpt( $post_id ); ?>
             <?php if ( ! empty( $excerpt ) ) : ?>
-                <p class="hrk-event-excerpt"><?php echo esc_html( $excerpt ); ?></p>
+                <p class="mcpt-event-excerpt"><?php echo esc_html( $excerpt ); ?></p>
             <?php endif; ?>
 
             <?php if ( ! empty( $thumb_url ) ) : ?>
-                <img class="hrk-event-banner"
+                <img class="mcpt-event-banner"
                      src="<?php echo esc_url( $thumb_url ); ?>"
                      alt="<?php echo esc_attr( get_the_title( $post_id ) ); ?>" />
             <?php else : ?>
-                <div class="hrk-banner-placeholder">No banner image uploaded</div>
+                <div class="mcpt-banner-placeholder">No banner image uploaded</div>
             <?php endif; ?>
 
-            <div class="hrk-info-grid">
+            <div class="mcpt-info-grid">
                 <?php if ( ! empty( $date_long ) ) : ?>
-                <div class="hrk-info-card">
-                    <div class="hrk-info-label">Date</div>
-                    <div class="hrk-info-value"><?php echo esc_html( $date_long ); ?></div>
+                <div class="mcpt-info-card">
+                    <div class="mcpt-info-label">Date</div>
+                    <div class="mcpt-info-value"><?php echo esc_html( $date_long ); ?></div>
                 </div>
                 <?php endif; ?>
                 <?php if ( ! empty( $event_time ) ) : ?>
-                <div class="hrk-info-card">
-                    <div class="hrk-info-label">Time</div>
-                    <div class="hrk-info-value"><?php echo esc_html( $event_time ); ?></div>
+                <div class="mcpt-info-card">
+                    <div class="mcpt-info-label">Time</div>
+                    <div class="mcpt-info-value"><?php echo esc_html( $event_time ); ?></div>
                 </div>
                 <?php endif; ?>
                 <?php if ( ! empty( $event_venue ) ) : ?>
-                <div class="hrk-info-card">
-                    <div class="hrk-info-label">Venue</div>
-                    <div class="hrk-info-value"><?php echo esc_html( $event_venue ); ?></div>
+                <div class="mcpt-info-card">
+                    <div class="mcpt-info-label">Venue</div>
+                    <div class="mcpt-info-value"><?php echo esc_html( $event_venue ); ?></div>
                 </div>
                 <?php endif; ?>
                 <?php if ( ! empty( $event_organiser ) ) : ?>
-                <div class="hrk-info-card">
-                    <div class="hrk-info-label">Organiser</div>
-                    <div class="hrk-info-value"><?php echo esc_html( $event_organiser ); ?></div>
+                <div class="mcpt-info-card">
+                    <div class="mcpt-info-label">Organiser</div>
+                    <div class="mcpt-info-value"><?php echo esc_html( $event_organiser ); ?></div>
                 </div>
                 <?php endif; ?>
             </div>
 
             <?php if ( ! empty( $vips ) ) : ?>
-            <div class="hrk-section">
-                <div class="hrk-section-title">VIPs &amp; Key Figures</div>
+            <div class="mcpt-section">
+                <div class="mcpt-section-title">VIPs &amp; Key Figures</div>
                 <?php foreach ( $vips as $vip ) : ?>
                     <?php if ( empty( $vip['name'] ) ) continue; ?>
-                    <div class="hrk-vip-row">
-                        <div class="hrk-avatar">
+                    <div class="mcpt-vip-row">
+                        <div class="mcpt-avatar">
                             <?php echo esc_html( metcpt_get_initials( $vip['name'] ) ); ?>
                         </div>
                         <div>
-                            <div class="hrk-vip-name"><?php echo esc_html( $vip['name'] ); ?></div>
+                            <div class="mcpt-vip-name"><?php echo esc_html( $vip['name'] ); ?></div>
                             <?php if ( ! empty( $vip['title'] ) ) : ?>
-                                <div class="hrk-vip-title"><?php echo esc_html( $vip['title'] ); ?></div>
+                                <div class="mcpt-vip-title"><?php echo esc_html( $vip['title'] ); ?></div>
                             <?php endif; ?>
                         </div>
                         <?php if ( ! empty( $vip['role'] ) ) : ?>
-                            <span class="hrk-vip-tag <?php echo esc_attr( metcpt_vip_role_class( $vip['role'] ) ); ?>">
+                            <span class="mcpt-vip-tag <?php echo esc_attr( metcpt_vip_role_class( $vip['role'] ) ); ?>">
                                 <?php echo esc_html( $vip['role'] ); ?>
                             </span>
                         <?php endif; ?>
@@ -231,10 +231,10 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
             <?php endif; ?>
 
             <?php if ( ! empty( $itinerary ) ) : ?>
-            <div class="hrk-section">
-                <div class="hrk-section-title">Programme Itinerary</div>
-                <div class="hrk-table-wrap">
-                    <table class="hrk-itinerary-table">
+            <div class="mcpt-section">
+                <div class="mcpt-section-title">Programme Itinerary</div>
+                <div class="mcpt-table-wrap">
+                    <table class="mcpt-itinerary-table">
                         <thead>
                             <tr>
                                 <th style="width:110px">Time</th>
@@ -246,9 +246,9 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
                             <?php foreach ( $itinerary as $item ) : ?>
                                 <?php if ( empty( $item['activity'] ) ) continue; ?>
                                 <tr>
-                                    <td><div class="hrk-itin-time"><?php echo esc_html( $item['time'] ); ?></div></td>
-                                    <td><div class="hrk-itin-activity"><?php echo esc_html( $item['activity'] ); ?></div></td>
-                                    <td><div class="hrk-itin-pic"><?php echo esc_html( $item['pic'] ); ?></div></td>
+                                    <td><div class="mcpt-itin-time"><?php echo esc_html( $item['time'] ); ?></div></td>
+                                    <td><div class="mcpt-itin-activity"><?php echo esc_html( $item['activity'] ); ?></div></td>
+                                    <td><div class="mcpt-itin-pic"><?php echo esc_html( $item['pic'] ); ?></div></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -258,21 +258,21 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
             <?php endif; ?>
 
             <?php if ( ! empty( $event_audience ) || ! empty( $event_capacity ) ) : ?>
-            <div class="hrk-section">
-                <div class="hrk-section-title">Attendance &amp; Capacity</div>
-                <div class="hrk-attendance-grid">
+            <div class="mcpt-section">
+                <div class="mcpt-section-title">Attendance &amp; Capacity</div>
+                <div class="mcpt-attendance-grid">
                     <?php if ( ! empty( $event_audience ) ) : ?>
-                    <div class="hrk-info-card">
-                        <div class="hrk-info-label">Who Should Attend</div>
-                        <div class="hrk-info-value" style="font-weight:400;font-size:13px;margin-top:4px;">
+                    <div class="mcpt-info-card">
+                        <div class="mcpt-info-label">Who Should Attend</div>
+                        <div class="mcpt-info-value" style="font-weight:400;font-size:13px;margin-top:4px;">
                             <?php echo esc_html( $event_audience ); ?>
                         </div>
                     </div>
                     <?php endif; ?>
                     <?php if ( ! empty( $event_capacity ) ) : ?>
-                    <div class="hrk-info-card">
-                        <div class="hrk-info-label">Capacity</div>
-                        <div class="hrk-info-value"><?php echo esc_html( $event_capacity ); ?></div>
+                    <div class="mcpt-info-card">
+                        <div class="mcpt-info-label">Capacity</div>
+                        <div class="mcpt-info-value"><?php echo esc_html( $event_capacity ); ?></div>
                     </div>
                     <?php endif; ?>
                 </div>
@@ -280,14 +280,14 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
             <?php endif; ?>
 
             <?php if ( ! empty( $faqs ) ) : ?>
-            <div class="hrk-section">
-                <div class="hrk-section-title">Frequently Asked Questions</div>
+            <div class="mcpt-section">
+                <div class="mcpt-section-title">Frequently Asked Questions</div>
                 <?php foreach ( $faqs as $faq ) : ?>
                     <?php if ( empty( $faq['question'] ) ) continue; ?>
-                    <div class="hrk-faq-item">
-                        <div class="hrk-faq-q"><?php echo esc_html( $faq['question'] ); ?></div>
+                    <div class="mcpt-faq-item">
+                        <div class="mcpt-faq-q"><?php echo esc_html( $faq['question'] ); ?></div>
                         <?php if ( ! empty( $faq['answer'] ) ) : ?>
-                            <div class="hrk-faq-a"><?php echo nl2br( esc_html( $faq['answer'] ) ); ?></div>
+                            <div class="mcpt-faq-a"><?php echo nl2br( esc_html( $faq['answer'] ) ); ?></div>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
@@ -295,14 +295,14 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
             <?php endif; ?>
 
             <?php if ( ! empty( $event_guidelines ) ) : ?>
-            <div class="hrk-section">
-                <div class="hrk-section-title">Guidelines &amp; Important Notes</div>
+            <div class="mcpt-section">
+                <div class="mcpt-section-title">Guidelines &amp; Important Notes</div>
                 <?php
                 $lines = array_filter( array_map( 'trim', explode( "\n", $event_guidelines ) ) );
                 foreach ( $lines as $line ) :
                 ?>
-                    <div class="hrk-guideline-item">
-                        <div class="hrk-guide-dot"></div>
+                    <div class="mcpt-guideline-item">
+                        <div class="mcpt-guide-dot"></div>
                         <div><?php echo esc_html( $line ); ?></div>
                     </div>
                 <?php endforeach; ?>
@@ -310,25 +310,25 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
             <?php endif; ?>
 
             <?php if ( ! empty( $event_rsvp_url ) || ! empty( $event_cal_url ) ) : ?>
-            <div class="hrk-section">
-                <div class="hrk-section-title">Register &amp; Save the Date</div>
-                <div class="hrk-cta-row">
+            <div class="mcpt-section">
+                <div class="mcpt-section-title">Register &amp; Save the Date</div>
+                <div class="mcpt-cta-row">
                     <?php if ( ! empty( $event_rsvp_url ) ) : ?>
                         <a href="<?php echo esc_url( $event_rsvp_url ); ?>"
-                           class="hrk-btn hrk-btn-primary"
+                           class="mcpt-btn mcpt-btn-primary"
                            target="_blank" rel="noopener noreferrer">
                             Confirm Attendance
                         </a>
                     <?php endif; ?>
                     <?php if ( ! empty( $event_cal_url ) ) : ?>
                         <a href="<?php echo esc_url( $event_cal_url ); ?>"
-                           class="hrk-btn hrk-btn-secondary"
+                           class="mcpt-btn mcpt-btn-secondary"
                            target="_blank" rel="noopener noreferrer">
                             Add to Google Calendar
                         </a>
                     <?php endif; ?>
                     <a href="<?php echo esc_url( $whatsapp_url ); ?>"
-                       class="hrk-btn hrk-btn-secondary"
+                       class="mcpt-btn mcpt-btn-secondary"
                        target="_blank" rel="noopener noreferrer">
                         Share via WhatsApp
                     </a>
@@ -337,26 +337,26 @@ if ( ! function_exists( 'metcpt_render_event_single' ) ) {
             <?php endif; ?>
 
             <?php if ( ! empty( $event_contact_name ) ) : ?>
-            <div class="hrk-section">
-                <div class="hrk-section-title">Contact &amp; Secretariat</div>
-                <div class="hrk-contact-card">
-                    <div class="hrk-avatar" style="width:50px;height:50px;font-size:15px;flex-shrink:0;">
+            <div class="mcpt-section">
+                <div class="mcpt-section-title">Contact &amp; Secretariat</div>
+                <div class="mcpt-contact-card">
+                    <div class="mcpt-avatar" style="width:50px;height:50px;font-size:15px;flex-shrink:0;">
                         <?php echo esc_html( metcpt_get_initials( $event_contact_name ) ); ?>
                     </div>
                     <div>
                         <?php if ( ! empty( $event_contact_dept ) ) : ?>
-                            <div class="hrk-contact-dept"><?php echo esc_html( $event_contact_dept ); ?></div>
+                            <div class="mcpt-contact-dept"><?php echo esc_html( $event_contact_dept ); ?></div>
                         <?php endif; ?>
-                        <div class="hrk-contact-name"><?php echo esc_html( $event_contact_name ); ?></div>
+                        <div class="mcpt-contact-name"><?php echo esc_html( $event_contact_name ); ?></div>
                         <div style="margin-top:4px;display:flex;gap:16px;flex-wrap:wrap;">
                             <?php if ( ! empty( $event_contact_email ) ) : ?>
-                                <a class="hrk-contact-detail"
+                                <a class="mcpt-contact-detail"
                                    href="mailto:<?php echo esc_attr( $event_contact_email ); ?>">
                                     <?php echo esc_html( $event_contact_email ); ?>
                                 </a>
                             <?php endif; ?>
                             <?php if ( ! empty( $event_contact_phone ) ) : ?>
-                                <a class="hrk-contact-detail"
+                                <a class="mcpt-contact-detail"
                                    href="tel:<?php echo esc_attr( $event_contact_phone ); ?>">
                                     <?php echo esc_html( $event_contact_phone ); ?>
                                 </a>

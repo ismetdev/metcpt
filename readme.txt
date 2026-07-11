@@ -4,7 +4,7 @@ Tags: corporate, events, careers, tenders, listings
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.2.2
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,12 @@ Yes. Developers can override or customize templates as needed.
 
 == Changelog ==
 
+= 1.3.0 =
+
+* Redesigned the admin Settings page into one unified, consistent house design (header, tabs and body now read as a single card) with a blue accent throughout
+* Fixed the Error Log and How-To pages so they stay within the page width and no longer run off to the right on smaller screens
+* Renamed all remaining internal "hrk" CSS classes and design tokens (leftover from the old plugin name) to the "mcpt" prefix; no change to functionality or content
+
 = 1.2.2 =
 
 * Rewrote the plugin description to a clearer, standards-based summary of what the plugin does
@@ -76,6 +82,10 @@ Yes. Developers can override or customize templates as needed.
 * Polished archive pages for Events, Tenders, and Careers
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+
+Visual refresh of the admin Settings page (unified design, blue accent) and a fix so the Error Log and How-To pages display neatly on all screen sizes. No functional changes; your content and configuration are unaffected.
 
 = 1.2.2 =
 

@@ -2,14 +2,14 @@
    MetCPT — General Post List
    =================================== */
 
-.hrk-post-list {
+.mcpt-post-list {
     display: grid;
     grid-template-columns: repeat( auto-fill, minmax( 280px, 1fr ) );
     gap: 24px;
     margin: 24px 0;
 }
 
-.hrk-post-item {
+.mcpt-post-item {
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
@@ -19,59 +19,59 @@
     transition: box-shadow 0.2s ease;
 }
 
-.hrk-post-item:hover {
+.mcpt-post-item:hover {
     box-shadow: 0 4px 16px rgba( 0, 0, 0, 0.08 );
 }
 
-.hrk-post-thumbnail img {
+.mcpt-post-thumbnail img {
     width: 100%;
     height: 180px;
     object-fit: cover;
     display: block;
 }
 
-.hrk-post-content {
+.mcpt-post-content {
     padding: 16px;
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
-.hrk-post-title {
+.mcpt-post-title {
     font-size: 1.05rem;
     font-weight: 600;
     margin: 0 0 8px;
     line-height: 1.4;
 }
 
-.hrk-post-title a {
+.mcpt-post-title a {
     text-decoration: none;
     color: #0f172a;
 }
 
-.hrk-post-title a:hover {
+.mcpt-post-title a:hover {
     color: #0056b3;
     text-decoration: underline;
 }
 
-.hrk-post-date {
+.mcpt-post-date {
     font-size: 0.8rem;
     color: #94a3b8;
     margin: 0 0 10px;
 }
 
-.hrk-post-excerpt {
+.mcpt-post-excerpt {
     font-size: 0.9rem;
     color: #475569;
     flex: 1;
     line-height: 1.6;
 }
 
-.hrk-post-excerpt p {
+.mcpt-post-excerpt p {
     margin: 0 0 10px;
 }
 
-.hrk-read-more {
+.mcpt-read-more {
     display: inline-block;
     margin-top: 12px;
     font-size: 0.85rem;
@@ -80,11 +80,11 @@
     text-decoration: none;
 }
 
-.hrk-read-more:hover {
+.mcpt-read-more:hover {
     text-decoration: underline;
 }
 
-.hrk-no-posts {
+.mcpt-no-posts {
     padding: 12px 16px;
     background: #fef9c3;
     border-left: 4px solid #f59e0b;

@@ -45,25 +45,25 @@ if ( ! function_exists( 'metcpt_render_tender_archive' ) ) {
         <?php get_header(); ?>
 
         <main>
-        <div class="hrk-t-archive-wrap">
+        <div class="mcpt-t-archive-wrap">
 
-            <div class="hrk-t-archive-header">
-                <div class="hrk-t-archive-label">&mdash; Tender Opportunities</div>
-                <h1 class="hrk-t-archive-title">Procurement &amp; Tenders</h1>
-                <p class="hrk-t-archive-desc">
+            <div class="mcpt-t-archive-header">
+                <div class="mcpt-t-archive-label">&mdash; Tender Opportunities</div>
+                <h1 class="mcpt-t-archive-title">Procurement &amp; Tenders</h1>
+                <p class="mcpt-t-archive-desc">
                     Explore current tender opportunities across IIUM Holdings and subsidiary companies.
                     All tenders are open for submission unless marked as closed.
                 </p>
             </div>
 
-            <div class="hrk-t-archive-filters">
-                <button class="hrk-t-filter-btn active" data-filter="all">All Tenders</button>
-                <button class="hrk-t-filter-btn" data-filter="open">Open</button>
-                <button class="hrk-t-filter-btn" data-filter="soon">Closing Soon</button>
-                <button class="hrk-t-filter-btn" data-filter="closed">Closed</button>
+            <div class="mcpt-t-archive-filters">
+                <button class="mcpt-t-filter-btn active" data-filter="all">All Tenders</button>
+                <button class="mcpt-t-filter-btn" data-filter="open">Open</button>
+                <button class="mcpt-t-filter-btn" data-filter="soon">Closing Soon</button>
+                <button class="mcpt-t-filter-btn" data-filter="closed">Closed</button>
             </div>
 
-            <div class="hrk-t-archive-grid">
+            <div class="mcpt-t-archive-grid">
                 <?php
                 $query = new WP_Query( array(
                     'post_type'      => 'metcpt_tender',
@@ -95,58 +95,58 @@ if ( ! function_exists( 'metcpt_render_tender_archive' ) ) {
                         $close_fmt = metcpt_format_tender_date( $close_date );
 
                         $status_label = 'Open';
-                        $status_class = 'hrk-t-status-open';
+                        $status_class = 'mcpt-t-status-open';
                         $date_prefix  = 'Closes';
                         if ( $status === 'soon' ) {
                             $status_label = 'Closing Soon';
-                            $status_class = 'hrk-t-status-soon';
+                            $status_class = 'mcpt-t-status-soon';
                         } elseif ( $status === 'closed' ) {
                             $status_label = 'Closed';
-                            $status_class = 'hrk-t-status-closed';
+                            $status_class = 'mcpt-t-status-closed';
                             $date_prefix  = 'Closed';
                         }
                         ?>
 
                         <a href="<?php echo esc_url( get_permalink() ); ?>"
-                           class="hrk-t-archive-card"
+                           class="mcpt-t-archive-card"
                            data-status="<?php echo esc_attr( $status ); ?>">
 
-                            <div class="hrk-t-card-header">
+                            <div class="mcpt-t-card-header">
                                 <?php if ( ! empty( $ref ) ) : ?>
-                                    <div class="hrk-t-card-ref"><?php echo esc_html( $ref ); ?></div>
+                                    <div class="mcpt-t-card-ref"><?php echo esc_html( $ref ); ?></div>
                                 <?php endif; ?>
-                                <span class="hrk-t-card-status <?php echo esc_attr( $status_class ); ?>">
-                                    <span class="hrk-t-dot"></span>
+                                <span class="mcpt-t-card-status <?php echo esc_attr( $status_class ); ?>">
+                                    <span class="mcpt-t-dot"></span>
                                     <?php echo esc_html( $status_label ); ?>
                                 </span>
                             </div>
 
                             <?php if ( ! empty( $category ) ) : ?>
-                                <div class="hrk-t-card-cat"><?php echo esc_html( $category ); ?></div>
+                                <div class="mcpt-t-card-cat"><?php echo esc_html( $category ); ?></div>
                             <?php endif; ?>
 
-                            <h2 class="hrk-t-card-title"><?php echo esc_html( get_the_title() ); ?></h2>
+                            <h2 class="mcpt-t-card-title"><?php echo esc_html( get_the_title() ); ?></h2>
 
-                            <div class="hrk-t-card-meta">
+                            <div class="mcpt-t-card-meta">
                                 <?php if ( ! empty( $issuer ) ) : ?>
-                                    <div class="hrk-t-card-meta-item">
-                                        <div class="hrk-t-card-meta-label">Issuer</div>
-                                        <div class="hrk-t-card-meta-value"><?php echo esc_html( $issuer ); ?></div>
+                                    <div class="mcpt-t-card-meta-item">
+                                        <div class="mcpt-t-card-meta-label">Issuer</div>
+                                        <div class="mcpt-t-card-meta-value"><?php echo esc_html( $issuer ); ?></div>
                                     </div>
                                 <?php endif; ?>
                                 <?php if ( ! empty( $location ) ) : ?>
-                                    <div class="hrk-t-card-meta-item">
-                                        <div class="hrk-t-card-meta-label">Location</div>
-                                        <div class="hrk-t-card-meta-value"><?php echo esc_html( $location ); ?></div>
+                                    <div class="mcpt-t-card-meta-item">
+                                        <div class="mcpt-t-card-meta-label">Location</div>
+                                        <div class="mcpt-t-card-meta-value"><?php echo esc_html( $location ); ?></div>
                                     </div>
                                 <?php endif; ?>
                             </div>
 
-                            <div class="hrk-t-card-footer">
-                                <div class="hrk-t-card-date">
+                            <div class="mcpt-t-card-footer">
+                                <div class="mcpt-t-card-date">
                                     <?php echo esc_html( $date_prefix . ' ' . $close_fmt ); ?>
                                 </div>
-                                <div class="hrk-t-card-arrow">&rarr;</div>
+                                <div class="mcpt-t-card-arrow">&rarr;</div>
                             </div>
 
                         </a>
@@ -156,10 +156,10 @@ if ( ! function_exists( 'metcpt_render_tender_archive' ) ) {
                     wp_reset_postdata();
                 else :
                     ?>
-                    <div class="hrk-t-archive-empty" style="grid-column: 1 / -1;">
-                        <div class="hrk-t-empty-icon">📋</div>
-                        <h3 class="hrk-t-empty-title">No Tenders Available</h3>
-                        <p class="hrk-t-empty-text">There are currently no tender opportunities published.</p>
+                    <div class="mcpt-t-archive-empty" style="grid-column: 1 / -1;">
+                        <div class="mcpt-t-empty-icon">📋</div>
+                        <h3 class="mcpt-t-empty-title">No Tenders Available</h3>
+                        <p class="mcpt-t-empty-text">There are currently no tender opportunities published.</p>
                     </div>
                 <?php endif; ?>
             </div>
@@ -169,8 +169,8 @@ if ( ! function_exists( 'metcpt_render_tender_archive' ) ) {
 
         <script>
         (function() {
-            var filters = document.querySelectorAll('.hrk-t-filter-btn');
-            var cards   = document.querySelectorAll('.hrk-t-archive-card');
+            var filters = document.querySelectorAll('.mcpt-t-filter-btn');
+            var cards   = document.querySelectorAll('.mcpt-t-archive-card');
 
             filters.forEach(function(btn) {
                 btn.addEventListener('click', function() {

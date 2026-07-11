@@ -14,19 +14,26 @@
 
 /* ── Tokens (scoped to the settings page) ─────────────────────────────────── */
 .metcpt-settings-wrap {
-    --hrk-ink:             #0F1419;
-    --hrk-ink-soft:        #5A6168;
-    --hrk-ink-faint:       #8A9098;
-    --hrk-paper:           #F4EFE7;
-    --hrk-paper-cool:      #FFFFFF;
-    --hrk-gold:            #B98A2E;
-    --hrk-gold-soft:       #C99A3A;
-    --hrk-gold-wash:       rgba(185, 138, 46, 0.14);
-    --hrk-hairline:        rgba(15, 20, 25, 0.08);
-    --hrk-hairline-strong: rgba(15, 20, 25, 0.14);
+    --mcpt-ink:             #0F1419;
+    --mcpt-ink-soft:        #5A6168;
+    --mcpt-ink-faint:       #8A9098;
+    --mcpt-paper:           #F4EFE7;
+    --mcpt-paper-cool:      #FFFFFF;
+    /* Gold retained ONLY for the cream frontend-preview mockups below. */
+    --mcpt-gold:            #B98A2E;
+    --mcpt-gold-soft:       #C99A3A;
+    --mcpt-gold-wash:       rgba(185, 138, 46, 0.14);
 
-    --hrk-radius:    10px;
-    --hrk-radius-lg: 16px;
+    /* House brand accent (blue). Same design language as our other plugins, own signature colour. */
+    --mcpt-accent:          #1D4ED8;
+    --mcpt-accent-dark:     #1E40AF;
+    --mcpt-accent-soft:     #DBEAFE;
+    --mcpt-surface:         #F6F7F7;
+    --mcpt-hairline:        rgba(15, 20, 25, 0.08);
+    --mcpt-hairline-strong: rgba(15, 20, 25, 0.14);
+
+    --mcpt-radius:    10px;
+    --mcpt-radius-lg: 16px;
 
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     margin: 0;
@@ -34,70 +41,70 @@
     background: transparent;
 }
 
-/* ── Header ───────────────────────────────────────────────────────────────── */
+/* ── Header (house brand banner — shared across all our plugins) ───────────── */
 .metcpt-settings-header {
-    background: var(--hrk-paper);
-    padding: 28px 32px 24px;
-    margin-left: -20px;
-    margin-top: -10px;
-    border-bottom: 1px solid var(--hrk-hairline);
-    position: relative;
-}
-.metcpt-settings-header::after {
-    content: '';
-    position: absolute;
-    left: 32px;
-    bottom: -1px;
-    width: 64px;
-    height: 3px;
-    background: var(--hrk-gold);
-    border-radius: 2px;
+    max-width: 1080px;
+    margin: 0;
+    background: linear-gradient(120deg, #2563EB 0%, var(--mcpt-accent) 100%);
+    border-radius: var(--mcpt-radius) var(--mcpt-radius) 0 0;
+    color: #fff;
 }
 .metcpt-settings-header-inner {
-    max-width: 960px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px;
 }
-.metcpt-settings-title {
-    color: var(--hrk-ink) !important;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 24px !important;
-    font-weight: 700 !important;
-    margin: 0 0 4px !important;
+.metcpt-brand {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 0 !important;
 }
-.metcpt-logo {
-    width: 36px;
-    height: 36px;
-    background: var(--hrk-gold);
-    border-radius: 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Georgia, serif;
-    font-size: 19px;
-    font-weight: 700;
+.metcpt-brand-mark {
+    font-size: 34px;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
     color: #fff;
     flex-shrink: 0;
-    box-shadow: 0 2px 6px var(--hrk-gold-wash);
 }
-.metcpt-settings-subtitle {
-    color: var(--hrk-ink-soft);
+.metcpt-brand-title {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 20px !important;
+    line-height: 1.2;
+    font-weight: 600 !important;
+    color: #fff !important;
+}
+.metcpt-brand-sub {
+    margin: 2px 0 0;
     font-size: 13px;
-    margin: 0;
-    padding-left: 50px;
-    letter-spacing: 0.01em;
+    color: rgba(255, 255, 255, 0.82);
+}
+.metcpt-header-meta {
+    display: flex;
+    align-items: center;
+}
+.metcpt-version {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    white-space: nowrap;
 }
 
 /* ── Top tab bar ──────────────────────────────────────────────────────────── */
 .metcpt-tabbar {
     display: flex;
-    gap: 4px;
-    margin: 0 0 0 -20px;
-    padding: 0 32px;
-    background: var(--hrk-paper);
-    border-bottom: 1px solid var(--hrk-hairline);
+    gap: 2px;
+    max-width: 1080px;
+    margin: 0;
+    padding: 0 12px;
+    background: var(--mcpt-paper-cool);
+    border: 1px solid var(--mcpt-hairline);
+    border-top: none;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
@@ -108,39 +115,49 @@
     padding: 13px 16px;
     font-size: 13px;
     font-weight: 600;
-    color: var(--hrk-ink-soft);
+    color: var(--mcpt-ink-soft);
     text-decoration: none;
-    border-bottom: 2px solid transparent;
+    border-bottom: 3px solid transparent;
     transition: color 0.15s, border-color 0.15s;
     flex-shrink: 0;
 }
 .metcpt-tab:hover {
-    color: var(--hrk-ink);
+    color: var(--mcpt-accent);
 }
 .metcpt-tab:focus {
     box-shadow: none;
     outline: none;
-    color: var(--hrk-ink);
+    color: var(--mcpt-accent);
 }
 .metcpt-tab.active {
-    color: var(--hrk-ink);
-    border-bottom-color: var(--hrk-gold);
+    color: var(--mcpt-accent);
+    border-bottom-color: var(--mcpt-accent);
 }
 
 /* ── Body / content card ──────────────────────────────────────────────────── */
+/* The header, tab bar and body share one width and connect into a single card:
+   header (rounded top) → tabs (flush) → body (gray surface, rounded bottom). */
 .metcpt-settings-body {
-    max-width: 960px;
-    margin-top: 28px;
+    max-width: 1080px;
+    margin: 0;
+    background: var(--mcpt-surface);
+    border: 1px solid var(--mcpt-hairline);
+    border-top: none;
+    border-radius: 0 0 var(--mcpt-radius) var(--mcpt-radius);
+    padding: 24px;
 }
+/* Full-page tabs (Error Log / How-To): same contained gray frame as standard tabs,
+   with a slightly tighter gutter. Their content (dashboard / docs) provides its own
+   white surfaces on top of the gray. */
 .metcpt-settings-body-full {
-    max-width: 100%;
-    margin-top: 24px;
+    padding: 16px;
 }
+/* The single white panel that holds a standard tab's form (mettranslate .mtwp-panel analog). */
 .metcpt-settings-content {
-    background: var(--hrk-paper-cool);
-    border: 1px solid var(--hrk-hairline);
-    border-radius: var(--hrk-radius-lg);
-    padding: 32px 36px;
+    background: var(--mcpt-paper-cool);
+    border: 1px solid var(--mcpt-hairline);
+    border-radius: var(--mcpt-radius);
+    padding: 28px 32px;
     box-shadow: 0 1px 2px rgba(15, 20, 25, 0.03);
 }
 .metcpt-settings-content-wide {
@@ -158,8 +175,8 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--hrk-gold);
-    border-bottom: 1px solid var(--hrk-hairline);
+    color: var(--mcpt-accent);
+    border-bottom: 1px solid var(--mcpt-hairline);
     padding-bottom: 10px;
     margin: 32px 0 22px;
 }
@@ -178,14 +195,14 @@
 .metcpt-field-label {
     font-size: 13px;
     font-weight: 600;
-    color: var(--hrk-ink);
+    color: var(--mcpt-ink);
     padding-top: 6px;
     line-height: 1.4;
 }
 .metcpt-field-hint {
     font-size: 11px;
     font-weight: 400;
-    color: var(--hrk-ink-faint);
+    color: var(--mcpt-ink-faint);
     display: block;
     margin-top: 4px;
     line-height: 1.5;
@@ -201,9 +218,9 @@
     max-width: 480px;
     font-size: 13px;
     padding: 8px 11px;
-    border: 1px solid var(--hrk-hairline-strong);
-    border-radius: var(--hrk-radius);
-    color: var(--hrk-ink);
+    border: 1px solid var(--mcpt-hairline-strong);
+    border-radius: var(--mcpt-radius);
+    color: var(--mcpt-ink);
     background: #fff;
     box-sizing: border-box;
 }
@@ -211,8 +228,8 @@
     width: 60px;
     height: 40px;
     padding: 2px 4px;
-    border: 1px solid var(--hrk-hairline-strong);
-    border-radius: var(--hrk-radius);
+    border: 1px solid var(--mcpt-hairline-strong);
+    border-radius: var(--mcpt-radius);
     cursor: pointer;
     background: #fff;
     box-sizing: border-box;
@@ -225,8 +242,8 @@
 .metcpt-field-row input:focus,
 .metcpt-field-row select:focus,
 .metcpt-field-row textarea:focus {
-    border-color: var(--hrk-gold);
-    outline: 2px solid var(--hrk-gold-wash);
+    border-color: var(--mcpt-accent);
+    outline: 2px solid var(--mcpt-accent-soft);
     outline-offset: 0;
     box-shadow: none;
 }
@@ -235,7 +252,7 @@
 .metcpt-field-narrow { max-width: 100px !important; }
 .metcpt-field-note {
     font-size: 12px;
-    color: var(--hrk-ink-faint);
+    color: var(--mcpt-ink-faint);
     margin: 6px 0 0;
 }
 
@@ -279,14 +296,14 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .metcpt-toggle input:checked + .metcpt-toggle-slider {
-    background: var(--hrk-gold);
+    background: var(--mcpt-accent);
 }
 .metcpt-toggle input:checked + .metcpt-toggle-slider:before {
     transform: translateX(20px);
 }
 .metcpt-toggle-label {
     font-size: 13px;
-    color: var(--hrk-ink-soft);
+    color: var(--mcpt-ink-soft);
 }
 
 /* ── Colour preview ───────────────────────────────────────────────────────── */
@@ -300,49 +317,49 @@
     width: 28px;
     height: 28px;
     border-radius: 8px;
-    border: 1px solid var(--hrk-hairline);
+    border: 1px solid var(--mcpt-hairline);
 }
 .metcpt-colour-value {
     font-size: 12px;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    color: var(--hrk-ink-soft);
+    color: var(--mcpt-ink-soft);
 }
 
 /* ── Save button ──────────────────────────────────────────────────────────── */
 .metcpt-save-btn {
     margin-top: 12px !important;
-    background: var(--hrk-ink) !important;
-    border-color: var(--hrk-ink) !important;
+    background: var(--mcpt-accent) !important;
+    border-color: var(--mcpt-accent) !important;
     color: #fff !important;
     padding: 9px 26px !important;
     font-size: 13px !important;
     font-weight: 600 !important;
-    border-radius: var(--hrk-radius) !important;
+    border-radius: var(--mcpt-radius) !important;
     height: auto !important;
     box-shadow: none !important;
     text-shadow: none !important;
     transition: background 0.15s, border-color 0.15s;
 }
 .metcpt-save-btn:hover {
-    background: var(--hrk-gold) !important;
-    border-color: var(--hrk-gold) !important;
+    background: var(--mcpt-accent-dark) !important;
+    border-color: var(--mcpt-accent-dark) !important;
 }
 
 /* ── Dummy-data action buttons ────────────────────────────────────────────── */
-.hrk-dummy-actions {
+.mcpt-dummy-actions {
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
     padding-top: 2px;
 }
-.hrk-dummy-status { font-size: 12px; }
-.hrk-dummy-ok  { color: #166534; }
-.hrk-dummy-err { color: #991b1b; }
+.mcpt-dummy-status { font-size: 12px; }
+.mcpt-dummy-ok  { color: #166534; }
+.mcpt-dummy-err { color: #991b1b; }
 
 /* ── Success notice tint ──────────────────────────────────────────────────── */
 .metcpt-settings-wrap .notice-success {
-    border-left-color: var(--hrk-gold) !important;
+    border-left-color: var(--mcpt-accent) !important;
 }
 
 /* ── Radio "template" cards (Tenders tab) ─────────────────────────────────── */
@@ -367,22 +384,22 @@
 .metcpt-radio-title {
     font-size: 13px;
     font-weight: 600;
-    color: var(--hrk-ink);
+    color: var(--mcpt-ink);
     margin-bottom: 4px;
 }
 .metcpt-radio-desc {
     font-size: 11px;
-    color: var(--hrk-ink-soft);
+    color: var(--mcpt-ink-soft);
     line-height: 1.5;
 }
 .metcpt-mock {
     margin-top: 10px;
-    border-radius: var(--hrk-radius);
+    border-radius: var(--mcpt-radius);
     padding: 12px 14px;
 }
 .metcpt-mock-a {
     background: #faf7f1;
-    border: 1px solid var(--hrk-hairline);
+    border: 1px solid var(--mcpt-hairline);
 }
 .metcpt-mock-a-head {
     display: flex;
@@ -394,9 +411,9 @@
     height: 6px;
     border-radius: 2px;
 }
-.metcpt-mock-bar-gold { background: var(--hrk-gold); flex: 1; }
-.metcpt-mock-bar-a { background: var(--hrk-hairline); width: 40px; }
-.metcpt-mock-bar-b { background: var(--hrk-hairline); width: 60px; }
+.metcpt-mock-bar-gold { background: var(--mcpt-gold); flex: 1; }
+.metcpt-mock-bar-a { background: var(--mcpt-hairline); width: 40px; }
+.metcpt-mock-bar-b { background: var(--mcpt-hairline); width: 60px; }
 .metcpt-mock-a-rows {
     display: grid;
     grid-template-columns: 80px 1fr 50px 50px;
@@ -406,17 +423,17 @@
 .metcpt-mock-cell {
     height: 5px;
     border-radius: 2px;
-    background: var(--hrk-hairline);
+    background: var(--mcpt-hairline);
 }
 .metcpt-mock-cell-strong { background: rgba(15, 20, 25, 0.16); }
 
 .metcpt-mock-b {
-    background: var(--hrk-paper);
-    border: 1px solid var(--hrk-hairline-strong);
+    background: var(--mcpt-paper);
+    border: 1px solid var(--mcpt-hairline-strong);
 }
 .metcpt-mock-b-label {
     font-size: 9px;
-    color: var(--hrk-ink-faint);
+    color: var(--mcpt-ink-faint);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin-bottom: 4px;
@@ -424,7 +441,7 @@
 .metcpt-mock-b-head {
     font-size: 13px;
     font-weight: 700;
-    color: var(--hrk-ink);
+    color: var(--mcpt-ink);
     margin-bottom: 8px;
 }
 .metcpt-mock-b-head em { font-style: italic; font-weight: 400; }
@@ -432,21 +449,21 @@
 .metcpt-mock-b-tabs {
     display: flex;
     gap: 12px;
-    border-bottom: 1px solid var(--hrk-hairline);
+    border-bottom: 1px solid var(--mcpt-hairline);
     padding-bottom: 6px;
     margin-bottom: 6px;
 }
 .metcpt-mock-b-tab-on {
     font-size: 9px;
     font-weight: 600;
-    color: var(--hrk-ink);
-    border-bottom: 1.5px solid var(--hrk-ink);
+    color: var(--mcpt-ink);
+    border-bottom: 1.5px solid var(--mcpt-ink);
     padding-bottom: 3px;
 }
-.metcpt-mock-b-tab-off { font-size: 9px; color: var(--hrk-ink-faint); }
+.metcpt-mock-b-tab-off { font-size: 9px; color: var(--mcpt-ink-faint); }
 .metcpt-mock-b-row {
     font-size: 9px;
-    color: var(--hrk-ink-soft);
+    color: var(--mcpt-ink-soft);
     display: flex;
     justify-content: space-between;
     padding: 3px 0;
@@ -461,36 +478,36 @@
 
 /* ── Live preview boxes (Tenders / Posts) ─────────────────────────────────── */
 .metcpt-preview-box {
-    background: var(--hrk-paper);
-    border-radius: var(--hrk-radius);
+    background: var(--mcpt-paper);
+    border-radius: var(--mcpt-radius);
     padding: 20px 24px;
-    border: 1px solid var(--hrk-hairline-strong);
+    border: 1px solid var(--mcpt-hairline-strong);
 }
 .metcpt-preview-label {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--hrk-ink-faint);
+    color: var(--mcpt-ink-faint);
     margin: 0 0 6px;
 }
 .metcpt-preview-headline {
     font-family: Georgia, serif;
     font-size: 22px;
     font-weight: 700;
-    color: var(--hrk-ink);
+    color: var(--mcpt-ink);
     margin: 0 0 8px;
     line-height: 1.3;
 }
 .metcpt-preview-headline em { font-style: italic; font-weight: 400; }
 .metcpt-preview-links {
     font-size: 12px;
-    color: var(--hrk-ink-soft);
+    color: var(--mcpt-ink-soft);
     margin: 0;
 }
 .metcpt-preview-links .muted {
     font-size: 11px;
-    color: var(--hrk-ink-faint);
+    color: var(--mcpt-ink-faint);
 }
 
 /* ── Shortcode reference table (Posts tab) ────────────────────────────────── */
@@ -502,7 +519,7 @@
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 .metcpt-shortcode-table thead th {
-    background: var(--hrk-ink);
+    background: var(--mcpt-ink);
     color: #fff;
     padding: 9px 12px;
     text-align: left;
@@ -511,34 +528,37 @@
 }
 .metcpt-shortcode-table td {
     padding: 8px 12px;
-    border-bottom: 1px solid var(--hrk-hairline);
+    border-bottom: 1px solid var(--mcpt-hairline);
     vertical-align: top;
 }
 .metcpt-shortcode-table tbody tr:nth-child(odd) { background: #faf7f1; }
 .metcpt-shortcode-table tbody tr:last-child td { border-bottom: none; }
-.metcpt-shortcode-code { color: var(--hrk-gold); white-space: nowrap; }
-.metcpt-shortcode-desc { font-family: -apple-system, 'Segoe UI', sans-serif; color: var(--hrk-ink-soft); }
+.metcpt-shortcode-code { color: var(--mcpt-accent); white-space: nowrap; }
+.metcpt-shortcode-desc { font-family: -apple-system, 'Segoe UI', sans-serif; color: var(--mcpt-ink-soft); }
 
 .metcpt-tip {
     margin-top: 16px;
     padding: 12px 16px;
-    background: var(--hrk-gold-wash);
-    border-left: 3px solid var(--hrk-gold);
-    border-radius: 0 var(--hrk-radius) var(--hrk-radius) 0;
+    background: var(--mcpt-accent-soft);
+    border-left: 3px solid var(--mcpt-accent);
+    border-radius: 0 var(--mcpt-radius) var(--mcpt-radius) 0;
 }
 .metcpt-tip p {
     font-size: 12px;
-    color: #7a5a12;
+    color: #1E3A8A;
     margin: 0;
 }
 
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 @media ( max-width: 782px ) {
-    .metcpt-settings-header { padding: 22px 20px 18px; }
-    .metcpt-settings-header::after { left: 20px; }
-    .metcpt-settings-title { font-size: 20px !important; }
-    .metcpt-settings-subtitle { padding-left: 0; margin-top: 6px; }
-    .metcpt-tabbar { padding: 0 20px; }
+    .metcpt-settings-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 20px;
+    }
+    .metcpt-brand-title { font-size: 18px !important; }
+    .metcpt-tabbar { padding: 0 8px; }
     .metcpt-settings-content { padding: 22px 20px; }
     .metcpt-field-row {
         grid-template-columns: 1fr;

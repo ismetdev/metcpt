@@ -1,31 +1,31 @@
 /* ── Specificity wrapper for live site theme override fix ── */
-body .hrk-cr-archive-wrap,
-body .hrk-cr-archive-wrap * {
+body .mcpt-cr-archive-wrap,
+body .mcpt-cr-archive-wrap * {
     box-sizing: border-box;
 }
 
-body .hrk-cr-archive-card {
+body .mcpt-cr-archive-card {
     text-decoration: none;
     color: inherit;
 }
 
-body .hrk-cr-card-title {
+body .mcpt-cr-card-title {
     color: #0f172a !important;
 }
 
-body .hrk-cr-card-company {
+body .mcpt-cr-card-company {
     color: #0056b3;
 }
 
-body .hrk-cr-card-meta-label {
+body .mcpt-cr-card-meta-label {
     color: #94a3b8;
 }
 
-body .hrk-cr-card-meta-value {
+body .mcpt-cr-card-meta-value {
     color: #334155;
 }
 
-body .hrk-cr-card-date {
+body .mcpt-cr-card-date {
     color: #64748b;
 }
 /* ===================================
@@ -401,7 +401,7 @@ body .hrk-cr-card-date {
    MetCPT — Career Single Page
    =================================== */
 
-.hrk-career-page {
+.mcpt-career-page {
     font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
     max-width: 860px;
     margin: 40px auto;
@@ -409,7 +409,7 @@ body .hrk-cr-card-date {
     color: #0f172a;
 }
 
-.hrk-c-back {
+.mcpt-c-back {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -419,9 +419,9 @@ body .hrk-cr-card-date {
     margin-bottom: 20px;
 }
 
-.hrk-c-back:hover { color: #0f172a; }
+.mcpt-c-back:hover { color: #0f172a; }
 
-.hrk-c-badges {
+.mcpt-c-badges {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -429,7 +429,7 @@ body .hrk-cr-card-date {
     flex-wrap: wrap;
 }
 
-.hrk-c-status {
+.mcpt-c-status {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -441,20 +441,20 @@ body .hrk-cr-card-date {
     letter-spacing: 0.06em;
 }
 
-.hrk-c-dot {
+.mcpt-c-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
 }
 
-.hrk-c-status-open   { background: #dcfce7; color: #166534; }
-.hrk-c-status-open .hrk-c-dot   { background: #16a34a; }
-.hrk-c-status-soon   { background: #fef9c3; color: #a16207; }
-.hrk-c-status-soon .hrk-c-dot   { background: #ca8a04; }
-.hrk-c-status-closed { background: #f1f5f9; color: #475569; }
-.hrk-c-status-closed .hrk-c-dot { background: #94a3b8; }
+.mcpt-c-status-open   { background: #dcfce7; color: #166534; }
+.mcpt-c-status-open .mcpt-c-dot   { background: #16a34a; }
+.mcpt-c-status-soon   { background: #fef9c3; color: #a16207; }
+.mcpt-c-status-soon .mcpt-c-dot   { background: #ca8a04; }
+.mcpt-c-status-closed { background: #f1f5f9; color: #475569; }
+.mcpt-c-status-closed .mcpt-c-dot { background: #94a3b8; }
 
-.hrk-c-type-badge {
+.mcpt-c-type-badge {
     display: inline-block;
     font-size: 11px;
     font-weight: 600;
@@ -466,7 +466,7 @@ body .hrk-cr-card-date {
     letter-spacing: 0.04em;
 }
 
-.hrk-c-title {
+.mcpt-c-title {
     font-size: 30px;
     font-weight: 700;
     color: #0f172a;
@@ -474,28 +474,28 @@ body .hrk-cr-card-date {
     margin: 0 0 12px;
 }
 
-.hrk-c-excerpt {
+.mcpt-c-excerpt {
     font-size: 15px;
     color: #475569;
     line-height: 1.7;
     margin: 0 0 24px;
 }
 
-.hrk-c-info-grid {
+.mcpt-c-info-grid {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax( 160px, 1fr ) );
     gap: 12px;
     margin-bottom: 32px;
 }
 
-.hrk-c-info-card {
+.mcpt-c-info-card {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 14px 16px;
 }
 
-.hrk-c-info-label {
+.mcpt-c-info-label {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -504,23 +504,23 @@ body .hrk-cr-card-date {
     margin-bottom: 5px;
 }
 
-.hrk-c-info-value {
+.mcpt-c-info-value {
     font-size: 13px;
     font-weight: 600;
     color: #0f172a;
     line-height: 1.4;
 }
 
-.hrk-c-company-logo {
+.mcpt-c-company-logo {
     max-height: 36px;
     max-width: 120px;
     object-fit: contain;
     display: block;
 }
 
-.hrk-c-section { margin-bottom: 32px; }
+.mcpt-c-section { margin-bottom: 32px; }
 
-.hrk-c-section-title {
+.mcpt-c-section-title {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -531,20 +531,20 @@ body .hrk-cr-card-date {
     margin-bottom: 18px;
 }
 
-.hrk-c-content {
+.mcpt-c-content {
     font-size: 14px;
     color: #334155;
     line-height: 1.75;
 }
 
-.hrk-c-content p   { margin: 0 0 14px; }
-.hrk-c-content ul,
-.hrk-c-content ol  { padding-left: 20px; margin: 0 0 14px; }
-.hrk-c-content li  { margin-bottom: 6px; }
-.hrk-c-content h2,
-.hrk-c-content h3  { color: #0f172a; margin: 20px 0 8px; }
+.mcpt-c-content p   { margin: 0 0 14px; }
+.mcpt-c-content ul,
+.mcpt-c-content ol  { padding-left: 20px; margin: 0 0 14px; }
+.mcpt-c-content li  { margin-bottom: 6px; }
+.mcpt-c-content h2,
+.mcpt-c-content h3  { color: #0f172a; margin: 20px 0 8px; }
 
-.hrk-c-apply-box {
+.mcpt-c-apply-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -556,13 +556,13 @@ body .hrk-cr-card-date {
     flex-wrap: wrap;
 }
 
-.hrk-c-apply-deadline {
+.mcpt-c-apply-deadline {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.hrk-c-apply-label {
+.mcpt-c-apply-label {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -570,15 +570,15 @@ body .hrk-cr-card-date {
     color: #94a3b8;
 }
 
-.hrk-c-apply-date {
+.mcpt-c-apply-date {
     font-size: 18px;
     font-weight: 700;
     color: #0f172a;
 }
 
-.hrk-c-date-urgent { color: #dc2626; }
+.mcpt-c-date-urgent { color: #dc2626; }
 
-.hrk-c-btn {
+.mcpt-c-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -593,14 +593,14 @@ body .hrk-cr-card-date {
     flex-shrink: 0;
 }
 
-.hrk-c-btn-primary {
+.mcpt-c-btn-primary {
     background: #0f172a;
     color: #ffffff !important;
 }
 
-.hrk-c-btn-primary:hover { background: #1e293b; }
+.mcpt-c-btn-primary:hover { background: #1e293b; }
 
-.hrk-c-btn-disabled {
+.mcpt-c-btn-disabled {
     background: #f1f5f9;
     color: #94a3b8 !important;
     cursor: not-allowed;
@@ -611,7 +611,7 @@ body .hrk-cr-card-date {
     white-space: nowrap;
 }
 
-.hrk-c-company-box {
+.mcpt-c-company-box {
     display: flex;
     align-items: flex-start;
     gap: 20px;
@@ -621,32 +621,32 @@ body .hrk-cr-card-date {
     padding: 20px 24px;
 }
 
-.hrk-c-company-logo-lg {
+.mcpt-c-company-logo-lg {
     max-height: 50px;
     max-width: 140px;
     object-fit: contain;
     flex-shrink: 0;
 }
 
-.hrk-c-company-info { flex: 1; }
+.mcpt-c-company-info { flex: 1; }
 
-.hrk-c-company-desc {
+.mcpt-c-company-desc {
     font-size: 13px;
     color: #475569;
     line-height: 1.65;
     margin: 0 0 10px;
 }
 
-.hrk-c-company-link {
+.mcpt-c-company-link {
     font-size: 13px;
     font-weight: 500;
     color: #0056b3;
     text-decoration: none;
 }
 
-.hrk-c-company-link:hover { text-decoration: underline; }
+.mcpt-c-company-link:hover { text-decoration: underline; }
 
-.hrk-c-contact-card {
+.mcpt-c-contact-card {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -656,7 +656,7 @@ body .hrk-cr-card-date {
     padding: 18px 20px;
 }
 
-.hrk-c-avatar {
+.mcpt-c-avatar {
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -670,17 +670,17 @@ body .hrk-cr-card-date {
     flex-shrink: 0;
 }
 
-.hrk-c-contact-name  { font-size: 14px; font-weight: 600; color: #0f172a; }
-.hrk-c-contact-dept  { font-size: 12px; color: #64748b; margin-bottom: 4px; }
-.hrk-c-contact-link  { font-size: 12px; color: #0056b3; text-decoration: none; }
-.hrk-c-contact-link:hover { text-decoration: underline; }
+.mcpt-c-contact-name  { font-size: 14px; font-weight: 600; color: #0f172a; }
+.mcpt-c-contact-dept  { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+.mcpt-c-contact-link  { font-size: 12px; color: #0056b3; text-decoration: none; }
+.mcpt-c-contact-link:hover { text-decoration: underline; }
 
 @media ( max-width: 640px ) {
-    .hrk-c-title        { font-size: 24px; }
-    .hrk-c-apply-box    { flex-direction: column; align-items: flex-start; }
-    .hrk-c-company-box  { flex-direction: column; }
-    .hrk-c-btn          { width: 100%; justify-content: center; }
-    .hrk-c-btn-disabled { width: 100%; text-align: center; }
+    .mcpt-c-title        { font-size: 24px; }
+    .mcpt-c-apply-box    { flex-direction: column; align-items: flex-start; }
+    .mcpt-c-company-box  { flex-direction: column; }
+    .mcpt-c-btn          { width: 100%; justify-content: center; }
+    .mcpt-c-btn-disabled { width: 100%; text-align: center; }
 }
 
 /* ===================================
@@ -688,7 +688,7 @@ body .hrk-cr-card-date {
    template-single.php styles
    =================================== */
 
-.hrk-career-page {
+.mcpt-career-page {
     font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
     max-width: 860px;
     margin: 40px auto;
@@ -696,7 +696,7 @@ body .hrk-cr-card-date {
     color: #0f172a;
 }
 
-.hrk-c-back {
+.mcpt-c-back {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -706,9 +706,9 @@ body .hrk-cr-card-date {
     margin-bottom: 20px;
 }
 
-.hrk-c-back:hover { color: #0f172a; }
+.mcpt-c-back:hover { color: #0f172a; }
 
-.hrk-c-badges {
+.mcpt-c-badges {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -716,7 +716,7 @@ body .hrk-cr-card-date {
     flex-wrap: wrap;
 }
 
-.hrk-c-status {
+.mcpt-c-status {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -728,20 +728,20 @@ body .hrk-cr-card-date {
     letter-spacing: 0.06em;
 }
 
-.hrk-c-dot {
+.mcpt-c-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
 }
 
-.hrk-c-status-open   { background: #dcfce7; color: #166534; }
-.hrk-c-status-open .hrk-c-dot   { background: #16a34a; }
-.hrk-c-status-soon   { background: #fef9c3; color: #a16207; }
-.hrk-c-status-soon .hrk-c-dot   { background: #ca8a04; }
-.hrk-c-status-closed { background: #f1f5f9; color: #475569; }
-.hrk-c-status-closed .hrk-c-dot { background: #94a3b8; }
+.mcpt-c-status-open   { background: #dcfce7; color: #166534; }
+.mcpt-c-status-open .mcpt-c-dot   { background: #16a34a; }
+.mcpt-c-status-soon   { background: #fef9c3; color: #a16207; }
+.mcpt-c-status-soon .mcpt-c-dot   { background: #ca8a04; }
+.mcpt-c-status-closed { background: #f1f5f9; color: #475569; }
+.mcpt-c-status-closed .mcpt-c-dot { background: #94a3b8; }
 
-.hrk-c-type-badge {
+.mcpt-c-type-badge {
     display: inline-block;
     font-size: 11px;
     font-weight: 600;
@@ -753,7 +753,7 @@ body .hrk-cr-card-date {
     letter-spacing: 0.04em;
 }
 
-.hrk-c-title {
+.mcpt-c-title {
     font-size: 30px;
     font-weight: 700;
     color: #0f172a;
@@ -761,28 +761,28 @@ body .hrk-cr-card-date {
     margin: 0 0 12px;
 }
 
-.hrk-c-excerpt {
+.mcpt-c-excerpt {
     font-size: 15px;
     color: #475569;
     line-height: 1.7;
     margin: 0 0 24px;
 }
 
-.hrk-c-info-grid {
+.mcpt-c-info-grid {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax( 160px, 1fr ) );
     gap: 12px;
     margin-bottom: 32px;
 }
 
-.hrk-c-info-card {
+.mcpt-c-info-card {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 14px 16px;
 }
 
-.hrk-c-info-label {
+.mcpt-c-info-label {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -791,23 +791,23 @@ body .hrk-cr-card-date {
     margin-bottom: 5px;
 }
 
-.hrk-c-info-value {
+.mcpt-c-info-value {
     font-size: 13px;
     font-weight: 600;
     color: #0f172a;
     line-height: 1.4;
 }
 
-.hrk-c-company-logo {
+.mcpt-c-company-logo {
     max-height: 36px;
     max-width: 120px;
     object-fit: contain;
     display: block;
 }
 
-.hrk-c-section { margin-bottom: 32px; }
+.mcpt-c-section { margin-bottom: 32px; }
 
-.hrk-c-section-title {
+.mcpt-c-section-title {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -818,20 +818,20 @@ body .hrk-cr-card-date {
     margin-bottom: 18px;
 }
 
-.hrk-c-content {
+.mcpt-c-content {
     font-size: 14px;
     color: #334155;
     line-height: 1.75;
 }
 
-.hrk-c-content p   { margin: 0 0 14px; }
-.hrk-c-content ul,
-.hrk-c-content ol  { padding-left: 20px; margin: 0 0 14px; }
-.hrk-c-content li  { margin-bottom: 6px; }
-.hrk-c-content h2,
-.hrk-c-content h3  { color: #0f172a; margin: 20px 0 8px; }
+.mcpt-c-content p   { margin: 0 0 14px; }
+.mcpt-c-content ul,
+.mcpt-c-content ol  { padding-left: 20px; margin: 0 0 14px; }
+.mcpt-c-content li  { margin-bottom: 6px; }
+.mcpt-c-content h2,
+.mcpt-c-content h3  { color: #0f172a; margin: 20px 0 8px; }
 
-.hrk-c-apply-box {
+.mcpt-c-apply-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -843,13 +843,13 @@ body .hrk-cr-card-date {
     flex-wrap: wrap;
 }
 
-.hrk-c-apply-deadline {
+.mcpt-c-apply-deadline {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.hrk-c-apply-label {
+.mcpt-c-apply-label {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -857,15 +857,15 @@ body .hrk-cr-card-date {
     color: #94a3b8;
 }
 
-.hrk-c-apply-date {
+.mcpt-c-apply-date {
     font-size: 18px;
     font-weight: 700;
     color: #0f172a;
 }
 
-.hrk-c-date-urgent { color: #dc2626; }
+.mcpt-c-date-urgent { color: #dc2626; }
 
-.hrk-c-btn {
+.mcpt-c-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -880,14 +880,14 @@ body .hrk-cr-card-date {
     flex-shrink: 0;
 }
 
-.hrk-c-btn-primary {
+.mcpt-c-btn-primary {
     background: #0f172a;
     color: #ffffff !important;
 }
 
-.hrk-c-btn-primary:hover { background: #1e293b; }
+.mcpt-c-btn-primary:hover { background: #1e293b; }
 
-.hrk-c-btn-disabled {
+.mcpt-c-btn-disabled {
     background: #f1f5f9;
     color: #94a3b8 !important;
     cursor: not-allowed;
@@ -898,7 +898,7 @@ body .hrk-cr-card-date {
     white-space: nowrap;
 }
 
-.hrk-c-company-box {
+.mcpt-c-company-box {
     display: flex;
     align-items: flex-start;
     gap: 20px;
@@ -908,32 +908,32 @@ body .hrk-cr-card-date {
     padding: 20px 24px;
 }
 
-.hrk-c-company-logo-lg {
+.mcpt-c-company-logo-lg {
     max-height: 50px;
     max-width: 140px;
     object-fit: contain;
     flex-shrink: 0;
 }
 
-.hrk-c-company-info { flex: 1; }
+.mcpt-c-company-info { flex: 1; }
 
-.hrk-c-company-desc {
+.mcpt-c-company-desc {
     font-size: 13px;
     color: #475569;
     line-height: 1.65;
     margin: 0 0 10px;
 }
 
-.hrk-c-company-link {
+.mcpt-c-company-link {
     font-size: 13px;
     font-weight: 500;
     color: #0056b3;
     text-decoration: none;
 }
 
-.hrk-c-company-link:hover { text-decoration: underline; }
+.mcpt-c-company-link:hover { text-decoration: underline; }
 
-.hrk-c-contact-card {
+.mcpt-c-contact-card {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -943,7 +943,7 @@ body .hrk-cr-card-date {
     padding: 18px 20px;
 }
 
-.hrk-c-avatar {
+.mcpt-c-avatar {
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -957,17 +957,17 @@ body .hrk-cr-card-date {
     flex-shrink: 0;
 }
 
-.hrk-c-contact-name  { font-size: 14px; font-weight: 600; color: #0f172a; }
-.hrk-c-contact-dept  { font-size: 12px; color: #64748b; margin-bottom: 4px; }
-.hrk-c-contact-link  { font-size: 12px; color: #0056b3; text-decoration: none; }
-.hrk-c-contact-link:hover { text-decoration: underline; }
+.mcpt-c-contact-name  { font-size: 14px; font-weight: 600; color: #0f172a; }
+.mcpt-c-contact-dept  { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+.mcpt-c-contact-link  { font-size: 12px; color: #0056b3; text-decoration: none; }
+.mcpt-c-contact-link:hover { text-decoration: underline; }
 
 @media ( max-width: 640px ) {
-    .hrk-c-title        { font-size: 24px; }
-    .hrk-c-apply-box    { flex-direction: column; align-items: flex-start; }
-    .hrk-c-company-box  { flex-direction: column; }
-    .hrk-c-btn          { width: 100%; justify-content: center; }
-    .hrk-c-btn-disabled { width: 100%; text-align: center; }
+    .mcpt-c-title        { font-size: 24px; }
+    .mcpt-c-apply-box    { flex-direction: column; align-items: flex-start; }
+    .mcpt-c-company-box  { flex-direction: column; }
+    .mcpt-c-btn          { width: 100%; justify-content: center; }
+    .mcpt-c-btn-disabled { width: 100%; text-align: center; }
 }
 
 /* ===================================
@@ -975,7 +975,7 @@ body .hrk-cr-card-date {
    template-archive.php styles
    =================================== */
 
-body .hrk-cr-archive-wrap {
+body .mcpt-cr-archive-wrap {
     font-family: 'DM Sans', -apple-system, 'Segoe UI', sans-serif;
     max-width: 1200px;
     margin: 0 auto;
@@ -983,12 +983,12 @@ body .hrk-cr-archive-wrap {
     color: #0f172a;
 }
 
-body .hrk-cr-archive-header {
+body .mcpt-cr-archive-header {
     margin-bottom: 48px;
     text-align: center;
 }
 
-body .hrk-cr-archive-label {
+body .mcpt-cr-archive-label {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -997,7 +997,7 @@ body .hrk-cr-archive-label {
     margin-bottom: 12px;
 }
 
-body .hrk-cr-archive-title {
+body .mcpt-cr-archive-title {
     font-size: 42px;
     font-weight: 700;
     color: #0f172a;
@@ -1005,7 +1005,7 @@ body .hrk-cr-archive-title {
     margin: 0 0 16px;
 }
 
-body .hrk-cr-archive-desc {
+body .mcpt-cr-archive-desc {
     font-size: 16px;
     color: #475569;
     line-height: 1.7;
@@ -1013,7 +1013,7 @@ body .hrk-cr-archive-desc {
     margin: 0 auto;
 }
 
-body .hrk-cr-archive-filters {
+body .mcpt-cr-archive-filters {
     display: flex;
     justify-content: center;
     gap: 12px;
@@ -1021,7 +1021,7 @@ body .hrk-cr-archive-filters {
     flex-wrap: wrap;
 }
 
-body .hrk-cr-filter-btn {
+body .mcpt-cr-filter-btn {
     padding: 10px 24px;
     font-size: 13px;
     font-weight: 600;
@@ -1033,25 +1033,25 @@ body .hrk-cr-filter-btn {
     transition: all 0.2s;
 }
 
-body .hrk-cr-filter-btn:hover {
+body .mcpt-cr-filter-btn:hover {
     color: #0f172a;
     border-color: #cbd5e1;
 }
 
-body .hrk-cr-filter-btn.active {
+body .mcpt-cr-filter-btn.active {
     color: #ffffff;
     background: #0f172a;
     border-color: #0f172a;
 }
 
-body .hrk-cr-archive-grid {
+body .mcpt-cr-archive-grid {
     display: grid;
     grid-template-columns: repeat( auto-fill, minmax( 340px, 1fr ) );
     gap: 24px;
     margin-bottom: 48px;
 }
 
-body .hrk-cr-archive-card {
+body .mcpt-cr-archive-card {
     display: flex;
     flex-direction: column;
     background: #ffffff;
@@ -1063,13 +1063,13 @@ body .hrk-cr-archive-card {
     color: #0f172a !important;
 }
 
-body .hrk-cr-archive-card:hover {
+body .mcpt-cr-archive-card:hover {
     border-color: #cbd5e1;
     box-shadow: 0 4px 12px rgba( 15, 23, 42, 0.08 );
     transform: translateY( -2px );
 }
 
-body .hrk-cr-card-top {
+body .mcpt-cr-card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1077,7 +1077,7 @@ body .hrk-cr-card-top {
     margin-bottom: 12px;
 }
 
-body .hrk-cr-card-type {
+body .mcpt-cr-card-type {
     font-size: 11px;
     font-weight: 600;
     padding: 3px 10px;
@@ -1088,7 +1088,7 @@ body .hrk-cr-card-type {
     letter-spacing: 0.04em;
 }
 
-body .hrk-cr-card-status {
+body .mcpt-cr-card-status {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -1102,34 +1102,34 @@ body .hrk-cr-card-status {
     flex-shrink: 0;
 }
 
-body .hrk-cr-status-dot {
+body .mcpt-cr-status-dot {
     width: 5px;
     height: 5px;
     border-radius: 50%;
 }
 
-body .hrk-cr-status-open {
+body .mcpt-cr-status-open {
     background: #dcfce7;
     color: #166534;
 }
 
-body .hrk-cr-status-open .hrk-cr-status-dot { background: #16a34a; }
+body .mcpt-cr-status-open .mcpt-cr-status-dot { background: #16a34a; }
 
-body .hrk-cr-status-soon {
+body .mcpt-cr-status-soon {
     background: #fef9c3;
     color: #a16207;
 }
 
-body .hrk-cr-status-soon .hrk-cr-status-dot { background: #ca8a04; }
+body .mcpt-cr-status-soon .mcpt-cr-status-dot { background: #ca8a04; }
 
-body .hrk-cr-status-closed {
+body .mcpt-cr-status-closed {
     background: #f1f5f9;
     color: #475569;
 }
 
-body .hrk-cr-status-closed .hrk-cr-status-dot { background: #94a3b8; }
+body .mcpt-cr-status-closed .mcpt-cr-status-dot { background: #94a3b8; }
 
-body .hrk-cr-card-title {
+body .mcpt-cr-card-title {
     font-size: 17px;
     font-weight: 600;
     color: #0f172a;
@@ -1137,18 +1137,18 @@ body .hrk-cr-card-title {
     margin: 0 0 6px;
 }
 
-body .hrk-cr-archive-card:hover .hrk-cr-card-title {
+body .mcpt-cr-archive-card:hover .mcpt-cr-card-title {
     color: #0056b3;
 }
 
-body .hrk-cr-card-company {
+body .mcpt-cr-card-company {
     font-size: 13px;
     font-weight: 500;
     color: #0056b3;
     margin-bottom: 16px;
 }
 
-body .hrk-cr-card-meta {
+body .mcpt-cr-card-meta {
     display: grid;
     grid-template-columns: repeat( 2, 1fr );
     gap: 12px;
@@ -1156,13 +1156,13 @@ body .hrk-cr-card-meta {
     flex: 1;
 }
 
-body .hrk-cr-card-meta-item {
+body .mcpt-cr-card-meta-item {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-body .hrk-cr-card-meta-label {
+body .mcpt-cr-card-meta-label {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -1170,13 +1170,13 @@ body .hrk-cr-card-meta-label {
     color: #94a3b8;
 }
 
-body .hrk-cr-card-meta-value {
+body .mcpt-cr-card-meta-value {
     font-size: 13px;
     color: #334155;
     font-weight: 500;
 }
 
-body .hrk-cr-card-footer {
+body .mcpt-cr-card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1185,12 +1185,12 @@ body .hrk-cr-card-footer {
     margin-top: auto;
 }
 
-body .hrk-cr-card-date {
+body .mcpt-cr-card-date {
     font-size: 12px;
     color: #64748b;
 }
 
-body .hrk-cr-card-arrow {
+body .mcpt-cr-card-arrow {
     width: 20px;
     height: 20px;
     display: flex;
@@ -1203,36 +1203,36 @@ body .hrk-cr-card-arrow {
     transition: all 0.2s;
 }
 
-body .hrk-cr-archive-card:hover .hrk-cr-card-arrow {
+body .mcpt-cr-archive-card:hover .mcpt-cr-card-arrow {
     background: #0f172a;
     color: #ffffff;
 }
 
-body .hrk-cr-archive-empty {
+body .mcpt-cr-archive-empty {
     text-align: center;
     padding: 80px 24px;
 }
 
-body .hrk-cr-empty-icon {
+body .mcpt-cr-empty-icon {
     font-size: 48px;
     margin-bottom: 16px;
 }
 
-body .hrk-cr-empty-title {
+body .mcpt-cr-empty-title {
     font-size: 18px;
     font-weight: 600;
     color: #334155;
     margin: 0 0 8px;
 }
 
-body .hrk-cr-empty-text {
+body .mcpt-cr-empty-text {
     font-size: 14px;
     color: #64748b;
 }
 
 @media ( max-width: 768px ) {
-    .hrk-cr-archive-wrap  { padding: 40px 16px 60px; }
-    .hrk-cr-archive-title { font-size: 32px; }
-    .hrk-cr-archive-grid  { grid-template-columns: 1fr; }
-    .hrk-cr-card-meta     { grid-template-columns: 1fr; }
+    .mcpt-cr-archive-wrap  { padding: 40px 16px 60px; }
+    .mcpt-cr-archive-title { font-size: 32px; }
+    .mcpt-cr-archive-grid  { grid-template-columns: 1fr; }
+    .mcpt-cr-card-meta     { grid-template-columns: 1fr; }
 }

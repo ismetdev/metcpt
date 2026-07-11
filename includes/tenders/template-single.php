@@ -85,13 +85,13 @@ if ( ! function_exists( 'metcpt_render_tender_single' ) ) {
         $excerpt      = get_the_excerpt( $post_id );
 
         $status_label = 'Open';
-        $status_class = 'hrk-t-status-open';
+        $status_class = 'mcpt-t-status-open';
         if ( $status === 'soon' ) {
             $status_label = 'Closing Soon';
-            $status_class = 'hrk-t-status-soon';
+            $status_class = 'mcpt-t-status-soon';
         } elseif ( $status === 'closed' ) {
             $status_label = 'Closed';
-            $status_class = 'hrk-t-status-closed';
+            $status_class = 'mcpt-t-status-closed';
         }
 
         $tenders_archive = get_post_type_archive_link( 'metcpt_tender' );
@@ -109,82 +109,82 @@ if ( ! function_exists( 'metcpt_render_tender_single' ) ) {
         <?php get_header(); ?>
 
         <main>
-        <article class="hrk-tender-page">
+        <article class="mcpt-tender-page">
 
-            <a class="hrk-t-back"
+            <a class="mcpt-t-back"
                href="<?php echo esc_url( $tenders_archive ? $tenders_archive : home_url( '/tenders' ) ); ?>">
                 &larr; Back to Tenders
             </a>
 
-            <span class="hrk-t-status <?php echo esc_attr( $status_class ); ?>">
-                <span class="hrk-t-dot"></span>
+            <span class="mcpt-t-status <?php echo esc_attr( $status_class ); ?>">
+                <span class="mcpt-t-dot"></span>
                 <?php echo esc_html( $status_label ); ?>
             </span>
 
             <?php if ( ! empty( $tender_category ) ) : ?>
-                <div class="hrk-t-cat"><?php echo esc_html( $tender_category ); ?></div>
+                <div class="mcpt-t-cat"><?php echo esc_html( $tender_category ); ?></div>
             <?php endif; ?>
 
-            <h1 class="hrk-t-title">
+            <h1 class="mcpt-t-title">
                 <?php echo esc_html( get_the_title( $post_id ) ); ?>
             </h1>
 
             <?php if ( ! empty( $excerpt ) ) : ?>
-                <p class="hrk-t-desc"><?php echo esc_html( $excerpt ); ?></p>
+                <p class="mcpt-t-desc"><?php echo esc_html( $excerpt ); ?></p>
             <?php endif; ?>
 
             <?php /* ── SECTION 1: KEY INFO GRID ── */ ?>
-            <div class="hrk-t-info-grid">
+            <div class="mcpt-t-info-grid">
                 <?php if ( ! empty( $tender_ref ) ) : ?>
-                <div class="hrk-t-info-card">
-                    <div class="hrk-t-info-label">Reference No.</div>
-                    <div class="hrk-t-info-value"><?php echo esc_html( $tender_ref ); ?></div>
+                <div class="mcpt-t-info-card">
+                    <div class="mcpt-t-info-label">Reference No.</div>
+                    <div class="mcpt-t-info-value"><?php echo esc_html( $tender_ref ); ?></div>
                 </div>
                 <?php endif; ?>
                 <?php if ( ! empty( $tender_issuer ) ) : ?>
-                <div class="hrk-t-info-card">
-                    <div class="hrk-t-info-label">Issuing Organisation</div>
-                    <div class="hrk-t-info-value"><?php echo esc_html( $tender_issuer ); ?></div>
+                <div class="mcpt-t-info-card">
+                    <div class="mcpt-t-info-label">Issuing Organisation</div>
+                    <div class="mcpt-t-info-value"><?php echo esc_html( $tender_issuer ); ?></div>
                 </div>
                 <?php endif; ?>
                 <?php if ( ! empty( $tender_location ) ) : ?>
-                <div class="hrk-t-info-card">
-                    <div class="hrk-t-info-label">Location</div>
-                    <div class="hrk-t-info-value"><?php echo esc_html( $tender_location ); ?></div>
+                <div class="mcpt-t-info-card">
+                    <div class="mcpt-t-info-label">Location</div>
+                    <div class="mcpt-t-info-value"><?php echo esc_html( $tender_location ); ?></div>
                 </div>
                 <?php endif; ?>
-                <div class="hrk-t-info-card">
-                    <div class="hrk-t-info-label">Published</div>
-                    <div class="hrk-t-info-value"><?php echo esc_html( $publish_date ); ?></div>
+                <div class="mcpt-t-info-card">
+                    <div class="mcpt-t-info-label">Published</div>
+                    <div class="mcpt-t-info-value"><?php echo esc_html( $publish_date ); ?></div>
                 </div>
             </div>
 
             <?php /* ── SECTION 2: TIMELINES ── */ ?>
             <?php if ( ! empty( $tender_close_date ) || ! empty( $tender_validity ) || ! empty( $tender_fee ) ) : ?>
-            <div class="hrk-t-section">
-                <div class="hrk-t-section-title">Critical Timelines</div>
-                <div class="hrk-t-timeline-grid">
+            <div class="mcpt-t-section">
+                <div class="mcpt-t-section-title">Critical Timelines</div>
+                <div class="mcpt-t-timeline-grid">
                     <?php if ( ! empty( $tender_close_date ) ) : ?>
-                    <div class="hrk-t-timeline-card hrk-t-deadline">
-                        <div class="hrk-t-timeline-label">Closing Date</div>
-                        <div class="hrk-t-timeline-date"><?php echo esc_html( $close_fmt ); ?></div>
+                    <div class="mcpt-t-timeline-card mcpt-t-deadline">
+                        <div class="mcpt-t-timeline-label">Closing Date</div>
+                        <div class="mcpt-t-timeline-date"><?php echo esc_html( $close_fmt ); ?></div>
                         <?php if ( ! empty( $tender_close_time ) ) : ?>
-                            <div class="hrk-t-timeline-sub"><?php echo esc_html( $tender_close_time ); ?> (MYT)</div>
+                            <div class="mcpt-t-timeline-sub"><?php echo esc_html( $tender_close_time ); ?> (MYT)</div>
                         <?php endif; ?>
                     </div>
                     <?php endif; ?>
                     <?php if ( ! empty( $tender_validity ) ) : ?>
-                    <div class="hrk-t-timeline-card">
-                        <div class="hrk-t-timeline-label">Tender Validity</div>
-                        <div class="hrk-t-timeline-date"><?php echo esc_html( $tender_validity ); ?></div>
-                        <div class="hrk-t-timeline-sub">From closing date</div>
+                    <div class="mcpt-t-timeline-card">
+                        <div class="mcpt-t-timeline-label">Tender Validity</div>
+                        <div class="mcpt-t-timeline-date"><?php echo esc_html( $tender_validity ); ?></div>
+                        <div class="mcpt-t-timeline-sub">From closing date</div>
                     </div>
                     <?php endif; ?>
                     <?php if ( ! empty( $tender_fee ) ) : ?>
-                    <div class="hrk-t-timeline-card">
-                        <div class="hrk-t-timeline-label">Tender Fee</div>
-                        <div class="hrk-t-timeline-date"><?php echo esc_html( $tender_fee ); ?></div>
-                        <div class="hrk-t-timeline-sub">Non-refundable</div>
+                    <div class="mcpt-t-timeline-card">
+                        <div class="mcpt-t-timeline-label">Tender Fee</div>
+                        <div class="mcpt-t-timeline-date"><?php echo esc_html( $tender_fee ); ?></div>
+                        <div class="mcpt-t-timeline-sub">Non-refundable</div>
                     </div>
                     <?php endif; ?>
                 </div>
@@ -193,19 +193,19 @@ if ( ! function_exists( 'metcpt_render_tender_single' ) ) {
 
             <?php /* ── SECTION 3: DOCUMENT ── */ ?>
             <?php if ( ! empty( $tender_document_url ) ) : ?>
-            <div class="hrk-t-section">
-                <div class="hrk-t-section-title">Tender Document</div>
-                <div class="hrk-t-doc-box">
-                    <div class="hrk-t-doc-info">
-                        <div class="hrk-t-doc-title">Download Tender Document</div>
+            <div class="mcpt-t-section">
+                <div class="mcpt-t-section-title">Tender Document</div>
+                <div class="mcpt-t-doc-box">
+                    <div class="mcpt-t-doc-info">
+                        <div class="mcpt-t-doc-title">Download Tender Document</div>
                         <?php if ( ! empty( $tender_fee ) && strtolower( $tender_fee ) !== 'free' ) : ?>
-                            <div class="hrk-t-doc-fee">
+                            <div class="mcpt-t-doc-fee">
                                 Tender fee: <?php echo esc_html( $tender_fee ); ?> — payable upon collection
                             </div>
                         <?php endif; ?>
                     </div>
                     <a href="<?php echo esc_url( $tender_document_url ); ?>"
-                       class="hrk-t-btn hrk-t-btn-primary"
+                       class="mcpt-t-btn mcpt-t-btn-primary"
                        target="_blank" rel="noopener noreferrer">
                         Download
                     </a>
@@ -215,16 +215,16 @@ if ( ! function_exists( 'metcpt_render_tender_single' ) ) {
 
             <?php /* ── SECTION 4: SUBMISSION ── */ ?>
             <?php if ( ! empty( $tender_submission_method ) || ! empty( $tender_submission_address ) ) : ?>
-            <div class="hrk-t-section">
-                <div class="hrk-t-section-title">Submission Details</div>
-                <div class="hrk-t-submission-box">
+            <div class="mcpt-t-section">
+                <div class="mcpt-t-section-title">Submission Details</div>
+                <div class="mcpt-t-submission-box">
                     <?php if ( ! empty( $tender_submission_method ) ) : ?>
-                        <div class="hrk-t-submission-method">
+                        <div class="mcpt-t-submission-method">
                             <?php echo esc_html( $tender_submission_method ); ?>
                         </div>
                     <?php endif; ?>
                     <?php if ( ! empty( $tender_submission_address ) ) : ?>
-                        <div class="hrk-t-submission-address">
+                        <div class="mcpt-t-submission-address">
                             <?php echo nl2br( esc_html( $tender_submission_address ) ); ?>
                         </div>
                     <?php endif; ?>
@@ -234,24 +234,24 @@ if ( ! function_exists( 'metcpt_render_tender_single' ) ) {
 
             <?php /* ── SECTION 5: CONTACT ── */ ?>
             <?php if ( ! empty( $tender_contact_name ) ) : ?>
-            <div class="hrk-t-section">
-                <div class="hrk-t-section-title">Contact &amp; Enquiries</div>
-                <div class="hrk-t-contact-card">
-                    <div class="hrk-t-avatar">
+            <div class="mcpt-t-section">
+                <div class="mcpt-t-section-title">Contact &amp; Enquiries</div>
+                <div class="mcpt-t-contact-card">
+                    <div class="mcpt-t-avatar">
                         <?php echo esc_html( metcpt_tender_initials( $tender_contact_name ) ); ?>
                     </div>
                     <div>
-                        <div class="hrk-t-contact-dept">Procurement Unit</div>
-                        <div class="hrk-t-contact-name"><?php echo esc_html( $tender_contact_name ); ?></div>
+                        <div class="mcpt-t-contact-dept">Procurement Unit</div>
+                        <div class="mcpt-t-contact-name"><?php echo esc_html( $tender_contact_name ); ?></div>
                         <div style="margin-top:4px;display:flex;gap:16px;flex-wrap:wrap;">
                             <?php if ( ! empty( $tender_contact_email ) ) : ?>
-                                <a class="hrk-t-contact-link"
+                                <a class="mcpt-t-contact-link"
                                    href="mailto:<?php echo esc_attr( $tender_contact_email ); ?>">
                                     <?php echo esc_html( $tender_contact_email ); ?>
                                 </a>
                             <?php endif; ?>
                             <?php if ( ! empty( $tender_contact_phone ) ) : ?>
-                                <a class="hrk-t-contact-link"
+                                <a class="mcpt-t-contact-link"
                                    href="tel:<?php echo esc_attr( $tender_contact_phone ); ?>">
                                     <?php echo esc_html( $tender_contact_phone ); ?>
                                 </a>

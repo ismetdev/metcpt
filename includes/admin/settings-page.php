@@ -87,17 +87,20 @@ function metcpt_settings_page_html() {
 
     <div class="wrap metcpt-settings-wrap">
 
-        <div class="metcpt-settings-header">
+        <header class="metcpt-settings-header">
             <div class="metcpt-settings-header-inner">
-                <h1 class="metcpt-settings-title">
-                    <span class="metcpt-logo">H</span>
-                    MetCPT
-                </h1>
-                <p class="metcpt-settings-subtitle">
-                    Corporate Content Hub — v<?php echo esc_html( METCPT_VERSION ); ?>
-                </p>
+                <div class="metcpt-brand">
+                    <span class="metcpt-brand-mark dashicons dashicons-screenoptions"></span>
+                    <div class="metcpt-brand-text">
+                        <h1 class="metcpt-brand-title">MetCPT WP</h1>
+                        <p class="metcpt-brand-sub">Events, Tenders &amp; Careers as structured content types.</p>
+                    </div>
+                </div>
+                <div class="metcpt-header-meta">
+                    <span class="metcpt-version">v<?php echo esc_html( METCPT_VERSION ); ?></span>
+                </div>
             </div>
-        </div>
+        </header>
 
         <nav class="metcpt-tabbar">
             <?php foreach ( $metcpt_tabs as $tab_key => $tab_label ) : ?>

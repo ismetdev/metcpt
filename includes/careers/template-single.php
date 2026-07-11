@@ -81,13 +81,13 @@ if ( ! function_exists( 'metcpt_render_career_single' ) ) {
         $excerpt      = get_the_excerpt( $post_id );
 
         $status_label = 'Open';
-        $status_class = 'hrk-c-status-open';
+        $status_class = 'mcpt-c-status-open';
         if ( $status === 'soon' ) {
             $status_label = 'Closing Soon';
-            $status_class = 'hrk-c-status-soon';
+            $status_class = 'mcpt-c-status-soon';
         } elseif ( $status === 'closed' ) {
             $status_label = 'Closed';
-            $status_class = 'hrk-c-status-closed';
+            $status_class = 'mcpt-c-status-closed';
         }
 
         // ── Archive link ──────────────────────────────────────────────────────
@@ -106,46 +106,46 @@ if ( ! function_exists( 'metcpt_render_career_single' ) ) {
         <?php get_header(); ?>
 
         <main>
-        <article class="hrk-career-page">
+        <article class="mcpt-career-page">
 
-            <a class="hrk-c-back"
+            <a class="mcpt-c-back"
                href="<?php echo esc_url( $careers_archive ); ?>">
                 &larr; Back to Careers
             </a>
 
             <?php /* ── STATUS + TYPE BADGES ── */ ?>
-            <div class="hrk-c-badges">
-                <span class="hrk-c-status <?php echo esc_attr( $status_class ); ?>">
-                    <span class="hrk-c-dot"></span>
+            <div class="mcpt-c-badges">
+                <span class="mcpt-c-status <?php echo esc_attr( $status_class ); ?>">
+                    <span class="mcpt-c-dot"></span>
                     <?php echo esc_html( $status_label ); ?>
                 </span>
                 <?php if ( ! empty( $type ) ) : ?>
-                    <span class="hrk-c-type-badge">
+                    <span class="mcpt-c-type-badge">
                         <?php echo esc_html( $type ); ?>
                     </span>
                 <?php endif; ?>
             </div>
 
             <?php /* ── TITLE ── */ ?>
-            <h1 class="hrk-c-title">
+            <h1 class="mcpt-c-title">
                 <?php echo esc_html( get_the_title( $post_id ) ); ?>
             </h1>
 
             <?php /* ── EXCERPT ── */ ?>
             <?php if ( ! empty( $excerpt ) ) : ?>
-                <p class="hrk-c-excerpt"><?php echo esc_html( $excerpt ); ?></p>
+                <p class="mcpt-c-excerpt"><?php echo esc_html( $excerpt ); ?></p>
             <?php endif; ?>
 
             <?php /* ── SECTION 1: KEY INFO GRID ── */ ?>
-            <div class="hrk-c-info-grid">
+            <div class="mcpt-c-info-grid">
                 <?php if ( ! empty( $display_company ) ) : ?>
-                <div class="hrk-c-info-card">
-                    <div class="hrk-c-info-label">Company</div>
-                    <div class="hrk-c-info-value">
+                <div class="mcpt-c-info-card">
+                    <div class="mcpt-c-info-label">Company</div>
+                    <div class="mcpt-c-info-value">
                         <?php if ( ! empty( $company_logo ) ) : ?>
                             <img src="<?php echo esc_url( $company_logo ); ?>"
                                  alt="<?php echo esc_attr( $display_company ); ?>"
-                                 class="hrk-c-company-logo" />
+                                 class="mcpt-c-company-logo" />
                         <?php else : ?>
                             <?php echo esc_html( $display_company ); ?>
                         <?php endif; ?>
@@ -154,29 +154,29 @@ if ( ! function_exists( 'metcpt_render_career_single' ) ) {
                 <?php endif; ?>
 
                 <?php if ( ! empty( $department ) ) : ?>
-                <div class="hrk-c-info-card">
-                    <div class="hrk-c-info-label">Department</div>
-                    <div class="hrk-c-info-value"><?php echo esc_html( $department ); ?></div>
+                <div class="mcpt-c-info-card">
+                    <div class="mcpt-c-info-label">Department</div>
+                    <div class="mcpt-c-info-value"><?php echo esc_html( $department ); ?></div>
                 </div>
                 <?php endif; ?>
 
                 <?php if ( ! empty( $location ) ) : ?>
-                <div class="hrk-c-info-card">
-                    <div class="hrk-c-info-label">Location</div>
-                    <div class="hrk-c-info-value"><?php echo esc_html( $location ); ?></div>
+                <div class="mcpt-c-info-card">
+                    <div class="mcpt-c-info-label">Location</div>
+                    <div class="mcpt-c-info-value"><?php echo esc_html( $location ); ?></div>
                 </div>
                 <?php endif; ?>
 
                 <?php if ( ! empty( $salary ) ) : ?>
-                <div class="hrk-c-info-card">
-                    <div class="hrk-c-info-label">Salary Range</div>
-                    <div class="hrk-c-info-value"><?php echo esc_html( $salary ); ?></div>
+                <div class="mcpt-c-info-card">
+                    <div class="mcpt-c-info-label">Salary Range</div>
+                    <div class="mcpt-c-info-value"><?php echo esc_html( $salary ); ?></div>
                 </div>
                 <?php endif; ?>
 
-                <div class="hrk-c-info-card">
-                    <div class="hrk-c-info-label">Posted</div>
-                    <div class="hrk-c-info-value"><?php echo esc_html( $publish_date ); ?></div>
+                <div class="mcpt-c-info-card">
+                    <div class="mcpt-c-info-label">Posted</div>
+                    <div class="mcpt-c-info-value"><?php echo esc_html( $publish_date ); ?></div>
                 </div>
             </div>
 
@@ -186,9 +186,9 @@ if ( ! function_exists( 'metcpt_render_career_single' ) ) {
             $content = apply_filters( 'the_content', $content );
             ?>
             <?php if ( ! empty( trim( $content ) ) ) : ?>
-            <div class="hrk-c-section">
-                <div class="hrk-c-section-title">Job Description &amp; Requirements</div>
-                <div class="hrk-c-content">
+            <div class="mcpt-c-section">
+                <div class="mcpt-c-section-title">Job Description &amp; Requirements</div>
+                <div class="mcpt-c-content">
                     <?php echo wp_kses_post( $content ); ?>
                 </div>
             </div>
@@ -196,14 +196,14 @@ if ( ! function_exists( 'metcpt_render_career_single' ) ) {
 
             <?php /* ── SECTION 3: APPLICATION DETAILS ── */ ?>
             <?php if ( ! empty( $close_date ) || ! empty( $apply_url ) ) : ?>
-            <div class="hrk-c-section">
-                <div class="hrk-c-section-title">How to Apply</div>
-                <div class="hrk-c-apply-box">
-                    <div class="hrk-c-apply-info">
+            <div class="mcpt-c-section">
+                <div class="mcpt-c-section-title">How to Apply</div>
+                <div class="mcpt-c-apply-box">
+                    <div class="mcpt-c-apply-info">
                         <?php if ( ! empty( $close_date ) ) : ?>
-                            <div class="hrk-c-apply-deadline">
-                                <span class="hrk-c-apply-label">Application Deadline</span>
-                                <span class="hrk-c-apply-date <?php echo $status === 'soon' ? 'hrk-c-date-urgent' : ''; ?>">
+                            <div class="mcpt-c-apply-deadline">
+                                <span class="mcpt-c-apply-label">Application Deadline</span>
+                                <span class="mcpt-c-apply-date <?php echo $status === 'soon' ? 'mcpt-c-date-urgent' : ''; ?>">
                                     <?php echo esc_html( $close_fmt ); ?>
                                 </span>
                             </div>
@@ -211,13 +211,13 @@ if ( ! function_exists( 'metcpt_render_career_single' ) ) {
                     </div>
                     <?php if ( ! empty( $apply_url ) && $status !== 'closed' ) : ?>
                         <a href="<?php echo esc_url( $apply_url ); ?>"
-                           class="hrk-c-btn hrk-c-btn-primary"
+                           class="mcpt-c-btn mcpt-c-btn-primary"
                            target="_blank"
                            rel="noopener noreferrer">
                             Apply Now
                         </a>
                     <?php elseif ( $status === 'closed' ) : ?>
-                        <span class="hrk-c-btn hrk-c-btn-disabled">
+                        <span class="mcpt-c-btn mcpt-c-btn-disabled">
                             Applications Closed
                         </span>
                     <?php endif; ?>
@@ -227,25 +227,25 @@ if ( ! function_exists( 'metcpt_render_career_single' ) ) {
 
             <?php /* ── SECTION 4: ABOUT THE COMPANY ── */ ?>
             <?php if ( ! empty( $company_desc ) || ! empty( $company_website ) ) : ?>
-            <div class="hrk-c-section">
-                <div class="hrk-c-section-title">
+            <div class="mcpt-c-section">
+                <div class="mcpt-c-section-title">
                     About <?php echo esc_html( $display_company ? $display_company : 'the Company' ); ?>
                 </div>
-                <div class="hrk-c-company-box">
+                <div class="mcpt-c-company-box">
                     <?php if ( ! empty( $company_logo ) ) : ?>
                         <img src="<?php echo esc_url( $company_logo ); ?>"
                              alt="<?php echo esc_attr( $display_company ); ?>"
-                             class="hrk-c-company-logo-lg" />
+                             class="mcpt-c-company-logo-lg" />
                     <?php endif; ?>
-                    <div class="hrk-c-company-info">
+                    <div class="mcpt-c-company-info">
                         <?php if ( ! empty( $company_desc ) ) : ?>
-                            <p class="hrk-c-company-desc">
+                            <p class="mcpt-c-company-desc">
                                 <?php echo esc_html( $company_desc ); ?>
                             </p>
                         <?php endif; ?>
                         <?php if ( ! empty( $company_website ) ) : ?>
                             <a href="<?php echo esc_url( $company_website ); ?>"
-                               class="hrk-c-company-link"
+                               class="mcpt-c-company-link"
                                target="_blank"
                                rel="noopener noreferrer">
                                 Visit company website &rarr;
@@ -258,26 +258,26 @@ if ( ! function_exists( 'metcpt_render_career_single' ) ) {
 
             <?php /* ── SECTION 5: HR CONTACT ── */ ?>
             <?php if ( ! empty( $contact_name ) ) : ?>
-            <div class="hrk-c-section">
-                <div class="hrk-c-section-title">HR Contact &amp; Enquiries</div>
-                <div class="hrk-c-contact-card">
-                    <div class="hrk-c-avatar">
+            <div class="mcpt-c-section">
+                <div class="mcpt-c-section-title">HR Contact &amp; Enquiries</div>
+                <div class="mcpt-c-contact-card">
+                    <div class="mcpt-c-avatar">
                         <?php echo esc_html( metcpt_career_initials( $contact_name ) ); ?>
                     </div>
                     <div>
-                        <div class="hrk-c-contact-dept">Human Resource</div>
-                        <div class="hrk-c-contact-name">
+                        <div class="mcpt-c-contact-dept">Human Resource</div>
+                        <div class="mcpt-c-contact-name">
                             <?php echo esc_html( $contact_name ); ?>
                         </div>
                         <div style="margin-top:4px;display:flex;gap:16px;flex-wrap:wrap;">
                             <?php if ( ! empty( $contact_email ) ) : ?>
-                                <a class="hrk-c-contact-link"
+                                <a class="mcpt-c-contact-link"
                                    href="mailto:<?php echo esc_attr( $contact_email ); ?>">
                                     <?php echo esc_html( $contact_email ); ?>
                                 </a>
                             <?php endif; ?>
                             <?php if ( ! empty( $contact_phone ) ) : ?>
-                                <a class="hrk-c-contact-link"
+                                <a class="mcpt-c-contact-link"
                                    href="tel:<?php echo esc_attr( $contact_phone ); ?>">
                                     <?php echo esc_html( $contact_phone ); ?>
                                 </a>

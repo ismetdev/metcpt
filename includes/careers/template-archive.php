@@ -43,25 +43,25 @@ if ( ! function_exists( 'metcpt_render_career_archive' ) ) {
         <?php get_header(); ?>
 
         <main>
-        <div class="hrk-cr-archive-wrap">
+        <div class="mcpt-cr-archive-wrap">
 
-            <div class="hrk-cr-archive-header">
-                <div class="hrk-cr-archive-label">&mdash; Career Opportunities</div>
-                <h1 class="hrk-cr-archive-title">Join our team</h1>
-                <p class="hrk-cr-archive-desc">
+            <div class="mcpt-cr-archive-header">
+                <div class="mcpt-cr-archive-label">&mdash; Career Opportunities</div>
+                <h1 class="mcpt-cr-archive-title">Join our team</h1>
+                <p class="mcpt-cr-archive-desc">
                     Explore open positions across IIUM Holdings and its subsidiary companies.
                     Build a meaningful career in service of the ummah.
                 </p>
             </div>
 
-            <div class="hrk-cr-archive-filters">
-                <button class="hrk-cr-filter-btn active" data-filter="all">All Positions</button>
-                <button class="hrk-cr-filter-btn" data-filter="open">Open</button>
-                <button class="hrk-cr-filter-btn" data-filter="soon">Closing Soon</button>
-                <button class="hrk-cr-filter-btn" data-filter="closed">Closed</button>
+            <div class="mcpt-cr-archive-filters">
+                <button class="mcpt-cr-filter-btn active" data-filter="all">All Positions</button>
+                <button class="mcpt-cr-filter-btn" data-filter="open">Open</button>
+                <button class="mcpt-cr-filter-btn" data-filter="soon">Closing Soon</button>
+                <button class="mcpt-cr-filter-btn" data-filter="closed">Closed</button>
             </div>
 
-            <div class="hrk-cr-archive-grid">
+            <div class="mcpt-cr-archive-grid">
                 <?php
                 $today     = date( 'Y-m-d' );
                 $threshold = (int) get_option( 'metcpt_closing_soon_days', 7 );
@@ -125,51 +125,51 @@ if ( ! function_exists( 'metcpt_render_career_archive' ) ) {
                         ?>
 
                         <a href="<?php echo esc_url( get_permalink() ); ?>"
-                           class="hrk-cr-archive-card"
+                           class="mcpt-cr-archive-card"
                            data-status="<?php echo esc_attr( $status ); ?>">
 
-                            <div class="hrk-cr-card-top">
-                                <div class="hrk-cr-card-type"><?php echo esc_html( $type ? $type : 'Full Time' ); ?></div>
-                                <span class="hrk-cr-card-status hrk-cr-status-<?php echo esc_attr( $status ); ?>">
-                                    <span class="hrk-cr-status-dot"></span>
+                            <div class="mcpt-cr-card-top">
+                                <div class="mcpt-cr-card-type"><?php echo esc_html( $type ? $type : 'Full Time' ); ?></div>
+                                <span class="mcpt-cr-card-status mcpt-cr-status-<?php echo esc_attr( $status ); ?>">
+                                    <span class="mcpt-cr-status-dot"></span>
                                     <?php echo esc_html( $status_label ); ?>
                                 </span>
                             </div>
 
-                            <h2 class="hrk-cr-card-title"><?php echo esc_html( get_the_title() ); ?></h2>
+                            <h2 class="mcpt-cr-card-title"><?php echo esc_html( get_the_title() ); ?></h2>
 
                             <?php if ( ! empty( $company_name ) ) : ?>
-                                <div class="hrk-cr-card-company"><?php echo esc_html( $company_name ); ?></div>
+                                <div class="mcpt-cr-card-company"><?php echo esc_html( $company_name ); ?></div>
                             <?php endif; ?>
 
-                            <div class="hrk-cr-card-meta">
+                            <div class="mcpt-cr-card-meta">
                                 <?php if ( ! empty( $department ) ) : ?>
-                                    <div class="hrk-cr-card-meta-item">
-                                        <div class="hrk-cr-card-meta-label">Department</div>
-                                        <div class="hrk-cr-card-meta-value"><?php echo esc_html( $department ); ?></div>
+                                    <div class="mcpt-cr-card-meta-item">
+                                        <div class="mcpt-cr-card-meta-label">Department</div>
+                                        <div class="mcpt-cr-card-meta-value"><?php echo esc_html( $department ); ?></div>
                                     </div>
                                 <?php endif; ?>
                                 <?php if ( ! empty( $location ) ) : ?>
-                                    <div class="hrk-cr-card-meta-item">
-                                        <div class="hrk-cr-card-meta-label">Location</div>
-                                        <div class="hrk-cr-card-meta-value"><?php echo esc_html( $location ); ?></div>
+                                    <div class="mcpt-cr-card-meta-item">
+                                        <div class="mcpt-cr-card-meta-label">Location</div>
+                                        <div class="mcpt-cr-card-meta-value"><?php echo esc_html( $location ); ?></div>
                                     </div>
                                 <?php endif; ?>
                                 <?php if ( ! empty( $salary ) ) : ?>
-                                    <div class="hrk-cr-card-meta-item">
-                                        <div class="hrk-cr-card-meta-label">Salary</div>
-                                        <div class="hrk-cr-card-meta-value"><?php echo esc_html( $salary ); ?></div>
+                                    <div class="mcpt-cr-card-meta-item">
+                                        <div class="mcpt-cr-card-meta-label">Salary</div>
+                                        <div class="mcpt-cr-card-meta-value"><?php echo esc_html( $salary ); ?></div>
                                     </div>
                                 <?php endif; ?>
                             </div>
 
-                            <div class="hrk-cr-card-footer">
+                            <div class="mcpt-cr-card-footer">
                                 <?php if ( ! empty( $close_fmt ) ) : ?>
-                                    <div class="hrk-cr-card-date">
+                                    <div class="mcpt-cr-card-date">
                                         <?php echo esc_html( $date_prefix . ' ' . $close_fmt ); ?>
                                     </div>
                                 <?php endif; ?>
-                                <div class="hrk-cr-card-arrow">&rarr;</div>
+                                <div class="mcpt-cr-card-arrow">&rarr;</div>
                             </div>
 
                         </a>
@@ -179,10 +179,10 @@ if ( ! function_exists( 'metcpt_render_career_archive' ) ) {
                     wp_reset_postdata();
                 else :
                     ?>
-                    <div class="hrk-cr-archive-empty" style="grid-column: 1 / -1;">
-                        <div class="hrk-cr-empty-icon">💼</div>
-                        <h3 class="hrk-cr-empty-title">No Positions Available</h3>
-                        <p class="hrk-cr-empty-text">There are currently no open positions published.</p>
+                    <div class="mcpt-cr-archive-empty" style="grid-column: 1 / -1;">
+                        <div class="mcpt-cr-empty-icon">💼</div>
+                        <h3 class="mcpt-cr-empty-title">No Positions Available</h3>
+                        <p class="mcpt-cr-empty-text">There are currently no open positions published.</p>
                     </div>
                 <?php endif; ?>
             </div>
@@ -192,8 +192,8 @@ if ( ! function_exists( 'metcpt_render_career_archive' ) ) {
 
         <script>
         (function() {
-            var filters = document.querySelectorAll('.hrk-cr-filter-btn');
-            var cards   = document.querySelectorAll('.hrk-cr-archive-card');
+            var filters = document.querySelectorAll('.mcpt-cr-filter-btn');
+            var cards   = document.querySelectorAll('.mcpt-cr-archive-card');
 
             filters.forEach(function(btn) {
                 btn.addEventListener('click', function() {

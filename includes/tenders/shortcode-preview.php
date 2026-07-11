@@ -51,7 +51,7 @@ function metcpt_tenders_preview_shortcode( $atts ) {
     ob_start();
     ?>
 
-    <div class="tdp-wrap hrk-v2">
+    <div class="tdp-wrap mcpt-v2">
 
         <?php if ( $query->have_posts() ) : ?>
             <?php while ( $query->have_posts() ) : $query->the_post(); ?>

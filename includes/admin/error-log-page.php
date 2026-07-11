@@ -136,96 +136,96 @@ function metcpt_render_error_log_tab() {
     $total_table = count( $entries );
     ?>
 
-    <div class="hrk-eld-wrap" id="hrk-log-wrap">
+    <div class="mcpt-eld-wrap" id="mcpt-log-wrap">
 
         <?php /* ── SECTION 1: Summary Cards ── */ ?>
-        <div class="hrk-eld-cards">
+        <div class="mcpt-eld-cards">
 
-            <div class="hrk-eld-card hrk-eld-card-total">
-                <div class="hrk-eld-card-icon">⚠</div>
-                <div class="hrk-eld-card-body">
-                    <div class="hrk-eld-card-value"><?php echo esc_html( $stat_total ); ?></div>
-                    <div class="hrk-eld-card-label">Unresolved Issues</div>
+            <div class="mcpt-eld-card mcpt-eld-card-total">
+                <div class="mcpt-eld-card-icon">⚠</div>
+                <div class="mcpt-eld-card-body">
+                    <div class="mcpt-eld-card-value"><?php echo esc_html( $stat_total ); ?></div>
+                    <div class="mcpt-eld-card-label">Unresolved Issues</div>
                 </div>
             </div>
 
-            <div class="hrk-eld-card hrk-eld-card-critical">
-                <div class="hrk-eld-card-icon">✕</div>
-                <div class="hrk-eld-card-body">
-                    <div class="hrk-eld-card-value"><?php echo esc_html( $stat_critical ); ?></div>
-                    <div class="hrk-eld-card-label">Critical (Fatal + Exception)</div>
+            <div class="mcpt-eld-card mcpt-eld-card-critical">
+                <div class="mcpt-eld-card-icon">✕</div>
+                <div class="mcpt-eld-card-body">
+                    <div class="mcpt-eld-card-value"><?php echo esc_html( $stat_critical ); ?></div>
+                    <div class="mcpt-eld-card-label">Critical (Fatal + Exception)</div>
                 </div>
             </div>
 
-            <div class="hrk-eld-card hrk-eld-card-warning">
-                <div class="hrk-eld-card-icon">△</div>
-                <div class="hrk-eld-card-body">
-                    <div class="hrk-eld-card-value"><?php echo esc_html( $stat_warnings ); ?></div>
-                    <div class="hrk-eld-card-label">Warnings</div>
+            <div class="mcpt-eld-card mcpt-eld-card-warning">
+                <div class="mcpt-eld-card-icon">△</div>
+                <div class="mcpt-eld-card-body">
+                    <div class="mcpt-eld-card-value"><?php echo esc_html( $stat_warnings ); ?></div>
+                    <div class="mcpt-eld-card-label">Warnings</div>
                 </div>
             </div>
 
-            <div class="hrk-eld-card hrk-eld-card-resolved">
-                <div class="hrk-eld-card-icon">✓</div>
-                <div class="hrk-eld-card-body">
-                    <div class="hrk-eld-card-value"><?php echo esc_html( $stat_resolved_today ); ?></div>
-                    <div class="hrk-eld-card-label">Resolved Today</div>
+            <div class="mcpt-eld-card mcpt-eld-card-resolved">
+                <div class="mcpt-eld-card-icon">✓</div>
+                <div class="mcpt-eld-card-body">
+                    <div class="mcpt-eld-card-value"><?php echo esc_html( $stat_resolved_today ); ?></div>
+                    <div class="mcpt-eld-card-label">Resolved Today</div>
                 </div>
             </div>
 
         </div>
 
         <?php /* ── SECTION 2 + 3: Charts row ── */ ?>
-        <div class="hrk-eld-charts-row">
+        <div class="mcpt-eld-charts-row">
 
             <?php /* ── 7-day trend ── */ ?>
-            <div class="hrk-eld-panel hrk-eld-panel-trend">
-                <div class="hrk-eld-panel-header">
-                    <div class="hrk-eld-panel-title">7-Day Error Trend</div>
-                    <div class="hrk-eld-trend-legend">
-                        <span class="hrk-eld-legend-dot" style="background:#dc2626;"></span> Fatal/Error
-                        <span class="hrk-eld-legend-dot" style="background:#a855f7;"></span> Exception
-                        <span class="hrk-eld-legend-dot" style="background:#eab308;"></span> Warning
-                        <span class="hrk-eld-legend-dot" style="background:#64748b;"></span> Notice
+            <div class="mcpt-eld-panel mcpt-eld-panel-trend">
+                <div class="mcpt-eld-panel-header">
+                    <div class="mcpt-eld-panel-title">7-Day Error Trend</div>
+                    <div class="mcpt-eld-trend-legend">
+                        <span class="mcpt-eld-legend-dot" style="background:#dc2626;"></span> Fatal/Error
+                        <span class="mcpt-eld-legend-dot" style="background:#a855f7;"></span> Exception
+                        <span class="mcpt-eld-legend-dot" style="background:#eab308;"></span> Warning
+                        <span class="mcpt-eld-legend-dot" style="background:#64748b;"></span> Notice
                     </div>
                 </div>
-                <div class="hrk-eld-chart-area">
+                <div class="mcpt-eld-chart-area">
                     <?php foreach ( $trend as $day => $data ) :
                         $bar_pct   = $trend_max > 0 ? round( ( $data['total'] / $trend_max ) * 100 ) : 0;
                         $is_today  = ( $day === $today_str );
                     ?>
-                    <div class="hrk-eld-bar-col <?php echo $is_today ? 'hrk-eld-bar-today' : ''; ?>">
-                        <div class="hrk-eld-bar-count">
+                    <div class="mcpt-eld-bar-col <?php echo $is_today ? 'mcpt-eld-bar-today' : ''; ?>">
+                        <div class="mcpt-eld-bar-count">
                             <?php echo $data['total'] > 0 ? esc_html( $data['total'] ) : ''; ?>
                         </div>
-                        <div class="hrk-eld-bar-track">
-                            <div class="hrk-eld-bar-stack" style="height:<?php echo esc_attr( $bar_pct ); ?>%;">
+                        <div class="mcpt-eld-bar-track">
+                            <div class="mcpt-eld-bar-stack" style="height:<?php echo esc_attr( $bar_pct ); ?>%;">
                                 <?php if ( ( $data['fatal'] + $data['error'] ) > 0 ) :
                                     $pct = round( ( ( $data['fatal'] + $data['error'] ) / $data['total'] ) * 100 );
                                 ?>
-                                    <div class="hrk-eld-bar-seg hrk-eld-seg-error" style="height:<?php echo esc_attr( $pct ); ?>%;"></div>
+                                    <div class="mcpt-eld-bar-seg mcpt-eld-seg-error" style="height:<?php echo esc_attr( $pct ); ?>%;"></div>
                                 <?php endif; ?>
                                 <?php if ( $data['exception'] > 0 ) :
                                     $pct = round( ( $data['exception'] / $data['total'] ) * 100 );
                                 ?>
-                                    <div class="hrk-eld-bar-seg hrk-eld-seg-exception" style="height:<?php echo esc_attr( $pct ); ?>%;"></div>
+                                    <div class="mcpt-eld-bar-seg mcpt-eld-seg-exception" style="height:<?php echo esc_attr( $pct ); ?>%;"></div>
                                 <?php endif; ?>
                                 <?php if ( $data['warning'] > 0 ) :
                                     $pct = round( ( $data['warning'] / $data['total'] ) * 100 );
                                 ?>
-                                    <div class="hrk-eld-bar-seg hrk-eld-seg-warning" style="height:<?php echo esc_attr( $pct ); ?>%;"></div>
+                                    <div class="mcpt-eld-bar-seg mcpt-eld-seg-warning" style="height:<?php echo esc_attr( $pct ); ?>%;"></div>
                                 <?php endif; ?>
                                 <?php if ( $data['notice'] > 0 ) :
                                     $pct = round( ( $data['notice'] / $data['total'] ) * 100 );
                                 ?>
-                                    <div class="hrk-eld-bar-seg hrk-eld-seg-notice" style="height:<?php echo esc_attr( $pct ); ?>%;"></div>
+                                    <div class="mcpt-eld-bar-seg mcpt-eld-seg-notice" style="height:<?php echo esc_attr( $pct ); ?>%;"></div>
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <div class="hrk-eld-bar-label">
+                        <div class="mcpt-eld-bar-label">
                             <?php echo esc_html( $data['label'] ); ?>
                             <?php if ( $is_today ) : ?>
-                                <span class="hrk-eld-today-dot"></span>
+                                <span class="mcpt-eld-today-dot"></span>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -234,12 +234,12 @@ function metcpt_render_error_log_tab() {
             </div>
 
             <?php /* ── Level distribution ── */ ?>
-            <div class="hrk-eld-panel hrk-eld-panel-dist">
-                <div class="hrk-eld-panel-header">
-                    <div class="hrk-eld-panel-title">Level Distribution</div>
-                    <div class="hrk-eld-panel-sub"><?php echo esc_html( $total_all ); ?> total entries</div>
+            <div class="mcpt-eld-panel mcpt-eld-panel-dist">
+                <div class="mcpt-eld-panel-header">
+                    <div class="mcpt-eld-panel-title">Level Distribution</div>
+                    <div class="mcpt-eld-panel-sub"><?php echo esc_html( $total_all ); ?> total entries</div>
                 </div>
-                <div class="hrk-eld-dist-list">
+                <div class="mcpt-eld-dist-list">
                     <?php
                     $dist_levels = array(
                         'fatal'     => array( 'label' => 'Fatal',     'color' => '#dc2626' ),
@@ -252,34 +252,34 @@ function metcpt_render_error_log_tab() {
                         $count = $level_counts[ $lvl ];
                         $pct   = $total_all > 0 ? round( ( $count / $total_all ) * 100 ) : 0;
                     ?>
-                    <div class="hrk-eld-dist-row">
-                        <div class="hrk-eld-dist-label"><?php echo esc_html( $meta['label'] ); ?></div>
-                        <div class="hrk-eld-dist-bar-track">
-                            <div class="hrk-eld-dist-bar-fill"
+                    <div class="mcpt-eld-dist-row">
+                        <div class="mcpt-eld-dist-label"><?php echo esc_html( $meta['label'] ); ?></div>
+                        <div class="mcpt-eld-dist-bar-track">
+                            <div class="mcpt-eld-dist-bar-fill"
                                  style="width:<?php echo esc_attr( $pct ); ?>%; background:<?php echo esc_attr( $meta['color'] ); ?>;"></div>
                         </div>
-                        <div class="hrk-eld-dist-count">
-                            <span class="hrk-eld-dist-num"><?php echo esc_html( $count ); ?></span>
-                            <span class="hrk-eld-dist-pct"><?php echo esc_html( $pct ); ?>%</span>
+                        <div class="mcpt-eld-dist-count">
+                            <span class="mcpt-eld-dist-num"><?php echo esc_html( $count ); ?></span>
+                            <span class="mcpt-eld-dist-pct"><?php echo esc_html( $pct ); ?>%</span>
                         </div>
                     </div>
                     <?php endforeach; ?>
                 </div>
 
-                <div class="hrk-eld-health">
+                <div class="mcpt-eld-health">
                     <?php if ( $stat_total === 0 ) : ?>
-                        <div class="hrk-eld-health-ok">
-                            <span class="hrk-eld-health-icon">✓</span>
+                        <div class="mcpt-eld-health-ok">
+                            <span class="mcpt-eld-health-icon">✓</span>
                             System healthy — no unresolved issues
                         </div>
                     <?php elseif ( $stat_critical > 0 ) : ?>
-                        <div class="hrk-eld-health-critical">
-                            <span class="hrk-eld-health-icon">✕</span>
+                        <div class="mcpt-eld-health-critical">
+                            <span class="mcpt-eld-health-icon">✕</span>
                             <?php echo esc_html( $stat_critical ); ?> critical issue<?php echo $stat_critical > 1 ? 's' : ''; ?> need attention
                         </div>
                     <?php else : ?>
-                        <div class="hrk-eld-health-warn">
-                            <span class="hrk-eld-health-icon">△</span>
+                        <div class="mcpt-eld-health-warn">
+                            <span class="mcpt-eld-health-icon">△</span>
                             <?php echo esc_html( $stat_total ); ?> issue<?php echo $stat_total > 1 ? 's' : ''; ?> unresolved
                         </div>
                     <?php endif; ?>
@@ -289,40 +289,40 @@ function metcpt_render_error_log_tab() {
         </div>
 
         <?php /* ── SECTION 4: Log Table ── */ ?>
-        <div class="hrk-eld-panel hrk-eld-panel-table">
+        <div class="mcpt-eld-panel mcpt-eld-panel-table">
 
-            <div class="hrk-eld-panel-header hrk-eld-table-header">
-                <div class="hrk-eld-panel-title">Log Entries</div>
-                <div class="hrk-eld-table-controls">
+            <div class="mcpt-eld-panel-header mcpt-eld-table-header">
+                <div class="mcpt-eld-panel-title">Log Entries</div>
+                <div class="mcpt-eld-table-controls">
 
-                    <div class="hrk-eld-filter-row">
+                    <div class="mcpt-eld-filter-row">
                         <?php foreach ( $level_opts as $lvl ) : ?>
                             <a href="<?php echo esc_url( add_query_arg( array( 'tab' => 'error-log', 'log_level' => $lvl, 'log_resolved' => $filter_resolved ) ) ); ?>"
-                               class="hrk-eld-filter-btn <?php echo $filter_level === $lvl ? 'active' : ''; ?>">
+                               class="mcpt-eld-filter-btn <?php echo $filter_level === $lvl ? 'active' : ''; ?>">
                                 <?php echo esc_html( ucfirst( $lvl ) ); ?>
                             </a>
                         <?php endforeach; ?>
-                        <span class="hrk-eld-filter-sep">|</span>
+                        <span class="mcpt-eld-filter-sep">|</span>
                         <a href="<?php echo esc_url( add_query_arg( array( 'tab' => 'error-log', 'log_level' => $filter_level, 'log_resolved' => '0' ) ) ); ?>"
-                           class="hrk-eld-filter-btn <?php echo $filter_resolved === '0' ? 'active' : ''; ?>">
+                           class="mcpt-eld-filter-btn <?php echo $filter_resolved === '0' ? 'active' : ''; ?>">
                             Unresolved
                         </a>
                         <a href="<?php echo esc_url( add_query_arg( array( 'tab' => 'error-log', 'log_level' => $filter_level, 'log_resolved' => '1' ) ) ); ?>"
-                           class="hrk-eld-filter-btn <?php echo $filter_resolved === '1' ? 'active' : ''; ?>">
+                           class="mcpt-eld-filter-btn <?php echo $filter_resolved === '1' ? 'active' : ''; ?>">
                             Resolved
                         </a>
                         <a href="<?php echo esc_url( add_query_arg( array( 'tab' => 'error-log', 'log_level' => $filter_level, 'log_resolved' => 'all' ) ) ); ?>"
-                           class="hrk-eld-filter-btn <?php echo $filter_resolved === 'all' ? 'active' : ''; ?>">
+                           class="mcpt-eld-filter-btn <?php echo $filter_resolved === 'all' ? 'active' : ''; ?>">
                             All
                         </a>
                     </div>
 
-                    <div class="hrk-eld-table-actions">
-                        <span class="hrk-eld-entry-count">
+                    <div class="mcpt-eld-table-actions">
+                        <span class="mcpt-eld-entry-count">
                             <?php echo esc_html( $total_table ); ?> entr<?php echo $total_table === 1 ? 'y' : 'ies'; ?>
                         </span>
                         <button type="button"
-                                class="button hrk-log-clear-resolved"
+                                class="button mcpt-log-clear-resolved"
                                 data-nonce="<?php echo esc_attr( $nonce ); ?>">
                             Clear Resolved
                         </button>
@@ -332,17 +332,17 @@ function metcpt_render_error_log_tab() {
             </div>
 
             <?php if ( empty( $entries ) ) : ?>
-                <div class="hrk-eld-empty">
-                    <div class="hrk-eld-empty-icon">✓</div>
-                    <p class="hrk-eld-empty-title">No log entries found</p>
-                    <p class="hrk-eld-empty-desc">
+                <div class="mcpt-eld-empty">
+                    <div class="mcpt-eld-empty-icon">✓</div>
+                    <p class="mcpt-eld-empty-title">No log entries found</p>
+                    <p class="mcpt-eld-empty-desc">
                         MetCPT will capture errors, warnings, exceptions, and fatal errors
                         from its own files and display them here.
                     </p>
                 </div>
             <?php else : ?>
-                <div class="hrk-eld-table-wrap">
-                    <table class="hrk-eld-table">
+                <div class="mcpt-eld-table-wrap">
+                    <table class="mcpt-eld-table">
                         <thead>
                             <tr>
                                 <th class="col-time">Timestamp</th>
@@ -354,56 +354,56 @@ function metcpt_render_error_log_tab() {
                         </thead>
                         <tbody>
                             <?php foreach ( $entries as $entry ) : ?>
-                                <tr class="hrk-eld-row hrk-eld-level-<?php echo esc_attr( $entry['level'] ); ?> <?php echo $entry['resolved'] ? 'hrk-eld-resolved' : ''; ?>"
+                                <tr class="mcpt-eld-row mcpt-eld-level-<?php echo esc_attr( $entry['level'] ); ?> <?php echo $entry['resolved'] ? 'mcpt-eld-resolved' : ''; ?>"
                                     data-id="<?php echo esc_attr( $entry['id'] ); ?>">
 
                                     <td class="col-time">
-                                        <span class="hrk-eld-time-date">
+                                        <span class="mcpt-eld-time-date">
                                             <?php echo esc_html( date( 'd M Y', strtotime( $entry['created_at'] ) ) ); ?>
                                         </span>
-                                        <span class="hrk-eld-time-clock">
+                                        <span class="mcpt-eld-time-clock">
                                             <?php echo esc_html( date( 'H:i:s', strtotime( $entry['created_at'] ) ) ); ?>
                                         </span>
                                     </td>
 
                                     <td class="col-level">
-                                        <span class="hrk-log-badge hrk-log-badge-<?php echo esc_attr( $entry['level'] ); ?>">
+                                        <span class="mcpt-log-badge mcpt-log-badge-<?php echo esc_attr( $entry['level'] ); ?>">
                                             <?php echo esc_html( strtoupper( $entry['level'] ) ); ?>
                                         </span>
                                     </td>
 
                                     <td class="col-msg">
-                                        <div class="hrk-eld-msg"><?php echo esc_html( $entry['message'] ); ?></div>
+                                        <div class="mcpt-eld-msg"><?php echo esc_html( $entry['message'] ); ?></div>
                                         <?php if ( ! empty( $entry['function'] ) ) : ?>
-                                            <div class="hrk-eld-fn"><?php echo esc_html( $entry['function'] ); ?></div>
+                                            <div class="mcpt-eld-fn"><?php echo esc_html( $entry['function'] ); ?></div>
                                         <?php endif; ?>
                                     </td>
 
                                     <td class="col-source">
-                                        <div class="hrk-eld-src"><?php echo esc_html( $entry['source'] ); ?></div>
-                                        <div class="hrk-eld-src-line">Line <?php echo esc_html( $entry['line'] ); ?></div>
+                                        <div class="mcpt-eld-src"><?php echo esc_html( $entry['source'] ); ?></div>
+                                        <div class="mcpt-eld-src-line">Line <?php echo esc_html( $entry['line'] ); ?></div>
                                     </td>
 
                                     <td class="col-actions">
-                                        <div class="hrk-eld-actions">
+                                        <div class="mcpt-eld-actions">
                                             <button type="button"
-                                                    class="hrk-eld-btn hrk-eld-btn-view hrk-log-view-btn"
+                                                    class="mcpt-eld-btn mcpt-eld-btn-view mcpt-log-view-btn"
                                                     data-id="<?php echo esc_attr( $entry['id'] ); ?>"
                                                     data-nonce="<?php echo esc_attr( $nonce ); ?>">
                                                 Details
                                             </button>
                                             <?php if ( ! $entry['resolved'] ) : ?>
                                                 <button type="button"
-                                                        class="hrk-eld-btn hrk-eld-btn-resolve hrk-log-resolve-btn"
+                                                        class="mcpt-eld-btn mcpt-eld-btn-resolve mcpt-log-resolve-btn"
                                                         data-id="<?php echo esc_attr( $entry['id'] ); ?>"
                                                         data-nonce="<?php echo esc_attr( $nonce ); ?>">
                                                     Resolve
                                                 </button>
                                             <?php else : ?>
-                                                <span class="hrk-eld-resolved-tag">✓ Resolved</span>
+                                                <span class="mcpt-eld-resolved-tag">✓ Resolved</span>
                                             <?php endif; ?>
                                             <button type="button"
-                                                    class="hrk-eld-btn hrk-eld-btn-copy hrk-log-copy-btn"
+                                                    class="mcpt-eld-btn mcpt-eld-btn-copy mcpt-log-copy-btn"
                                                     data-id="<?php echo esc_attr( $entry['id'] ); ?>"
                                                     data-level="<?php echo esc_attr( $entry['level'] ); ?>"
                                                     data-message="<?php echo esc_attr( $entry['message'] ); ?>"
@@ -430,14 +430,14 @@ function metcpt_render_error_log_tab() {
     </div>
 
     <?php /* ── Detail Modal ── */ ?>
-    <div class="hrk-log-modal-overlay" id="hrk-log-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="hrk-log-modal-title">
-        <div class="hrk-log-modal">
-            <div class="hrk-log-modal-header">
-                <h2 class="hrk-log-modal-title" id="hrk-log-modal-title">Error Details</h2>
-                <button type="button" class="hrk-log-modal-close" aria-label="Close">&times;</button>
+    <div class="mcpt-log-modal-overlay" id="mcpt-log-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="mcpt-log-modal-title">
+        <div class="mcpt-log-modal">
+            <div class="mcpt-log-modal-header">
+                <h2 class="mcpt-log-modal-title" id="mcpt-log-modal-title">Error Details</h2>
+                <button type="button" class="mcpt-log-modal-close" aria-label="Close">&times;</button>
             </div>
-            <div class="hrk-log-modal-body" id="hrk-log-modal-body">
-                <div class="hrk-log-modal-loading">Loading&hellip;</div>
+            <div class="mcpt-log-modal-body" id="mcpt-log-modal-body">
+                <div class="mcpt-log-modal-loading">Loading&hellip;</div>
             </div>
         </div>
     </div>
@@ -446,9 +446,9 @@ function metcpt_render_error_log_tab() {
     document.addEventListener('DOMContentLoaded', function() {
     (function() {
 
-        var wrap      = document.getElementById('hrk-log-wrap');
-        var modal     = document.getElementById('hrk-log-modal');
-        var modalBody = document.getElementById('hrk-log-modal-body');
+        var wrap      = document.getElementById('mcpt-log-wrap');
+        var modal     = document.getElementById('mcpt-log-modal');
+        var modalBody = document.getElementById('mcpt-log-modal-body');
         var ajaxUrl   = '<?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>';
 
         function escHtml(str) {
@@ -461,16 +461,16 @@ function metcpt_render_error_log_tab() {
         function closeModal() {
             modal.style.display = 'none';
             document.body.style.overflow = '';
-            modalBody.innerHTML = '<div class="hrk-log-modal-loading">Loading&hellip;</div>';
+            modalBody.innerHTML = '<div class="mcpt-log-modal-loading">Loading&hellip;</div>';
         }
 
-        document.querySelector('.hrk-log-modal-close').addEventListener('click', closeModal);
+        document.querySelector('.mcpt-log-modal-close').addEventListener('click', closeModal);
         modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
 
         // ── View Details ──────────────────────────────────────────────────────
         wrap.addEventListener('click', function(e) {
-            var btn = e.target.closest('.hrk-log-view-btn');
+            var btn = e.target.closest('.mcpt-log-view-btn');
             if (!btn) return;
             var id    = btn.getAttribute('data-id');
             var nonce = btn.getAttribute('data-nonce');
@@ -490,45 +490,45 @@ function metcpt_render_error_log_tab() {
 
             var traceHtml = trace.length
                 ? trace.map(function(f, i) {
-                    return '<div class="hrk-log-trace-frame">'
-                         + '<span class="hrk-log-trace-num">#' + i + '</span>'
-                         + '<span class="hrk-log-trace-file">' + escHtml(f.file || '') + ':' + escHtml(f.line || '') + '</span>'
-                         + '<span class="hrk-log-trace-fn">'   + escHtml((f.class||'') + (f.type||'') + (f.function||'') + '()') + '</span>'
+                    return '<div class="mcpt-log-trace-frame">'
+                         + '<span class="mcpt-log-trace-num">#' + i + '</span>'
+                         + '<span class="mcpt-log-trace-file">' + escHtml(f.file || '') + ':' + escHtml(f.line || '') + '</span>'
+                         + '<span class="mcpt-log-trace-fn">'   + escHtml((f.class||'') + (f.type||'') + (f.function||'') + '()') + '</span>'
                          + '</div>';
                   }).join('')
-                : '<p class="hrk-log-muted">No stack trace available.</p>';
+                : '<p class="mcpt-log-muted">No stack trace available.</p>';
 
             var ctxHtml = Object.keys(context).map(function(k) {
-                return '<div class="hrk-log-ctx-row">'
-                     + '<span class="hrk-log-ctx-key">' + escHtml(k)            + '</span>'
-                     + '<span class="hrk-log-ctx-val">' + escHtml(context[k])   + '</span>'
+                return '<div class="mcpt-log-ctx-row">'
+                     + '<span class="mcpt-log-ctx-key">' + escHtml(k)            + '</span>'
+                     + '<span class="mcpt-log-ctx-val">' + escHtml(context[k])   + '</span>'
                      + '</div>';
             }).join('');
 
             modalBody.innerHTML = ''
-                + '<div class="hrk-log-modal-meta">'
-                +   '<span class="hrk-log-badge hrk-log-badge-' + escHtml(entry.level) + '">' + escHtml(entry.level.toUpperCase()) + '</span>'
-                +   '<span class="hrk-log-modal-time">' + escHtml(entry.created_at) + '</span>'
+                + '<div class="mcpt-log-modal-meta">'
+                +   '<span class="mcpt-log-badge mcpt-log-badge-' + escHtml(entry.level) + '">' + escHtml(entry.level.toUpperCase()) + '</span>'
+                +   '<span class="mcpt-log-modal-time">' + escHtml(entry.created_at) + '</span>'
                 + '</div>'
-                + '<div class="hrk-log-modal-section"><div class="hrk-log-modal-section-title">Message</div>'
-                +   '<p class="hrk-log-modal-message">' + escHtml(entry.message) + '</p></div>'
-                + '<div class="hrk-log-modal-section"><div class="hrk-log-modal-section-title">Location</div>'
-                +   '<p class="hrk-log-muted">' + escHtml(entry.file) + ' &mdash; Line ' + escHtml(entry.line) + '</p>'
-                +   (entry.function ? '<p class="hrk-log-muted">Function: ' + escHtml(entry.function) + '</p>' : '')
+                + '<div class="mcpt-log-modal-section"><div class="mcpt-log-modal-section-title">Message</div>'
+                +   '<p class="mcpt-log-modal-message">' + escHtml(entry.message) + '</p></div>'
+                + '<div class="mcpt-log-modal-section"><div class="mcpt-log-modal-section-title">Location</div>'
+                +   '<p class="mcpt-log-muted">' + escHtml(entry.file) + ' &mdash; Line ' + escHtml(entry.line) + '</p>'
+                +   (entry.function ? '<p class="mcpt-log-muted">Function: ' + escHtml(entry.function) + '</p>' : '')
                 + '</div>'
-                + '<div class="hrk-log-modal-section"><div class="hrk-log-modal-section-title">Stack Trace</div>'
-                +   '<div class="hrk-log-trace">' + traceHtml + '</div></div>'
-                + '<div class="hrk-log-modal-section"><div class="hrk-log-modal-section-title">Request Context</div>'
-                +   '<div class="hrk-log-ctx">' + ctxHtml + '</div></div>';
+                + '<div class="mcpt-log-modal-section"><div class="mcpt-log-modal-section-title">Stack Trace</div>'
+                +   '<div class="mcpt-log-trace">' + traceHtml + '</div></div>'
+                + '<div class="mcpt-log-modal-section"><div class="mcpt-log-modal-section-title">Request Context</div>'
+                +   '<div class="mcpt-log-ctx">' + ctxHtml + '</div></div>';
         }
 
         // ── Mark Resolved ─────────────────────────────────────────────────────
         wrap.addEventListener('click', function(e) {
-            var btn = e.target.closest('.hrk-log-resolve-btn');
+            var btn = e.target.closest('.mcpt-log-resolve-btn');
             if (!btn) return;
             var id    = btn.getAttribute('data-id');
             var nonce = btn.getAttribute('data-nonce');
-            var row   = btn.closest('.hrk-eld-row');
+            var row   = btn.closest('.mcpt-eld-row');
             btn.disabled = true;
             btn.textContent = '…';
             var body = new FormData();
@@ -539,10 +539,10 @@ function metcpt_render_error_log_tab() {
                 .then(function(r) { return r.json(); })
                 .then(function(data) {
                     if (data.success) {
-                        row.classList.add('hrk-eld-resolved');
+                        row.classList.add('mcpt-eld-resolved');
                         btn.replaceWith(Object.assign(
                             document.createElement('span'),
-                            { className: 'hrk-eld-resolved-tag', textContent: '✓ Resolved' }
+                            { className: 'mcpt-eld-resolved-tag', textContent: '✓ Resolved' }
                         ));
                     } else {
                         btn.disabled = false;
@@ -554,7 +554,7 @@ function metcpt_render_error_log_tab() {
 
         // ── Copy for Claude ───────────────────────────────────────────────────
         wrap.addEventListener('click', function(e) {
-            var btn = e.target.closest('.hrk-log-copy-btn');
+            var btn = e.target.closest('.mcpt-log-copy-btn');
             if (!btn) return;
 
             var level    = btn.getAttribute('data-level')    || '';
@@ -619,7 +619,7 @@ function metcpt_render_error_log_tab() {
         });
 
         // ── Clear Resolved ────────────────────────────────────────────────────
-        var clearBtn = document.querySelector('.hrk-log-clear-resolved');
+        var clearBtn = document.querySelector('.mcpt-log-clear-resolved');
         if (clearBtn) {
             clearBtn.addEventListener('click', function() {
                 if (!confirm('Delete all resolved log entries? This cannot be undone.')) return;

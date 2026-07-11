@@ -28,14 +28,14 @@ function metcpt_company_meta_box_html( $post ) {
     $description = get_post_meta( $post->ID, 'company_description', true );
     ?>
 
-    <div class="hrk-meta-wrap">
+    <div class="mcpt-meta-wrap">
 
-        <div class="hrk-meta-section-title">Section 1 — Identity</div>
+        <div class="mcpt-meta-section-title">Section 1 — Identity</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_company_full_name">
-                Full Legal Name <span class="hrk-required">*</span>
-                <span class="hrk-hint">e.g. Daya Bersih Sdn Bhd</span>
+                Full Legal Name <span class="mcpt-required">*</span>
+                <span class="mcpt-hint">e.g. Daya Bersih Sdn Bhd</span>
             </label>
             <input type="text"
                    id="metcpt_company_full_name"
@@ -44,10 +44,10 @@ function metcpt_company_meta_box_html( $post ) {
                    placeholder="e.g. Daya Bersih Sdn Bhd" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_company_short_name">
                 Short / Display Name
-                <span class="hrk-hint">
+                <span class="mcpt-hint">
                     Used in listings and dropdowns e.g. Daya Bersih
                 </span>
             </label>
@@ -58,10 +58,10 @@ function metcpt_company_meta_box_html( $post ) {
                    placeholder="e.g. Daya Bersih" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_company_website">
                 Company Website
-                <span class="hrk-hint">e.g. https://dayabersih.com.my</span>
+                <span class="mcpt-hint">e.g. https://dayabersih.com.my</span>
             </label>
             <input type="url"
                    id="metcpt_company_website"
@@ -70,12 +70,12 @@ function metcpt_company_meta_box_html( $post ) {
                    placeholder="https://example.com.my" />
         </div>
 
-        <div class="hrk-meta-section-title">Section 2 — Location</div>
+        <div class="mcpt-meta-section-title">Section 2 — Location</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_company_address">
                 Office Address
-                <span class="hrk-hint">Full address of the company office</span>
+                <span class="mcpt-hint">Full address of the company office</span>
             </label>
             <textarea id="metcpt_company_address"
                       name="metcpt_company_address"
@@ -83,12 +83,12 @@ function metcpt_company_meta_box_html( $post ) {
                       placeholder="e.g. Level 3, Muhammad Abdul Rauf Building&#10;International Islamic University Malaysia&#10;Jalan Gombak, 53100 Kuala Lumpur"><?php echo esc_textarea( $address ); ?></textarea>
         </div>
 
-        <div class="hrk-meta-section-title">Section 3 — About</div>
+        <div class="mcpt-meta-section-title">Section 3 — About</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_company_description">
                 Company Description
-                <span class="hrk-hint">
+                <span class="mcpt-hint">
                     One short paragraph shown on career listings for this company
                 </span>
             </label>
@@ -98,12 +98,12 @@ function metcpt_company_meta_box_html( $post ) {
                       placeholder="e.g. Daya Bersih Sdn Bhd is a facilities management subsidiary of IIUM Holdings..."><?php echo esc_textarea( $description ); ?></textarea>
         </div>
 
-        <div class="hrk-meta-section-title">Section 4 — Logo</div>
+        <div class="mcpt-meta-section-title">Section 4 — Logo</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label>
                 Company Logo
-                <span class="hrk-hint">
+                <span class="mcpt-hint">
                     Set the Featured Image of this post as the company logo.
                     Use the Featured Image panel on the right side of this editor.
                 </span>

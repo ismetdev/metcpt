@@ -44,11 +44,11 @@ function metcpt_tender_meta_box_html( $post ) {
         $threshold = (int) get_option( 'metcpt_closing_soon_days', 7 );
         if ( $close_date ) {
             if ( $close_date < $today ) {
-                $status_html = '<span class="hrk-admin-badge hrk-badge-past">Closed</span>';
+                $status_html = '<span class="mcpt-admin-badge mcpt-badge-past">Closed</span>';
             } elseif ( (int) $today->diff( $close_date )->days <= $threshold ) {
-                $status_html = '<span class="hrk-admin-badge hrk-badge-today">Closing Soon</span>';
+                $status_html = '<span class="mcpt-admin-badge mcpt-badge-today">Closing Soon</span>';
             } else {
-                $status_html = '<span class="hrk-admin-badge hrk-badge-upcoming">Open</span>';
+                $status_html = '<span class="mcpt-admin-badge mcpt-badge-upcoming">Open</span>';
             }
         }
     }
@@ -57,26 +57,26 @@ function metcpt_tender_meta_box_html( $post ) {
     $categories     = array_filter( array_map( 'trim', explode( "\n", $categories_raw ) ) );
     ?>
 
-    <div class="hrk-meta-wrap">
+    <div class="mcpt-meta-wrap">
 
-        <div class="hrk-meta-section-title">
+        <div class="mcpt-meta-section-title">
             Section 1 — Tender Identity <?php echo $status_html; ?>
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_ref">
-                Reference No. <span class="hrk-required">*</span>
-                <span class="hrk-hint">e.g. IIUM-TDR-001/2026</span>
+                Reference No. <span class="mcpt-required">*</span>
+                <span class="mcpt-hint">e.g. IIUM-TDR-001/2026</span>
             </label>
             <input type="text" id="metcpt_tender_ref" name="metcpt_tender_ref"
                    value="<?php echo esc_attr( $tender_ref ); ?>"
                    placeholder="e.g. IIUM-TDR-001/2026" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_category">
-                Category <span class="hrk-required">*</span>
-                <span class="hrk-hint">Select the tender category</span>
+                Category <span class="mcpt-required">*</span>
+                <span class="mcpt-hint">Select the tender category</span>
             </label>
             <select id="metcpt_tender_category" name="metcpt_tender_category">
                 <option value="">-- Select Category --</option>
@@ -89,85 +89,85 @@ function metcpt_tender_meta_box_html( $post ) {
             </select>
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_issuer">
                 Issuing Organisation
-                <span class="hrk-hint">e.g. Daya Bersih Sdn Bhd</span>
+                <span class="mcpt-hint">e.g. Daya Bersih Sdn Bhd</span>
             </label>
             <input type="text" id="metcpt_tender_issuer" name="metcpt_tender_issuer"
                    value="<?php echo esc_attr( $tender_issuer ); ?>"
                    placeholder="e.g. Daya Bersih Sdn Bhd" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_location">
                 Location
-                <span class="hrk-hint">e.g. Gombak, Selangor</span>
+                <span class="mcpt-hint">e.g. Gombak, Selangor</span>
             </label>
             <input type="text" id="metcpt_tender_location" name="metcpt_tender_location"
                    value="<?php echo esc_attr( $tender_location ); ?>"
                    placeholder="e.g. Gombak, Selangor" />
         </div>
 
-        <div class="hrk-meta-section-title">Section 2 — Critical Timelines</div>
+        <div class="mcpt-meta-section-title">Section 2 — Critical Timelines</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_close_date">
-                Closing Date <span class="hrk-required">*</span>
-                <span class="hrk-hint">Plugin auto-determines Open / Closing Soon / Closed from this date</span>
+                Closing Date <span class="mcpt-required">*</span>
+                <span class="mcpt-hint">Plugin auto-determines Open / Closing Soon / Closed from this date</span>
             </label>
             <input type="date" id="metcpt_tender_close_date" name="metcpt_tender_close_date"
                    value="<?php echo esc_attr( $tender_close_date ); ?>" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_close_time">
                 Closing Time
-                <span class="hrk-hint">e.g. 4:00 PM</span>
+                <span class="mcpt-hint">e.g. 4:00 PM</span>
             </label>
             <input type="text" id="metcpt_tender_close_time" name="metcpt_tender_close_time"
                    value="<?php echo esc_attr( $tender_close_time ); ?>"
                    placeholder="e.g. 4:00 PM" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_validity">
                 Tender Validity Period
-                <span class="hrk-hint">e.g. 90 days</span>
+                <span class="mcpt-hint">e.g. 90 days</span>
             </label>
             <input type="text" id="metcpt_tender_validity" name="metcpt_tender_validity"
                    value="<?php echo esc_attr( $tender_validity ); ?>"
                    placeholder="e.g. 90 days" />
         </div>
 
-        <div class="hrk-meta-section-title">Section 3 — Document &amp; Fee</div>
+        <div class="mcpt-meta-section-title">Section 3 — Document &amp; Fee</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_document_url">
                 Document URL
-                <span class="hrk-hint">Paste the external link to the tender document or PDF</span>
+                <span class="mcpt-hint">Paste the external link to the tender document or PDF</span>
             </label>
             <input type="url" id="metcpt_tender_document_url" name="metcpt_tender_document_url"
                    value="<?php echo esc_attr( $tender_document_url ); ?>"
                    placeholder="https://example.com/tender-document.pdf" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_fee">
                 Tender Fee
-                <span class="hrk-hint">e.g. RM 50 or Free</span>
+                <span class="mcpt-hint">e.g. RM 50 or Free</span>
             </label>
             <input type="text" id="metcpt_tender_fee" name="metcpt_tender_fee"
                    value="<?php echo esc_attr( $tender_fee ); ?>"
                    placeholder="e.g. RM 50 or Free" />
         </div>
 
-        <div class="hrk-meta-section-title">Section 4 — Submission Details</div>
+        <div class="mcpt-meta-section-title">Section 4 — Submission Details</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_submission_method">
                 Submission Method
-                <span class="hrk-hint">e.g. Physical Submission / Email / Online Portal</span>
+                <span class="mcpt-hint">e.g. Physical Submission / Email / Online Portal</span>
             </label>
             <input type="text" id="metcpt_tender_submission_method"
                    name="metcpt_tender_submission_method"
@@ -175,10 +175,10 @@ function metcpt_tender_meta_box_html( $post ) {
                    placeholder="e.g. Physical Submission" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_submission_address">
                 Submission Address / URL
-                <span class="hrk-hint">Full address or portal URL where bids are submitted</span>
+                <span class="mcpt-hint">Full address or portal URL where bids are submitted</span>
             </label>
             <textarea id="metcpt_tender_submission_address"
                       name="metcpt_tender_submission_address"
@@ -186,19 +186,19 @@ function metcpt_tender_meta_box_html( $post ) {
                       placeholder="e.g. Procurement Unit, IIUM Holdings Sdn Bhd&#10;Level 3, Muhammad Abdul Rauf Building&#10;Jalan Gombak, 53100 Kuala Lumpur"><?php echo esc_textarea( $tender_submission_address ); ?></textarea>
         </div>
 
-        <div class="hrk-meta-section-title">Section 5 — Contact &amp; Enquiries</div>
+        <div class="mcpt-meta-section-title">Section 5 — Contact &amp; Enquiries</div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_contact_name">
                 Contact Person
-                <span class="hrk-hint">PIC name for tender enquiries</span>
+                <span class="mcpt-hint">PIC name for tender enquiries</span>
             </label>
             <input type="text" id="metcpt_tender_contact_name" name="metcpt_tender_contact_name"
                    value="<?php echo esc_attr( $tender_contact_name ); ?>"
                    placeholder="e.g. Puan Siti Nabilah" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_contact_email">
                 Contact Email
             </label>
@@ -207,7 +207,7 @@ function metcpt_tender_meta_box_html( $post ) {
                    placeholder="e.g. tender@iiumholdings.com.my" />
         </div>
 
-        <div class="hrk-meta-row">
+        <div class="mcpt-meta-row">
             <label for="metcpt_tender_contact_phone">
                 Contact Phone
             </label>

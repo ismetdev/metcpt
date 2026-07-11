@@ -43,36 +43,36 @@ function metcpt_render_general_settings() {
                 Clear removes only dummy posts — real content is never affected.
             </span>
         </div>
-        <div class="hrk-dummy-actions">
+        <div class="mcpt-dummy-actions">
             <button type="button"
-                    class="button button-primary hrk-seed-btn"
+                    class="button button-primary mcpt-seed-btn"
                     data-nonce="<?php echo esc_attr( wp_create_nonce( 'metcpt_dummy_data' ) ); ?>">
                 Seed Dummy Data
             </button>
             <button type="button"
-                    class="button hrk-clear-btn"
+                    class="button mcpt-clear-btn"
                     data-nonce="<?php echo esc_attr( wp_create_nonce( 'metcpt_dummy_data' ) ); ?>">
                 Clear Dummy Data
             </button>
             <button type="button"
-                    class="button hrk-seed-errors-btn"
+                    class="button mcpt-seed-errors-btn"
                     data-nonce="<?php echo esc_attr( wp_create_nonce( 'metcpt_dummy_data' ) ); ?>">
                 Seed Dummy Errors
             </button>
-            <span class="hrk-dummy-status" id="hrk-dummy-status"></span>
+            <span class="mcpt-dummy-status" id="mcpt-dummy-status"></span>
         </div>
     </div>
 
     <script>
     (function() {
         var ajaxUrl = '<?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>';
-        var status  = document.getElementById('hrk-dummy-status');
+        var status  = document.getElementById('mcpt-dummy-status');
 
         function runAction(action, nonce, btn, msg) {
             btn.disabled    = true;
             btn.textContent = 'Please wait…';
             status.textContent = '';
-            status.className   = 'hrk-dummy-status';
+            status.className   = 'mcpt-dummy-status';
 
             var body = new FormData();
             body.append('action', action);
@@ -85,21 +85,21 @@ function metcpt_render_general_settings() {
                     btn.textContent = msg;
                     if (data.success) {
                         status.textContent = '✓ ' + data.data.message;
-                        status.className   = 'hrk-dummy-status hrk-dummy-ok';
+                        status.className   = 'mcpt-dummy-status mcpt-dummy-ok';
                     } else {
                         status.textContent = '✗ ' + (data.data ? data.data.message : 'Error.');
-                        status.className   = 'hrk-dummy-status hrk-dummy-err';
+                        status.className   = 'mcpt-dummy-status mcpt-dummy-err';
                     }
                 })
                 .catch(function() {
                     btn.disabled    = false;
                     btn.textContent = msg;
                     status.textContent = '✗ Network error.';
-                    status.className   = 'hrk-dummy-status hrk-dummy-err';
+                    status.className   = 'mcpt-dummy-status mcpt-dummy-err';
                 });
         }
 
-        var seedBtn = document.querySelector('.hrk-seed-btn');
+        var seedBtn = document.querySelector('.mcpt-seed-btn');
         if (seedBtn) {
             seedBtn.addEventListener('click', function() {
                 if (!confirm('Seed 10 events, 10 tenders and 10 careers?')) return;
@@ -107,7 +107,7 @@ function metcpt_render_general_settings() {
             });
         }
 
-        var clearBtn = document.querySelector('.hrk-clear-btn');
+        var clearBtn = document.querySelector('.mcpt-clear-btn');
         if (clearBtn) {
             clearBtn.addEventListener('click', function() {
                 if (!confirm('Clear all dummy data? This cannot be undone.')) return;
@@ -115,7 +115,7 @@ function metcpt_render_general_settings() {
             });
         }
 
-        var seedErrBtn = document.querySelector('.hrk-seed-errors-btn');
+        var seedErrBtn = document.querySelector('.mcpt-seed-errors-btn');
         if (seedErrBtn) {
             seedErrBtn.addEventListener('click', function() {
                 if (!confirm('Seed 12 dummy error log entries?')) return;
@@ -275,7 +275,7 @@ function metcpt_render_tenders_settings() {
                        name="metcpt_tenders_template"
                        value="a"
                        <?php checked( $selected_template, 'a' ); ?>
-                       onchange="document.getElementById('hrk-tb-fields').style.display='none';" />
+                       onchange="document.getElementById('mcpt-tb-fields').style.display='none';" />
                 <div>
                     <div class="metcpt-radio-title">Template A — Table Layout</div>
                     <div class="metcpt-radio-desc">
@@ -302,7 +302,7 @@ function metcpt_render_tenders_settings() {
                        name="metcpt_tenders_template"
                        value="b"
                        <?php checked( $selected_template, 'b' ); ?>
-                       onchange="document.getElementById('hrk-tb-fields').style.display='block';" />
+                       onchange="document.getElementById('mcpt-tb-fields').style.display='block';" />
                 <div style="flex:1;">
                     <div class="metcpt-radio-title">Template B — Editorial Layout</div>
                     <div class="metcpt-radio-desc">
@@ -330,7 +330,7 @@ function metcpt_render_tenders_settings() {
     </div>
 
     <?php /* ── Template B header fields ── */ ?>
-    <div id="hrk-tb-fields" style="display:<?php echo $selected_template === 'b' ? 'block' : 'none'; ?>;">
+    <div id="mcpt-tb-fields" style="display:<?php echo $selected_template === 'b' ? 'block' : 'none'; ?>;">
 
         <div class="metcpt-section-title">Template B — Header Text</div>
 
@@ -398,16 +398,16 @@ function metcpt_render_tenders_settings() {
 
         <div class="metcpt-preview-box">
             <p class="metcpt-preview-label">
-                — <span id="hrk-tb-preview-label"><?php echo esc_html( $tb_label ); ?></span>
+                — <span id="mcpt-tb-preview-label"><?php echo esc_html( $tb_label ); ?></span>
             </p>
             <p class="metcpt-preview-headline">
-                <span id="hrk-tb-preview-headline"><?php echo esc_html( $tb_headline ); ?></span>
-                <em id="hrk-tb-preview-italic"><?php echo esc_html( $tb_headline_italic ); ?></em>
+                <span id="mcpt-tb-preview-headline"><?php echo esc_html( $tb_headline ); ?></span>
+                <em id="mcpt-tb-preview-italic"><?php echo esc_html( $tb_headline_italic ); ?></em>
             </p>
             <p class="metcpt-preview-links">
-                <span id="hrk-tb-preview-all"><?php echo esc_html( $tb_all_text ); ?></span> &rarr;
+                <span id="mcpt-tb-preview-all"><?php echo esc_html( $tb_all_text ); ?></span> &rarr;
                 &nbsp;&nbsp;
-                <span id="hrk-tb-preview-viewall" class="muted"><?php echo esc_html( $tb_view_all_text ); ?> &rarr;</span>
+                <span id="mcpt-tb-preview-viewall" class="muted"><?php echo esc_html( $tb_view_all_text ); ?> &rarr;</span>
             </p>
         </div>
 
@@ -416,11 +416,11 @@ function metcpt_render_tenders_settings() {
     <script>
     (function() {
         var tbFields = {
-            'metcpt_tenders_b_label':          'hrk-tb-preview-label',
-            'metcpt_tenders_b_headline':       'hrk-tb-preview-headline',
-            'metcpt_tenders_b_headline_italic':'hrk-tb-preview-italic',
-            'metcpt_tenders_b_all_text':       'hrk-tb-preview-all',
-            'metcpt_tenders_b_view_all_text':  'hrk-tb-preview-viewall',
+            'metcpt_tenders_b_label':          'mcpt-tb-preview-label',
+            'metcpt_tenders_b_headline':       'mcpt-tb-preview-headline',
+            'metcpt_tenders_b_headline_italic':'mcpt-tb-preview-italic',
+            'metcpt_tenders_b_all_text':       'mcpt-tb-preview-all',
+            'metcpt_tenders_b_view_all_text':  'mcpt-tb-preview-viewall',
         };
         Object.keys(tbFields).forEach(function(fieldId) {
             var input   = document.getElementById(fieldId);

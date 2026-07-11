@@ -19,7 +19,7 @@ function metcpt_category_posts_shortcode( $atts ) {
     );
 
     if ( empty( $atts['category_slug'] ) ) {
-        return '<p class="hrk-no-posts">Please provide a category_slug attribute.</p>';
+        return '<p class="mcpt-no-posts">Please provide a category_slug attribute.</p>';
     }
 
     $query_args = array(
@@ -42,33 +42,33 @@ function metcpt_category_posts_shortcode( $atts ) {
     ob_start();
 
     if ( $query->have_posts() ) :
-        echo '<div class="hrk-post-list">';
+        echo '<div class="mcpt-post-list">';
         while ( $query->have_posts() ) :
             $query->the_post();
             ?>
-            <div class="hrk-post-item">
+            <div class="mcpt-post-item">
                 <?php if ( has_post_thumbnail() ) : ?>
-                    <div class="hrk-post-thumbnail">
+                    <div class="mcpt-post-thumbnail">
                         <a href="<?php the_permalink(); ?>">
                             <?php the_post_thumbnail( 'medium' ); ?>
                         </a>
                     </div>
                 <?php endif; ?>
-                <div class="hrk-post-content">
-                    <h3 class="hrk-post-title">
+                <div class="mcpt-post-content">
+                    <h3 class="mcpt-post-title">
                         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                     </h3>
                     <?php if ( $atts['show_date'] === 'yes' ) : ?>
-                        <p class="hrk-post-date">
+                        <p class="mcpt-post-date">
                             <?php echo esc_html( get_the_date() ); ?>
                         </p>
                     <?php endif; ?>
                     <?php if ( $atts['show_excerpt'] === 'yes' ) : ?>
-                        <div class="hrk-post-excerpt">
+                        <div class="mcpt-post-excerpt">
                             <?php the_excerpt(); ?>
                         </div>
                     <?php endif; ?>
-                    <a class="hrk-read-more" href="<?php the_permalink(); ?>">
+                    <a class="mcpt-read-more" href="<?php the_permalink(); ?>">
                         Read More &rarr;
                     </a>
                 </div>
@@ -77,7 +77,7 @@ function metcpt_category_posts_shortcode( $atts ) {
         endwhile;
         echo '</div>';
     else :
-        echo '<p class="hrk-no-posts">No posts found.</p>';
+        echo '<p class="mcpt-no-posts">No posts found.</p>';
     endif;
 
     wp_reset_postdata();
