@@ -3,7 +3,7 @@
  * Plugin Name:       MetCPT WP
  * Plugin URI:        https://github.com/ismetdev/metcpt
  * Description:       Corporate content management for WordPress. Adds Events, Tenders, and Careers as dedicated content types with structured admin fields, ready-made listing shortcodes, and full single-page templates.
- * Version:           1.3.1
+ * Version:           1.4.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            ismetdev
@@ -20,36 +20,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // ── Constants ─────────────────────────────────────────────────────────────────
-define( 'METCPT_VERSION',  '1.3.1' );
+define( 'METCPT_VERSION',  '1.4.0' );
 define( 'METCPT_FILE',     __FILE__ );
 define( 'METCPT_PATH',     plugin_dir_path( __FILE__ ) );
 define( 'METCPT_URL',      plugin_dir_url( __FILE__ ) );
 define( 'METCPT_BASENAME', plugin_basename( __FILE__ ) );
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-function metcpt_page_has_shortcode( $shortcode ) {
-    global $post;
-    return is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $shortcode );
-}
+require_once METCPT_PATH . 'includes/core/helpers.php';
 
 // ── Auto-updater — checks GitHub releases for updates ─────────────────────────
-require_once METCPT_PATH . 'libs/plugin-update-checker/plugin-update-checker.php';
-$metcpt_update_checker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
-    'https://github.com/ismetdev/metcpt/',
-    METCPT_FILE,
-    'metcpt'
-);
-$metcpt_update_checker->setBranch( 'main' );
+function metcpt_bootstrap_updater() {
+    require_once METCPT_PATH . 'libs/plugin-update-checker/plugin-update-checker.php';
+    $update_checker = YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+        'https://github.com/ismetdev/metcpt/',
+        METCPT_FILE,
+        'metcpt'
+    );
+    $update_checker->setBranch( 'main' );
 
-// Authenticate with GitHub when a token is provided (required for private repos).
-// The token is defined in wp-config.php as METCPT_GITHUB_TOKEN and is never
-// committed to the repository. If it is absent, the checker runs unauthenticated,
-// which still works while the repository is public.
-if ( defined( 'METCPT_GITHUB_TOKEN' ) && METCPT_GITHUB_TOKEN ) {
-    $metcpt_update_checker->setAuthentication( METCPT_GITHUB_TOKEN );
+    // Authenticate with GitHub when a token is provided (required for private repos).
+    // The token is defined in wp-config.php as METCPT_GITHUB_TOKEN and is never
+    // committed to the repository. If it is absent, the checker runs unauthenticated,
+    // which still works while the repository is public.
+    if ( defined( 'METCPT_GITHUB_TOKEN' ) && METCPT_GITHUB_TOKEN ) {
+        $update_checker->setAuthentication( METCPT_GITHUB_TOKEN );
+    }
+
+    $update_checker->getVcsApi()->enableReleaseAssets();
+
+    return $update_checker;
 }
-
-$metcpt_update_checker->getVcsApi()->enableReleaseAssets();
+metcpt_bootstrap_updater();
 
 // ── One-time rebrand migration (Haraka → MetCPT) ──────────────────────────────
 // Moves legacy Haraka data (post types, options, meta, table, cron) onto the new

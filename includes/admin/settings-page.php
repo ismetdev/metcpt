@@ -68,9 +68,6 @@ function metcpt_settings_page_html() {
         echo '<div class="notice notice-success is-dismissible"><p><strong>MetCPT Settings saved successfully.</strong></p></div>';
     }
 
-    if ( $active_tab === 'how-to' ) {
-        echo '<link rel="stylesheet" href="' . esc_url( METCPT_URL . 'assets/style-docs.css?v=' . METCPT_VERSION ) . '">';
-    }
     ?>
 
     <?php

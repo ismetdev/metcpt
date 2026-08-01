@@ -76,6 +76,10 @@ year into `DOCS/archive/PROJECT_LOG-<year>.md` and link it from the top.
   `/careers/`. See [DOCS/DECISIONS.md](DOCS/DECISIONS.md#d5).
 - Before adding any shortcode tag, grep all of `wp-content/plugins/` for it.
   Another plugin on this site already collided once.
+- Single and archive template markup lives in `templates/{module}/`, not
+  `includes/`. `includes/{module}/templates.php` is a thin loader that
+  `require_once`s both files from `templates/`. CSS lives in `assets/css/`.
+  See [DOCS/DECISIONS.md](DOCS/DECISIONS.md#d23).
 
 **Release steps.**
 

@@ -38,7 +38,7 @@ if ( ! function_exists( 'metcpt_event_single_template' ) ) {
         if ( is_singular( 'metcpt_event' ) ) {
             if ( ! defined( 'METCPT_EVENT_TEMPLATE_LOADED' ) ) {
                 define( 'METCPT_EVENT_TEMPLATE_LOADED', true );
-                return METCPT_PATH . 'includes/events/template-single.php';
+                return METCPT_PATH . 'templates/events/single.php';
             }
         }
         return $template;

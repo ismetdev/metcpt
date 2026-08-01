@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * or press Back from a single tender page.
  *
  * @package MetCPT
- * @version 1.0.4
  */
 
 // ── Hook into WordPress archive template filter ───────────────────────────────
@@ -19,7 +18,7 @@ if ( ! function_exists( 'metcpt_tender_archive_template' ) ) {
         if ( is_post_type_archive( 'metcpt_tender' ) ) {
             if ( ! defined( 'METCPT_TENDER_ARCHIVE_LOADED' ) ) {
                 define( 'METCPT_TENDER_ARCHIVE_LOADED', true );
-                return METCPT_PATH . 'includes/tenders/template-archive.php';
+                return METCPT_PATH . 'templates/tenders/archive.php';
             }
         }
         return $template;

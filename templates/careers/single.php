@@ -24,7 +24,7 @@ if ( ! function_exists( 'metcpt_career_single_template' ) ) {
         if ( is_singular( 'metcpt_career' ) ) {
             if ( ! defined( 'METCPT_CAREER_TEMPLATE_LOADED' ) ) {
                 define( 'METCPT_CAREER_TEMPLATE_LOADED', true );
-                return METCPT_PATH . 'includes/careers/template-single.php';
+                return METCPT_PATH . 'templates/careers/single.php';
             }
         }
         return $template;

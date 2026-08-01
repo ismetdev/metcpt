@@ -357,3 +357,49 @@ theme refactor on 2026-08-01 and silently corrupted two files. It was caught and
 restored, but only because a verification pass ran afterwards. The Haraka rebrand
 here used a mass replacement across 45 files and got away with it. Do not rely on
 that.
+
+---
+
+<a id="d23"></a>
+## D23. Move to a standard WordPress layout, without hand-splitting the template markup
+
+**Decision.** In 1.4.0: the six `template-single.php`/`template-archive.php`
+files moved to `templates/{module}/single.php` and `archive.php`, with a thin
+`includes/{module}/templates.php` left behind that `require_once`s both. CSS moved
+from `assets/` to `assets/css/`. `metcpt_page_has_shortcode()` moved to
+`includes/core/helpers.php`. The update-checker setup in `metcpt.php` was wrapped
+in `metcpt_bootstrap_updater()` so it no longer leaves a global variable behind.
+Added `phpcs.xml.dist`, `composer.json`, `.editorconfig`, `LICENSE`. `release.yml`
+and `.gitattributes` now exclude `DOCS/`, `CLAUDE.md`, `composer.json`,
+`phpcs.xml.dist` and `.editorconfig` from the release zip.
+
+**Why.** Each `template-*.php` file did three jobs in one: defined helpers,
+registered a `single_template`/`archive_template` filter, and held 200 to 400
+lines of page markup, with WordPress including the same file a second time to
+render it (guarded by a `METCPT_*_LOADED` constant). That is surprising but was
+working, tested code. Rather than hand-split each render function's markup into a
+separate partial, which risks a transcription error across roughly 1,600 lines
+under the no-bulk-find-and-replace rule (see [D22](#d22)), the file was relocated
+as-is: `git mv` to `templates/`, one self-referencing path string updated per
+file, and a loader left in `includes/` so the require order in
+[class-metcpt.php](../includes/core/class-metcpt.php) barely changes. This gets
+markup out of `includes/` without touching the tested render logic.
+
+**Verification.** `git mv` reported all six files as 98 to 100 percent renames,
+confirming content was preserved. Function-name diff against the pre-refactor
+commit showed zero functions lost or renamed, one added
+(`metcpt_bootstrap_updater`). All PHP files pass `php -l` on 8.2.29. Every
+`METCPT_PATH`-relative reference was checked to resolve, including three sample
+data literals in `dummy-data.php`'s dummy error log seeder that referenced the old
+paths, since fixed. Tested live on `github-test.local`: homepage, all three single
+templates, all three archive fallback URLs, the Settings page's four tabs
+including the How-To tab's now-enqueued (rather than raw-echoed) stylesheet, the
+post editor, and the dashboard, all with no PHP warnings or notices.
+
+**Consequence.** The `templates/*/archive.php` files still emit their own
+`<!DOCTYPE>`/`<head>`/`<body>` in addition to calling `get_header()`/`get_footer()`,
+the same double-shell pattern fixed for single templates in [D16](#d16). Confirmed
+pre-existing (identical behaviour before and after this move, via an A/B test
+against the pre-refactor commit), not introduced by this decision, and not fixed
+here since these templates are dormant (`has_archive => false`). Recorded as
+[STATE.md](STATE.md#open-items) item 3.

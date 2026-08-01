@@ -17,6 +17,42 @@ unusually detailed. Dates are commit dates unless marked as an attribution.
 
 ---
 
+## 2026-08-01, v1.4.0, layout refactor (this machine, Ismet Office)
+
+Restructured to the standard WordPress layout. Templates moved from
+`includes/*/template-single.php` and `template-archive.php` to
+`templates/*/single.php` and `archive.php` (relocated as-is via `git mv`, not
+hand-split, to avoid a transcription error across roughly 1,600 lines of markup
+under the no-bulk-replace rule). CSS moved from `assets/` to `assets/css/`.
+`metcpt_page_has_shortcode()` moved to a new `includes/core/helpers.php`. The
+update-checker bootstrap in `metcpt.php` wrapped in `metcpt_bootstrap_updater()`
+so it stops leaving a global. Added `phpcs.xml.dist`, `composer.json`,
+`.editorconfig`, `LICENSE`. `release.yml` and `.gitattributes` now exclude
+`DOCS/`, `CLAUDE.md`, `composer.json`, `phpcs.xml.dist` and `.editorconfig` from
+the release zip. The How-To tab stylesheet moved from a raw `<link>` echo to a
+normal `wp_enqueue_style()` call. Full reasoning in
+[DECISIONS.md](DECISIONS.md#d23).
+
+Verified: `php -l` clean on every file (PHP 8.2.29); function-name diff against
+the pre-refactor commit showed zero lost or renamed, one added
+(`metcpt_bootstrap_updater`); every `METCPT_PATH`-relative reference resolves,
+including three sample-data literals in the dummy error log seeder that still
+pointed at the old paths, fixed; release zip simulated and confirmed no
+development files leak in. Tested live on `github-test.local`, authenticated:
+homepage, all three single templates, all three archive fallback URLs, all four
+Settings tabs (including the How-To tab CSS), the post editor, and the dashboard.
+No PHP warnings or notices anywhere.
+
+Found while moving the archive templates: they still double-wrap their document
+shell (`<!DOCTYPE>` plus `get_header()`/`get_footer()`), the same bug fixed for
+single templates in 1.3.1 ([D16](DECISIONS.md#d16)). Confirmed pre-existing via an
+A/B test against the pre-refactor commit, not a regression. Not fixed, since these
+templates are dormant. Recorded as [STATE.md](STATE.md#open-items) item 3.
+
+Closed five open items: stale `@version` docblocks (7 files), no
+coding-standards config, release zip shipping development files, no `LICENSE`,
+and `PROJECT_AUDIT_AND_CONTEXT.md` overlapping `DOCS/` (replaced with a stub).
+
 ## 2026-08-01, docs (this machine, Ismet Office)
 
 Added `DOCS/STATE.md`, `DOCS/DECISIONS.md`, `DOCS/PROJECT_LOG.md`,

@@ -4,7 +4,7 @@ Tags: corporate, events, careers, tenders, listings
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,12 @@ Yes, but it works best with themes that support modern WordPress templating.
 Yes. Developers can override or customize templates as needed.
 
 == Changelog ==
+
+= 1.4.0 =
+
+* Restructured the codebase to the standard WordPress layout: single and archive templates moved from includes/ to templates/, CSS moved to assets/css/, added coding-standards tooling (phpcs, composer, editorconfig) and a LICENSE file. No functional or visual change.
+* Fixed the release zip and repo export list so development files (DOCS, CLAUDE.md, composer.json, phpcs.xml.dist) no longer ship to sites.
+* The How-To tab stylesheet is now enqueued through the normal WordPress asset pipeline instead of a raw <link> tag, so it gets the same cache-busting as every other stylesheet.
 
 = 1.3.1 =
 
@@ -90,6 +96,10 @@ Yes. Developers can override or customize templates as needed.
 * Polished archive pages for Events, Tenders, and Careers
 
 == Upgrade Notice ==
+
+= 1.4.0 =
+
+Internal restructuring release: files reorganised into a standard WordPress layout (templates/, assets/css/), plus coding-standards tooling and a fix so development files no longer ship in the release zip. No functional or visual change; your content and configuration are unaffected.
 
 = 1.3.1 =
 

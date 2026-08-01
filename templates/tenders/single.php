@@ -47,7 +47,7 @@ if ( ! function_exists( 'metcpt_tender_single_template' ) ) {
         if ( is_singular( 'metcpt_tender' ) ) {
             if ( ! defined( 'METCPT_TENDER_TEMPLATE_LOADED' ) ) {
                 define( 'METCPT_TENDER_TEMPLATE_LOADED', true );
-                return METCPT_PATH . 'includes/tenders/template-single.php';
+                return METCPT_PATH . 'templates/tenders/single.php';
             }
         }
         return $template;

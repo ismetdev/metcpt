@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * or press Back from a single career page.
  *
  * @package MetCPT
- * @version 1.0.4
  */
 
 if ( ! function_exists( 'metcpt_career_archive_template' ) ) {
@@ -18,7 +17,7 @@ if ( ! function_exists( 'metcpt_career_archive_template' ) ) {
         if ( is_post_type_archive( 'metcpt_career' ) ) {
             if ( ! defined( 'METCPT_CAREER_ARCHIVE_LOADED' ) ) {
                 define( 'METCPT_CAREER_ARCHIVE_LOADED', true );
-                return METCPT_PATH . 'includes/careers/template-archive.php';
+                return METCPT_PATH . 'templates/careers/archive.php';
             }
         }
         return $template;

@@ -18,6 +18,19 @@
 *.po   text eol=lf
 *.pot  text eol=lf
 
+# Development-only files — kept in the repo, excluded from `git archive`
+# output. release.yml builds the zip with its own copy+exclude step (not
+# git archive), so its exclude list must be kept in sync with this one.
+DOCS/               export-ignore
+CLAUDE.md           export-ignore
+PROJECT_AUDIT_AND_CONTEXT.md export-ignore
+composer.json       export-ignore
+composer.lock       export-ignore
+phpcs.xml.dist      export-ignore
+.editorconfig       export-ignore
+.gitattributes       export-ignore
+.gitignore           export-ignore
+
 # Binary files — never normalize, never diff as text.
 *.mo    binary
 *.png   binary

@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package MetCPT
  * @subpackage Admin
- * @version 1.0.4
  */
 
 function metcpt_render_docs_tab() {

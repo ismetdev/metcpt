@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * or press Back from a single event page.
  *
  * @package MetCPT
- * @version 1.0.4
  */
 
 if ( ! function_exists( 'metcpt_event_archive_template' ) ) {
@@ -18,7 +17,7 @@ if ( ! function_exists( 'metcpt_event_archive_template' ) ) {
         if ( is_post_type_archive( 'metcpt_event' ) ) {
             if ( ! defined( 'METCPT_EVENT_ARCHIVE_LOADED' ) ) {
                 define( 'METCPT_EVENT_ARCHIVE_LOADED', true );
-                return METCPT_PATH . 'includes/events/template-archive.php';
+                return METCPT_PATH . 'templates/events/archive.php';
             }
         }
         return $template;

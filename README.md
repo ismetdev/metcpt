@@ -202,14 +202,16 @@ WordPress `wp_cron` runs on page traffic, which can delay tender notifications. 
 
 ```
 metcpt/
-├── metcpt.php                          # Plugin entry point + auto-updater
+├── metcpt.php                          # Plugin entry point + auto-updater bootstrap
 ├── uninstall.php                       # Cleanup on deletion (preserve-by-default)
 ├── readme.txt                          # WordPress-format readme
+├── LICENSE                             # GPL-2.0-or-later
 ├── libs/plugin-update-checker/         # GitHub release update library (YahnisElsts)
 ├── includes/
 │   ├── core/
 │   │   ├── class-metcpt.php            # Main loader class
 │   │   ├── post-types.php              # CPT registration
+│   │   ├── helpers.php                 # Shared standalone helpers
 │   │   └── migrate-from-haraka.php     # One-time Haraka → MetCPT data migration
 │   ├── admin/
 │   │   ├── settings-page.php           # Settings UI + registration
@@ -220,11 +222,15 @@ metcpt/
 │   │   ├── error-log-page.php          # Error Log tab UI
 │   │   ├── docs-page.php               # How-To tab UI
 │   │   └── dummy-data.php              # Seed / clear sample content
-│   ├── events/    (meta-boxes, shortcode-list, template-single, template-archive)
-│   ├── tenders/   (meta-boxes, shortcode-list, shortcode-preview, shortcode-template-b, template-single, template-archive)
-│   ├── careers/   (meta-boxes-company, meta-boxes-career, shortcode-list, shortcode-preview, template-single, template-archive)
+│   ├── events/    (meta-boxes, shortcode-list, templates.php — registers templates/events/*)
+│   ├── tenders/   (meta-boxes, shortcode-list, shortcode-preview, shortcode-template-b, templates.php — registers templates/tenders/*)
+│   ├── careers/   (meta-boxes-company, meta-boxes-career, shortcode-list, shortcode-preview, templates.php — registers templates/careers/*)
 │   └── posts/     (shortcode-general, shortcode-news-grid)
-└── assets/                             # Per-module CSS (tokens, general, events, tenders, careers, posts, admin, settings, docs)
+├── templates/                          # Single and archive-fallback markup per module
+│   ├── events/    (single.php, archive.php)
+│   ├── tenders/   (single.php, archive.php)
+│   └── careers/   (single.php, archive.php)
+└── assets/css/                         # Per-module CSS (tokens, general, events, tenders, careers, posts, admin, settings, docs)
 ```
 
 ## Custom Post Types

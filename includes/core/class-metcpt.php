@@ -7,7 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Main plugin class — bootstraps all modules and hooks.
  *
  * @package MetCPT
- * @version 1.2.1
  */
 class MetCPT {
 
@@ -67,17 +66,14 @@ class MetCPT {
             require_once METCPT_PATH . 'includes/posts/shortcode-general.php';
             require_once METCPT_PATH . 'includes/posts/shortcode-news-grid.php';
             require_once METCPT_PATH . 'includes/events/shortcode-list.php';
-            require_once METCPT_PATH . 'includes/events/template-single.php';
-            require_once METCPT_PATH . 'includes/events/template-archive.php';
+            require_once METCPT_PATH . 'includes/events/templates.php';
             require_once METCPT_PATH . 'includes/tenders/shortcode-list.php';
             require_once METCPT_PATH . 'includes/tenders/shortcode-preview.php';
             require_once METCPT_PATH . 'includes/tenders/shortcode-template-b.php';
-            require_once METCPT_PATH . 'includes/tenders/template-single.php';
-            require_once METCPT_PATH . 'includes/tenders/template-archive.php';
+            require_once METCPT_PATH . 'includes/tenders/templates.php';
             require_once METCPT_PATH . 'includes/careers/shortcode-list.php';
             require_once METCPT_PATH . 'includes/careers/shortcode-preview.php';
-            require_once METCPT_PATH . 'includes/careers/template-single.php';
-            require_once METCPT_PATH . 'includes/careers/template-archive.php';
+            require_once METCPT_PATH . 'includes/careers/templates.php';
         }
     }
 
@@ -99,7 +95,7 @@ class MetCPT {
      * and caching layers (e.g. LiteSpeed) to fetch the updated file instead of
      * serving a stale copy. Falls back to METCPT_VERSION if the file is missing.
      *
-     * @param string $relative_path Path relative to the plugin root, e.g. 'assets/style-general.css'.
+     * @param string $relative_path Path relative to the plugin root, e.g. 'assets/css/style-general.css'.
      * @return string|int Version string for wp_enqueue_style().
      */
     private function asset_version( $relative_path ) {
@@ -114,44 +110,44 @@ class MetCPT {
 
         wp_enqueue_style(
             'metcpt-tokens',
-            METCPT_URL . 'assets/style-tokens.css',
+            METCPT_URL . 'assets/css/style-tokens.css',
             array(),
-            $this->asset_version( 'assets/style-tokens.css' )
+            $this->asset_version( 'assets/css/style-tokens.css' )
         );
 
         wp_enqueue_style(
             'metcpt-general',
-            METCPT_URL . 'assets/style-general.css',
+            METCPT_URL . 'assets/css/style-general.css',
             array(),
-            $this->asset_version( 'assets/style-general.css' )
+            $this->asset_version( 'assets/css/style-general.css' )
         );
 
         wp_enqueue_style(
             'metcpt-events',
-            METCPT_URL . 'assets/style-events.css',
+            METCPT_URL . 'assets/css/style-events.css',
             array(),
-            $this->asset_version( 'assets/style-events.css' )
+            $this->asset_version( 'assets/css/style-events.css' )
         );
 
         wp_enqueue_style(
             'metcpt-tenders',
-            METCPT_URL . 'assets/style-tenders.css',
+            METCPT_URL . 'assets/css/style-tenders.css',
             array( 'metcpt-tokens' ),
-            $this->asset_version( 'assets/style-tenders.css' )
+            $this->asset_version( 'assets/css/style-tenders.css' )
         );
 
         wp_enqueue_style(
             'metcpt-careers',
-            METCPT_URL . 'assets/style-careers.css',
+            METCPT_URL . 'assets/css/style-careers.css',
             array(),
-            $this->asset_version( 'assets/style-careers.css' )
+            $this->asset_version( 'assets/css/style-careers.css' )
         );
 
         wp_enqueue_style(
             'metcpt-posts',
-            METCPT_URL . 'assets/style-posts.css',
+            METCPT_URL . 'assets/css/style-posts.css',
             array( 'metcpt-tokens' ),
-            $this->asset_version( 'assets/style-posts.css' )
+            $this->asset_version( 'assets/css/style-posts.css' )
         );
     }
 
@@ -176,19 +172,30 @@ class MetCPT {
 
         wp_enqueue_style(
             'metcpt-admin',
-            METCPT_URL . 'assets/style-admin.css',
+            METCPT_URL . 'assets/css/style-admin.css',
             array(),
-            $this->asset_version( 'assets/style-admin.css' )
+            $this->asset_version( 'assets/css/style-admin.css' )
         );
 
         // Settings-page-only styles (editorial paper + gold theme).
         if ( $is_metcpt_page ) {
             wp_enqueue_style(
                 'metcpt-settings',
-                METCPT_URL . 'assets/style-settings.css',
+                METCPT_URL . 'assets/css/style-settings.css',
                 array(),
-                $this->asset_version( 'assets/style-settings.css' )
+                $this->asset_version( 'assets/css/style-settings.css' )
             );
+
+            // How-To tab only. Loaded here instead of a raw <link> echo so it
+            // gets the same filemtime cache-busting as every other sheet.
+            if ( isset( $_GET['tab'] ) && $_GET['tab'] === 'how-to' ) {
+                wp_enqueue_style(
+                    'metcpt-docs',
+                    METCPT_URL . 'assets/css/style-docs.css',
+                    array(),
+                    $this->asset_version( 'assets/css/style-docs.css' )
+                );
+            }
         }
     }
 

@@ -9,14 +9,14 @@ Last updated: 2026-08-01
 
 | | |
 |---|---|
-| Shipped version | **1.3.1** |
+| Shipped version | **1.4.0** |
 | Repository | https://github.com/ismetdev/metcpt (public) |
 | Branch | `main` |
-| Tags | `v1.0.0`, `1.0.3`, `v1.0.4`, `v1.1.0`, `v1.2.0`, `v1.2.1`, `v1.2.2`, `v1.3.0`, `v1.3.1` |
+| Tags | `v1.0.0`, `1.0.3`, `v1.0.4`, `v1.1.0`, `v1.2.0`, `v1.2.1`, `v1.2.2`, `v1.3.0`, `v1.3.1`, `v1.4.0` |
 | Type | WordPress plugin, formerly named "Haraka" |
 | Requires | WordPress 6.0+ (tested to 6.5), PHP 7.4+ |
 | Text domain | `metcpt` |
-| License | GPL-2.0-or-later |
+| License | GPL-2.0-or-later, see [LICENSE](../LICENSE) |
 
 Note: `1.0.3` is missing its `v` prefix. It is a historical mistake, left alone.
 Every tag from `v1.0.4` onward uses `v`.
@@ -44,21 +44,27 @@ renamed: [metcpt.php](../metcpt.php) (carries the plugin header, and its path is
 stored in the `active_plugins` option and used by the update checker),
 [uninstall.php](../uninstall.php), and [readme.txt](../readme.txt).
 
-Everything else is already modular:
+Everything else was moved to a standard layout in 1.4.0. See
+[DECISIONS.md](DECISIONS.md#d23):
 
 ```
 metcpt.php              bootstrap: constants, updater, migration, MetCPT::instance()
 uninstall.php           option and table cleanup, most of it deliberately commented out
 readme.txt              WordPress-format readme and changelog
-assets/                 9 stylesheets, enqueued from class-metcpt.php
-includes/core/          post types, main class, Haraka migration
+LICENSE                 GPL-2.0-or-later, full text
+assets/css/             9 stylesheets, enqueued from class-metcpt.php
+includes/core/          post types, main class, helpers, Haraka migration
 includes/admin/         settings, docs page, error log, dashboard widget, cron, dummy data
-includes/events/        meta boxes, shortcode, single and archive templates
-includes/tenders/       meta boxes, shortcodes, template A and B, single and archive templates
-includes/careers/       meta boxes for career and company, shortcodes, templates
+includes/events/        meta boxes, shortcode, templates.php (registers templates/events/*)
+includes/tenders/       meta boxes, shortcodes, template A and B, templates.php
+includes/careers/       meta boxes for career and company, shortcodes, templates.php
 includes/posts/         shortcodes over native WordPress posts
+templates/events/       single.php, archive.php — the markup WP includes as the template
+templates/tenders/      single.php, archive.php
+templates/careers/      single.php, archive.php
 libs/plugin-update-checker/   third party, YahnisElsts PUC v5.7, do not edit
-DOCS/                   this documentation
+DOCS/                   this documentation, not shipped in the release zip
+phpcs.xml.dist, composer.json, .editorconfig   coding-standards tooling, not shipped
 .github/workflows/      release.yml
 ```
 
@@ -73,8 +79,8 @@ DOCS/                   this documentation
 | `[careers_list]`, `[careers_preview]` | [includes/careers/shortcode-list.php](../includes/careers/shortcode-list.php), [shortcode-preview.php](../includes/careers/shortcode-preview.php) | Shipped 1.0.0 |
 | `[news_grid]` | [includes/posts/shortcode-news-grid.php](../includes/posts/shortcode-news-grid.php) | Rebuilt to a 3-column grid in 1.1.0 |
 | `[category_posts]` | [includes/posts/shortcode-general.php](../includes/posts/shortcode-general.php) | Shipped 1.0.0 |
-| Single event, tender, career | `includes/*/template-single.php` | Duplicate document shell removed in 1.3.1 |
-| CPT archive fallback | `includes/*/template-archive.php` | Dormant, `has_archive` is false. Not dead code |
+| Single event, tender, career | `templates/*/single.php` | Duplicate document shell removed in 1.3.1. Moved from `includes/*/template-single.php` in 1.4.0 |
+| CPT archive fallback | `templates/*/archive.php` | Dormant, `has_archive` is false. Not dead code. Moved from `includes/*/template-archive.php` in 1.4.0 |
 | Settings page | [includes/admin/settings-page.php](../includes/admin/settings-page.php), [settings-fields.php](../includes/admin/settings-fields.php) | Redesigned 1.3.0 |
 | Docs (How To) page | [includes/admin/docs-page.php](../includes/admin/docs-page.php) | Shipped 1.0.4 |
 | Error log | [includes/admin/error-log.php](../includes/admin/error-log.php), [error-log-page.php](../includes/admin/error-log-page.php) | Flood guard and row cap added 1.3.1 |
@@ -120,7 +126,8 @@ does not read any `metcpt_` option. Checked from both sides on 2026-07-29.
 - Two machines, and Claude Code transcripts do not sync between them. Git author
   names identify which machine did what:
   - **Ismet Home**: v1.0.0 through v1.1.0, and v1.2.2 through v1.3.1.
-  - **Ismet Office**: v1.2.0 and v1.2.1, and this documentation.
+  - **Ismet Office**: v1.2.0, v1.2.1, and v1.4.0 (this documentation and the
+    layout refactor).
   - **Ismet Fitri**: commits made through the GitHub web UI.
   Run `git pull --ff-only origin main` before editing on either machine.
 
@@ -144,31 +151,30 @@ Same site, separate repos, separate release cycles.
 ## Open items
 
 1. **CSS `!important` and `body`-prefix tech debt.** The `.mcpt-v2` design-token
-   pattern in [assets/style-tokens.css](../assets/style-tokens.css) is applied
-   only to the news grid and tenders preview template A. Events, Careers,
+   pattern in [assets/css/style-tokens.css](../assets/css/style-tokens.css) is
+   applied only to the news grid and tenders preview template A. Events, Careers,
    `[tenders_list]` and template B still use `body`-prefixed selectors and
    `!important` to beat Hello Elementor's reset. Deliberately deferred: extending
    it needs a design reference to verify against, and Events and Careers have only
    one layout each, so a per-page template override would mean designing a second
    layout first. See [DECISIONS.md](DECISIONS.md#d17).
-2. **Stale `@version` docblocks.** Seven files still say `@version 1.0.4` or
-   `1.2.1` while the plugin is at 1.3.1. Cosmetic, but misleading.
-3. **No coding-standards config.** No `phpcs.xml.dist`, no `composer.json`, no
-   `.editorconfig`. The code has never been checked against WordPress Coding
-   Standards.
-4. **The release zip ships development files.** `release.yml` excludes only
-   `.git`, `.github`, `.gitattributes`, `.gitignore`, `.claude`, `node_modules`
-   and `build`, so `PROJECT_AUDIT_AND_CONTEXT.md`, `README.md` and now `DOCS/` go
-   out to every site.
-5. **No `languages/` directory.** The text domain `metcpt` is declared in the
+2. **No `languages/` directory.** The text domain `metcpt` is declared in the
    plugin header but no `.pot` exists, and most admin strings are plain literals
    rather than wrapped in translation functions.
-6. **No `LICENSE` file.** The header and `readme.txt` both say GPL-2.0-or-later,
-   but the licence text is not in the repo. MetTranslate ships one.
-7. **`PROJECT_AUDIT_AND_CONTEXT.md` overlaps this DOCS set.** It was the single
-   handoff doc before DOCS existed. Its content is now split across
-   [STATE.md](STATE.md), [DECISIONS.md](DECISIONS.md) and
-   [PROJECT_LOG.md](PROJECT_LOG.md). Keeping both means two files to update.
+3. **Archive fallback templates double-wrap their document shell.** Each
+   `templates/*/archive.php` emits its own `<!DOCTYPE>`/`<head>`/`<body>` and also
+   calls `get_header()`/`get_footer()`, the same bug fixed for single templates in
+   [DECISIONS.md](DECISIONS.md#d16). Found while relocating these files in 1.4.0.
+   Confirmed pre-existing, not a regression. Not fixed yet because these templates
+   are dormant (`has_archive => false`), reachable only via a raw
+   `?post_type=metcpt_event`-style URL. See [DECISIONS.md](DECISIONS.md#d23).
+
+Closed in 1.4.0 (2026-08-01): stale `@version` docblocks removed from 7 files;
+added `phpcs.xml.dist`, `composer.json`, `.editorconfig`; `release.yml` and
+`.gitattributes` now exclude development files from the release zip; added
+`LICENSE`; `PROJECT_AUDIT_AND_CONTEXT.md` replaced with a stub pointing at
+`DOCS/`. See [DECISIONS.md](DECISIONS.md#d23) and
+[PROJECT_LOG.md](PROJECT_LOG.md).
 
 ## How to cut the next release
 

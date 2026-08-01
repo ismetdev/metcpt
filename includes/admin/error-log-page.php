@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package MetCPT
  * @subpackage Admin
- * @version 1.0.4
  */
 
 // ── Fetch all logs (unfiltered) for stats ─────────────────────────────────────
