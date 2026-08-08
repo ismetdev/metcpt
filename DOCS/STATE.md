@@ -3,16 +3,16 @@
 Where the project stands today. Update when the shipped version, the open work, or
 the environment changes.
 
-Last updated: 2026-08-01
+Last updated: 2026-08-08
 
 ## At a glance
 
 | | |
 |---|---|
-| Shipped version | **1.4.0** |
+| Shipped version | **1.5.0** |
 | Repository | https://github.com/ismetdev/metcpt (public) |
 | Branch | `main` |
-| Tags | `v1.0.0`, `1.0.3`, `v1.0.4`, `v1.1.0`, `v1.2.0`, `v1.2.1`, `v1.2.2`, `v1.3.0`, `v1.3.1`, `v1.4.0` |
+| Tags | `v1.0.0`, `1.0.3`, `v1.0.4`, `v1.1.0`, `v1.2.0`, `v1.2.1`, `v1.2.2`, `v1.3.0`, `v1.3.1`, `v1.4.0`, `v1.5.0` |
 | Type | WordPress plugin, formerly named "Haraka" |
 | Requires | WordPress 6.0+ (tested to 6.5), PHP 7.4+ |
 | Text domain | `metcpt` |

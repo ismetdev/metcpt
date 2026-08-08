@@ -104,51 +104,66 @@ class MetCPT {
     }
 
     /**
-     * Enqueue frontend CSS conditionally per module.
+     * Enqueue frontend CSS, one module at a time, only where it is used.
+     *
+     * Every sheet is registered first, then enqueued by condition. A sheet loads
+     * when the view is that module's single post, its CPT archive, or a page that
+     * carries the module's shortcode. The tokens sheet is a dependency of the
+     * tenders and posts sheets, so it loads with them and nowhere else.
      */
     public function enqueue_frontend_styles() {
 
-        wp_enqueue_style(
-            'metcpt-tokens',
-            METCPT_URL . 'assets/css/style-tokens.css',
-            array(),
-            $this->asset_version( 'assets/css/style-tokens.css' )
+        // Register every sheet. Registering does not output anything; only the
+        // enqueue calls below do. Dependencies (tokens) are declared here.
+        $sheets = array(
+            'metcpt-tokens'  => array( 'assets/css/style-tokens.css',  array() ),
+            'metcpt-general' => array( 'assets/css/style-general.css', array() ),
+            'metcpt-events'  => array( 'assets/css/style-events.css',  array() ),
+            'metcpt-tenders' => array( 'assets/css/style-tenders.css', array( 'metcpt-tokens' ) ),
+            'metcpt-careers' => array( 'assets/css/style-careers.css', array() ),
+            'metcpt-posts'   => array( 'assets/css/style-posts.css',   array( 'metcpt-tokens' ) ),
         );
+        foreach ( $sheets as $handle => $sheet ) {
+            wp_register_style(
+                $handle,
+                METCPT_URL . $sheet[0],
+                $sheet[1],
+                $this->asset_version( $sheet[0] )
+            );
+        }
 
-        wp_enqueue_style(
-            'metcpt-general',
-            METCPT_URL . 'assets/css/style-general.css',
-            array(),
-            $this->asset_version( 'assets/css/style-general.css' )
-        );
+        // Events: single event, event archive, or the [events_list] shortcode.
+        if ( is_singular( 'metcpt_event' )
+            || is_post_type_archive( 'metcpt_event' )
+            || metcpt_page_has_shortcode( 'events_list' ) ) {
+            wp_enqueue_style( 'metcpt-events' );
+        }
 
-        wp_enqueue_style(
-            'metcpt-events',
-            METCPT_URL . 'assets/css/style-events.css',
-            array(),
-            $this->asset_version( 'assets/css/style-events.css' )
-        );
+        // Tenders: single, archive, or a tenders shortcode. Pulls tokens via dep.
+        if ( is_singular( 'metcpt_tender' )
+            || is_post_type_archive( 'metcpt_tender' )
+            || metcpt_page_has_shortcode( 'tenders_list' )
+            || metcpt_page_has_shortcode( 'tenders_preview' ) ) {
+            wp_enqueue_style( 'metcpt-tenders' );
+        }
 
-        wp_enqueue_style(
-            'metcpt-tenders',
-            METCPT_URL . 'assets/css/style-tenders.css',
-            array( 'metcpt-tokens' ),
-            $this->asset_version( 'assets/css/style-tenders.css' )
-        );
+        // Careers: single, archive, or a careers shortcode.
+        if ( is_singular( 'metcpt_career' )
+            || is_post_type_archive( 'metcpt_career' )
+            || metcpt_page_has_shortcode( 'careers_list' )
+            || metcpt_page_has_shortcode( 'careers_preview' ) ) {
+            wp_enqueue_style( 'metcpt-careers' );
+        }
 
-        wp_enqueue_style(
-            'metcpt-careers',
-            METCPT_URL . 'assets/css/style-careers.css',
-            array(),
-            $this->asset_version( 'assets/css/style-careers.css' )
-        );
+        // News grid: the [news_grid] shortcode. Pulls tokens via dep.
+        if ( metcpt_page_has_shortcode( 'news_grid' ) ) {
+            wp_enqueue_style( 'metcpt-posts' );
+        }
 
-        wp_enqueue_style(
-            'metcpt-posts',
-            METCPT_URL . 'assets/css/style-posts.css',
-            array( 'metcpt-tokens' ),
-            $this->asset_version( 'assets/css/style-posts.css' )
-        );
+        // General post list: the [category_posts] shortcode.
+        if ( metcpt_page_has_shortcode( 'category_posts' ) ) {
+            wp_enqueue_style( 'metcpt-general' );
+        }
     }
 
     /**

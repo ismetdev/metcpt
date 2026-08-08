@@ -17,6 +17,37 @@ unusually detailed. Dates are commit dates unless marked as an attribution.
 
 ---
 
+## 2026-08-08, v1.5.0, conditional CSS and no Google Fonts (this machine, Ismet Office)
+
+Front-end CSS now loads only where used. `enqueue_frontend_styles()` in
+[class-metcpt.php](../includes/core/class-metcpt.php) registers all six sheets,
+then enqueues each by condition: the module's single post
+(`is_singular`), its CPT archive (`is_post_type_archive`), or a page carrying
+its shortcode (`metcpt_page_has_shortcode`). The tokens sheet loads only as a
+declared dependency of the tenders and posts sheets. Before this, all six loaded
+on every page, about 75 KB, including pages with no MetCPT content.
+
+`metcpt_page_has_shortcode()` in [helpers.php](../includes/core/helpers.php) now
+also reads `_elementor_data`, because the listing Pages are Elementor built and
+hold the shortcode in a widget, not in `post_content`. The archive guard uses the
+same `is_post_type_archive()` check the archive templates use, so CSS and template
+stay coupled.
+
+Removed the render-blocking Google Fonts `@import` (DM Sans, DM Serif Display)
+from [style-events.css](../assets/css/style-events.css). Font declarations keep
+their existing fallbacks, so no replacement font ships.
+
+Verified on `http://v2` against cache-busted responses: each single, list Page,
+and the two shortcode Pages load only their own sheets; the homepage and other
+pages load none. The two shortcode Pages (news_grid, category_posts) had no host
+on local, so they were created via an authenticated REST session, checked, then
+deleted. CPT archives resolve to the blog listing here because `has_archive` is
+false, so no archive template renders and no CSS loads, which is correct. The two
+remaining Google Fonts requests on pages are Elementor's own Inter and Roboto,
+outside the plugin. `php -l` clean on both changed PHP files (PHP 8.2.29).
+Browser automation was not available this session, so checks used cache-busted
+server HTML, the same stylesheet set a browser would request.
+
 ## 2026-08-01, v1.4.0, layout refactor (this machine, Ismet Office)
 
 Restructured to the standard WordPress layout. Templates moved from

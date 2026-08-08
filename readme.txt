@@ -4,7 +4,7 @@ Tags: corporate, events, careers, tenders, listings
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,12 @@ Yes, but it works best with themes that support modern WordPress templating.
 Yes. Developers can override or customize templates as needed.
 
 == Changelog ==
+
+= 1.5.0 =
+
+* Front-end stylesheets now load only where they are used, not on every page. Each module's CSS loads on its single post, its archive, or a page carrying its shortcode. A page with no MetCPT content now loads no MetCPT CSS, cutting about 75 KB from every such page.
+* Shortcode detection now also reads Elementor page data, so listing Pages built in Elementor load the right CSS.
+* Removed the Google Fonts request from the events stylesheet. Fonts fall back to the system stack, matching the self-hosted-font direction used elsewhere on the site.
 
 = 1.4.0 =
 
@@ -96,6 +102,10 @@ Yes. Developers can override or customize templates as needed.
 * Polished archive pages for Events, Tenders, and Careers
 
 == Upgrade Notice ==
+
+= 1.5.0 =
+
+Performance release: MetCPT stylesheets now load only on pages that use them, and the events stylesheet no longer pulls Google Fonts. No visual change on pages that use MetCPT; your content and configuration are unaffected.
 
 = 1.4.0 =
 
