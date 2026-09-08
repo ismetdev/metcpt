@@ -22,7 +22,12 @@ function metcpt_register_post_types() {
         ),
         'public'              => true,
         'has_archive'         => false,
-        'show_in_menu'        => true,
+        // Hidden from the admin menu once events are migrated to native posts
+        // (see includes/admin/migrate-events-to-posts.php), but the post type
+        // stays registered so migrated posts' old /event/<slug>/ URLs still
+        // resolve to a query var for the redirect handler, and so the CPT can
+        // be shown again if ever needed.
+        'show_in_menu'        => ! get_option( 'metcpt_hide_events_cpt_menu', 0 ),
         'show_in_rest'        => true,
         'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
         'menu_icon'           => 'dashicons-calendar-alt',

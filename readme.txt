@@ -4,7 +4,7 @@ Tags: corporate, events, careers, tenders, listings
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.5.0
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,14 @@ Yes, but it works best with themes that support modern WordPress templating.
 Yes. Developers can override or customize templates as needed.
 
 == Changelog ==
+
+= 1.6.0 =
+
+* Events are now written as ordinary WordPress posts, not a separate content type. Create one from Posts > Add New, tick "Use this post for MetCPT Events" in the Event Details box, and fill in the date, time, venue and organiser. The single page uses your theme's normal post design, with a short summary card added above or below the content (position is configurable per post, with a site-wide default in Settings > Events).
+* The `[events_list]` listing page is unchanged in appearance and continues to sort by event date.
+* Existing events can be moved over from Settings > Events with a one-click migration (preview first, then run). Old `/event/<slug>/` links keep working and redirect to the new post address.
+* Event pages now carry structured Event data for search engines (schema.org), and their "back" link points to the events listing.
+* The old Events content type is kept, hidden from the admin menu once migration is run, so nothing already published is lost and the change can be rolled back if needed.
 
 = 1.5.0 =
 
@@ -102,6 +110,10 @@ Yes. Developers can override or customize templates as needed.
 * Polished archive pages for Events, Tenders, and Careers
 
 == Upgrade Notice ==
+
+= 1.6.0 =
+
+Events move from a separate content type to ordinary posts. Existing events keep working as-is; use the new migration tool on Settings > Events (preview first) when you are ready to move them over. Old event links redirect automatically once migrated. No action required to keep the site running as before.
 
 = 1.5.0 =
 

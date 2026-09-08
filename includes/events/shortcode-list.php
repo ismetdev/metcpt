@@ -24,6 +24,10 @@ function metcpt_events_list_shortcode( $atts ) {
     // ── Build meta query based on filter ─────────────────────────────────────
     $meta_query = array(
         array(
+            'key'     => 'metcpt_is_event',
+            'compare' => 'EXISTS',
+        ),
+        array(
             'key'     => 'event_date',
             'compare' => 'EXISTS',
         ),
@@ -45,9 +49,9 @@ function metcpt_events_list_shortcode( $atts ) {
         );
     }
 
-    // ── Base query — always uses metcpt_event CPT ────────────────────────────────
+    // ── Base query — events are native posts flagged with metcpt_is_event ────────
     $query_args = array(
-        'post_type'      => 'metcpt_event',
+        'post_type'      => 'post',
         'post_status'    => 'publish',
         'posts_per_page' => intval( $atts['posts_per_page'] ),
         'orderby'        => 'meta_value',

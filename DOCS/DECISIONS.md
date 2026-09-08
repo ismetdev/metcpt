@@ -361,6 +361,7 @@ that.
 ---
 
 <a id="d23"></a>
+
 ## D23. Move to a standard WordPress layout, without hand-splitting the template markup
 
 **Decision.** In 1.4.0: the six `template-single.php`/`template-archive.php`
@@ -403,3 +404,73 @@ pre-existing (identical behaviour before and after this move, via an A/B test
 against the pre-refactor commit), not introduced by this decision, and not fixed
 here since these templates are dormant (`has_archive => false`). Recorded as
 [STATE.md](STATE.md#open-items) item 3.
+
+---
+
+<a id="d24"></a>
+## D24. Events move from a CPT to native posts, single page owned by the theme
+
+**Decision.** In 1.6.0: events are written as ordinary WordPress posts, not
+`metcpt_event`. A post becomes an event when its `metcpt_is_event` meta is on
+(set from a tick box in a new meta box on the Post screen); an event date is
+also required for it to appear in `[events_list]`. Ticking the box also assigns
+the post to the (auto-created if missing) `events` category, a convenience, not
+the trigger. The plugin injects a short summary (date, time, venue, organiser)
+via a `the_content` filter, never a `single_template` filter, so the
+`met-hello-elementor-child` theme's own `single.php` keeps rendering everything
+else unchanged. `metcpt_event` stays registered, `show_in_menu` gated by a new
+option so it can be hidden after migration and shown again if ever needed.
+
+Existing `metcpt_event` posts move over with a button on Settings > Events
+(preview first, then run), never automatically on update. Migration changes
+only `post_type` and adds meta; ID, content, meta, featured image, comments and
+publish date are untouched. Old `/event/<slug>/` URLs 301 to the new post via a
+`template_redirect` handler keyed on a stored `metcpt_legacy_event_slug`.
+
+**Why.** Owner's decision, 2026-09-08: the `/events/` listing (an Elementor
+Page holding `[events_list]`, see [D1](#d1)) was fine, but the CPT's own single
+page (`templates/events/single.php`, 16 meta fields including three JSON
+repeaters) looked nothing like the rest of the site. Native posts get the
+theme's normal article design for free; the plugin only needs to add the event
+facts and keep the listing sorted by date.
+
+**Why `the_content`, never `single_template`.** The theme's `single.php` is a
+complete, opinionated template with no content hooks of its own. A
+`single_template` filter for `post` would replace it outright, exactly the
+design this change exists to keep. `the_content` runs inside the theme's own
+markup instead.
+
+**The back-link problem, and why it needed a second filter.** The theme
+exposes `met_hello_child_back_link_url()` (filterable, defaults to the
+Newsroom archive) for exactly this kind of override, but `single.php` only
+calls it when the post has no category — otherwise it links to the post's
+primary category archive directly, with no filter around that branch. Every
+event post carries the auto-assigned `events` category, so the exposed filter
+never fired in testing; the back link went to `/category/events/` instead of
+the intended `/events/`. Fixed without a theme edit by adding a second,
+narrowly-scoped `term_link` filter: it rewrites the URL only for the `events`
+term, only inside the main loop, only on a singular post, only when that post
+is an event. Nothing else on the site resolves that term's link during that
+window, so the Events category archive is unaffected everywhere else. Found
+and confirmed during phase-by-phase verification on `http://v2`, 2026-09-08.
+
+**Also decided, and deliberately not done.**
+- Event posts are not filtered out of the homepage, newsroom, search, or any
+  archive. An event is a post, so it behaves like one everywhere. Owner's
+  choice: removes a site-wide query filter and any need to touch the theme.
+- The CPT's rich fields (VIPs, itinerary, FAQs, guidelines, audience,
+  capacity) stay editable on the post screen and render nothing on the front
+  end. Owner writes the programme into the post body with the normal editor.
+- `style-event-summary.css` is a separate sheet from `style-events.css` with
+  its own enqueue gate, custom properties scoped to `.mcpt-event-summary`
+  rather than `:root` — the theme already writes `:root` custom properties
+  sitewide, so a second `:root` block would load in undefined order. Same
+  rule as [D17](#d17), applied to a new sheet instead of an existing one.
+
+**Consequence.** This is a deliberate, partial exception to the "no overlap"
+boundary between the plugin and the theme recorded in
+[STATE.md](STATE.md#scope-boundary): the plugin now renders inside a native
+post via two tightly-scoped filters. No theme file was edited or needs a
+matching release. `templates/events/single.php` and `archive.php` become
+unreachable once the CPT is empty after migration; left on disk, not deleted,
+same reasoning as [D2](#d2).

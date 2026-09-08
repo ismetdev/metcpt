@@ -17,6 +17,58 @@ unusually detailed. Dates are commit dates unless marked as an attribution.
 
 ---
 
+## 2026-09-08, v1.6.0, events move to native posts (this machine, Ismet Office)
+
+Events are now written as ordinary WordPress posts instead of the `metcpt_event`
+CPT, so the single page uses the `met-hello-elementor-child` theme's normal post
+design instead of the plugin's own template. Full reasoning in
+[DECISIONS.md D24](DECISIONS.md#d24). PRD at
+[PLAN/PRD-events-as-posts.md](../PLAN/PRD-events-as-posts.md), not shipped in the
+release zip.
+
+A tick box in a new meta box on the Post screen
+([includes/events/meta-boxes-post.php](../includes/events/meta-boxes-post.php))
+marks a post as an event and reveals the same fields the CPT screen uses,
+shared through `metcpt_event_meta_box_html()` and
+`metcpt_save_event_meta_fields()` in `meta-boxes.php` (refactored to expose
+both) so the two screens cannot list different fields by accident.
+`[events_list]` now queries `post_type => post` filtered on `metcpt_is_event`
+and `event_date`, both required to exist; the listing's own markup, CSS and
+sorting are unchanged.
+
+A summary block (date, time, venue, organiser) is injected into event posts via
+a `the_content` filter, in
+[includes/events/summary-block.php](../includes/events/summary-block.php),
+placement configurable per post with a site-wide default in Settings > Events.
+The same file adds Event JSON-LD on `wp_head` and points the theme's back link
+at the events listing, the latter needing a second, narrowly-scoped `term_link`
+filter after testing showed the theme's own filter hook never fires for a post
+with a category (see D24 for why). A new stylesheet,
+`style-event-summary.css`, has its own enqueue gate and scopes its custom
+properties to `.mcpt-event-summary`, never `:root`.
+
+A one-click migration
+([includes/admin/migrate-events-to-posts.php](../includes/admin/migrate-events-to-posts.php))
+converts existing `metcpt_event` posts in place (post ID, content, meta,
+featured image, comments and publish date all preserved), button-triggered
+from Settings > Events with a dry-run preview first. Old `/event/<slug>/` URLs
+301-redirect to the new post via a `template_redirect` handler. The CPT stays
+registered; its admin menu item is hidden by a new option once migration is
+run, and can be shown again.
+
+Verified in seven phases on `http://v2`: the post editor and field save/reload,
+the single post front end (design, summary block, JSON-LD, back link, no
+bleed to normal posts), stylesheet scoping, the `/events/` listing unchanged,
+the settings panel, the migration run (data integrity, redirect, listing after
+migration), and a regression pass over tenders, careers, the news grid, the
+dashboard widget, the error log and the cron. One issue found and fixed during
+phase 2 (the back-link filter, see above); everything else passed on first
+check. `php -l` clean on every changed file (PHP 8.2.29).
+
+Also added: `PLAN/` as a new development-only folder (this repo's PRDs),
+excluded from the release zip the same way `DOCS/` is — matching entries added
+to `.gitattributes` and `release.yml`'s copy-exclusion list and leak check.
+
 ## 2026-08-08, v1.5.0, conditional CSS and no Google Fonts (this machine, Ismet Office)
 
 Front-end CSS now loads only where used. `enqueue_frontend_styles()` in

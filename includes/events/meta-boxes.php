@@ -403,41 +403,44 @@ Photography is permitted during the event."><?php echo esc_textarea( $event_guid
 }
 
 
-// ── Save all event meta ───────────────────────────────────────────────────────
-function metcpt_save_event_meta( $post_id ) {
+// ── Field key map — shared with the native-post event meta box ────────────────
+//
+// POST field name => meta key. metcpt_save_event_meta_fields() below and
+// includes/events/meta-boxes-post.php both read this, so the CPT screen and the
+// native Post screen cannot list the fields differently by accident.
+function metcpt_event_meta_field_map() {
+    return array(
+        'text' => array(
+            'metcpt_event_date'          => 'event_date',
+            'metcpt_event_time'          => 'event_time',
+            'metcpt_event_venue'         => 'event_venue',
+            'metcpt_event_organiser'     => 'event_organiser',
+            'metcpt_event_audience'      => 'event_audience',
+            'metcpt_event_capacity'      => 'event_capacity',
+            'metcpt_event_contact_name'  => 'event_contact_name',
+            'metcpt_event_contact_dept'  => 'event_contact_dept',
+            'metcpt_event_contact_email' => 'event_contact_email',
+            'metcpt_event_contact_phone' => 'event_contact_phone',
+        ),
+        'url' => array(
+            'metcpt_event_rsvp_url' => 'event_rsvp_url',
+            'metcpt_event_cal_url'  => 'event_cal_url',
+        ),
+    );
+}
 
-    if ( ! isset( $_POST['metcpt_event_nonce'] ) ||
-         ! wp_verify_nonce( $_POST['metcpt_event_nonce'], 'metcpt_event_meta_save' ) ) {
-        return;
-    }
 
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-        return;
-    }
+// ── Save all event fields — text, url, textarea, repeaters ────────────────────
+//
+// No nonce, capability or post-type guard here. Called by metcpt_save_event_meta()
+// below and by metcpt_save_event_meta_post() in meta-boxes-post.php, after each
+// has run its own guards, so the field-saving logic exists in one place.
+function metcpt_save_event_meta_fields( $post_id ) {
 
-    if ( ! current_user_can( 'edit_post', $post_id ) ) {
-        return;
-    }
-
-    if ( get_post_type( $post_id ) !== 'metcpt_event' ) {
-        return;
-    }
+    $field_map = metcpt_event_meta_field_map();
 
     // ── Simple text fields ────────────────────────────────────────────────────
-    $text_fields = array(
-        'metcpt_event_date'          => 'event_date',
-        'metcpt_event_time'          => 'event_time',
-        'metcpt_event_venue'         => 'event_venue',
-        'metcpt_event_organiser'     => 'event_organiser',
-        'metcpt_event_audience'      => 'event_audience',
-        'metcpt_event_capacity'      => 'event_capacity',
-        'metcpt_event_contact_name'  => 'event_contact_name',
-        'metcpt_event_contact_dept'  => 'event_contact_dept',
-        'metcpt_event_contact_email' => 'event_contact_email',
-        'metcpt_event_contact_phone' => 'event_contact_phone',
-    );
-
-    foreach ( $text_fields as $post_key => $meta_key ) {
+    foreach ( $field_map['text'] as $post_key => $meta_key ) {
         if ( isset( $_POST[ $post_key ] ) ) {
             update_post_meta(
                 $post_id,
@@ -448,12 +451,7 @@ function metcpt_save_event_meta( $post_id ) {
     }
 
     // ── URL fields ────────────────────────────────────────────────────────────
-    $url_fields = array(
-        'metcpt_event_rsvp_url' => 'event_rsvp_url',
-        'metcpt_event_cal_url'  => 'event_cal_url',
-    );
-
-    foreach ( $url_fields as $post_key => $meta_key ) {
+    foreach ( $field_map['url'] as $post_key => $meta_key ) {
         if ( isset( $_POST[ $post_key ] ) ) {
             update_post_meta(
                 $post_id,
@@ -518,5 +516,29 @@ function metcpt_save_event_meta( $post_id ) {
         }
         update_post_meta( $post_id, 'event_faqs', wp_json_encode( $faqs ) );
     }
+}
+
+
+// ── Save handler — metcpt_event CPT screen ─────────────────────────────────────
+function metcpt_save_event_meta( $post_id ) {
+
+    if ( ! isset( $_POST['metcpt_event_nonce'] ) ||
+         ! wp_verify_nonce( $_POST['metcpt_event_nonce'], 'metcpt_event_meta_save' ) ) {
+        return;
+    }
+
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    if ( get_post_type( $post_id ) !== 'metcpt_event' ) {
+        return;
+    }
+
+    metcpt_save_event_meta_fields( $post_id );
 }
 add_action( 'save_post', 'metcpt_save_event_meta' );

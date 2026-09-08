@@ -47,7 +47,8 @@ class MetCPT {
         require_once METCPT_PATH . 'includes/admin/cron.php';
         require_once METCPT_PATH . 'includes/admin/error-log.php';
         require_once METCPT_PATH . 'includes/admin/dummy-data.php';
-        require_once METCPT_PATH . 'includes/admin/docs-page.php';        
+        require_once METCPT_PATH . 'includes/admin/docs-page.php';
+        require_once METCPT_PATH . 'includes/admin/migrate-events-to-posts.php';
 
         // Admin only
         if ( is_admin() ) {
@@ -58,6 +59,7 @@ class MetCPT {
             require_once METCPT_PATH . 'includes/careers/meta-boxes-company.php';
             require_once METCPT_PATH . 'includes/careers/meta-boxes-career.php';
             require_once METCPT_PATH . 'includes/events/meta-boxes.php';
+            require_once METCPT_PATH . 'includes/events/meta-boxes-post.php';
             require_once METCPT_PATH . 'includes/tenders/meta-boxes.php';
         }
 
@@ -66,6 +68,7 @@ class MetCPT {
             require_once METCPT_PATH . 'includes/posts/shortcode-general.php';
             require_once METCPT_PATH . 'includes/posts/shortcode-news-grid.php';
             require_once METCPT_PATH . 'includes/events/shortcode-list.php';
+            require_once METCPT_PATH . 'includes/events/summary-block.php';
             require_once METCPT_PATH . 'includes/events/templates.php';
             require_once METCPT_PATH . 'includes/tenders/shortcode-list.php';
             require_once METCPT_PATH . 'includes/tenders/shortcode-preview.php';
@@ -116,12 +119,13 @@ class MetCPT {
         // Register every sheet. Registering does not output anything; only the
         // enqueue calls below do. Dependencies (tokens) are declared here.
         $sheets = array(
-            'metcpt-tokens'  => array( 'assets/css/style-tokens.css',  array() ),
-            'metcpt-general' => array( 'assets/css/style-general.css', array() ),
-            'metcpt-events'  => array( 'assets/css/style-events.css',  array() ),
-            'metcpt-tenders' => array( 'assets/css/style-tenders.css', array( 'metcpt-tokens' ) ),
-            'metcpt-careers' => array( 'assets/css/style-careers.css', array() ),
-            'metcpt-posts'   => array( 'assets/css/style-posts.css',   array( 'metcpt-tokens' ) ),
+            'metcpt-tokens'         => array( 'assets/css/style-tokens.css',         array() ),
+            'metcpt-general'        => array( 'assets/css/style-general.css',        array() ),
+            'metcpt-events'         => array( 'assets/css/style-events.css',         array() ),
+            'metcpt-event-summary'  => array( 'assets/css/style-event-summary.css',  array() ),
+            'metcpt-tenders'        => array( 'assets/css/style-tenders.css',        array( 'metcpt-tokens' ) ),
+            'metcpt-careers'        => array( 'assets/css/style-careers.css',        array() ),
+            'metcpt-posts'          => array( 'assets/css/style-posts.css',          array( 'metcpt-tokens' ) ),
         );
         foreach ( $sheets as $handle => $sheet ) {
             wp_register_style(
@@ -132,11 +136,21 @@ class MetCPT {
             );
         }
 
-        // Events: single event, event archive, or the [events_list] shortcode.
+        // Events: single event (legacy CPT, kept for rollback safety), event
+        // archive, or the [events_list] shortcode. The listing page and any
+        // surviving metcpt_event CPT post use this sheet.
         if ( is_singular( 'metcpt_event' )
             || is_post_type_archive( 'metcpt_event' )
             || metcpt_page_has_shortcode( 'events_list' ) ) {
             wp_enqueue_style( 'metcpt-events' );
+        }
+
+        // Event summary block: a native post with the MetCPT event box ticked.
+        // Separate sheet, separate gate, from style-events.css above — this one
+        // styles the small summary card on an ordinary post, not the listing.
+        if ( is_singular( 'post' ) && function_exists( 'metcpt_post_is_event' )
+            && metcpt_post_is_event( get_queried_object_id() ) ) {
+            wp_enqueue_style( 'metcpt-event-summary' );
         }
 
         // Tenders: single, archive, or a tenders shortcode. Pulls tokens via dep.

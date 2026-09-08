@@ -27,6 +27,8 @@ function metcpt_register_settings() {
     // ── Events ────────────────────────────────────────────────────────────────
     register_setting( 'metcpt_events', 'metcpt_events_archive_url',   array( 'sanitize_callback' => 'sanitize_text_field',      'default' => '/events' ) );
     register_setting( 'metcpt_events', 'metcpt_vip_roles',            array( 'sanitize_callback' => 'sanitize_textarea_field',  'default' => "Guest of Honour\nTazkirah\nNotable Attendee\nSpeaker\nMC" ) );
+    register_setting( 'metcpt_events', 'metcpt_event_summary_position_default', array( 'sanitize_callback' => 'metcpt_sanitize_event_summary_position', 'default' => 'top' ) );
+    register_setting( 'metcpt_events', 'metcpt_hide_events_cpt_menu',   array( 'sanitize_callback' => 'absint',                   'default' => 0 ) );
 
     // ── Tenders ───────────────────────────────────────────────────────────────
     register_setting( 'metcpt_tenders', 'metcpt_tenders_page_url',             array( 'sanitize_callback' => 'sanitize_text_field',     'default' => '/tenders' ) );
@@ -53,6 +55,24 @@ function metcpt_register_settings() {
     register_setting( 'metcpt_posts', 'metcpt_news_category',      array( 'sanitize_callback' => 'sanitize_text_field',  'default' => '' ) );
 }
 add_action( 'admin_init', 'metcpt_register_settings' );
+
+
+/**
+ * Sanitize the global default for where the event summary block appears.
+ *
+ * Falls back to 'top' for anything not in the allowed set, including the
+ * empty string, since this is the site-wide default and 'use default' has no
+ * further fallback to defer to. See includes/events/meta-boxes-post.php for
+ * the per-post options this list matches.
+ *
+ * @param string $value Raw posted value.
+ * @return string
+ */
+function metcpt_sanitize_event_summary_position( $value ) {
+    $allowed = array( 'top', 'bottom', 'both', 'none' );
+    $value   = sanitize_text_field( $value );
+    return in_array( $value, $allowed, true ) ? $value : 'top';
+}
 
 
 // ── Settings page HTML ────────────────────────────────────────────────────────

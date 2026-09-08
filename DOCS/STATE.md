@@ -3,16 +3,16 @@
 Where the project stands today. Update when the shipped version, the open work, or
 the environment changes.
 
-Last updated: 2026-08-08
+Last updated: 2026-09-08
 
 ## At a glance
 
 | | |
 |---|---|
-| Shipped version | **1.5.0** |
+| Shipped version | **1.6.0** |
 | Repository | https://github.com/ismetdev/metcpt (public) |
 | Branch | `main` |
-| Tags | `v1.0.0`, `1.0.3`, `v1.0.4`, `v1.1.0`, `v1.2.0`, `v1.2.1`, `v1.2.2`, `v1.3.0`, `v1.3.1`, `v1.4.0`, `v1.5.0` |
+| Tags | `v1.0.0`, `1.0.3`, `v1.0.4`, `v1.1.0`, `v1.2.0`, `v1.2.1`, `v1.2.2`, `v1.3.0`, `v1.3.1`, `v1.4.0`, `v1.5.0`, `v1.6.0` |
 | Type | WordPress plugin, formerly named "Haraka" |
 | Requires | WordPress 6.0+ (tested to 6.5), PHP 7.4+ |
 | Text domain | `metcpt` |
@@ -37,6 +37,14 @@ widget, a docs page, and a daily cron that emails about closing tenders.
 
 Registered in [includes/core/post-types.php](../includes/core/post-types.php).
 
+**Events, since 1.6.0, live on native posts, not `metcpt_event`.** A post with
+the MetCPT event tick box on (meta `metcpt_is_event`) and an event date is what
+`[events_list]` queries and what the single-post summary block renders on. The
+`metcpt_event` CPT stays registered, hidden from the admin menu once the
+one-click migration in Settings > Events has run, so old `/event/<slug>/` links
+still resolve (via a 301 redirect) and the type can be shown again if ever
+needed. See [DECISIONS.md D24](DECISIONS.md#d24).
+
 ## Layout
 
 WordPress pins three files at the plugin root and they must not move or be
@@ -54,8 +62,10 @@ readme.txt              WordPress-format readme and changelog
 LICENSE                 GPL-2.0-or-later, full text
 assets/css/             9 stylesheets, enqueued from class-metcpt.php
 includes/core/          post types, main class, helpers, Haraka migration
-includes/admin/         settings, docs page, error log, dashboard widget, cron, dummy data
-includes/events/        meta boxes, shortcode, templates.php (registers templates/events/*)
+includes/admin/         settings, docs page, error log, dashboard widget, cron,
+                        dummy data, events-to-posts migration
+includes/events/        meta boxes (CPT and native post), summary block, shortcode,
+                        templates.php (registers templates/events/*, legacy/dormant)
 includes/tenders/       meta boxes, shortcodes, template A and B, templates.php
 includes/careers/       meta boxes for career and company, shortcodes, templates.php
 includes/posts/         shortcodes over native WordPress posts
@@ -79,7 +89,11 @@ phpcs.xml.dist, composer.json, .editorconfig   coding-standards tooling, not shi
 | `[careers_list]`, `[careers_preview]` | [includes/careers/shortcode-list.php](../includes/careers/shortcode-list.php), [shortcode-preview.php](../includes/careers/shortcode-preview.php) | Shipped 1.0.0 |
 | `[news_grid]` | [includes/posts/shortcode-news-grid.php](../includes/posts/shortcode-news-grid.php) | Rebuilt to a 3-column grid in 1.1.0 |
 | `[category_posts]` | [includes/posts/shortcode-general.php](../includes/posts/shortcode-general.php) | Shipped 1.0.0 |
-| Single event, tender, career | `templates/*/single.php` | Duplicate document shell removed in 1.3.1. Moved from `includes/*/template-single.php` in 1.4.0 |
+| Single tender, career | `templates/*/single.php` | Duplicate document shell removed in 1.3.1. Moved from `includes/*/template-single.php` in 1.4.0 |
+| Single event | Native post + `met-hello-elementor-child`'s `single.php` | Since 1.6.0. `templates/events/single.php` is now legacy/dormant, see [D24](DECISIONS.md#d24) |
+| Event meta box on posts | [includes/events/meta-boxes-post.php](../includes/events/meta-boxes-post.php) | Shipped 1.6.0. Shares fields and save logic with the CPT box in `meta-boxes.php` |
+| Event summary block, schema, back link | [includes/events/summary-block.php](../includes/events/summary-block.php) | Shipped 1.6.0. `the_content` filter only, never `single_template` |
+| Events-to-posts migration | [includes/admin/migrate-events-to-posts.php](../includes/admin/migrate-events-to-posts.php), Settings > Events tab | Shipped 1.6.0. Button-triggered, not automatic |
 | CPT archive fallback | `templates/*/archive.php` | Dormant, `has_archive` is false. Not dead code. Moved from `includes/*/template-archive.php` in 1.4.0 |
 | Settings page | [includes/admin/settings-page.php](../includes/admin/settings-page.php), [settings-fields.php](../includes/admin/settings-fields.php) | Redesigned 1.3.0 |
 | Docs (How To) page | [includes/admin/docs-page.php](../includes/admin/docs-page.php) | Shipped 1.0.4 |
@@ -110,6 +124,14 @@ white screen. It now rethrows after logging. Do not make it swallow again.
 
 The sibling child theme owns the native post, category, tag and date archives. It
 does not read any `metcpt_` option. Checked from both sides on 2026-07-29.
+
+**This invariant is now deliberately partial, since 1.6.0.** Event posts render
+through the theme's own `single.php` (the plugin never filters
+`single_template` for `post`), but the plugin adds a `the_content` filter and a
+narrowly-scoped `term_link` filter that only fire on a post with the MetCPT
+event flag on. No theme file was edited. See
+[DECISIONS.md D24](DECISIONS.md#d24) for the full reasoning, including why the
+back-link fix could not be done with the theme's own filter hook.
 
 ## Environment
 

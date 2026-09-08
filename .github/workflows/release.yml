@@ -31,7 +31,7 @@ jobs:
           # unpacks to wp-content/plugins/metcpt/ on the target site. Plain
           # cp + zip keeps forward-slash paths, always valid on Linux/WordPress.
           mkdir -p build/metcpt
-          for item in $(ls -A | grep -vE '^(\.git|\.github|\.gitattributes|\.gitignore|\.claude|\.editorconfig|node_modules|build|DOCS|CLAUDE\.md|PROJECT_AUDIT_AND_CONTEXT\.md|composer\.json|composer\.lock|phpcs\.xml\.dist)$'); do
+          for item in $(ls -A | grep -vE '^(\.git|\.github|\.gitattributes|\.gitignore|\.claude|\.editorconfig|node_modules|build|DOCS|PLAN|CLAUDE\.md|PROJECT_AUDIT_AND_CONTEXT\.md|composer\.json|composer\.lock|phpcs\.xml\.dist)$'); do
             cp -r "$item" build/metcpt/
           done
           cd build
@@ -44,7 +44,7 @@ jobs:
           echo "---- verifying update library is present ----"
           unzip -l metcpt.zip | grep -q "metcpt/libs/plugin-update-checker/plugin-update-checker.php" && echo "OK: update library present" || (echo "ERROR: update library missing" && exit 1)
           echo "---- verifying no development files leaked ----"
-          unzip -l metcpt.zip | grep -qE "metcpt/(DOCS/|CLAUDE\.md|composer\.json|phpcs\.xml\.dist)" && (echo "ERROR: development files present in zip" && exit 1) || echo "OK: no development files in zip"
+          unzip -l metcpt.zip | grep -qE "metcpt/(DOCS/|PLAN/|CLAUDE\.md|composer\.json|phpcs\.xml\.dist)" && (echo "ERROR: development files present in zip" && exit 1) || echo "OK: no development files in zip"
 
       - name: Create release and attach zip
         uses: softprops/action-gh-release@v2

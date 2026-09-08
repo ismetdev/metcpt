@@ -132,8 +132,9 @@ function metcpt_render_general_settings() {
 
 // ── Events Settings ───────────────────────────────────────────────────────────
 function metcpt_render_events_settings() {
-    $archive_url    = get_option( 'metcpt_events_archive_url',   '/events' );
-    $vip_roles_raw  = get_option( 'metcpt_vip_roles',            "Guest of Honour\nTazkirah\nNotable Attendee\nSpeaker\nMC" );
+    $archive_url      = get_option( 'metcpt_events_archive_url',   '/events' );
+    $vip_roles_raw    = get_option( 'metcpt_vip_roles',            "Guest of Honour\nTazkirah\nNotable Attendee\nSpeaker\nMC" );
+    $summary_position = get_option( 'metcpt_event_summary_position_default', 'top' );
     ?>
 
     <div class="metcpt-section-title">Display</div>
@@ -149,6 +150,23 @@ function metcpt_render_events_settings() {
                placeholder="e.g. /events or https://yoursite.com/events" />
     </div>
 
+    <div class="metcpt-field-row">
+        <label class="metcpt-field-label" for="metcpt_event_summary_position_default">
+            Event Summary Position
+            <span class="metcpt-field-hint">
+                Where the date, time, venue and organiser summary appears on an
+                event post by default. Any single post can override this in its
+                own Event Details box.
+            </span>
+        </label>
+        <select id="metcpt_event_summary_position_default" name="metcpt_event_summary_position_default">
+            <option value="top"    <?php selected( $summary_position, 'top' ); ?>>Top of the post</option>
+            <option value="bottom" <?php selected( $summary_position, 'bottom' ); ?>>Bottom of the post</option>
+            <option value="both"   <?php selected( $summary_position, 'both' ); ?>>Both top and bottom</option>
+            <option value="none"   <?php selected( $summary_position, 'none' ); ?>>Do not show</option>
+        </select>
+    </div>
+
     <div class="metcpt-section-title">VIP Roles</div>
 
     <div class="metcpt-field-row">
@@ -161,6 +179,189 @@ function metcpt_render_events_settings() {
                   rows="7"
                   placeholder="Guest of Honour&#10;Tazkirah&#10;Notable Attendee&#10;Speaker&#10;MC"><?php echo esc_textarea( $vip_roles_raw ); ?></textarea>
     </div>
+
+    <?php metcpt_render_events_migration_panel(); ?>
+
+    <?php
+}
+
+
+// ── Events → Posts migration panel ────────────────────────────────────────────
+function metcpt_render_events_migration_panel() {
+    $stats = metcpt_events_migration_stats();
+    ?>
+
+    <div class="metcpt-section-title">Migrate Legacy Events to Posts</div>
+
+    <div class="metcpt-field-row">
+        <div class="metcpt-field-label">
+            Remaining metcpt_event entries
+            <span class="metcpt-field-hint">
+                Converts each into a native post with the same content, meta,
+                featured image, comments and publish date. Old
+                <code>/event/&lt;slug&gt;/</code> URLs redirect to the new post
+                afterwards. This does not touch tenders, careers or companies.
+            </span>
+        </div>
+        <div class="mcpt-dummy-actions">
+            <strong id="mcpt-migrate-remaining"><?php echo (int) $stats['remaining']; ?></strong>
+            <span>event<?php echo 1 === (int) $stats['remaining'] ? '' : 's'; ?> not yet migrated</span>
+        </div>
+    </div>
+
+    <?php if ( $stats['remaining'] > 0 ) : ?>
+    <div class="metcpt-field-row">
+        <div class="metcpt-field-label">
+            Run Migration
+            <span class="metcpt-field-hint">
+                Always preview first. Take a database backup before running this
+                on a live site.
+            </span>
+        </div>
+        <div class="mcpt-dummy-actions">
+            <button type="button"
+                    class="button mcpt-migrate-preview-btn"
+                    data-nonce="<?php echo esc_attr( wp_create_nonce( 'metcpt_migrate_events' ) ); ?>">
+                Preview (Dry Run)
+            </button>
+            <button type="button"
+                    class="button button-primary mcpt-migrate-run-btn"
+                    data-nonce="<?php echo esc_attr( wp_create_nonce( 'metcpt_migrate_events' ) ); ?>">
+                Run Migration
+            </button>
+            <span class="mcpt-dummy-status" id="mcpt-migrate-status"></span>
+        </div>
+    </div>
+
+    <div class="metcpt-field-row" id="mcpt-migrate-preview-row" style="display:none;">
+        <div class="metcpt-field-label">Preview</div>
+        <div id="mcpt-migrate-preview-list" style="font-size:12px; max-height:260px; overflow-y:auto;"></div>
+    </div>
+    <?php endif; ?>
+
+    <div class="metcpt-field-row">
+        <div class="metcpt-field-label">
+            Hide Legacy Events Menu
+            <span class="metcpt-field-hint">
+                Once every event is migrated, hide the old Events menu item in
+                wp-admin. The post type stays registered, so old links still
+                redirect, and you can re-enable this later if needed.
+            </span>
+        </div>
+        <div class="metcpt-toggle-wrap">
+            <label class="metcpt-toggle">
+                <input type="checkbox"
+                       name="metcpt_hide_events_cpt_menu"
+                       value="1"
+                       <?php checked( 1, get_option( 'metcpt_hide_events_cpt_menu', 0 ) ); ?> />
+                <span class="metcpt-toggle-slider"></span>
+            </label>
+            <span class="metcpt-toggle-label">
+                <?php echo get_option( 'metcpt_hide_events_cpt_menu', 0 ) ? 'Hidden' : 'Visible'; ?>
+            </span>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var ajaxUrl = '<?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>';
+        var status  = document.getElementById( 'mcpt-migrate-status' );
+
+        function runAction( action, nonce, extra ) {
+            var body = new FormData();
+            body.append( 'action', action );
+            body.append( 'nonce', nonce );
+            return fetch( ajaxUrl, { method: 'POST', body: body } ).then( function( r ) { return r.json(); } );
+        }
+
+        function escapeHtml( str ) {
+            var div = document.createElement( 'div' );
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        var previewBtn = document.querySelector( '.mcpt-migrate-preview-btn' );
+        if ( previewBtn ) {
+            previewBtn.addEventListener( 'click', function() {
+                previewBtn.disabled = true;
+                if ( status ) { status.textContent = 'Loading preview…'; status.className = 'mcpt-dummy-status'; }
+
+                runAction( 'metcpt_migrate_events_preview', previewBtn.getAttribute( 'data-nonce' ) )
+                    .then( function( data ) {
+                        previewBtn.disabled = false;
+                        var row  = document.getElementById( 'mcpt-migrate-preview-row' );
+                        var list = document.getElementById( 'mcpt-migrate-preview-list' );
+                        if ( ! data.success ) {
+                            if ( status ) {
+                                status.textContent = '✗ ' + ( data.data ? data.data.message : 'Error.' );
+                                status.className   = 'mcpt-dummy-status mcpt-dummy-err';
+                            }
+                            return;
+                        }
+                        if ( status ) { status.textContent = ''; }
+                        if ( row && list ) {
+                            row.style.display = 'block';
+                            if ( ! data.data.items.length ) {
+                                list.innerHTML = '<p>Nothing to migrate.</p>';
+                            } else {
+                                var html = '<ul style="margin:0; padding-left:18px;">';
+                                data.data.items.forEach( function( item ) {
+                                    html += '<li>#' + item.id + ' — ' + escapeHtml( item.title ) + ' (' + item.status + ')</li>';
+                                } );
+                                html += '</ul>';
+                                list.innerHTML = html;
+                            }
+                        }
+                    } )
+                    .catch( function() {
+                        previewBtn.disabled = false;
+                        if ( status ) {
+                            status.textContent = '✗ Network error.';
+                            status.className   = 'mcpt-dummy-status mcpt-dummy-err';
+                        }
+                    } );
+            } );
+        }
+
+        var runBtn = document.querySelector( '.mcpt-migrate-run-btn' );
+        if ( runBtn ) {
+            runBtn.addEventListener( 'click', function() {
+                if ( ! confirm( 'Migrate every remaining metcpt_event entry into a native post? Preview first if you have not already. Take a database backup before running this on a live site.' ) ) {
+                    return;
+                }
+                runBtn.disabled = true;
+                if ( status ) { status.textContent = 'Migrating…'; status.className = 'mcpt-dummy-status'; }
+
+                runAction( 'metcpt_migrate_events_run', runBtn.getAttribute( 'data-nonce' ) )
+                    .then( function( data ) {
+                        runBtn.disabled = false;
+                        if ( ! data.success ) {
+                            if ( status ) {
+                                status.textContent = '✗ ' + ( data.data ? data.data.message : 'Error.' );
+                                status.className   = 'mcpt-dummy-status mcpt-dummy-err';
+                            }
+                            return;
+                        }
+                        if ( status ) {
+                            status.textContent = '✓ ' + data.data.message;
+                            status.className   = 'mcpt-dummy-status mcpt-dummy-ok';
+                        }
+                        var remaining = document.getElementById( 'mcpt-migrate-remaining' );
+                        if ( remaining ) {
+                            remaining.textContent = Math.max( 0, parseInt( remaining.textContent, 10 ) - data.data.migrated );
+                        }
+                    } )
+                    .catch( function() {
+                        runBtn.disabled = false;
+                        if ( status ) {
+                            status.textContent = '✗ Network error.';
+                            status.className   = 'mcpt-dummy-status mcpt-dummy-err';
+                        }
+                    } );
+            } );
+        }
+    })();
+    </script>
 
     <?php
 }

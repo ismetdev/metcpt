@@ -1,0 +1,58 @@
+/* ===================================
+   MetCPT — Event Summary Block
+   Renders inside .post-body__inner on the met-hello-elementor-child theme's
+   single post template (single.php). All custom properties are scoped to
+   .mcpt-event-summary, never :root — the theme already writes :root custom
+   properties sitewide, so a second :root block here would load in undefined
+   order. See DOCS/DECISIONS.md D17 for the same rule applied elsewhere.
+   =================================== */
+
+.mcpt-event-summary {
+    --mcpt-es-border: #e2e8f0;
+    --mcpt-es-label: #64748b;
+    --mcpt-es-value: #0f172a;
+    --mcpt-es-bg: #f8fafc;
+
+    margin: 0 0 28px;
+    padding: 18px 20px;
+    background: var( --mcpt-es-bg );
+    border: 1px solid var( --mcpt-es-border );
+    border-left: 3px solid #0f172a;
+    border-radius: 8px;
+}
+
+.mcpt-event-summary-list {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax( 160px, 1fr ) );
+    gap: 14px 24px;
+    margin: 0;
+}
+
+.mcpt-event-summary-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.mcpt-event-summary-row dt {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var( --mcpt-es-label );
+    margin: 0;
+}
+
+.mcpt-event-summary-row dd {
+    font-size: 15px;
+    font-weight: 600;
+    color: var( --mcpt-es-value );
+    margin: 0;
+    line-height: 1.4;
+}
+
+@media ( max-width: 480px ) {
+    .mcpt-event-summary-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
