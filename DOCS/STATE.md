@@ -3,16 +3,16 @@
 Where the project stands today. Update when the shipped version, the open work, or
 the environment changes.
 
-Last updated: 2026-09-08
+Last updated: 2026-09-16
 
 ## At a glance
 
 | | |
 |---|---|
-| Shipped version | **1.6.0** |
+| Shipped version | **1.7.0** |
 | Repository | https://github.com/ismetdev/metcpt (public) |
 | Branch | `main` |
-| Tags | `v1.0.0`, `1.0.3`, `v1.0.4`, `v1.1.0`, `v1.2.0`, `v1.2.1`, `v1.2.2`, `v1.3.0`, `v1.3.1`, `v1.4.0`, `v1.5.0`, `v1.6.0` |
+| Tags | `v1.0.0`, `1.0.3`, `v1.0.4`, `v1.1.0`, `v1.2.0`, `v1.2.1`, `v1.2.2`, `v1.3.0`, `v1.3.1`, `v1.4.0`, `v1.5.0`, `v1.6.0`, `v1.7.0` |
 | Type | WordPress plugin, formerly named "Haraka" |
 | Requires | WordPress 6.0+ (tested to 6.5), PHP 7.4+ |
 | Text domain | `metcpt` |
@@ -60,10 +60,12 @@ metcpt.php              bootstrap: constants, updater, migration, MetCPT::instan
 uninstall.php           option and table cleanup, most of it deliberately commented out
 readme.txt              WordPress-format readme and changelog
 LICENSE                 GPL-2.0-or-later, full text
-assets/css/             9 stylesheets, enqueued from class-metcpt.php
+assets/css/             11 stylesheets, enqueued from class-metcpt.php
+assets/js/              bulk-import.js — the only properly enqueued admin script;
+                        every other admin script in the plugin is inline PHP
 includes/core/          post types, main class, helpers, Haraka migration
 includes/admin/         settings, docs page, error log, dashboard widget, cron,
-                        dummy data, events-to-posts migration
+                        dummy data, events-to-posts migration, bulk posts importer
 includes/events/        meta boxes (CPT and native post), summary block, shortcode,
                         templates.php (registers templates/events/*, legacy/dormant)
 includes/tenders/       meta boxes, shortcodes, template A and B, templates.php
@@ -96,6 +98,7 @@ phpcs.xml.dist, composer.json, .editorconfig   coding-standards tooling, not shi
 | Events-to-posts migration | [includes/admin/migrate-events-to-posts.php](../includes/admin/migrate-events-to-posts.php), Settings > Events tab | Shipped 1.6.0. Button-triggered, not automatic |
 | CPT archive fallback | `templates/*/archive.php` | Dormant, `has_archive` is false. Not dead code. Moved from `includes/*/template-archive.php` in 1.4.0 |
 | Settings page | [includes/admin/settings-page.php](../includes/admin/settings-page.php), [settings-fields.php](../includes/admin/settings-fields.php) | Redesigned 1.3.0 |
+| Bulk Posts Importer | [bulk-import-page.php](../includes/admin/bulk-import-page.php), [bulk-import-csv.php](../includes/admin/bulk-import-csv.php), [bulk-import-runner.php](../includes/admin/bulk-import-runner.php) | Shipped 1.7.0. Own submenu, not a Settings tab. See [DECISIONS.md D25](DECISIONS.md#d25) |
 | Docs (How To) page | [includes/admin/docs-page.php](../includes/admin/docs-page.php) | Shipped 1.0.4 |
 | Error log | [includes/admin/error-log.php](../includes/admin/error-log.php), [error-log-page.php](../includes/admin/error-log-page.php) | Flood guard and row cap added 1.3.1 |
 | Dashboard widget | [includes/admin/dashboard-widget.php](../includes/admin/dashboard-widget.php) | Shipped 1.0.0 |

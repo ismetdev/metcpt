@@ -1,0 +1,158 @@
+/**
+ * MetCPT — Bulk Posts Importer styles
+ *
+ * Loaded only on the Bulk Posts Importer submenu (see
+ * metcpt_is_bulk_import_page() and enqueue_admin_styles() in
+ * includes/core/class-metcpt.php). Depends on style-settings.css for the
+ * .metcpt-settings-wrap tokens and header — this sheet only adds what is
+ * specific to the four-step import screen.
+ *
+ * @package MetCPT
+ * @subpackage Admin
+ */
+
+.mcpt-bulk-import {
+    max-width: 1080px;
+}
+
+/* ── Step indicator ───────────────────────────────────────────────────────── */
+.mcpt-bi-steps {
+    display: flex;
+    gap: 4px;
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid var(--mcpt-hairline);
+    padding-bottom: 0;
+}
+.mcpt-bi-step {
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mcpt-ink-faint);
+    border-bottom: 2px solid transparent;
+}
+.mcpt-bi-step.is-active {
+    color: var(--mcpt-accent);
+    border-bottom-color: var(--mcpt-accent);
+}
+.mcpt-bi-step.is-done {
+    color: var(--mcpt-ink-soft);
+}
+
+.mcpt-bi-panel {
+    padding-top: 4px;
+}
+
+/* ── Reference table / hint boxes ─────────────────────────────────────────── */
+.mcpt-bi-columns {
+    margin: 0 0 20px 0;
+    padding: 12px 16px;
+    background: var(--mcpt-surface);
+    border: 1px solid var(--mcpt-hairline);
+    border-radius: var(--mcpt-radius);
+}
+.mcpt-bi-columns summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--mcpt-ink);
+}
+.mcpt-bi-columns table {
+    margin-top: 12px;
+}
+
+.mcpt-bi-hint-box {
+    padding: 12px 16px;
+    background: var(--mcpt-surface);
+    border: 1px solid var(--mcpt-hairline);
+    border-radius: var(--mcpt-radius);
+    font-size: 13px;
+    color: var(--mcpt-ink-soft);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* ── Actions row ───────────────────────────────────────────────────────────── */
+.mcpt-bi-actions {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ── Preview / result tables ──────────────────────────────────────────────── */
+.mcpt-bi-table-wrap {
+    max-height: 480px;
+    overflow-y: auto;
+    border: 1px solid var(--mcpt-hairline);
+    border-radius: var(--mcpt-radius);
+}
+#mcpt-bi-preview-table,
+#mcpt-bi-run-table {
+    border: none;
+}
+#mcpt-bi-preview-table thead th,
+#mcpt-bi-run-table thead th {
+    position: sticky;
+    top: 0;
+    background: var(--mcpt-paper-cool);
+    z-index: 1;
+}
+
+.mcpt-bi-badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.mcpt-bi-badge-ok      { background: #DCFCE7; color: #166534; }
+.mcpt-bi-badge-warning { background: #FEF3C7; color: #92400E; }
+.mcpt-bi-badge-error   { background: #FEE2E2; color: #991B1B; }
+.mcpt-bi-badge-skip    { background: #E5E7EB; color: #374151; }
+.mcpt-bi-badge-success { background: #DCFCE7; color: #166534; }
+.mcpt-bi-badge-failed  { background: #FEE2E2; color: #991B1B; }
+.mcpt-bi-badge-skipped { background: #E5E7EB; color: #374151; }
+.mcpt-bi-badge-pending { background: #E0E7FF; color: #3730A3; }
+
+.mcpt-bi-row-detail {
+    font-size: 12px;
+    color: var(--mcpt-ink-soft);
+}
+
+/* ── Progress bar ─────────────────────────────────────────────────────────── */
+.mcpt-bi-progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.mcpt-bi-progress-bar {
+    flex: 1;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--mcpt-surface);
+    border: 1px solid var(--mcpt-hairline);
+    overflow: hidden;
+}
+.mcpt-bi-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--mcpt-accent);
+    transition: width 0.2s ease;
+}
+#mcpt-bi-progress-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mcpt-ink-soft);
+    white-space: nowrap;
+}
+
+@media (max-width: 782px) {
+    .mcpt-bi-steps {
+        flex-wrap: wrap;
+    }
+    .mcpt-bi-actions {
+        flex-wrap: wrap;
+    }
+}

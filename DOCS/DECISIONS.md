@@ -474,3 +474,133 @@ post via two tightly-scoped filters. No theme file was edited or needs a
 matching release. `templates/events/single.php` and `archive.php` become
 unreachable once the CPT is empty after migration; left on disk, not deleted,
 same reasoning as [D2](#d2).
+
+## D25. Bulk Posts Importer: CSV, not a form; own submenu; filename image matching; per-row AJAX
+
+**Decision.** In 1.7.0: a new admin screen, MetCPT > Bulk Posts Importer,
+turns a CSV of ready-written posts into native `post` entries. Four steps on
+one page (Upload, Preview, Import, Done), all client-side transitions, no
+page reload. Full reasoning and the rejected repeater-form design in
+[PLAN/PRD-bulk-wordpress-posts-importer.md](../PLAN/PRD-bulk-wordpress-posts-importer.md)
+and [PLAN/PLAN-bulk-posts-importer.md](../PLAN/PLAN-bulk-posts-importer.md)
+(not shipped in the release zip).
+
+**Why CSV, not a repeatable row form.** The PRD's first draft specced a
+repeater: one form block per post, "add another post", a native media-modal
+picker per row. Built as a plan, rejected before code, because it does not
+remove the operator's actual bottleneck — typing 13 fields per post into a
+browser, 15 to 50 times a month. A CSV does: the operator's existing ChatGPT
+session already produces every field in one pass; the importer's job is to
+turn that output into posts, not to be a second place to type it.
+
+**Why its own submenu, not a Settings tab.** Every tab on the Settings page
+renders inside one `<form action="options.php">` (see
+[settings-page.php](../includes/admin/settings-page.php)). A file upload
+control has no registered setting to post to and does not belong in that
+form. `add_submenu_page()` under `metcpt-settings`, reusing the settings
+page's header and field-row CSS classes so it reads as part of MetCPT without
+adding a second visual language.
+
+**Why images are matched by filename, not uploaded inside the importer.**
+The PRD asked for a native media-modal picker per post. Rejected: that still
+processes one image per browser action, and any sideload during the import
+request would run image resizing inside the production host's limits (see
+below). Instead, the operator uploads every image for the batch through the
+ordinary Media > Add New screen in one action, and the CSV names the file.
+`metcpt_bulk_import_resolve_attachment()` in
+[bulk-import-csv.php](../includes/admin/bulk-import-csv.php) matches on the
+sanitised basename WordPress stored the file under (also accepts a bare
+attachment ID, to reuse an already-uploaded image). The Preview step reports
+an unmatched filename before anything is written, so a typo is caught early,
+not discovered after 15 drafts exist with no featured image.
+
+**Why one AJAX request per row, not one form POST for the batch.** The
+production site health report
+([DOCS/CURRENT WEB INFO/ihsb-wordpress-site-health-report.md](CURRENT%20WEB%20INFO/ihsb-wordpress-site-health-report.md))
+records a 30 second PHP time limit and a 40 MB `WP_MEMORY_LIMIT`. A batch of
+20+ posts, each needing a term lookup, an insert, and postmeta writes, is not
+guaranteed to finish in one request under those limits, and a mid-batch
+timeout leaves no record of which rows made it. The browser instead drives
+the loop: `metcpt_bulk_import_row` (in
+[bulk-import-runner.php](../includes/admin/bulk-import-runner.php)) creates
+exactly one post per call. A slow or failed row costs one row, not the batch,
+and every row's result is visible as it happens rather than only at the end.
+
+**Why a transient, not a new database table.** The PRD explicitly rules out a
+second custom table (the error log is the only one, see
+[STATE.md](../DOCS/STATE.md)). Parsed rows between Preview and Import live in
+one `set_transient()` call, 12 hour TTL, deleted by WordPress on its own once
+it expires. At the row counts this screen is built for (tens, not thousands)
+this is simpler than a file with a resume cursor and has no cleanup to get
+wrong.
+
+**Duplicate safety.** Each imported post carries `metcpt_import_hash`, an MD5
+of its title plus its CSV date. Before creating a row, the importer checks
+for an existing post with that hash and reports "already imported" instead of
+creating a second copy. This makes re-uploading the same CSV, deliberately or
+after an interrupted run, safe by default — the same idea WordPress's own WXR
+importer uses (a source post ID) to avoid duplicating a re-imported item,
+adapted here since a CSV row has no post ID of its own yet.
+
+**Yoast meta keys.** `_yoast_wpseo_focuskw`, `_yoast_wpseo_title`,
+`_yoast_wpseo_metadesc`. Confirmed against Yoast SEO 28.5, the version
+installed on local, staging, and production as of 2026-09-16. Written
+unconditionally; inert if Yoast is not active, picked up if it is installed
+later. Kept in one function,
+`metcpt_bulk_import_yoast_meta_keys()`, so a future Yoast key change is a
+one-line fix.
+
+**Deviation from the PRD, stated per its own rule 4 (codebase wins,
+conflict flagged rather than silently overridden).** The PRD asked for
+`wp_kses_post` on the body column with no exception. This plugin instead
+matches WordPress core's own rule: `wp_kses_post` only for a user without
+`unfiltered_html`. An operator who already has `unfiltered_html` in the
+normal post editor should not have embeds silently stripped only on this
+screen.
+
+**Also decided, and deliberately not done.**
+- No column-mapping step. The CSV header is fixed and case-insensitive,
+  because the ChatGPT prompt on the Upload step dictates the header the
+  operator's own CSV will have. A mapping UI solves a problem this importer
+  does not have.
+- No image upload or sideload path inside the importer itself, see above.
+  Adding one later (a zip upload, sideloaded per row) is not precluded, but
+  was cut from this version since Media > Add New already solves it.
+- `assets/js/` did not exist before this feature; every other admin script in
+  the plugin is inline in the PHP that prints it. `bulk-import.js` is too
+  large for that pattern (the whole four-step flow), so it is the first
+  properly enqueued script, with `wp_localize_script()` for its nonce and
+  AJAX URL rather than an inline `<script>` block.
+
+**Consequence.** No new database table, no new option, no new shortcode tag,
+no change to CPT registration, templates, or front-end CSS. All hooks are
+`is_admin()`-gated (`admin_menu`, `wp_ajax_*`); nothing touches
+`single_template`, `the_content`, or rewrite rules, so this feature cannot
+collide with the Events native-post work in [D24](#d24).
+
+**Two bugs found only by testing against a live site, not by review.**
+Static review and an isolated logic test (both done before this) missed
+both; a real run through wp-admin against the `v2` local site caught them.
+
+- **Import and Done were two separate panels.** Finishing a run hid the
+  per-row report behind a bare count, losing the Edit/View links the screen
+  exists to produce. Fixed by merging them into one panel (`#mcpt-bi-step-3`
+  serves both "3. Import" and "4. Done"); `showStep()` in
+  [bulk-import.js](../assets/js/bulk-import.js) keeps it visible for both
+  step numbers and only the step chip and a done-summary block toggle.
+- **Every imported post's time was 8 hours off.** `strtotime()` reads PHP's
+  own `date.timezone` ini setting to interpret a string with no timezone in
+  it; `wp_date()` then converts that timestamp into the site's own
+  timezone/gmt_offset option to format it. On this host the two settings
+  disagree — PHP ini is `UTC`, the site is `Asia/Kuala_Lumpur` (UTC+8) — so
+  chaining them applied the site's offset on top of an already-UTC reading.
+  Fixed with `metcpt_bulk_import_normalize_date()` in
+  [bulk-import-csv.php](../includes/admin/bulk-import-csv.php): parses with
+  an explicit UTC `DateTimeZone`, so the literal numbers in the CSV land
+  unchanged as the post's local time regardless of the PHP process's own ini
+  setting, the same way wp-admin's own Publish date field treats what an
+  editor types. `get_gmt_from_date()` (used unchanged, on the result) is
+  safe here because it reads the site's own option, not PHP's ini.
+
+Confirmed fixed by opening the created post in the block editor and reading
+its own date picker, not only by reading the database back.

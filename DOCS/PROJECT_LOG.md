@@ -17,6 +17,59 @@ unusually detailed. Dates are commit dates unless marked as an attribution.
 
 ---
 
+## 2026-09-16, v1.7.0, Bulk Posts Importer (this machine, Ismet Office)
+
+New admin screen, MetCPT > Bulk Posts Importer: upload a CSV of ready-written
+posts and import all of them in one run as native WordPress posts. Built from
+[PLAN/PRD-bulk-wordpress-posts-importer.md](../PLAN/PRD-bulk-wordpress-posts-importer.md),
+with the input mechanism replaced mid-planning from a repeatable row form to a
+CSV upload once it was clear the form only removed clicks, not typing. Full
+reasoning in [DECISIONS.md D25](DECISIONS.md#d25).
+
+Four steps on one page (Upload, Preview, Import, Done), no page reload between
+them. Preview validates every row before anything is written: missing title,
+content, or an unreadable date blocks that row; a missing image, empty SEO
+field, or a category that will be created is a warning, not a block. Import
+runs one `wp_insert_post()` per AJAX request
+([includes/admin/bulk-import-runner.php](../includes/admin/bulk-import-runner.php)),
+driven by the browser, so a slow or failed row costs one row and not the
+30-second-limited batch. Featured images are matched by filename against the
+Media Library rather than uploaded inside the importer, so no image
+processing happens inside that same request. Re-uploading the same CSV skips
+rows already imported, via an `metcpt_import_hash` postmeta fingerprint.
+
+Also added: `assets/js/` (the plugin's first properly enqueued admin script,
+`wp_localize_script()` for its nonce and AJAX URL), and
+`assets/css/style-bulk-import.css`, built on the existing
+`.metcpt-settings-wrap` tokens.
+
+Yoast SEO meta keys (`_yoast_wpseo_focuskw`, `_yoast_wpseo_title`,
+`_yoast_wpseo_metadesc`) confirmed against Yoast 28.5, installed on local,
+staging and production. Target category confirmed as `Activity`, matching
+production's `metcpt_news_category` setting.
+
+**Two bugs found and fixed during visual verification** against the live
+`v2` local site (logged into wp-admin, ran real CSVs through Preview and
+Import, read the created posts back via the REST API and the block editor's
+own date picker), before this shipped:
+
+- The Import and Done steps were two separate panels. Finishing a run hid the
+  per-row report — the Edit/View links the whole screen exists to produce —
+  behind a bare count. Fixed by merging them into one panel; the report now
+  stays on screen once the run finishes. See `showStep()` in
+  [assets/js/bulk-import.js](../assets/js/bulk-import.js).
+- Every imported post's time was 8 hours off. Cause: this host's PHP
+  `date.timezone` ini is `UTC`, but the site runs `Asia/Kuala_Lumpur`
+  (UTC+8); the original code parsed the CSV date with `strtotime()` (reads
+  PHP's ini timezone) then formatted it with `wp_date()` (converts to the
+  site's timezone), applying the site's offset on top of an already-UTC
+  reading. Fixed with `metcpt_bulk_import_normalize_date()` in
+  [includes/admin/bulk-import-csv.php](../includes/admin/bulk-import-csv.php),
+  which parses with an explicit UTC `DateTimeZone` so the literal numbers in
+  the CSV land unchanged as the post's local time — confirmed after the fix
+  by opening the block editor's own date picker on a created post, not only
+  by reading the database.
+
 ## 2026-09-08, v1.6.0, events move to native posts (this machine, Ismet Office)
 
 Events are now written as ordinary WordPress posts instead of the `metcpt_event`

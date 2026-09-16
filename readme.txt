@@ -4,7 +4,7 @@ Tags: corporate, events, careers, tenders, listings
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,14 @@ Yes, but it works best with themes that support modern WordPress templating.
 Yes. Developers can override or customize templates as needed.
 
 == Changelog ==
+
+= 1.7.0 =
+
+* New: Bulk Posts Importer (MetCPT > Bulk Posts Importer). Upload a CSV of ready-written posts and import all of them in one run, as ordinary WordPress posts.
+* Each row sets title, HTML content, excerpt, slug, author, category (created automatically if it does not exist), a back-dated publish date, comment status, featured image (matched by filename to an image already in the Media Library), image alt text, and the three Yoast SEO fields (focus keyphrase, SEO title, meta description).
+* Preview step checks every row before anything is written: a missing title, missing content, or an unreadable date stops that row only, not the batch. A missing image, empty SEO field, or a category that will be created shows as a warning, not an error.
+* Importing the same CSV twice does not create duplicate posts; a row already imported is reported and skipped.
+* A copy-to-clipboard writing prompt and a blank CSV template are built into the screen.
 
 = 1.6.0 =
 
@@ -110,6 +118,10 @@ Yes. Developers can override or customize templates as needed.
 * Polished archive pages for Events, Tenders, and Careers
 
 == Upgrade Notice ==
+
+= 1.7.0 =
+
+Adds a Bulk Posts Importer under a new admin page, MetCPT > Bulk Posts Importer. Upload a CSV to create many posts at once, with featured image, Yoast fields, and a back-dated publish date all set. No changes to Events, Tenders, Careers, or existing content. No action required.
 
 = 1.6.0 =
 

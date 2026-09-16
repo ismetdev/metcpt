@@ -56,6 +56,9 @@ class MetCPT {
             require_once METCPT_PATH . 'includes/admin/settings-fields.php';
             require_once METCPT_PATH . 'includes/admin/dashboard-widget.php';
             require_once METCPT_PATH . 'includes/admin/error-log-page.php';
+            require_once METCPT_PATH . 'includes/admin/bulk-import-csv.php';
+            require_once METCPT_PATH . 'includes/admin/bulk-import-runner.php';
+            require_once METCPT_PATH . 'includes/admin/bulk-import-page.php';
             require_once METCPT_PATH . 'includes/careers/meta-boxes-company.php';
             require_once METCPT_PATH . 'includes/careers/meta-boxes-career.php';
             require_once METCPT_PATH . 'includes/events/meta-boxes.php';
@@ -192,10 +195,13 @@ class MetCPT {
             'toplevel_page_metcpt-settings',
         );
 
-        // Also load on any MetCPT settings page regardless of hook
+        // Also load on any MetCPT settings page, and the Bulk Posts Importer
+        // submenu, regardless of hook — a submenu's hook suffix depends on
+        // its parent slug and is easy to get wrong, the page query var is not.
         $is_metcpt_page = isset( $_GET['page'] ) && $_GET['page'] === 'metcpt-settings';
+        $is_bulk_import_page = function_exists( 'metcpt_is_bulk_import_page' ) && metcpt_is_bulk_import_page();
 
-        if ( ! $is_metcpt_page && ! in_array( $hook, $allowed_hooks ) ) {
+        if ( ! $is_metcpt_page && ! $is_bulk_import_page && ! in_array( $hook, $allowed_hooks ) ) {
             return;
         }
 
@@ -206,15 +212,19 @@ class MetCPT {
             $this->asset_version( 'assets/css/style-admin.css' )
         );
 
-        // Settings-page-only styles (editorial paper + gold theme).
-        if ( $is_metcpt_page ) {
+        // Settings-page-only styles (editorial paper + gold theme). Also
+        // loaded on the Bulk Posts Importer page: it reuses the same
+        // .metcpt-settings-wrap header and field-row markup and tokens.
+        if ( $is_metcpt_page || $is_bulk_import_page ) {
             wp_enqueue_style(
                 'metcpt-settings',
                 METCPT_URL . 'assets/css/style-settings.css',
                 array(),
                 $this->asset_version( 'assets/css/style-settings.css' )
             );
+        }
 
+        if ( $is_metcpt_page ) {
             // How-To tab only. Loaded here instead of a raw <link> echo so it
             // gets the same filemtime cache-busting as every other sheet.
             if ( isset( $_GET['tab'] ) && $_GET['tab'] === 'how-to' ) {
@@ -225,6 +235,30 @@ class MetCPT {
                     $this->asset_version( 'assets/css/style-docs.css' )
                 );
             }
+        }
+
+        // Bulk Posts Importer — its own page, its own sheet and script. Not
+        // folded into $is_metcpt_page above since it is a separate submenu
+        // with a separate page slug, not a tab on metcpt-settings.
+        if ( $is_bulk_import_page ) {
+            wp_enqueue_style(
+                'metcpt-bulk-import',
+                METCPT_URL . 'assets/css/style-bulk-import.css',
+                array( 'metcpt-settings' ),
+                $this->asset_version( 'assets/css/style-bulk-import.css' )
+            );
+
+            wp_enqueue_script(
+                'metcpt-bulk-import',
+                METCPT_URL . 'assets/js/bulk-import.js',
+                array(),
+                $this->asset_version( 'assets/js/bulk-import.js' ),
+                true
+            );
+            wp_localize_script( 'metcpt-bulk-import', 'metcptBulkImport', array(
+                'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+                'nonce'   => wp_create_nonce( 'metcpt_bulk_import' ),
+            ) );
         }
     }
 
