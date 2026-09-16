@@ -14,7 +14,7 @@ Last updated: 2026-09-16
 | Branch | `main` |
 | Tags | `v1.0.0`, `1.0.3`, `v1.0.4`, `v1.1.0`, `v1.2.0`, `v1.2.1`, `v1.2.2`, `v1.3.0`, `v1.3.1`, `v1.4.0`, `v1.5.0`, `v1.6.0`, `v1.7.0` |
 | Type | WordPress plugin, formerly named "Haraka" |
-| Requires | WordPress 6.0+ (tested to 6.5), PHP 7.4+ |
+| Requires | WordPress 6.0+ (tested to 7.1), PHP 7.4+ (tested to 8.2) |
 | Text domain | `metcpt` |
 | License | GPL-2.0-or-later, see [LICENSE](../LICENSE) |
 
@@ -138,9 +138,16 @@ back-link fix could not be done with the theme's own filter hook.
 
 ## Environment
 
-- Local dev site: `github-test` (Local by Flywheel), at `https://github-test.local`.
-  HTTP fails, use HTTPS. This repo working copy is the live plugin folder of that
-  site.
+- Local dev site: folder name `github-test`, but its actual Local by Flywheel
+  site is named "V2" with hostname **`https://v2`** (not `github-test.local` —
+  that was this doc's error until 2026-09-16, found because the hostname
+  did not resolve when testing the Bulk Posts Importer live). Confirm with
+  `cat "$LOCALAPPDATA/../Roaming/Local/sites.json"` if this ever needs
+  re-checking; `hosts` also carries `v2` and `www.v2`. HTTP fails, use HTTPS.
+  This repo working copy is the live plugin folder of that site. Do not
+  confuse this local hostname with the separate remote staging site below,
+  which happens to share the name "v2" for an unrelated reason (both trace to
+  the same "IIUM Holdings V2" project naming, not to each other).
 - Staging: `https://v2.iiumholdings.com.my`. Server path
   `/home2/iiumhold/v2/wp-content/plugins/metcpt/`. Access via cPanel only. SSH
   was set up but has never connected, so data-level fixes on staging go through

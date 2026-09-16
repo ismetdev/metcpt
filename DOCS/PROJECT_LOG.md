@@ -70,6 +70,19 @@ own date picker), before this shipped:
   by opening the block editor's own date picker on a created post, not only
   by reading the database.
 
+Shipped as `v1.7.0`, tag pushed 2026-09-16, `release.yml` build green.
+
+**Acceptance confirmed by the site owner, 2026-09-16**, against `v2` with
+real content: the owner's own CSV (from the ChatGPT prompt this screen
+hands out) and the owner's own renamed images, uploaded through Media > Add
+New first as the importer expects. Every post came in correct against the
+ChatGPT source, images linked, no errors. This is the real backlog workflow
+working end to end, not a synthetic test batch.
+
+Also confirmed while shipping this release: the site's live WordPress
+version is 7.1 and PHP is 8.2.29, both ahead of what `readme.txt` and
+`STATE.md` claimed as tested — bumped both to match.
+
 ## 2026-09-08, v1.6.0, events move to native posts (this machine, Ismet Office)
 
 Events are now written as ordinary WordPress posts instead of the `metcpt_event`

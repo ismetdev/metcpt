@@ -2,7 +2,7 @@
 Contributors: Ismet Fitri
 Tags: corporate, events, careers, tenders, listings
 Requires at least: 6.0
-Tested up to: 6.5
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.7.0
 License: GPLv2 or later
